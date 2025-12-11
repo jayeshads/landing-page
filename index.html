@@ -240,6 +240,349 @@ body {
     .carousel-slide { width: 180px; height: 320px; margin-left: -90px; }
     .carousel-nav { display: none; }
 }
+/* ===================== */
+/*   RESPONSIVE FIXES    */
+/* ===================== */
+
+/* --- General Mobile Scaling (max 480px) --- */
+@media (max-width: 480px) {
+
+    body {
+        padding-top: 30px;
+    }
+
+    .section {
+        padding: 40px 0;
+    }
+
+    .section-heading {
+        font-size: 1.8rem;
+        margin-bottom: 40px;
+    }
+
+    /* HERO */
+    .hero .container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .logo {
+        width: 150px;
+        height: 150px;
+    }
+    .logo-glow {
+        width: 200px;
+        height: 200px;
+        filter: blur(25px);
+    }
+
+    .hero-title {
+        font-size: 2rem;
+        line-height: 1.2;
+    }
+
+    .hero-subtitle {
+        font-size: 0.95rem;
+    }
+
+    .cta-buttons {
+        width: 100%;
+        gap: 15px;
+    }
+
+    .cta-buttons .btn {
+        width: 95%;
+        padding: 14px;
+        font-size: 16px;
+    }
+
+    /* SERVICES */
+    .services-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    .service-card {
+        padding: 20px;
+    }
+
+    /* METRICS */
+    .metrics-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+    .metric-number {
+        font-size: 1.8rem;
+    }
+
+    /* CAROUSEL */
+    .carousel-container {
+        height: 380px !important;
+        perspective: 900px;
+    }
+
+    .carousel-slide {
+        width: 150px !important;
+        height: 260px !important;
+        margin-left: -75px !important;
+        border-radius: 10px;
+    }
+
+    .carousel-nav {
+        display: none !important; /* avoids crowding on phones */
+    }
+
+    /* CTA timer */
+    .cta-timer-section {
+        padding: 30px 15px;
+    }
+    .timer-box {
+        padding: 15px 25px;
+    }
+    #countdown-number {
+        font-size: 2rem;
+    }
+
+    /* FOOTER */
+    .footer {
+        padding: 40px 10px 20px;
+    }
+}
+
+/* ============================== */
+/*   TABLET OPTIMIZATION (480–768px) */
+/* ============================== */
+
+@media (min-width: 480px) and (max-width: 768px) {
+    .hero-title { font-size: 2.6rem; }
+    .cta-buttons .btn { width: 70%; }
+    .carousel-container { height: 450px; }
+    .carousel-slide { width: 200px; height: 330px; margin-left: -100px; }
+    .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ============================== */
+/*   LARGE TABLET (768–1024px)   */
+/* ============================== */
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .hero-title { font-size: 3.2rem; }
+    .services-grid { grid-template-columns: repeat(2, 1fr); }
+    .metrics-grid { grid-template-columns: repeat(3, 1fr); }
+    .carousel-container { height: 500px; }
+}
+/* ================================ */
+/*    FULL MOBILE RESPONSIVE FIX    */
+/* ================================ */
+@media (max-width: 480px) {
+
+    /* ----- GLOBAL FIX ----- */
+    body {
+        padding-top: 25px !important;
+        overflow-x: hidden !important;
+    }
+
+    .container {
+        padding: 0 12px !important;
+        max-width: 100% !important;
+    }
+
+    /* ----- HERO SECTION ----- */
+    .hero .container {
+        grid-template-columns: 1fr !important;
+        gap: 15px !important;
+        text-align: center !important;
+    }
+
+    .logo-container {
+        transform: scale(0.7) !important;
+        margin-bottom: -10px !important;
+    }
+
+    .logo {
+        width: 140px !important;
+        height: 140px !important;
+    }
+
+    .logo-glow {
+        width: 180px !important;
+        height: 180px !important;
+        filter: blur(20px) !important;
+    }
+
+    .hero-title {
+        font-size: 1.8rem !important;
+        margin-top: 0 !important;
+        line-height: 1.2 !important;
+    }
+
+    .hero-subtitle {
+        font-size: 0.9rem !important;
+        padding: 0 10px !important;
+    }
+
+    /* ----- CTA BUTTONS ----- */
+    .cta-buttons {
+        width: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 10px !important;
+    }
+
+    .cta-buttons .btn {
+        width: 90% !important;
+        font-size: 15px !important;
+        padding: 13px 0 !important;
+    }
+
+    /* ----- SERVICES ----- */
+    .services-grid {
+        grid-template-columns: 1fr !important;
+        gap: 15px !important;
+    }
+
+    .service-card {
+        padding: 18px !important;
+    }
+
+    /* ----- CAROUSEL ----- */
+    .carousel-container {
+        height: 320px !important;
+        perspective: 700px !important;
+    }
+
+    .carousel-slide {
+        width: 130px !important;
+        height: 230px !important;
+        margin-left: -65px !important;
+    }
+
+    .carousel-nav {
+        display: none !important;
+    }
+
+    /* ----- METRICS ----- */
+    .metrics-grid {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 15px !important;
+    }
+
+    .metric-card {
+        padding: 18px !important;
+    }
+
+    .metric-number {
+        font-size: 1.6rem !important;
+    }
+
+    /* ----- CTA TIMER ----- */
+    .cta-timer-section {
+        padding: 25px 10px !important;
+    }
+
+    .timer-box {
+        padding: 12px 20px !important;
+    }
+
+    #countdown-number {
+        font-size: 1.8rem !important;
+    }
+
+    /* ----- FOOTER ----- */
+    .footer {
+        padding: 40px 10px 20px !important;
+    }
+
+    .telegram-float {
+        width: 50px !important;
+        height: 50px !important;
+        font-size: 30px !important;
+        bottom: 20px !important;
+        right: 20px !important;
+    }
+}
+/* ===== MOBILE FINAL FIX — BIGGER LOGO + LESS GAP + BIG BUTTONS ===== */
+@media (max-width: 480px) {
+
+    /* Top spacing remove */
+    body {
+        padding-top: 15px !important;
+    }
+
+    .hero {
+        padding-top: 0 !important;
+        margin-top: -10px !important;
+    }
+
+    /* Logo container closer to top */
+    .logo-container {
+        margin-top: -5px !important;
+        margin-bottom: 0 !important;
+        transform: scale(1.15) !important; /* 🔥 Bigger logo */
+    }
+
+    /* Actual logo size */
+    .logo {
+        width: 240px !important;   /* 🔥 Larger & sharp */
+        height: 240px !important;
+    }
+
+    .logo-glow {
+        width: 320px !important;
+        height: 320px !important;
+        filter: blur(32px) !important; /* smooth glow */
+    }
+
+    /* Title spacing */
+    .hero-title {
+        margin-top: -5px !important;
+        font-size: 2.3rem !important;
+        line-height: 1.1 !important;
+    }
+
+    /* Bigger buttons */
+    .cta-buttons .btn {
+        width: 95% !important;
+        padding: 18px 0 !important;   /* 🔥 increases button height */
+        font-size: 17px !important;
+        border-radius: 50px !important;
+    }
+
+    /* Space between buttons */
+    .cta-buttons {
+        gap: 14px !important;
+        margin-top: 5px !important;
+    }
+}
+@media (max-width: 480px) {
+
+    /* Bigger logo but with safe spacing */
+    .logo-container {
+        transform: scale(1.18) !important;
+        margin-top: -5px !important;
+        margin-bottom: 20px !important; /* 👈 SMALL BUT SAFE GAP */
+    }
+
+    /* Logo actual size */
+    .logo {
+        width: 240px !important;
+        height: 240px !important;
+    }
+
+    .logo-glow {
+        width: 320px !important;
+        height: 320px !important;
+    }
+
+    /* Move hero title down slightly */
+    .hero-title {
+        margin-top: 10px !important;  /* 👈 FIXES OVERLAP */
+        font-size: 2.2rem !important;
+        line-height: 1.1 !important;
+        position: relative;
+        z-index: 5;
+    }
+}
 
 /* ============ End Inlined CSS ============ */
     </style>
