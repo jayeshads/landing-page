@@ -1,0 +1,495 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>MARKETING WITH JAYESH - Engineering Your Growth</title>
+ <!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1274349611038276');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1274349611038276&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Barlow:wght@400;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet"/>
+
+  <link rel="icon" href="https://i.ibb.co/C3cYVLWS/logo.png"/>
+
+
+    <style>
+    /* === Inlined CSS (from style (2).css) === */
+:root {
+    --primary-green: #1e90ff;   /* Shining Blue */
+    --accent-silver: #ffffff;   /* White */
+    --bright-green: #66b3ff;    /* Light Blue Shine */
+    --dark-bg: #0a0f1f;         /* Navy Blue Background */
+    --card-bg: rgba(20, 30, 60, 0.6);
+    --card-border: rgba(255, 255, 255, 0.15);
+    --text-light: #dbe9ff;
+    --text-heading: #ffffff;
+    --font-heading: 'Orbitron', sans-serif;
+    --font-body: 'Barlow', sans-serif;
+    --telegram-color: #0088cc;
+    --whatsapp-color: #25D366;
+}
+
+
+/* --- Base & Scrollbar --- */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
+body {
+    background-color: var(--dark-bg);
+    color: var(--text-light);
+    font-family: var(--font-body);
+    position: relative;
+    padding-top: 40px;
+}
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--dark-bg); }
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(var(--primary-green), var(--accent-silver));
+    border-radius: 10px;
+}
+
+/* --- Top Bar --- */
+.top-bar {
+    position: fixed; top: 0; left: 0; width: 100%; height: 40px;
+    background: linear-gradient(90deg, var(--primary-green), var(--accent-silver), var(--bright-green), var(--primary-green));
+    background-size: 200% 100%;
+    color: var(--dark-bg);
+    display: flex; align-items: center; overflow: hidden; z-index: 1001;
+    box-shadow: 0 2px 15px rgba(0, 255, 155, 0.2);
+    animation: gradient-pan 8s linear infinite;
+}
+.top-bar-content { display: flex; white-space: nowrap; animation: marquee-scroll 40s linear infinite; }
+.top-bar-content span { font-size: 0.9rem; font-weight: 700; text-transform: uppercase; padding: 0 2rem; letter-spacing: 1px; }
+@keyframes gradient-pan { 0% { background-position: 200% 0; } 100% { background-position: 0% 0; } }
+@keyframes marquee-scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+/* --- Animated Background --- */
+.aurora-background {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none;
+    background:
+        radial-gradient(circle at 15% 25%, rgba(0, 255, 155, 0.1), transparent 40%),
+        radial-gradient(circle at 85% 75%, rgba(224, 224, 224, 0.08), transparent 40%);
+    animation: moveAurora 20s ease-in-out infinite alternate;
+}
+@keyframes moveAurora { from { background-position: 0% 0%; } to { background-position: 100% 100%; } }
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+.section { padding: 80px 0; }
+.section-heading {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 5vw, 3rem);
+    text-align: center; margin-bottom: 60px; color: var(--text-heading);
+    background: linear-gradient(90deg, var(--primary-green), var(--text-heading), var(--accent-silver));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; position: relative;
+}
+.section-heading::after {
+    content: ''; position: absolute; bottom: -15px; left: 50%; transform: translateX(-50%); width: 80px; height: 3px;
+    background: linear-gradient(90deg, var(--primary-green), var(--accent-silver)); border-radius: 2px;
+    box-shadow: 0 0 10px var(--primary-green), 0 0 10px var(--accent-silver);
+}
+
+.hidden { opacity: 0; filter: blur(5px); transform: translateY(20px); transition: all 1s ease-out; }
+.show   { opacity: 1; filter: blur(0); transform: translateY(0); }
+
+/* --- Header & Hero Section --- */
+.hero { min-height: calc(100vh - 40px); display: flex; align-items: center; }
+.hero .container { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 40px; }
+.hero-content { text-align: left; }
+.logo-container { position: relative; display: flex; justify-content: center; align-items: center; }
+.logo-link { display: block; line-height: 0; }
+.logo { width: 250px; height: 250px; border-radius: 50%; position: relative; z-index: 2; background: var(--dark-bg); padding: 0; animation: logo-pulse 4s ease-in-out infinite; cursor: pointer; }
+.logo-glow {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 300px; height: 300px;
+    background: linear-gradient(45deg, var(--primary-green), var(--accent-silver)); border-radius: 50%; filter: blur(35px); z-index: 0;
+    animation: spin 10s linear infinite;
+}
+@keyframes logo-pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+@keyframes spin { from { transform: translate(-50%, -50%) rotate(0deg); } to { transform: translate(-50%, -50%) rotate(360deg); } }
+
+.hero-title { font-family: var(--font-heading); font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 900; line-height: 1.1;
+    background: linear-gradient(90deg, var(--primary-green), #fff, var(--accent-silver)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    margin-bottom: 20px; animation: fadeInDown 1s ease-out;
+}
+.hero-subtitle { font-size: clamp(1rem, 2.5vw, 1.25rem); max-width: 600px; margin-bottom: 40px; animation: fadeInUp 1s ease-out 0.3s; animation-fill-mode: backwards; }
+
+.cta-buttons { display: flex; gap: 20px; animation: fadeInUp 1s ease-out 0.6s; animation-fill-mode: backwards; flex-direction: column; align-items: flex-start; }
+
+.btn {
+    padding: 16px 40px; font-family: var(--font-body); font-weight: 700; font-size: 18px; text-transform: uppercase;
+    text-decoration: none; color: var(--dark-bg); border-radius: 50px; position: relative; overflow: hidden;
+    transition: all 0.3s ease; z-index: 1; display: inline-flex; align-items: center; gap: 12px; border: 2px solid transparent; white-space: nowrap;
+}
+.btn-primary { background: var(--primary-green); color: var(--dark-bg); box-shadow: 0 0 20px rgba(0, 255, 155, 0.4); }
+.btn::before {
+    content: ''; position: absolute; top: 50%; left: 50%; width: 300%; height: 300%; background: rgba(255,255,255,0.25);
+    border-radius: 50%; transform: translate(-50%,-50%) scale(0); transition: transform 0.6s ease; z-index: -1;
+}
+.btn:hover { transform: translateY(-5px); box-shadow: 0 5px 30px rgba(0, 255, 155, 0.6); }
+.btn:hover::before { transform: translate(-50%,-50%) scale(1); }
+
+@keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+/* WhatsApp button style */
+.btn-whatsapp {
+    background: var(--whatsapp-color);
+    color: #07280c;
+    box-shadow: 0 0 20px rgba(37,211,102,0.18);
+    border-color: rgba(255,255,255,0.05);
+}
+
+/* Ensure both buttons are centered on small screens and keep telegram button one-line */
+.cta-buttons .btn { min-width: 240px; display: inline-flex; justify-content: center; }
+@media (max-width:900px) { .cta-buttons { align-items: center; } .cta-buttons .btn { width: 320px; } }
+@media (max-width:480px) { .cta-buttons { width: 100%; gap: 12px; } .cta-buttons .btn { width: 90%; } }
+
+/* --- Services Section --- */
+.services-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; }
+.service-card {
+    background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 15px; padding: 30px; text-align: center;
+    backdrop-filter: blur(10px); position: relative; overflow: hidden; transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+.service-card::after {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, transparent, var(--primary-green), transparent);
+    transform: scaleX(0); transition: transform 0.4s ease-in-out;
+}
+.service-card:hover { transform: translateY(-10px); box-shadow: 0 0 40px rgba(0, 255, 155, 0.15); }
+.service-card:hover::after { transform: scaleX(1); }
+.service-icon { font-size: 40px; margin-bottom: 20px; background: linear-gradient(45deg, var(--primary-green), var(--accent-silver)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; transition: transform 0.3s ease; }
+.service-card:hover .service-icon { transform: scale(1.1); }
+.service-title { font-family: var(--font-body); font-size: 1.25rem; font-weight: 700; color: var(--text-heading); margin-bottom: 10px; }
+
+
+/* --- Carousel --- */
+.carousel-section { padding-bottom: 80px; }
+.carousel-container { position: relative; width: 100%; height: 550px; perspective: 1500px; }
+.carousel-wrapper { position: absolute; width: 100%; height: 100%; transform-style: preserve-3d; transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1); }
+.carousel-slide { position: absolute; width: 270px; height: 480px; top: 20px; left: 50%; margin-left: -135px; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5); background: #111; border: 2px solid var(--card-border); }
+.carousel-slide img { width: 100%; height: 100%; object-fit: cover; }
+.carousel-nav { position: absolute; top: 50%; transform: translateY(-50%); width: 100%; display: flex; justify-content: space-between; padding: 0 10px; z-index: 10; }
+.carousel-button { background: rgba(0,0,0,0.5); color: #fff; border: none; width: 40px; height: 40px; border-radius: 50%; font-size: 24px; cursor: pointer; transition: all 0.3s ease; }
+.carousel-button:hover { background: var(--primary-green); color: var(--dark-bg); }
+
+/* --- Metrics --- */
+.metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; }
+.metric-card { background: var(--card-bg); padding: 25px; text-align: center; border-radius: 10px; border: 1px solid var(--card-border); transition: all 0.3s ease; }
+.metric-card:hover { transform: scale(1.05); border-color: var(--primary-green); box-shadow: 0 0 20px rgba(0, 255, 155, 0.2); }
+.metric-icon { font-size: 36px; margin-bottom: 15px; color: var(--primary-green); }
+.metric-number { font-family: var(--font-heading); font-size: 2.5rem; font-weight: 700; color: var(--text-heading); }
+.metric-title { font-size: 1rem; color: var(--text-light); }
+
+/* --- CTA Countdown Section --- */
+.cta-timer-section { background: linear-gradient(135deg, rgba(0, 255, 155, 0.08), rgba(224, 224, 224, 0.05)); padding: 60px 20px; border-radius: 20px; text-align: center; margin: 40px 0; border: 1px solid var(--card-border); }
+.cta-title { font-family: var(--font-heading); font-size: 2rem; color: var(--text-heading); margin-bottom: 15px; }
+.cta-text { margin-bottom: 30px; color: var(--text-light); }
+.timer-box { display: inline-block; background: rgba(0,0,0,0.3); padding: 20px 40px; border-radius: 15px; box-shadow: 0 0 20px rgba(0,0,0,0.5); border: 1px solid var(--card-border); }
+#countdown-number { font-family: var(--font-heading); font-size: 3rem; font-weight: 900; color: var(--primary-green); text-shadow: 0 0 10px var(--primary-green); }
+.timer-label { font-size: 0.8rem; letter-spacing: 2px; color: var(--text-light); }
+
+/* --- Footer --- */
+.footer { padding: 80px 20px 20px; text-align: center; position: relative; background: var(--dark-bg); }
+.footer::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, var(--primary-green), var(--accent-silver)); }
+.footer-text { font-size: 0.9rem; opacity: 0.7; }
+.footer-text .highlight { font-weight: bold; color: var(--text-heading); }
+
+/* --- Floating CTA --- */
+.telegram-float { position: fixed; bottom: 25px; right: 25px; width: 60px; height: 60px; background: var(--telegram-color); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 36px; z-index: 1000; transition: all 0.3s ease; animation: pulse-telegram 2s infinite; }
+.telegram-float:hover { transform: scale(1.1); animation: none; }
+@keyframes pulse-telegram { 0% { box-shadow: 0 0 0 0 rgba(0, 136, 204, 0.7); } 70% { box-shadow: 0 0 0 20px rgba(0, 136, 204, 0); } 100% { box-shadow: 0 0 0 0 rgba(0, 136, 204, 0); } }
+
+/* --- Responsive --- */
+@media (max-width: 900px) {
+    .hero .container { grid-template-columns: 1fr; text-align: center; }
+    .hero-content { text-align: center; }
+    .hero-title { font-size: 2.8rem; }
+    .hero-subtitle { font-size: 1.1rem; margin-left: auto; margin-right: auto;}
+    .cta-buttons { justify-content: center; }
+}
+@media (max-width: 768px) {
+    .section { padding: 60px 0; }
+    .carousel-container { height: 550px; }
+    .carousel-slide { width: 225px; height: 400px; margin-left: -112.5px; }
+    .metrics-grid { grid-template-columns: 1fr 1fr; }
+    .top-bar-content span { font-size: 0.8rem; }
+}
+@media (max-width: 480px) {
+    .cta-buttons { flex-direction: column; align-items: center; }
+    .btn { width: 90%; justify-content: center; }
+    .services-grid { grid-template-columns: 1fr; }
+    .metrics-grid { grid-template-columns: 1fr; }
+    .carousel-container { height: 500px; }
+    .carousel-slide { width: 180px; height: 320px; margin-left: -90px; }
+    .carousel-nav { display: none; }
+}
+
+/* ============ End Inlined CSS ============ */
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <div class="top-bar-content">
+            <span>⚡ Precision-Engineered Ad Campaigns</span>
+            <span>📈 Optimize. Scale. Dominate.</span>
+            <span>💡 The Blueprint for Digital Success</span>
+            <span>✅ 100+ Brands Trust Our Strategy</span>
+            <!-- duplicated for smooth loop -->
+            <span>⚡ Precision-Engineered Ad Campaigns</span>
+            <span>📈 Optimize. Scale. Dominate.</span>
+            <span>💡 The Blueprint for Digital Success</span>
+            <span>✅ 100+ Brands Trust Our Strategy</span>
+        </div>
+    </div>
+
+    <div class="aurora-background"></div>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="logo-container hidden">
+                    <div class="logo-glow"></div>
+                    <a href="" target="_blank" class="logo-link">
+                       <img <img <img src="https://i.ibb.co/99SnrcXR/image.png" alt="MARKETING WITH JAYESH" class="logo">
+                    </a>
+                </div>
+
+                <div class="hero-content">
+                    <h1 class="hero-title hidden">MARKETING WITH JAYESH</h1>
+                    
+                    <!-- CTA buttons: WhatsApp above Telegram (as requested) -->
+                    <div class="cta-buttons hidden" style="transition-delay: 200ms;">
+                        <!-- WhatsApp Now button (above Telegram) -->
+                        <a href="https://wa.link/twa4e2" target="_blank" rel="noopener" class="btn btn-whatsapp" aria-label="Chat on WhatsApp">
+                            <i class='bx bxl-whatsapp'></i>WHATSAPP NOW
+                        </a>
+
+                        <!-- Telegram Join button -->
+                        <a href="https://t.me/+cFEgq5Kw7xRjYmU1" target="_blank" rel="noopener" class="btn btn-primary" aria-label="Join Telegram">
+                            <i class='bx bx-analyse'></i>JOIN TELEGRAM NOW
+                        </a>
+                    </div>
+                  
+
+                </div>
+            </div>
+        </section>
+
+        <section class="section services-section">
+            <div class="container">
+                <h2 class="section-heading hidden">Our Core Services</h2>
+                <div class="services-grid">
+                    <div class="service-card hidden">
+                        <i class='bx bxl-facebook-square service-icon'></i>
+                        <h3 class="service-title">📣 Facebook Ads</h3>
+                        <p>Precision-targeted Facebook ads designed to maximize ROI and scale your business.</p>
+                    </div>
+                    <div class="service-card hidden" style="transition-delay: 100ms;">
+                        <i class='bx bxl-telegram service-icon'></i>
+                        <h3 class="service-title">💬 Telegram Ads</h3>
+                        <p>Reach niche audiences through powerful Telegram ad placements that convert.</p>
+                    </div>
+                    <div class="service-card hidden" style="transition-delay: 200ms;">
+                        <i class='bx bx-code-alt service-icon'></i>
+                        <h3 class="service-title">🖥️📱 Web & App Development</h3>
+                        <p>Custom websites and mobile applications built for performance, user experience, and growth.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section carousel-section">
+            <div class="container">
+                <h2 class="section-heading hidden">Our Resluts</h2>
+                <div class="carousel-container hidden">
+                    <div class="carousel-wrapper"></div>
+                    <div class="carousel-nav">
+                        <button class="carousel-button prev"><i class='bx bx-chevron-left'></i></button>
+                        <button class="carousel-button next"><i class='bx bx-chevron-right'></i></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section metrics-section">
+            <div class="container">
+                <h2 class="section-heading hidden">Our Performance</h2>
+                <div class="metrics-grid">
+                    <div class="metric-card hidden">
+                        <i class='bx bx-cog metric-icon'></i>
+                        <div class="metric-number" data-target="150">0</div>
+                        <div class="metric-title">Campaigns Optimized</div>
+                    </div>
+                    <div class="metric-card hidden" style="transition-delay: 100ms;">
+                        <i class='bx bx-line-chart metric-icon'></i>
+                        <div class="metric-number" data-target="150">0</div>
+                        <div class="metric-title">Avg. ROI %</div>
+                    </div>
+                    <div class="metric-card hidden" style="transition-delay: 200ms;">
+                        <i class='bx bx-group metric-icon'></i>
+                        <div class="metric-number" data-target="100">0</div>
+                        <div class="metric-title">Valued Partners</div>
+                    </div>
+                    <div class="metric-card hidden" style="transition-delay: 300ms;">
+                        <i class='bx bx-infinite metric-icon'></i>
+                        <div class="metric-number" data-target="500">0</div>
+                        <div class="metric-title">K+ Impressions</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="container">
+            <div class="cta-timer-section hidden">
+                <h3 class="cta-title">LIMITED-TIME OFFER</h3>
+                <p class="cta-text">Get a FREE performance audit for your brand. This offer self-destructs in...</p>
+                <div class="timer-box">
+                    <div id="countdown-number">30</div>
+                    <span class="timer-label">SECONDS</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p class="footer-text">© 2025 <span class="highlight">MARKETING WITH JAYESH</span>. All Rights Reserved.</p>
+            <p class="footer-text">Engineering Tomorrow's Market Leaders.</p>
+        </div>
+    </footer>
+    <a href="https://t.me/+cFEgq5Kw7xRjYmU1" target="_blank" class="telegram-float" aria-label="Chat on Telegram">
+        <i class='bx bxl-telegram'></i>
+    </a>
+
+    <!-- Inlined JS (from script (1).js) -->
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+        // --- Scroll-triggered Animations ---
+        const mainObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                    if (entry.target.classList.contains('metric-card')) {
+                        const numberElement = entry.target.querySelector('.metric-number');
+                        if (numberElement && !numberElement.classList.contains('animated')) {
+                            animateCounter(numberElement);
+                            numberElement.classList.add('animated');
+                        }
+                    }
+                }
+            });
+        }, { threshold: 0.1 });
+
+        const hiddenElements = document.querySelectorAll('.hidden');
+        hiddenElements.forEach(el => mainObserver.observe(el));
+
+        // --- Counter Animation Function ---
+        function animateCounter(element) {
+            const target = +element.dataset.target;
+            let current = 0;
+            const duration = 2000;
+            const increment = target / (duration / 16);
+
+            function updateCounter() {
+                current += increment;
+                if (current < target) {
+                    element.textContent = Math.ceil(current).toLocaleString();
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    element.textContent = target.toLocaleString() + (element.parentElement.querySelector('.metric-title').textContent.includes('ROI') ? '%' : '+');
+                }
+            }
+            updateCounter();
+        }
+
+        // --- Carousel Functionality ---
+        const carouselContainer = document.querySelector('.carousel-container');
+        if (carouselContainer) {
+            const wrapper = carouselContainer.querySelector('.carousel-wrapper');
+            const prevButton = carouselContainer.querySelector('.carousel-button.prev');
+            const nextButton = carouselContainer.querySelector('.carousel-button.next');
+
+         const images = [
+    'assets/01.png',
+    'assets/02.png',
+    'assets/03.png',
+    'assets/04.png',
+    'assets/05.png'
+];
+
+
+
+
+            let currentAngle = 0;
+            let slideCount = images.length;
+            let anglePerSlide = 360 / slideCount;
+            let autoplayInterval = null;
+
+            images.forEach((src, i) => {
+                const slide = document.createElement('div');
+                slide.className = 'carousel-slide';
+                slide.style.transform = `rotateY(${i * anglePerSlide}deg) translateZ(360px)`;
+                const img = document.createElement('img');
+                img.src = src;
+                img.alt = `Campaign Result ${i+1}`;
+                slide.appendChild(img);
+                wrapper.appendChild(slide);
+            });
+
+            function rotateCarousel() { wrapper.style.transform = `rotateY(${currentAngle}deg)`; }
+            function showNextSlide() { currentAngle -= anglePerSlide; rotateCarousel(); }
+            function showPrevSlide() { currentAngle += anglePerSlide; rotateCarousel(); }
+
+            function startAutoplay() { if (autoplayInterval) clearInterval(autoplayInterval); autoplayInterval = setInterval(showNextSlide, 3000); }
+            function stopAutoplay() { clearInterval(autoplayInterval); autoplayInterval = null; }
+
+            nextButton && nextButton.addEventListener('click', showNextSlide);
+            prevButton && prevButton.addEventListener('click', showPrevSlide);
+            carouselContainer.addEventListener('mouseover', stopAutoplay);
+            carouselContainer.addEventListener('mouseout', startAutoplay);
+
+            const carouselObserver = new IntersectionObserver((entries) => {
+                if (entries[0].isIntersecting) startAutoplay();
+                else stopAutoplay();
+            }, { threshold: 0.1 });
+
+            carouselObserver.observe(carouselContainer);
+        }
+
+        // --- Countdown Timer ---
+        let secondsLeft = 30;
+        const countdownDisplay = document.getElementById('countdown-number');
+        if(countdownDisplay) {
+            const countdownTimer = setInterval(() => {
+                secondsLeft--;
+                countdownDisplay.textContent = secondsLeft;
+
+                if (secondsLeft <= 0) {
+                    clearInterval(countdownTimer);
+                    document.querySelector('.cta-timer-section .cta-text').textContent = "Offer expired! Contact us for other opportunities.";
+                }
+            }, 1000);
+        }
+    });
+    </script>
+</body>
+</html>
