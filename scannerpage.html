@@ -3,254 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bearish Alpha Pro | Advanced Market Analytics</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    
+    <title>AlphaScan - Technical Analysis & Market Research Tool</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        :root {
-            --primary: #ff3b3b;
-            --secondary: #0f172a;
-            --accent: #22d3ee;
-            --bg: #020617;
-            --card: #1e293b;
-            --text: #f8fafc;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden; }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: var(--bg); }
-        ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
-
-        /* Header */
-        header {
-            padding: 20px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(2, 6, 23, 0.9);
-            backdrop-filter: blur(10px);
-            position: fixed; width: 100%; top: 0; z-index: 1000;
-            border-bottom: 1px solid #1e293b;
-        }
-
-        .logo { font-size: 1.5rem; font-weight: 800; color: var(--primary); letter-spacing: -1px; }
-
-        /* Hero Section */
-        .hero {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            background: radial-gradient(circle at center, rgba(255, 59, 59, 0.1) 0%, transparent 70%);
-            padding: 0 20px;
-        }
-
-        .hero-content h1 { font-size: clamp(2.5rem, 6vw, 5rem); line-height: 1.1; margin-bottom: 20px; }
-        .hero-content span { color: var(--primary); }
-
-        /* Animated Button */
-        .btn-premium {
-            background: var(--primary);
-            color: white;
-            padding: 18px 45px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.2rem;
-            transition: 0.4s;
-            display: inline-block;
-            box-shadow: 0 0 30px rgba(255, 59, 59, 0.4);
-            border: 2px solid transparent;
-        }
-        .btn-premium:hover {
-            background: transparent;
-            border-color: var(--primary);
-            transform: scale(1.05);
-        }
-
-        /* Features Section */
-        .section-padding { padding: 100px 5%; }
-        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        
-        .card {
-            background: var(--card);
-            padding: 40px;
-            border-radius: 24px;
-            border: 1px solid #334155;
-            transition: 0.3s;
-        }
-        .card:hover { border-color: var(--primary); transform: translateY(-10px); }
-
-        /* Comparison Table */
-        .comparison-container {
-            overflow-x: auto;
-            margin-top: 50px;
-        }
-        table { width: 100%; border-collapse: collapse; background: var(--card); border-radius: 15px; overflow: hidden; }
-        th, td { padding: 20px; text-align: left; border-bottom: 1px solid #334155; }
-        th { background: #0f172a; color: var(--primary); }
-
-        /* FAQ Section */
-        .faq-item { margin-bottom: 15px; background: var(--card); padding: 20px; border-radius: 12px; }
-
-        /* Chart Area */
-        .chart-container {
-            max-width: 800px;
-            margin: 50px auto;
-            background: #0f172a;
-            padding: 30px;
-            border-radius: 20px;
-        }
-
-        footer { background: #000; padding: 50px 5%; text-align: center; border-top: 1px solid #1e293b; }
-        .disclaimer { font-size: 0.8rem; color: #64748b; margin-top: 30px; }
-
-        @media (max-width: 768px) {
-            .hero-content h1 { font-size: 3rem; }
-        }
+        .gradient-text { background: linear-gradient(to right, #ff4b2b, #ff416c); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .bg-dark { background-color: #0b0e14; }
+        .border-red { border-color: #ff4b2b; }
     </style>
 </head>
-<body>
+<body class="bg-dark text-gray-200 font-sans">
 
-    <header>
-        <div class="logo">BEARISH.ALPHA</div>
-        <a href="#pricing" class="btn-premium" style="padding: 10px 25px; font-size: 1rem;">Login</a>
+    <nav class="p-6 border-b border-gray-800 flex justify-between items-center bg-dark sticky top-0 z-50">
+        <div class="text-2xl font-bold gradient-text">ALPHASCAN</div>
+        <div class="hidden md:flex space-x-6 text-sm">
+            <a href="#features" class="hover:text-red-500">Features</a>
+            <a href="#how" class="hover:text-red-500">How it Works</a>
+            <a href="#disclaimer" class="hover:text-red-500">Compliance</a>
+        </div>
+    </nav>
+
+    <header class="text-center py-20 px-4">
+        <span class="bg-red-900/30 text-red-500 px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest">Advanced Data Analytics</span>
+        <h1 class="text-4xl md:text-6xl font-extrabold mt-6 leading-tight">Identify Market Patterns <br><span class="text-white">With Precision Data</span></h1>
+        <p class="mt-6 text-gray-400 max-w-2xl mx-auto text-lg">AlphaScan ek advanced technical research tool hai jo patterns aur indicators ko analyze karta hai. Hum financial advice nahi, sirf data provide karte hain.</p>
+        <div class="mt-10">
+            <a href="#pricing" class="bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-lg font-bold text-lg transition-all transform hover:scale-105 inline-block">Explore Tool Access</a>
+        </div>
     </header>
-
-    <section class="hero">
-        <div class="hero-content">
-            <p style="text-transform: uppercase; letter-spacing: 3px; color: var(--accent);">Advanced Technical Scanner</p>
-            <h1>Master Market <span>Downswings</span><br>With Precision Data.</h1>
-            <p>High-probability bearish patterns ko scan karein seconds mein. Meta-Policy compliant tool for serious analysts.</p>
-            <br>
-            <a href="#pricing" class="btn-premium">Start Scanning Now</a>
-        </div>
-    </section>
-
-    <div class="container section-padding">
-        <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 50px;">Real-Time Data Visualization</h2>
-        <div class="chart-container">
-            <canvas id="bearishChart"></canvas>
-        </div>
-    </div>
 
     
 
-    <section class="section-padding" style="background: #080c14;">
-        <div class="grid-3">
-            <div class="card">
-                <h3 style="color: var(--primary);">01. Pattern Recognition</h3>
-                <p>AI-driven algorithms jo Head & Shoulders aur Double Tops jaise patterns ko turant identify karte hain.</p>
-            </div>
-            <div class="card">
-                <h3 style="color: var(--primary);">02. Multi-Timeframe</h3>
-                <p>1-min scalping se lekar Daily charts tak, har timeframe par bearish breakdown alerts.</p>
-            </div>
-            <div class="card">
-                <h3 style="color: var(--primary);">03. Volume Analysis</h3>
-                <p>Sirf price nahi, smart money selling volume ko track karke accurate results deta hai.</p>
-            </div>
+    <section id="features" class="max-w-6xl mx-auto py-20 px-6 grid md:grid-cols-3 gap-10">
+        <div class="bg-gray-900/50 p-8 rounded-2xl border border-gray-800 hover:border-red-500 transition">
+            <div class="text-red-500 text-3xl mb-4">📊</div>
+            <h3 class="text-xl font-bold mb-3">Pattern Recognition</h3>
+            <p class="text-gray-400 text-sm">RSI divergence aur breakdown levels ko automate scan karein. Isme 25+ advanced bearish filters hain.</p>
+        </div>
+        <div class="bg-gray-900/50 p-8 rounded-2xl border border-gray-800 hover:border-red-500 transition">
+            <div class="text-red-500 text-3xl mb-4">⚡</div>
+            <h3 class="text-xl font-bold mb-3">Low Latency Data</h3>
+            <p class="text-gray-400 text-sm">Data processing ki speed <0.5s hai, taaki aapko mil sake accurate and timely technical information.</p>
+        </div>
+        <div class="bg-gray-900/50 p-8 rounded-2xl border border-gray-800 hover:border-red-500 transition">
+            <div class="text-red-500 text-3xl mb-4">📱</div>
+            <h3 class="text-xl font-bold mb-3">Cloud Alerts</h3>
+            <p class="text-gray-400 text-sm">System alerts jo direct aapke preferred dashboard par milte hain. No manual tracking needed.</p>
         </div>
     </section>
 
-    <section class="section-padding">
-        <h2 style="text-align: center; margin-bottom: 40px;">Why Choose Bearish Alpha?</h2>
-        <div class="comparison-container">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Feature</th>
-                        <th>Standard Tools</th>
-                        <th>Bearish Alpha Pro</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Data Latency</td>
-                        <td>5-10 Seconds Delay</td>
-                        <td>Real-time (< 1s)</td>
-                    </tr>
-                    <tr>
-                        <td>Pattern Detection</td>
-                        <td>Basic Indicators</td>
-                        <td>Advanced AI Patterns</td>
-                    </tr>
-                    <tr>
-                        <td>Alerts</td>
-                        <td>Email Only</td>
-                        <td>Telegram & Instant Push</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </section>
+    
 
-    <section id="pricing" class="section-padding" style="text-align: center;">
-        <div class="card" style="display: inline-block; max-width: 500px; border: 2px solid var(--primary);">
-            <span style="background: var(--primary); padding: 5px 15px; border-radius: 5px; font-size: 0.8rem;">BEST VALUE</span>
-            <h2 style="margin: 20px 0; font-size: 3rem;">₹2,499</h2>
-            <p style="color: var(--accent);">Lifetime Access - No Hidden Charges</p>
-            <ul style="text-align: left; margin: 30px 0; list-style: none;">
-                <li>✅ 50+ Bearish Scanners</li>
-                <li>✅ Custom Dashboard</li>
-                <li>✅ 24/7 Technical Support</li>
-                <li>✅ Weekly Strategy Webinars</li>
+    <section id="pricing" class="py-20 bg-black/30">
+        <div class="max-w-md mx-auto bg-gray-900 rounded-3xl p-10 border-2 border-red-600 text-center relative">
+            <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-red-600 px-4 py-1 rounded text-xs">OFFER EXPIRES SOON</div>
+            <h2 class="text-2xl font-bold">Tool Access License</h2>
+            <div class="text-5xl font-black my-6">₹1,999<span class="text-sm text-gray-500">/lifetime</span></div>
+            <ul class="text-left space-y-4 mb-10 text-gray-300">
+                <li class="flex items-center">✅ Full Technical Scanner Suite</li>
+                <li class="flex items-center">✅ Installation Video Guide</li>
+                <li class="flex items-center">✅ Lifetime Software Updates</li>
+                <li class="flex items-center">✅ Community Access</li>
             </ul>
-            <a href="#" class="btn-premium" style="width: 100%;">Get Instant Access</a>
+            <a href="#" class="block w-full bg-white text-black py-4 rounded-xl font-bold hover:bg-gray-200 transition">Get Started Now</a>
         </div>
     </section>
 
-    <section class="section-padding">
-        <h2 style="text-align: center; margin-bottom: 40px;">Frequently Asked Questions</h2>
-        <div class="faq-item">
-            <h4>Kya ye tool tips provide karta hai?</h4>
-            <p>Nahi, ye ek pure technical analysis scanner hai jo aapko data provide karta hai taaki aap informed decisions le sakein.</p>
+    <footer id="disclaimer" class="bg-black py-20 px-6 border-t border-gray-900">
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="flex justify-center space-x-6 mb-8 text-xs text-gray-500 uppercase font-bold">
+                <a href="/privacy-policy" class="hover:text-white">Privacy Policy</a>
+                <a href="/terms" class="hover:text-white">Terms & Conditions</a>
+                <a href="/contact" class="hover:text-white">Contact Us</a>
+            </div>
+            <p class="text-[10px] text-gray-600 leading-relaxed uppercase tracking-tighter">
+                DISCLAIMER: This website is not part of the Meta website or Meta Platforms, Inc. Additionally, this site is NOT endorsed by Meta in any way. META is a trademark of Meta Platforms, Inc. <br><br>
+                Financial Disclosure: Stock market analysis involves high risk. AlphaScan is a software tool for technical research and educational purposes only. We are NOT SEBI Registered advisors. We do not provide trading tips, investment advice, or guaranteed returns. Past performance is not an indicator of future results. Use this tool at your own risk.
+            </p>
+            <p class="mt-10 text-gray-700 text-xs">&copy; 2025 AlphaScan Technologies. All Rights Reserved.</p>
         </div>
-        <div class="faq-item">
-            <h4>Meta Ads ke liye safe hai?</h4>
-            <p>Ji haan, iska content aur structure Meta ki policies ke hisaab se banaya gaya hai (No false promises).</p>
-        </div>
-    </section>
-
-    <footer>
-        <div class="logo">BEARISH.ALPHA</div>
-        <p style="margin-top: 20px; color: var(--text-dim);">The ultimate toolkit for technical market analysis.</p>
-        <div class="disclaimer">
-            <strong>Risk Warning:</strong> Trading in financial markets involves high risk. This tool is for informational purposes only. We are not SEBI registered advisors. Performance data shown is for illustrative purposes. 
-        </div>
-        <p style="font-size: 0.7rem; margin-top: 20px; color: #334155;">&copy; 2025 Alpha Tech Analytics. All rights reserved.</p>
     </footer>
 
-    <script>
-        // Real-time Chart Simulation
-        const ctx = document.getElementById('bearishChart').getContext('2d');
-        new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: ['10:00', '11:00', '12:00', '13:00', '14:00', '15:00'],
-                datasets: [{
-                    label: 'Market Momentum (Bearish Trend)',
-                    data: [80, 75, 60, 65, 40, 30],
-                    borderColor: '#ff3b3b',
-                    backgroundColor: 'rgba(255, 59, 59, 0.1)',
-                    borderWidth: 3,
-                    fill: true,
-                    tension: 0.4
-                }]
-            },
-            options: {
-                responsive: true,
-                scales: {
-                    y: { beginAtZero: false, grid: { color: '#1e293b' } },
-                    x: { grid: { display: false } }
-                }
-            }
-        });
-    </script>
 </body>
 </html>
