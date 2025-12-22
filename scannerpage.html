@@ -1,84 +1,256 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
     <meta charset="UTF-8">
-    <title>Access Market Resource</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <title>Bearish Alpha Pro | Advanced Market Analytics</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
     <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: "Segoe UI", Arial, sans-serif;
-            background: linear-gradient(135deg, #0f172a, #020617);
-            color: #ffffff;
+        :root {
+            --primary: #ff3b3b;
+            --secondary: #0f172a;
+            --accent: #22d3ee;
+            --bg: #020617;
+            --card: #1e293b;
+            --text: #f8fafc;
         }
-        .container {
-            max-width: 720px;
-            margin: 90px auto;
-            background: #020617;
-            border-radius: 14px;
-            padding: 45px;
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden; }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
+
+        /* Header */
+        header {
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(2, 6, 23, 0.9);
+            backdrop-filter: blur(10px);
+            position: fixed; width: 100%; top: 0; z-index: 1000;
+            border-bottom: 1px solid #1e293b;
+        }
+
+        .logo { font-size: 1.5rem; font-weight: 800; color: var(--primary); letter-spacing: -1px; }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-align: center;
-            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+            background: radial-gradient(circle at center, rgba(255, 59, 59, 0.1) 0%, transparent 70%);
+            padding: 0 20px;
         }
-        h1 {
-            font-size: 30px;
-            margin-bottom: 15px;
-            color: #e5e7eb;
-        }
-        p {
-            font-size: 16px;
-            line-height: 1.7;
-            color: #cbd5f5;
-        }
-        .note {
-            font-size: 14px;
-            margin-top: 18px;
-            color: #94a3b8;
-        }
-        .btn {
-            display: inline-block;
-            margin-top: 32px;
-            padding: 16px 34px;
-            font-size: 16px;
-            font-weight: 600;
-            color: #020617;
-            background: #38bdf8;
-            border-radius: 8px;
+
+        .hero-content h1 { font-size: clamp(2.5rem, 6vw, 5rem); line-height: 1.1; margin-bottom: 20px; }
+        .hero-content span { color: var(--primary); }
+
+        /* Animated Button */
+        .btn-premium {
+            background: var(--primary);
+            color: white;
+            padding: 18px 45px;
+            border-radius: 50px;
             text-decoration: none;
-            transition: all 0.25s ease;
+            font-weight: 600;
+            font-size: 1.2rem;
+            transition: 0.4s;
+            display: inline-block;
+            box-shadow: 0 0 30px rgba(255, 59, 59, 0.4);
+            border: 2px solid transparent;
         }
-        .btn:hover {
-            background: #0ea5e9;
+        .btn-premium:hover {
+            background: transparent;
+            border-color: var(--primary);
             transform: scale(1.05);
+        }
+
+        /* Features Section */
+        .section-padding { padding: 100px 5%; }
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        
+        .card {
+            background: var(--card);
+            padding: 40px;
+            border-radius: 24px;
+            border: 1px solid #334155;
+            transition: 0.3s;
+        }
+        .card:hover { border-color: var(--primary); transform: translateY(-10px); }
+
+        /* Comparison Table */
+        .comparison-container {
+            overflow-x: auto;
+            margin-top: 50px;
+        }
+        table { width: 100%; border-collapse: collapse; background: var(--card); border-radius: 15px; overflow: hidden; }
+        th, td { padding: 20px; text-align: left; border-bottom: 1px solid #334155; }
+        th { background: #0f172a; color: var(--primary); }
+
+        /* FAQ Section */
+        .faq-item { margin-bottom: 15px; background: var(--card); padding: 20px; border-radius: 12px; }
+
+        /* Chart Area */
+        .chart-container {
+            max-width: 800px;
+            margin: 50px auto;
+            background: #0f172a;
+            padding: 30px;
+            border-radius: 20px;
+        }
+
+        footer { background: #000; padding: 50px 5%; text-align: center; border-top: 1px solid #1e293b; }
+        .disclaimer { font-size: 0.8rem; color: #64748b; margin-top: 30px; }
+
+        @media (max-width: 768px) {
+            .hero-content h1 { font-size: 3rem; }
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h1>Market Analysis Resource</h1>
+    <header>
+        <div class="logo">BEARISH.ALPHA</div>
+        <a href="#pricing" class="btn-premium" style="padding: 10px 25px; font-size: 1rem;">Login</a>
+    </header>
 
-    <p>
-        You are about to access an educational and analytical resource
-        intended to help users understand market behavior and trend structure.
-    </p>
+    <section class="hero">
+        <div class="hero-content">
+            <p style="text-transform: uppercase; letter-spacing: 3px; color: var(--accent);">Advanced Technical Scanner</p>
+            <h1>Master Market <span>Downswings</span><br>With Precision Data.</h1>
+            <p>High-probability bearish patterns ko scan karein seconds mein. Meta-Policy compliant tool for serious analysts.</p>
+            <br>
+            <a href="#pricing" class="btn-premium">Start Scanning Now</a>
+        </div>
+    </section>
 
-    <p>
-        This content is provided strictly for informational purposes only.
-        No financial advice, guarantees, or profit claims are made.
-    </p>
+    <div class="container section-padding">
+        <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 50px;">Real-Time Data Visualization</h2>
+        <div class="chart-container">
+            <canvas id="bearishChart"></canvas>
+        </div>
+    </div>
 
-    <p class="note">
-        Market participation involves risk. Users are responsible for
-        their own decisions and outcomes.
-    </p>
+    
 
-    <a class="btn" href="https://digitalnostalgia.in/product/digital-nostalgics-bearish-scanners-combo/">
-        Get Access
-    </a>
-</div>
+    <section class="section-padding" style="background: #080c14;">
+        <div class="grid-3">
+            <div class="card">
+                <h3 style="color: var(--primary);">01. Pattern Recognition</h3>
+                <p>AI-driven algorithms jo Head & Shoulders aur Double Tops jaise patterns ko turant identify karte hain.</p>
+            </div>
+            <div class="card">
+                <h3 style="color: var(--primary);">02. Multi-Timeframe</h3>
+                <p>1-min scalping se lekar Daily charts tak, har timeframe par bearish breakdown alerts.</p>
+            </div>
+            <div class="card">
+                <h3 style="color: var(--primary);">03. Volume Analysis</h3>
+                <p>Sirf price nahi, smart money selling volume ko track karke accurate results deta hai.</p>
+            </div>
+        </div>
+    </section>
 
+    <section class="section-padding">
+        <h2 style="text-align: center; margin-bottom: 40px;">Why Choose Bearish Alpha?</h2>
+        <div class="comparison-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Standard Tools</th>
+                        <th>Bearish Alpha Pro</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Data Latency</td>
+                        <td>5-10 Seconds Delay</td>
+                        <td>Real-time (< 1s)</td>
+                    </tr>
+                    <tr>
+                        <td>Pattern Detection</td>
+                        <td>Basic Indicators</td>
+                        <td>Advanced AI Patterns</td>
+                    </tr>
+                    <tr>
+                        <td>Alerts</td>
+                        <td>Email Only</td>
+                        <td>Telegram & Instant Push</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section id="pricing" class="section-padding" style="text-align: center;">
+        <div class="card" style="display: inline-block; max-width: 500px; border: 2px solid var(--primary);">
+            <span style="background: var(--primary); padding: 5px 15px; border-radius: 5px; font-size: 0.8rem;">BEST VALUE</span>
+            <h2 style="margin: 20px 0; font-size: 3rem;">₹2,499</h2>
+            <p style="color: var(--accent);">Lifetime Access - No Hidden Charges</p>
+            <ul style="text-align: left; margin: 30px 0; list-style: none;">
+                <li>✅ 50+ Bearish Scanners</li>
+                <li>✅ Custom Dashboard</li>
+                <li>✅ 24/7 Technical Support</li>
+                <li>✅ Weekly Strategy Webinars</li>
+            </ul>
+            <a href="#" class="btn-premium" style="width: 100%;">Get Instant Access</a>
+        </div>
+    </section>
+
+    <section class="section-padding">
+        <h2 style="text-align: center; margin-bottom: 40px;">Frequently Asked Questions</h2>
+        <div class="faq-item">
+            <h4>Kya ye tool tips provide karta hai?</h4>
+            <p>Nahi, ye ek pure technical analysis scanner hai jo aapko data provide karta hai taaki aap informed decisions le sakein.</p>
+        </div>
+        <div class="faq-item">
+            <h4>Meta Ads ke liye safe hai?</h4>
+            <p>Ji haan, iska content aur structure Meta ki policies ke hisaab se banaya gaya hai (No false promises).</p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="logo">BEARISH.ALPHA</div>
+        <p style="margin-top: 20px; color: var(--text-dim);">The ultimate toolkit for technical market analysis.</p>
+        <div class="disclaimer">
+            <strong>Risk Warning:</strong> Trading in financial markets involves high risk. This tool is for informational purposes only. We are not SEBI registered advisors. Performance data shown is for illustrative purposes. 
+        </div>
+        <p style="font-size: 0.7rem; margin-top: 20px; color: #334155;">&copy; 2025 Alpha Tech Analytics. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Real-time Chart Simulation
+        const ctx = document.getElementById('bearishChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['10:00', '11:00', '12:00', '13:00', '14:00', '15:00'],
+                datasets: [{
+                    label: 'Market Momentum (Bearish Trend)',
+                    data: [80, 75, 60, 65, 40, 30],
+                    borderColor: '#ff3b3b',
+                    backgroundColor: 'rgba(255, 59, 59, 0.1)',
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: { beginAtZero: false, grid: { color: '#1e293b' } },
+                    x: { grid: { display: false } }
+                }
+            }
+        });
+    </script>
 </body>
 </html>
