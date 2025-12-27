@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Market Direction Tool | Digital Nostalgia</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+    <style>
+        body { font-family: 'Poppins', sans-serif; background: #0f172a; color: white; overflow-x: hidden; }
+        .glass { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); }
+        .gradient-text { background: linear-gradient(90deg, #38bdf8, #818cf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .btn-glow:hover { box-shadow: 0 0 20px rgba(56, 189, 248, 0.6); transform: scale(1.05); transition: all 0.3s ease; }
+        .floating { animation: floating 3s ease-in-out infinite; }
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+    </style>
+</head>
+<body>
+
+    <section class="relative min-h-screen flex items-center justify-center px-6 overflow-hidden">
+        <div class="absolute top-0 -left-20 w-72 h-72 bg-blue-600 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>
+        <div class="absolute bottom-0 -right-20 w-72 h-72 bg-purple-600 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>
+
+        <div class="max-w-4xl text-center z-10">
+            <div data-aos="zoom-in" class="mb-6 inline-block px-4 py-1 rounded-full glass text-sm font-medium text-blue-400">
+                🚀 Advanced Market Scanning Technology
+            </div>
+            
+            <h1 data-aos="fade-up" data-aos-delay="200" class="text-5xl md:text-7xl font-extrabold mb-6">
+                Master The <span class="gradient-text">Downside</span> <br> Like a Pro
+            </h1>
+
+            <p data-aos="fade-up" data-aos-delay="400" class="text-gray-400 text-lg md:text-xl mb-10 max-w-2xl mx-auto">
+                Identify high-probability breakdown setups in seconds. Data-driven analysis for smart intraday traders.
+            </p>
+
+            <div data-aos="fade-up" data-aos-delay="600" class="flex flex-col items-center gap-4">
+                <a href="YOUR_TELEGRAM_LINK" class="btn-glow bg-blue-600 text-white px-10 py-5 rounded-2xl font-bold text-xl shadow-lg flex items-center gap-3">
+                    JOIN NOW ON TELEGRAM 
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                </a>
+                <p class="text-sm text-gray-500">Instant Access • Lifetime Updates • Just ₹399</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 px-6">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+            
+            <div data-aos="fade-right" class="glass p-8 rounded-3xl floating">
+                <div class="text-4xl mb-4">📊</div>
+                <h3 class="text-xl font-bold mb-2">Real-time Analysis</h3>
+                <p class="text-gray-400 text-sm">Scan F&O stocks with high selling pressure instantly.</p>
+            </div>
+
+            <div data-aos="fade-up" class="glass p-8 rounded-3xl">
+                <div class="text-4xl mb-4">🎯</div>
+                <h3 class="text-xl font-bold mb-2">Precision Alerts</h3>
+                <p class="text-gray-400 text-sm">Get notified at critical support breakdown levels.</p>
+            </div>
+
+            <div data-aos="fade-left" class="glass p-8 rounded-3xl floating" style="animation-delay: 1s;">
+                <div class="text-4xl mb-4">⚡</div>
+                <h3 class="text-xl font-bold mb-2">3-Min Strategy</h3>
+                <p class="text-gray-400 text-sm">Optimized for fast-moving intraday momentum.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="py-10 px-6 border-t border-gray-800">
+        <div class="max-w-6xl mx-auto text-center">
+            <div class="flex flex-wrap justify-center gap-6 mb-6 text-sm text-gray-500">
+                <a href="#" class="hover:text-white">Privacy Policy</a>
+                <a href="#" class="hover:text-white">Terms of Service</a>
+                <a href="#" class="hover:text-white">Refund Policy</a>
+            </div>
+            
+            <p class="text-[10px] text-gray-600 leading-relaxed max-w-4xl mx-auto">
+                DISCLAIMER: Investment in securities market are subject to market risks. We are NOT SEBI registered. This is an educational tool. This site is not a part of Facebook or Meta Inc.
+            </p>
+            <p class="mt-4 text-xs text-gray-700">© 2025 Digital Nostalgia</p>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: false,
+        });
+    </script>
+</body>
+</html>
