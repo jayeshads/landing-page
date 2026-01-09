@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>I'm Sorry</title>
+  <meta name="description" content="A heartfelt apology website"/>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    body {
+      overflow: hidden;
+    }
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px) scale(0.95);
+      transition: all 1s ease;
+    }
+    .fade-up.show {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  </style>
+</head>
+
+<body class="bg-gray-900 text-white">
+
+  <div class="min-h-screen flex flex-col items-center justify-center px-4 text-center relative overflow-hidden">
+
+    <!-- Emojis -->
+    <div class="absolute top-20 left-10 text-2xl">🌙</div>
+    <div class="absolute top-10 md:top-32 right-8 md:right-16 text-xl">✨</div>
+    <div class="absolute bottom-20 left-8 text-xl">🌸</div>
+
+    <!-- Teddy -->
+    <div id="teddy" class="mb-8 relative fade-up">
+      <div class="absolute inset-0 bg-gradient-to-r from-pink-400/20 to-purple-400/20 rounded-full blur-xl scale-110"></div>
+      <img src="gifs/teddy-walking.gif"
+           class="w-64 h-64 mx-auto rounded-2xl relative z-10"/>
+      <div class="absolute -top-2 -right-2 text-lg">💕</div>
+    </div>
+
+    <!-- Text -->
+    <div id="text" class="space-y-6 max-w-md fade-up">
+      <p class="text-pink-200 text-xl leading-relaxed">
+        It's late night… I've been walking for hours…
+      </p>
+      <p class="text-purple-200 text-xl leading-relaxed">
+        I'm holding something heavy… not in hands, but in heart…
+      </p>
+    </div>
+
+  <a href="sry2.html">
+  <button
+    id="btn"
+    class="mt-12 px-10 py-4 bg-gradient-to-r from-pink-500/30 to-purple-500/30
+           backdrop-blur-sm border border-pink-300/40 rounded-full
+           text-pink-100 text-xl hover:from-pink-500/40 hover:to-purple-500/40
+           transition-all duration-500 shadow-xl shadow-pink-500/30
+           relative overflow-hidden fade-up">
+
+    <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent pointer-events-none"></div>
+
+    <span class="relative z-10">Let me talk...</span>
+  </button>
+</a>
+
+  <!-- Animation Script -->
+  <script>
+    window.onload = () => {
+      setTimeout(() => document.getElementById('teddy').classList.add('show'), 300);
+      setTimeout(() => document.getElementById('text').classList.add('show'), 800);
+      setTimeout(() => document.getElementById('btn').classList.add('show'), 1400);
+    };
+  </script>
+
+</body>
+</html>
