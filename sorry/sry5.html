@@ -70,17 +70,19 @@
   </p>
 
   <!-- button -->
-  <button
-    id="btn"
-    onclick="hugEffect()"
-    class="fade px-12 py-4 rounded-full
-           bg-gradient-to-r from-purple-600/50 to-pink-600/50
-           border border-purple-300/30
-           text-pink-100 text-lg
-           hover:from-purple-600/70 hover:to-pink-600/70
-           transition-all duration-500 btn-glow">
-    🤍 Send a hug
-  </button>
+ <button
+  id="btn"
+  onclick="window.open('https://wa.me/919876543210', '_blank')"
+  class="fade px-12 py-4 rounded-full
+         bg-gradient-to-r from-purple-600/50 to-pink-600/50
+         border border-purple-300/30
+         text-pink-100 text-lg
+         hover:from-purple-600/70 hover:to-pink-600/70
+         transition-all duration-500 btn-glow"
+  style="z-index:10;">
+  🤍 Send a hug
+</button>
+
 
   <script>
     window.onload = () => {
@@ -98,3 +100,4 @@
 
 </body>
 </html>
+
