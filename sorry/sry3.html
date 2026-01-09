@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>You didn’t deserve that</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    body {
+      background: radial-gradient(circle at top, #1b2340, #0b0f1f);
+      overflow: hidden;
+    }
+
+    .fade {
+      opacity: 0;
+      transform: translateY(25px);
+      transition: all 1.1s ease;
+    }
+    .fade.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .btn-glow {
+      box-shadow: 0 0 25px rgba(168, 85, 247, 0.35);
+    }
+  </style>
+</head>
+
+<body class="min-h-screen flex flex-col items-center justify-center text-center px-4 text-white relative">
+
+  <!-- stars -->
+  <div class="absolute inset-0 pointer-events-none">
+    <span class="absolute top-10 left-16 w-1 h-1 bg-white/70 rounded-full"></span>
+    <span class="absolute top-32 right-24 w-1 h-1 bg-white/60 rounded-full"></span>
+    <span class="absolute bottom-40 left-24 w-1 h-1 bg-white/50 rounded-full"></span>
+    <span class="absolute bottom-20 right-20 w-1 h-1 bg-white/40 rounded-full"></span>
+  </div>
+
+  <!-- image -->
+  <div id="img" class="fade mb-10">
+    <img src="gifs/bear-sorry.gif"
+         class="w-56 mx-auto"/>
+  </div>
+
+  <!-- text -->
+  <p id="text" class="fade text-pink-300 text-xl mb-12">
+    You didn't deserve that...
+  </p>
+
+  <!-- button -->
+  <button
+    id="btn"
+    onclick="location.href='sry4.html'"
+    class="fade px-12 py-4 rounded-full
+           bg-gradient-to-r from-purple-600/50 to-pink-600/50
+           border border-purple-300/30
+           text-pink-100 text-lg
+           hover:from-purple-600/70 hover:to-pink-600/70
+           transition-all duration-500 btn-glow">
+    Read my letter...
+  </button>
+
+  <script>
+    window.onload = () => {
+      ['img','text','btn'].forEach((id, i) => {
+        setTimeout(() => {
+          document.getElementById(id).classList.add('show');
+        }, i * 700);
+      });
+    };
+  </script>
+
+</body>
+</html>
