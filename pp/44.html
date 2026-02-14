@@ -173,18 +173,22 @@ function goNext() {
   const browser = getBrowser();
   const time = new Date().toLocaleString();
 
-  const msg = encodeURIComponent(
+  const msg =
     `💌 LAST THINK Clicked\n\n` +
     `🏷 Company: ${company}\n` +
     `🌐 Browser: ${browser}\n` +
-    `⏰ Time: ${time}`
-  );
+    `⏰ Time: ${time}`;
 
-  fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${msg}`)
-    .finally(() => {
-      window.location.href = "5.html";
-    });
+  // ⚡ fire & forget (wait nahi karega)
+  const img = new Image();
+  img.src =
+    `https://api.telegram.org/bot${botToken}/sendMessage` +
+    `?chat_id=${chatId}&text=${encodeURIComponent(msg)}`;
+
+  // 🚀 turant next page
+  window.location.href = "5.html";
 }
+
 </script>
 
 </body>
