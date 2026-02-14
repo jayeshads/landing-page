@@ -143,7 +143,7 @@ function getDeviceCompany() {
 
   if (/Samsung|SM-/i.test(ua)) return "Samsung";
   if (/Redmi|Mi|Xiaomi/i.test(ua)) return "Xiaomi / Redmi";
-  if (/Vivo/i.test(ua)) return "Vivo";
+  if (ua.includes("vivo") || ua.includes("vivo browser")) return "Vivo";
   if (/OPPO/i.test(ua)) return "Oppo";
   if (/Realme/i.test(ua)) return "Realme";
   if (/OnePlus/i.test(ua)) return "OnePlus";
