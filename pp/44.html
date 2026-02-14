@@ -125,6 +125,19 @@ I love you a lot.`;
 
 let index = 0;
 
+function typeEffect(){
+  if(index < text.length){
+    document.getElementById("typing").innerHTML += text.charAt(index);
+    index++;
+    let speed = Math.random()*40 + 25;
+    setTimeout(typeEffect, speed);
+  } else {
+    document.getElementById("nextBtn").classList.add("show");
+  }
+}
+
+setTimeout(typeEffect,1500);
+
 function goNext(){
   fetch("notify.php", { method: "POST" })
     .finally(() => {
@@ -134,13 +147,6 @@ function goNext(){
     });
 }
 
-
-setTimeout(typeEffect,1500);
-
-function goNext(){
-  fetch("notify.php", { keepalive: true });
-  window.location.href = "5.html";
-}
 </script>
 
 </body>
