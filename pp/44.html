@@ -174,19 +174,29 @@ function goNext() {
   const time = new Date().toLocaleString();
 
   const msg =
-    `💌 LAST THINK Clicked\n\n` +
-    `🏷 Company: ${company}\n` +
-    `🌐 Browser: ${browser}\n` +
-    `⏰ Time: ${time}`;
+`💌 LAST THINK Clicked
 
-  // ⚡ fire & forget (wait nahi karega)
-  const img = new Image();
-  img.src =
-    `https://api.telegram.org/bot${botToken}/sendMessage` +
-    `?chat_id=${chatId}&text=${encodeURIComponent(msg)}`;
+🏷 Company: ${company}
+🌐 Browser: ${browser}
+⏰ Time: ${time}`;
 
-  // 🚀 turant next page
-  window.location.href = "5.html";
+  // ✅ Telegram notify (GitHub Pages safe)
+  fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      chat_id: chatId,
+      text: msg
+    }),
+    keepalive: true
+  }).catch(() => {});
+
+  // ⚡ tiny delay so request fire ho jaye
+  setTimeout(() => {
+    window.location.href = "5.html";
+  }, 150);
 }
 </script>
 
