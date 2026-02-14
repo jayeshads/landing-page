@@ -139,19 +139,19 @@ function typeEffect(){
 setTimeout(typeEffect,1500);
 
 function getDeviceCompany() {
-  const ua = navigator.userAgent.toLowerCase();
+  const ua = navigator.userAgent;
 
-  if (ua.includes("vivo") || ua.includes("vivo browser")) return "Vivo";
-  if (ua.includes("oppo")) return "Oppo";
-  if (ua.includes("realme")) return "Realme";
-  if (ua.includes("redmi") || ua.includes("xiaomi") || ua.includes("mi ")) return "Xiaomi / Redmi";
-  if (ua.includes("samsung") || ua.includes("sm-")) return "Samsung";
-  if (ua.includes("oneplus")) return "OnePlus";
-  if (ua.includes("iphone") || ua.includes("ipad")) return "Apple";
-  if (ua.includes("windows")) return "Windows PC";
-  if (ua.includes("macintosh")) return "Mac";
+  if (/Samsung|SM-/i.test(ua)) return "Samsung";
+  if (/Redmi|Mi|Xiaomi/i.test(ua)) return "Xiaomi / Redmi";
+  if (/Vivo/i.test(ua)) return "Vivo";
+  if (/OPPO/i.test(ua)) return "Oppo";
+  if (/Realme/i.test(ua)) return "Realme";
+  if (/OnePlus/i.test(ua)) return "OnePlus";
+  if (/iPhone|iPad/i.test(ua)) return "Apple";
+  if (/Windows/i.test(ua)) return "Windows PC";
+  if (/Macintosh/i.test(ua)) return "Mac";
 
-  return "Android (Brand Hidden)";
+  return "Unknown";
 }
 
 function getBrowser() {
@@ -188,10 +188,8 @@ function goNext() {
   // 🚀 turant next page
   window.location.href = "5.html";
 }
-
 </script>
 
 </body>
 
 </html>
-
