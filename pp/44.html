@@ -125,16 +125,15 @@ I love you a lot.`;
 
 let index = 0;
 
-function typeEffect(){
-  if(index < text.length){
-    document.getElementById("typing").innerHTML += text.charAt(index);
-    index++;
-    let speed = Math.random()*40 + 25;
-    setTimeout(typeEffect, speed);
-  } else {
-    document.getElementById("nextBtn").classList.add("show");
-  }
+function goNext(){
+  fetch("notify.php", { method: "POST" })
+    .finally(() => {
+      setTimeout(() => {
+        window.location.href = "5.html";
+      }, 300);
+    });
 }
+
 
 setTimeout(typeEffect,1500);
 
