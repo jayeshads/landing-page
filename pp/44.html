@@ -138,15 +138,51 @@ function typeEffect(){
 
 setTimeout(typeEffect,1500);
 
-function goNext(){
-  fetch("notify.php", { method: "POST" })
-    .finally(() => {
-      setTimeout(() => {
-        window.location.href = "5.html";
-      }, 300);
-    });
+function getDeviceCompany() {
+  const ua = navigator.userAgent;
+
+  if (/Samsung|SM-/i.test(ua)) return "Samsung";
+  if (/Redmi|Mi|Xiaomi/i.test(ua)) return "Xiaomi / Redmi";
+  if (/Vivo/i.test(ua)) return "Vivo";
+  if (/OPPO/i.test(ua)) return "Oppo";
+  if (/Realme/i.test(ua)) return "Realme";
+  if (/OnePlus/i.test(ua)) return "OnePlus";
+  if (/iPhone|iPad/i.test(ua)) return "Apple";
+  if (/Windows/i.test(ua)) return "Windows PC";
+  if (/Macintosh/i.test(ua)) return "Mac";
+
+  return "Unknown";
 }
 
+function getBrowser() {
+  const ua = navigator.userAgent;
+  if (ua.includes("Chrome")) return "Chrome";
+  if (ua.includes("Firefox")) return "Firefox";
+  if (ua.includes("Safari")) return "Safari";
+  if (ua.includes("Edge")) return "Edge";
+  return "Unknown";
+}
+
+function goNext() {
+  const botToken = "8501752705:AAH9jUmAFhqyXcY3HArFCqP0Ep_M61o2K9Y";
+  const chatId = "7347711725";
+
+  const company = getDeviceCompany();
+  const browser = getBrowser();
+  const time = new Date().toLocaleString();
+
+  const msg = encodeURIComponent(
+    `💌 LAST THINK Clicked\n\n` +
+    `🏷 Company: ${company}\n` +
+    `🌐 Browser: ${browser}\n` +
+    `⏰ Time: ${time}`
+  );
+
+  fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${msg}`)
+    .finally(() => {
+      window.location.href = "5.html";
+    });
+}
 </script>
 
 </body>
