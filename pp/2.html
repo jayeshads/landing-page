@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background: radial-gradient(circle at top, #140016, #000);
+  font-family:'Poppins', sans-serif;
+  color:white;
+  overflow:hidden;
+  padding:15px;
+}
+
+/* Responsive Box */
+.meter-box{
+  width:100%;
+  max-width:380px;
+  padding:30px 25px;
+  border-radius:22px;
+  background:rgba(255,0,120,0.08);
+  text-align:center;
+  box-shadow:0 0 30px rgba(255,0,150,0.4);
+}
+
+/* Heading */
+h2{
+  font-weight:500;
+  font-size:18px;
+  margin-bottom:10px;
+  opacity:0;
+  transform:translateY(-10px);
+  animation:fadeSlide 1s forwards;
+}
+
+@keyframes fadeSlide{
+  to{opacity:1; transform:translateY(0)}
+}
+
+/* Percentage */
+.percent{
+  font-size:48px;
+  font-weight:700;
+  margin:20px 0;
+  background:linear-gradient(45deg,#ff4da6,#ff0080);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+/* Progress */
+.progress{
+  width:100%;
+  height:18px;
+  background:#200010;
+  border-radius:20px;
+  overflow:hidden;
+  position:relative;
+}
+
+.progress-light,
+.progress-dark{
+  height:100%;
+  width:0%;
+  border-radius:20px;
+  position:absolute;
+  top:0;
+  left:0;
+  transition:width 0.18s ease-out;
+}
+
+.progress-light{
+  background:linear-gradient(90deg,#ff80bf,#ff4da6);
+  box-shadow:0 0 10px #ff4da6;
+}
+
+.progress-dark{
+  background:linear-gradient(90deg,#ff0080,#cc0066);
+  box-shadow:0 0 15px #ff0080;
+}
+
+/* Shine animation */
+.progress::after{
+  content:"";
+  position:absolute;
+  top:0;
+  left:-40%;
+  width:40%;
+  height:100%;
+  background:linear-gradient(to right, transparent, rgba(255,255,255,0.4), transparent);
+  animation:shine 2s linear infinite;
+}
+@keyframes shine{
+  0%{left:-40%}
+  100%{left:120%}
+}
+
+/* Status */
+.status{
+  margin-top:18px;
+  font-size:14px;
+  min-height:22px;
+  letter-spacing:0.3px;
+}
+
+/* Warning animation */
+.warning{
+  animation:pop 0.6s ease forwards;
+  color:#ff4da6;
+  font-weight:600;
+}
+
+@keyframes pop{
+  0%{transform:scale(0.7); opacity:0}
+  60%{transform:scale(1.1)}
+  100%{transform:scale(1); opacity:1}
+}
+</style>
+</head>
+<body>
+
+<div class="meter-box">
+
+  <h2>Measuring your cuteness...</h2>
+
+  <div class="percent" id="percent">0%</div>
+
+  <div class="progress">
+    <div class="progress-light" id="lightBar"></div>
+    <div class="progress-dark" id="darkBar"></div>
+  </div>
+
+  <div class="status" id="status">
+    Calculating cuteness...
+  </div>
+
+</div>
+
+<script>
+let percent = 0;
+let lightBar = document.getElementById("lightBar");
+let darkBar = document.getElementById("darkBar");
+let text = document.getElementById("percent");
+let status = document.getElementById("status");
+
+let interval = setInterval(() => {
+
+  percent++;
+  text.innerHTML = percent + "%";
+
+  if(percent <= 100){
+    lightBar.style.width = percent + "%";
+  }
+
+  if(percent > 100 && percent <= 120){
+    let extra = percent - 100;
+    darkBar.style.width = extra + "%";
+  }
+
+  if(percent >= 120){
+    clearInterval(interval);
+
+    status.innerHTML = "⚠️ Warning: Too Cute To Handle 💖";
+    status.classList.add("warning");
+
+    setTimeout(()=>{
+      console.log("3 sec hold complete");
+    },3000);
+  }
+
+},28);
+</script>
+
+</body>
+</html>

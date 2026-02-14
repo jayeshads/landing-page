@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hey Beautiful</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  height:100vh;
+  background: radial-gradient(circle at top, #1a001f, #000);
+  font-family:'Poppins', sans-serif;
+  overflow:hidden;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:white;
+}
+
+/* Animated background dots */
+body::before{
+  content:"";
+  position:absolute;
+  width:200%;
+  height:200%;
+  background-image: radial-gradient(rgba(255,255,255,0.08) 1px, transparent 1px);
+  background-size: 40px 40px;
+  animation: moveBg 40s linear infinite;
+}
+
+@keyframes moveBg{
+  from{transform:translate(0,0);}
+  to{transform:translate(-200px,-200px);}
+}
+
+.container{
+  text-align:center;
+  position:relative;
+  z-index:2;
+  animation: fadeIn 2s ease forwards;
+}
+
+@keyframes fadeIn{
+  from{opacity:0; transform:translateY(30px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+/* Avatar Circle */
+.avatar{
+  width:150px;
+  height:150px;
+  border-radius:50%;
+  background: #fff;
+  margin:auto;
+  position:relative;
+  overflow:hidden;
+  box-shadow:0 0 40px rgba(255,0,150,0.6);
+  animation:pulse 2s infinite;
+}
+
+@keyframes pulse{
+  0%{box-shadow:0 0 20px rgba(255,0,150,0.5);}
+  50%{box-shadow:0 0 60px rgba(255,0,150,1);}
+  100%{box-shadow:0 0 20px rgba(255,0,150,0.5);}
+}
+
+/* Replace this with your image */
+.avatar img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+/* Title */
+h1{
+  font-family:'Dancing Script', cursive;
+  font-size:60px;
+  margin-top:30px;
+  background:linear-gradient(45deg,#ff4da6,#ff0080);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+/* Typing effect */
+.typing{
+  font-size:20px;
+  margin-top:10px;
+  border-right:2px solid white;
+  width:0;
+  overflow:hidden;
+  white-space:nowrap;
+  animation: typing 4s steps(40,end) forwards, blink .7s infinite;
+}
+
+@keyframes typing{
+  to{width:100%;}
+}
+
+@keyframes blink{
+  50%{border-color:transparent;}
+}
+
+/* Button */
+.btn{
+  margin-top:40px;
+  padding:15px 40px;
+  border:none;
+  border-radius:50px;
+  font-size:18px;
+  cursor:pointer;
+  background:linear-gradient(45deg,#ff4da6,#ff0080);
+  color:white;
+  position:relative;
+  overflow:hidden;
+  transition:.3s;
+}
+
+.btn:hover{
+  transform:scale(1.1);
+  box-shadow:0 0 25px #ff0080;
+}
+
+/* Floating hearts */
+.heart{
+  position:absolute;
+  color:#ff4da6;
+  animation: float 6s linear infinite;
+  font-size:20px;
+}
+
+@keyframes float{
+  0%{transform:translateY(0); opacity:1;}
+  100%{transform:translateY(-800px); opacity:0;}
+}
+
+</style>
+</head>
+<body>
+
+<div class="container">
+
+ <div class="avatar">
+  <img src="gif/1st.gif.gif" alt="Avatar">
+</div>
+
+  <h1>Hey Beautiful</h1>
+
+  <div class="typing">
+    Do you even know how cute you are?
+ </div>
+
+<a href="22.html">
+  <button class="btn">Open My Heart 🤍</button>
+</a>
+
+</div>
+
+<script>
+// Generate floating hearts
+function createHeart(){
+  const heart = document.createElement("div");
+  heart.classList.add("heart");
+  heart.innerHTML = "❤";
+  heart.style.left = Math.random()*100 + "vw";
+  heart.style.fontSize = Math.random()*20 + 15 + "px";
+  document.body.appendChild(heart);
+
+  setTimeout(()=>{
+    heart.remove();
+  },6000);
+}
+
+setInterval(createHeart,500);
+</script>
+
+</body>
+</html>

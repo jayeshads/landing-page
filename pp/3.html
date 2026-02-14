@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Just For You</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Pacifico&display=swap" rel="stylesheet">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+body{
+  background: radial-gradient(circle at top,#0d0d0d,#000);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  min-height:100vh;
+  padding:20px;
+  color:white;
+}
+
+.container{
+  width:100%;
+  max-width:360px;
+  text-align:center;
+}
+
+/* Heart Circle */
+.heart-circle{
+  width:110px;
+  height:110px;
+  border-radius:50%;
+  margin:0 auto 20px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background: radial-gradient(circle,#ff4da6,#b30059);
+  animation: pulse 1.8s infinite;
+  box-shadow:0 0 25px #ff1a8c;
+}
+
+.heart-circle span{
+  font-size:42px;
+}
+
+@keyframes pulse{
+  0%{transform:scale(1);}
+  50%{transform:scale(1.15);}
+  100%{transform:scale(1);}
+}
+
+h1{
+  font-family:'Pacifico',cursive;
+  font-size:28px;
+  margin-bottom:5px;
+}
+
+.subtitle{
+  font-size:14px;
+  opacity:0.7;
+  margin-bottom:20px;
+}
+
+/* Boxes */
+.box{
+  width:100%;
+  padding:14px;
+  margin:10px 0;
+  border-radius:15px;
+  background:linear-gradient(90deg,#331a2b,#4d1f36);
+  cursor:pointer;
+  position:relative;
+  overflow:hidden;
+  transition:all .4s ease;
+  font-weight:500;
+  letter-spacing:0.5px;
+}
+
+.box:hover{
+  transform:translateY(-3px);
+  box-shadow:0 0 15px #ff4da6;
+}
+
+.box span{
+  position:relative;
+  z-index:2;
+}
+
+.box::after{
+  content:"";
+  position:absolute;
+  top:0;
+  left:-100%;
+  width:100%;
+  height:100%;
+  background:linear-gradient(120deg,transparent,#ff4da680,transparent);
+  transition:.6s;
+}
+
+.box:hover::after{
+  left:100%;
+}
+
+/* Slide Animation */
+.reveal{
+  animation: slideOut .5s forwards;
+}
+
+@keyframes slideOut{
+  0%{transform:translateX(0);opacity:1;}
+  100%{transform:translateX(-100%);opacity:0;}
+}
+
+/* Button */
+.btn{
+  margin-top:20px;
+  padding:14px;
+  border:none;
+  border-radius:25px;
+  width:100%;
+  font-size:16px;
+  font-weight:600;
+  background:linear-gradient(90deg,#ff007f,#ff4da6);
+  color:white;
+  cursor:pointer;
+  transition:all .3s ease;
+  animation: float 2s infinite;
+}
+
+.btn:hover{
+  transform:scale(1.05);
+  box-shadow:0 0 20px #ff1a8c;
+}
+
+@keyframes float{
+  0%{transform:translateY(0);}
+  50%{transform:translateY(-4px);}
+  100%{transform:translateY(0);}
+}
+
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <div class="heart-circle">
+    <span>❤</span>
+  </div>
+
+  <h1>Just for you</h1>
+  <p class="subtitle">Tap each one to reveal</p>
+
+  <div class="box" onclick="reveal(this,'You look adorable')">
+    <span>❤</span>
+  </div>
+
+  <div class="box" onclick="reveal(this,'Your smile is my favorite')">
+    <span>❤</span>
+  </div>
+
+  <div class="box" onclick="reveal(this,'You make everything better')">
+    <span>❤</span>
+  </div>
+
+  <div class="box" onclick="reveal(this,'You are truly special')">
+    <span>❤</span>
+  </div>
+
+ <button class="btn" onclick="window.location.href='4.html'">
+  See more →
+</button>
+</div>
+
+<script>
+function reveal(box,message){
+  if(box.classList.contains("opened")) return;
+
+  box.classList.add("reveal");
+  setTimeout(()=>{
+    box.classList.remove("reveal");
+    box.innerHTML="<span>"+message+"</span>";
+    box.classList.add("opened");
+  },400);
+}
+
+function seeMore(){
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+  alert("More surprises coming soon ❤️");
+}
+</script>
+
+</body>
+</html>

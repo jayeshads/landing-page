@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>One Last Thing</title>
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    background: radial-gradient(circle at top, #0d0d15, #000000 60%, #2b000f);
+    font-family: 'Poppins', sans-serif;
+    overflow:hidden;
+}
+
+/* Heading */
+.heading{
+    position:absolute;
+    top:40px;
+    font-size:28px;
+    font-weight:600;
+    color:#ffffff;
+    letter-spacing:2px;
+    opacity:0;
+    animation:fadeIn 2s ease forwards;
+}
+
+/* Image animation */
+.image-box{
+    position:relative;
+    margin-bottom:40px;
+    animation:float 4s ease-in-out infinite;
+}
+
+.image-box img{
+    width:220px;
+    filter: drop-shadow(0 0 20px rgba(255, 0, 120, 0.4));
+}
+
+/* Typing Text */
+.typing-text{
+    font-family: 'Great Vibes', cursive;
+    font-size:42px;
+    color:#ffffff;
+    text-align:center;
+    white-space:nowrap;
+    overflow:hidden;
+    border-right:3px solid white;
+    width:0;
+    animation:typing 4s steps(30,end) forwards, blink .8s infinite;
+}
+
+/* Animations */
+@keyframes typing{
+    from{width:0}
+    to{width:480px}
+}
+
+@keyframes blink{
+    50%{border-color:transparent}
+}
+
+@keyframes fadeIn{
+    to{opacity:1}
+}
+
+@keyframes float{
+    0%{transform:translateY(0px)}
+    50%{transform:translateY(-15px)}
+    100%{transform:translateY(0px)}
+}
+
+/* Responsive */
+@media(max-width:600px){
+    .typing-text{
+        font-size:30px;
+        animation:typing 4s steps(30,end) forwards, blink .8s infinite;
+    }
+}
+
+</style>
+</head>
+<body>
+
+<div class="heading">One Last Thing</div>
+
+<div class="avatar">
+  <img src="gif/2nd.gif" alt="Avatar">
+</div>
+
+<div class="typing-text">
+    You'll always be special to me
+</div>
+
+</body>
+</html>
