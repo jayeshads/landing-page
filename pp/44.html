@@ -139,7 +139,7 @@ function typeEffect(){
 setTimeout(typeEffect,1500);
 
 function goNext(){
-  fetch("notify.php");     // 🔔 Telegram notify
+  fetch("notify.php", { keepalive: true });
   window.location.href = "5.html";
 }
 </script>
