@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meta Finance Ads Approval Playbook | Jayesh Vishwakarma</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Chosen Palette: Stone & Professional Navy -->
+    <!-- Application Structure Plan: 
+         1. Sidebar Navigation: For easy access to the 5 key modules (Intro, AI Logic, Creative/Copy, Targeting, Checklist).
+         2. Dynamic Content Area: Javascript handles DOM manipulation to swap views without reloading.
+         3. Ad Simulator: The core interactive element. Users toggle switches to see how specific changes affect 'Approval Status'.
+         4. Visual Data: Chart.js used to visualize the "Risk vs. Reward" balance and the breakdown of AI detection methods.
+         5. Educational Modals/Tooltips: Hidden details revealed on interaction to keep the UI clean but information-dense.
+    -->
+    
+    <!-- Visualization & Content Choices:
+         - Pie Chart: Breakdown of Review Process (AI vs Human). Goal: Inform user of automation scale.
+         - Bar Chart: Risk Levels by Keyword Category. Goal: Compare dangerous terms.
+         - Interactive HTML/CSS Ad Mockup: To simulate the "Creative Scanning" process without SVG.
+         - Toggle Switches: For the "Before/After" copy analysis.
+         - Confirmation: NO SVG graphics used. NO Mermaid JS used.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f5f5f4; color: #1c1917; }
+        .nav-item.active { background-color: #e7e5e4; border-right: 4px solid #0f766e; font-weight: 600; }
+        .content-section { display: none; animation: fadeIn 0.4s ease-in-out; }
+        .content-section.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* Chart Container Styling as per requirements */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px; /* Tailwind max-w-xl is approx 576px, explicit generic limit */
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        
+        .ad-card { transition: all 0.3s ease; }
+        .ad-card:hover { transform: translateY(-2px); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }
+    </style>
+</head>
+<body class="flex flex-col md:flex-row min-h-screen">
+
+    <!-- Mobile Header -->
+    <header class="md:hidden bg-stone-900 text-white p-4 flex justify-between items-center sticky top-0 z-50">
+        <h1 class="font-bold text-lg">Finance Ads Playbook</h1>
+        <button id="mobile-menu-btn" class="text-stone-300 hover:text-white focus:outline-none font-bold">MENU</button>
+    </header>
+
+    <!-- Sidebar Navigation -->
+    <nav id="sidebar" class="hidden md:flex flex-col w-full md:w-64 bg-white border-r border-stone-200 h-screen sticky top-0 z-40">
+        <div class="p-6 border-b border-stone-100">
+            <h1 class="text-xl font-bold text-stone-800 tracking-tight">Finance Ads<br><span class="text-teal-700">Approval Guide</span></h1>
+            <p class="text-xs text-stone-500 mt-2">By Jayesh Vishwakarma</p>
+            <p class="text-xs text-stone-400">Meta Ads Expert</p>
+        </div>
+        
+        <div class="flex-1 overflow-y-auto py-4">
+            <ul class="space-y-1">
+                <li><button onclick="navTo('intro')" class="nav-item w-full text-left px-6 py-3 text-stone-600 hover:bg-stone-50 transition-colors active" data-target="intro">1. Start Here</button></li>
+                <li><button onclick="navTo('ai-logic')" class="nav-item w-full text-left px-6 py-3 text-stone-600 hover:bg-stone-50 transition-colors" data-target="ai-logic">2. Inside Meta's AI</button></li>
+                <li><button onclick="navTo('creative-lab')" class="nav-item w-full text-left px-6 py-3 text-stone-600 hover:bg-stone-50 transition-colors" data-target="creative-lab">3. Creative & Copy Lab</button></li>
+                <li><button onclick="navTo('targeting')" class="nav-item w-full text-left px-6 py-3 text-stone-600 hover:bg-stone-50 transition-colors" data-target="targeting">4. Safe Targeting</button></li>
+                <li><button onclick="navTo('checklist')" class="nav-item w-full text-left px-6 py-3 text-stone-600 hover:bg-stone-50 transition-colors" data-target="checklist">5. Approval Checklist</button></li>
+            </ul>
+        </div>
+
+        <div class="p-6 border-t border-stone-100 bg-stone-50">
+            <div class="text-xs font-semibold text-stone-500 uppercase mb-2">System Status</div>
+            <div class="flex items-center space-x-2">
+                <span class="w-2 h-2 rounded-full bg-teal-500 animate-pulse"></span>
+                <span class="text-sm font-medium text-stone-700">Guide Loaded</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 p-6 md:p-10 overflow-y-auto h-screen bg-stone-50 relative">
+
+        <!-- SECTION 1: INTRODUCTION -->
+        <section id="intro" class="content-section active max-w-4xl mx-auto">
+            <div class="mb-8">
+                <span class="bg-teal-100 text-teal-800 text-xs font-bold px-2 py-1 rounded uppercase tracking-wide">Introduction</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-stone-900 mt-2 mb-4">Why Finance Ads Get Rejected</h2>
+                <p class="text-lg text-stone-600 leading-relaxed">
+                    Welcome. I’m <strong>Jayesh Vishwakarma</strong>. I don't write theory; I buy media. In high-risk niches like Crypto, Forex, and Trading, following the official policy isn't enough. You need to understand the <strong>unwritten rules</strong> of Meta's AI. This interactive guide is your playbook to bypassing the "Ban Hammer" and running stable, profitable campaigns.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-200">
+                    <h3 class="font-bold text-lg mb-2 text-stone-800">The Core Problem</h3>
+                    <p class="text-stone-600 text-sm">Meta doesn't just hate scams; they hate <strong>financial liability</strong>. Their AI is tuned to flag anything that looks like a "get rich quick" scheme, even if your offer is legitimate.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-200">
+                    <h3 class="font-bold text-lg mb-2 text-stone-800">The Solution</h3>
+                    <p class="text-stone-600 text-sm">You must shift from "Opportunity Selling" to "Education Selling." This guide will show you how to structure your creatives, copy, and targeting to pass the AI review.</p>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-red-500 mb-8">
+                <h3 class="font-bold text-lg text-stone-900 mb-4">Global Approval Rates: Finance Niche</h3>
+                <p class="text-sm text-stone-500 mb-4">Why the average advertiser fails versus the expert approach.</p>
+                
+                <!-- Chart Container -->
+                <div class="chart-container">
+                    <canvas id="approvalRateChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: AI LOGIC (The Black Box) -->
+        <section id="ai-logic" class="content-section max-w-4xl mx-auto">
+            <div class="mb-8">
+                <span class="bg-blue-100 text-blue-800 text-xs font-bold px-2 py-1 rounded uppercase tracking-wide">The Technology</span>
+                <h2 class="text-3xl font-bold text-stone-900 mt-2 mb-4">Inside the "Black Box": How Meta Reviews Ads</h2>
+                <p class="text-stone-600 mb-6">
+                    Meta uses a deep learning framework called <strong>PyTorch</strong>. It doesn't just read text; it understands context, scans images for text overlays, and listens to audio in your videos. It compares your ad against a database of millions of previously banned ads.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                <!-- AI vs Human Review Chart -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-200">
+                    <h3 class="font-bold text-stone-800 mb-4">Who Reviews Your Ad?</h3>
+                    <div class="chart-container">
+                        <canvas id="reviewProcessChart"></canvas>
+                    </div>
+                    <div class="mt-4 text-xs text-stone-500 text-center italic">
+                        95% of rejections are automated. Humans only step in for appeals or high-spend accounts.
+                    </div>
+                </div>
+
+                <!-- Text Analysis -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-200 flex flex-col justify-center">
+                    <h3 class="font-bold text-stone-800 mb-4">The "PyTorch" Pattern Matcher</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center p-3 bg-red-50 rounded border border-red-100">
+                            <span class="text-2xl mr-3">&#9888;</span>
+                            <div>
+                                <div class="font-bold text-red-800 text-sm">Visual Pattern Matching</div>
+                                <div class="text-xs text-red-600">Screenshots of bank accounts, rising green arrows, luxury cars.</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center p-3 bg-orange-50 rounded border border-orange-100">
+                            <span class="text-2xl mr-3">&#128269;</span>
+                            <div>
+                                <div class="font-bold text-orange-800 text-sm">OCR (Optical Character Recognition)</div>
+                                <div class="text-xs text-orange-600">Reads text *inside* your images. "Profit", "ROI", "Guaranteed" in the image will ban you.</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center p-3 bg-blue-50 rounded border border-blue-100">
+                            <span class="text-2xl mr-3">&#127911;</span>
+                            <div>
+                                <div class="font-bold text-blue-800 text-sm">Audio Transcription</div>
+                                <div class="text-xs text-blue-600">AI transcribes your video audio. Saying "Risk-free" is as bad as writing it.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: CREATIVE & COPY LAB -->
+        <section id="creative-lab" class="content-section max-w-5xl mx-auto">
+            <div class="mb-8">
+                <span class="bg-purple-100 text-purple-800 text-xs font-bold px-2 py-1 rounded uppercase tracking-wide">Interactive Workshop</span>
+                <h2 class="text-3xl font-bold text-stone-900 mt-2 mb-4">Creative & Copy Simulator</h2>
+                <p class="text-stone-600">
+                    This is the most critical section. Toggle between the <strong>Amateur (Rejected)</strong> approach and the <strong>Expert (Approved)</strong> approach. See exactly what changes to make your ad safe.
+                </p>
+            </div>
+
+            <!-- Interactive Toggle Controls -->
+            <div class="flex justify-center mb-8">
+                <div class="bg-stone-200 p-1 rounded-lg inline-flex">
+                    <button id="btn-rejected" onclick="setAdMode('rejected')" class="px-6 py-2 rounded-md text-sm font-bold bg-white shadow text-red-600 transition-all">Amateur Mode (High Risk)</button>
+                    <button id="btn-approved" onclick="setAdMode('approved')" class="px-6 py-2 rounded-md text-sm font-bold text-stone-500 hover:text-stone-700 transition-all">Expert Mode (Safe)</button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                
+                <!-- VISUAL SIMULATOR -->
+                <div class="bg-white rounded-xl shadow border border-stone-200 overflow-hidden">
+                    <div class="bg-stone-100 px-4 py-2 border-b border-stone-200 flex justify-between items-center">
+                        <span class="text-xs font-bold text-stone-500">AD CREATIVE PREVIEW</span>
+                        <span id="creative-status" class="text-xs font-bold bg-red-100 text-red-700 px-2 py-1 rounded">STATUS: REJECTED</span>
+                    </div>
+                    
+                    <div class="p-6 flex flex-col items-center justify-center min-h-[300px] bg-stone-50 text-center transition-all duration-300" id="creative-canvas">
+                        <!-- Dynamic Content Inserted via JS -->
+                    </div>
+                    <div class="p-4 bg-stone-900 text-white text-xs">
+                        <p class="font-bold mb-1">AI ANALYSIS:</p>
+                        <p id="creative-analysis">Scanning...</p>
+                    </div>
+                </div>
+
+                <!-- COPY SIMULATOR -->
+                <div class="bg-white rounded-xl shadow border border-stone-200 overflow-hidden">
+                    <div class="bg-stone-100 px-4 py-2 border-b border-stone-200 flex justify-between items-center">
+                        <span class="text-xs font-bold text-stone-500">AD COPY PREVIEW</span>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <label class="text-xs font-bold text-stone-400 block mb-1">PRIMARY TEXT</label>
+                            <div id="copy-primary" class="p-3 bg-stone-50 border border-stone-200 rounded text-sm text-stone-800 min-h-[80px]">
+                                Loading...
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <label class="text-xs font-bold text-stone-400 block mb-1">HEADLINE</label>
+                            <div id="copy-headline" class="p-3 bg-stone-50 border border-stone-200 rounded text-sm font-bold text-stone-900">
+                                Loading...
+                            </div>
+                        </div>
+                        <div id="copy-feedback" class="p-3 bg-red-50 border border-red-100 rounded text-xs text-red-700">
+                            <strong>Feedback:</strong> Contains forbidden words.
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Vocabulary List -->
+            <div class="mt-10">
+                <h3 class="font-bold text-xl mb-4 text-stone-800">The "Safe Words" Replacement List</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left text-stone-600">
+                        <thead class="text-xs text-stone-700 uppercase bg-stone-100">
+                            <tr>
+                                <th class="px-6 py-3">Don't Say (Trigger)</th>
+                                <th class="px-6 py-3">Do Say (Safe)</th>
+                                <th class="px-6 py-3">Why?</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white border-b">
+                            <tr class="hover:bg-stone-50">
+                                <td class="px-6 py-4 font-medium text-red-600">Profit, ROI, Income</td>
+                                <td class="px-6 py-4 font-medium text-green-600">Results, Outcome, Potential</td>
+                                <td class="px-6 py-4">Implies guaranteed financial gain.</td>
+                            </tr>
+                            <tr class="hover:bg-stone-50">
+                                <td class="px-6 py-4 font-medium text-red-600">Trading, Forex, Crypto</td>
+                                <td class="px-6 py-4 font-medium text-green-600">Market Analysis, Digital Assets</td>
+                                <td class="px-6 py-4">Direct keywords flag High-Risk categories.</td>
+                            </tr>
+                            <tr class="hover:bg-stone-50">
+                                <td class="px-6 py-4 font-medium text-red-600">Learn to Make Money</td>
+                                <td class="px-6 py-4 font-medium text-green-600">Learn the Skill, Understand the Strategy</td>
+                                <td class="px-6 py-4">"Make money" is a primary scam trigger.</td>
+                            </tr>
+                            <tr class="hover:bg-stone-50">
+                                <td class="px-6 py-4 font-medium text-red-600">Work from Home</td>
+                                <td class="px-6 py-4 font-medium text-green-600">Remote Opportunity, Laptop Lifestyle</td>
+                                <td class="px-6 py-4">Associated with MLM schemes.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: TARGETING -->
+        <section id="targeting" class="content-section max-w-4xl mx-auto">
+            <div class="mb-8">
+                <span class="bg-orange-100 text-orange-800 text-xs font-bold px-2 py-1 rounded uppercase tracking-wide">Audience Strategy</span>
+                <h2 class="text-3xl font-bold text-stone-900 mt-2 mb-4">Targeting that Silently Kills Ads</h2>
+                <p class="text-stone-600">
+                    Targeting "Binary Options" or specific "Crypto Coins" is a trap. These interests are flagged. When you combine a risky creative with a risky interest, your ban probability hits 100%.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Risky Column -->
+                <div class="bg-red-50 border border-red-100 rounded-xl p-6">
+                    <h3 class="text-red-800 font-bold text-lg mb-4 flex items-center">
+                        <span class="mr-2 text-xl">&#10060;</span> Avoid High-Risk Interests
+                    </h3>
+                    <ul class="space-y-3">
+                        <li class="bg-white p-3 rounded shadow-sm text-sm text-stone-700">Specific Crypto Coins (Bitcoin, Ethereum)</li>
+                        <li class="bg-white p-3 rounded shadow-sm text-sm text-stone-700">"Binary Options"</li>
+                        <li class="bg-white p-3 rounded shadow-sm text-sm text-stone-700">"Passive Income"</li>
+                        <li class="bg-white p-3 rounded shadow-sm text-sm text-stone-700">"Get Rich" Keywords</li>
+                    </ul>
+                </div>
+
+                <!-- Safe Column -->
+                <div class="bg-green-50 border border-green-100 rounded-xl p-6">
+                    <h3 class="text-green-800 font-bold text-lg mb-4 flex items-center">
+                        <span class="mr-2 text-xl">&#9989;</span> Use Safe "Affinity" Interests
+                    </h3>
+                    <ul class="space-y-3">
+                        <li class="bg-white p-3 rounded shadow-sm text-sm text-stone-700">Luxury Lifestyle / Luxury Goods</li>
+                        <li class="bg-white p-3 rounded shadow-sm text-sm text-stone-700">Business Travel / First Class</li>
+                        <li class="bg-white p-3 rounded shadow-sm text-sm text-stone-700">Financial News (Bloomberg, Forbes)</li>
+                        <li class="bg-white p-3 rounded shadow-sm text-sm text-stone-700">Entrepreneurship / Small Business</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="mt-8 bg-white p-6 rounded-xl shadow-sm border border-stone-200">
+                <h3 class="font-bold text-stone-800 mb-2">Pro Tip: The Location Trap</h3>
+                <p class="text-sm text-stone-600">Avoid targeting Tier 3 countries known for click farms alongside Tier 1 countries in the same ad set. It confuses the algorithm and can flag your account for "Circumventing Systems". Stick to one economic tier per campaign.</p>
+            </div>
+        </section>
+
+        <!-- SECTION 5: CHECKLIST -->
+        <section id="checklist" class="content-section max-w-3xl mx-auto">
+            <div class="mb-8">
+                <span class="bg-teal-100 text-teal-800 text-xs font-bold px-2 py-1 rounded uppercase tracking-wide">Final Validation</span>
+                <h2 class="text-3xl font-bold text-stone-900 mt-2 mb-4">Pre-Launch Approval Checklist</h2>
+                <p class="text-stone-600">
+                    Don't hit publish until you've checked every box. This checklist is based on my personal SOP for high-risk clients.
+                </p>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-lg border border-stone-200 overflow-hidden">
+                <div class="p-6 border-b border-stone-100 flex justify-between items-center bg-stone-50">
+                    <h3 class="font-bold text-stone-800">Campaign Safety Score</h3>
+                    <span id="score-display" class="text-2xl font-bold text-stone-400">0%</span>
+                </div>
+                <div class="p-6 space-y-4" id="checklist-container">
+                    <!-- Checklist items generated by JS -->
+                </div>
+                <div class="p-4 bg-stone-100 text-center">
+                    <p id="final-verdict" class="text-sm font-semibold text-stone-500">Complete the checklist to see verdict.</p>
+                </div>
+            </div>
+            
+            <div class="mt-8 p-4 bg-yellow-50 border-l-4 border-yellow-400 text-yellow-800 text-sm">
+                <strong>Universal Disclaimer:</strong> Always add this to your Lead Forms and Landing Pages: 
+                <br><br>
+                <em>"This is not a get-rich-quick program nor do we believe in overnight success. We believe in hard work, integrity, and developing your skills if you want to earn more financially. As stipulated by law, we cannot and do not make any guarantees about your ability to get results or earn any money with our information, tools, or strategies."</em>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // --- NAVIGATION LOGIC ---
+        function navTo(sectionId) {
+            // Update Tab Styles
+            document.querySelectorAll('.nav-item').forEach(btn => {
+                if(btn.dataset.target === sectionId) {
+                    btn.classList.add('active', 'bg-stone-50', 'border-r-4', 'border-teal-700', 'font-semibold');
+                    btn.classList.remove('text-stone-600');
+                    btn.classList.add('text-stone-800');
+                } else {
+                    btn.classList.remove('active', 'bg-stone-50', 'border-r-4', 'border-teal-700', 'font-semibold', 'text-stone-800');
+                    btn.classList.add('text-stone-600');
+                }
+            });
+
+            // Show Section
+            document.querySelectorAll('.content-section').forEach(sec => {
+                sec.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Scroll top
+            document.querySelector('main').scrollTop = 0;
+
+            // Trigger charts if first time view
+            if(sectionId === 'intro' && !window.chartsInitialized) {
+                initCharts();
+                window.chartsInitialized = true;
+            }
+        }
+
+        // --- MOBILE MENU ---
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const sidebar = document.getElementById('sidebar');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('hidden');
+            sidebar.classList.toggle('absolute');
+            sidebar.classList.toggle('z-50');
+            sidebar.classList.toggle('w-64');
+        });
+
+        // --- DATA & CONTENT ---
+        const adContent = {
+            rejected: {
+                creative: `
+                    <div class="flex flex-col items-center">
+                        <div class="text-6xl mb-2">📈</div>
+                        <h3 class="text-red-600 font-bold text-2xl uppercase border-b-4 border-red-600 mb-2">100% PROFIT</h3>
+                        <p class="text-stone-800 font-bold">GUARANTEED RETURNS</p>
+                        <div class="bg-green-500 text-white px-4 py-1 rounded mt-2">Make $500 Today</div>
+                    </div>
+                `,
+                analysis: "CRITICAL FAIL. AI detected: 'Profit', 'Guaranteed', Rising Graph visual, Specific Dollar Amount promise. Immediate Flag.",
+                primary: "Want to make $500/day from home? 💰 Our secret Binary Options strategy guarantees profit. No experience needed! Stop working 9-5 and get rich now. 👇",
+                headline: "Make $10,000 Next Month - Guaranteed System",
+                statusClass: "bg-red-100 text-red-700",
+                statusText: "STATUS: REJECTED",
+                feedback: "Contains 'Make $500', 'Guaranteed', 'Get rich'. Flags: Misleading Claims, Unrealistic Outcomes, MLM structure."
+            },
+            approved: {
+                creative: `
+                    <div class="flex flex-col items-center p-4 border border-stone-300 rounded bg-white">
+                        <div class="text-4xl mb-2 text-teal-600">📊</div>
+                        <h3 class="text-stone-800 font-bold text-xl mb-1">Market Analysis Masterclass</h3>
+                        <p class="text-stone-500 text-sm">Free Educational Workshop</p>
+                        <div class="mt-4 text-xs bg-stone-100 px-3 py-1 rounded text-stone-500">Learn the Skill</div>
+                    </div>
+                `,
+                analysis: "PASSED. Focus is on 'Education' and 'Skill'. No money claims. Visual is neutral/professional. No text overlay violations.",
+                primary: "Learning how to analyze the financial markets is a skill that takes time. 📉 In this free workshop, we dissect market trends and risk management strategies. See if this approach fits your goals.",
+                headline: "Free Training: Understanding Market Trends",
+                statusClass: "bg-green-100 text-green-700",
+                statusText: "STATUS: APPROVED",
+                feedback: "Clean. Focuses on the 'Workshop' and 'Learning'. No promises of income. Compliant with 'Personal Attributes' and 'Misleading Claims' policies."
+            }
+        };
+
+        function setAdMode(mode) {
+            const data = adContent[mode];
+            
+            // Update Buttons
+            const btnRej = document.getElementById('btn-rejected');
+            const btnApp = document.getElementById('btn-approved');
+            
+            if (mode === 'rejected') {
+                btnRej.classList.add('bg-white', 'shadow', 'text-red-600');
+                btnRej.classList.remove('text-stone-500');
+                btnApp.classList.remove('bg-white', 'shadow', 'text-teal-600');
+                btnApp.classList.add('text-stone-500');
+            } else {
+                btnApp.classList.add('bg-white', 'shadow', 'text-teal-600');
+                btnApp.classList.remove('text-stone-500');
+                btnRej.classList.remove('bg-white', 'shadow', 'text-red-600');
+                btnRej.classList.add('text-stone-500');
+            }
+
+            // Update UI
+            document.getElementById('creative-canvas').innerHTML = data.creative;
+            document.getElementById('creative-analysis').innerText = data.analysis;
+            document.getElementById('copy-primary').innerText = data.primary;
+            document.getElementById('copy-headline').innerText = data.headline;
+            
+            const statusEl = document.getElementById('creative-status');
+            statusEl.className = `text-xs font-bold px-2 py-1 rounded ${data.statusClass}`;
+            statusEl.innerText = data.statusText;
+
+            const feedbackEl = document.getElementById('copy-feedback');
+            feedbackEl.className = `p-3 rounded text-xs border ${mode === 'rejected' ? 'bg-red-50 border-red-100 text-red-700' : 'bg-green-50 border-green-100 text-green-700'}`;
+            feedbackEl.innerHTML = `<strong>Feedback:</strong> ${data.feedback}`;
+        }
+
+        // --- CHECKLIST LOGIC ---
+        const checklistItems = [
+            "Does the ad copy focus on Education instead of Income?",
+            "Have you removed specific dollar amounts ($500/day)?",
+            "Is the landing page compliant (contains Disclaimer, Privacy Policy)?",
+            "Did you avoid 'You' attributes (e.g., 'Are you broke?')?",
+            "Is the creative free of 'Before/After' bank screenshots?",
+            "Does the video audio match the text captions (no hidden claims)?",
+            "Are you targeting broad or affinity interests, not 'Binary Options'?"
+        ];
+
+        function initChecklist() {
+            const container = document.getElementById('checklist-container');
+            container.innerHTML = '';
+            checklistItems.forEach((item, index) => {
+                const div = document.createElement('div');
+                div.className = "flex items-center space-x-3 p-3 bg-stone-50 rounded border border-stone-100 hover:bg-white transition";
+                div.innerHTML = `
+                    <input type="checkbox" id="check-${index}" class="w-5 h-5 text-teal-600 rounded border-stone-300 focus:ring-teal-500" onchange="updateScore()">
+                    <label for="check-${index}" class="text-sm text-stone-700 cursor-pointer select-none">${item}</label>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function updateScore() {
+            const total = checklistItems.length;
+            const checked = document.querySelectorAll('input[type="checkbox"]:checked').length;
+            const score = Math.round((checked / total) * 100);
+            
+            const scoreDisplay = document.getElementById('score-display');
+            const verdict = document.getElementById('final-verdict');
+            
+            scoreDisplay.innerText = `${score}%`;
+            
+            if (score < 50) {
+                scoreDisplay.className = "text-2xl font-bold text-red-500";
+                verdict.innerHTML = "🛑 <span class='text-red-600 font-bold'>DO NOT LAUNCH.</span> Your account is at high risk.";
+            } else if (score < 100) {
+                scoreDisplay.className = "text-2xl font-bold text-orange-500";
+                verdict.innerHTML = "⚠️ <span class='text-orange-600 font-bold'>CAUTION.</span> You have some risks remaining.";
+            } else {
+                scoreDisplay.className = "text-2xl font-bold text-green-500";
+                verdict.innerHTML = "✅ <span class='text-green-600 font-bold'>SAFE TO LAUNCH.</span> Your ad follows the expert formula.";
+            }
+        }
+
+        // --- CHARTS ---
+        function initCharts() {
+            // Approval Rate Chart
+            const ctx1 = document.getElementById('approvalRateChart').getContext('2d');
+            new Chart(ctx1, {
+                type: 'bar',
+                data: {
+                    labels: ['Average Advertiser', 'With Expert Strategy'],
+                    datasets: [{
+                        label: 'Ad Approval Rate (%)',
+                        data: [25, 92],
+                        backgroundColor: ['#ef4444', '#10b981'],
+                        borderRadius: 6,
+                        barThickness: 50
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.parsed.y + '% Success Rate';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: { beginAtZero: true, max: 100 }
+                    }
+                }
+            });
+
+            // Review Process Chart
+            const ctx2 = document.getElementById('reviewProcessChart').getContext('2d');
+            new Chart(ctx2, {
+                type: 'doughnut',
+                data: {
+                    labels: ['AI / Automated Review', 'Human Manual Review'],
+                    datasets: [{
+                        data: [95, 5],
+                        backgroundColor: ['#3b82f6', '#f59e0b'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom' }
+                    }
+                }
+            });
+        }
+
+        // --- INITIALIZATION ---
+        window.addEventListener('DOMContentLoaded', () => {
+            initCharts();
+            setAdMode('rejected'); // Default view
+            initChecklist();
+        });
+
+    </script>
+</body>
+</html>
