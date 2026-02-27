@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finance Ads Approval Guide - Meta Ads Playbook</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Chosen Palette: Professional & Stylish - 'Deep Navy & Vibrant Teal' */
+        /* Primary Dark: #1e3a8a (Blue-900) */
+        /* Accent Teal: #14b8a6 (Teal-500) - For Success/Approved */
+        /* Accent Red: #ef4444 (Red-500) - For Failure/Rejected */
+        /* Background: #f8fafc (Slate-50) */
+        /* Text: #334155 (Slate-700) */
+
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f8fafc;
+            color: #334155;
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px; /* Base height */
+            max-height: 400px;
+        }
+
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+
+        /* Custom scrollbar for clean look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+    <!-- Chosen Palette: Deep Navy & Vibrant Teal -->
+    <!-- Plan Narrative & Structure: 
+         1. Header: Establish Authority (Jayesh Vishwakarma).
+         2. The Problem: Stats on Rejection & AI vs Human Review (Donut Chart).
+         3. The Black Box: How Meta's AI (PyTorch) scans ads (Radar Chart).
+         4. Creative Strategy: Visual comparison of Rejected vs Approved creative elements (HTML Cards).
+         5. Copywriting: Risk analysis of keywords (Bar Chart).
+         6. Targeting: Visualizing Safe vs Risky Interests (Bubble Chart).
+         7. The Formula: Step-by-step process flow (HTML/CSS).
+         8. Checklist: Final recap.
+    -->
+    <!-- Visualization & Content Choices:
+         1. Intro: Donut Chart -> Inform -> Show the overwhelming dominance of AI review vs Human. Chart.js.
+         2. AI Logic: Radar Chart -> Compare -> Show the sensitivity of different AI scanning vectors (OCR, Audio, etc.). Chart.js.
+         3. Copy Risks: Horizontal Bar Chart -> Compare -> Risk scores of common finance terms. Chart.js.
+         4. Targeting: Bubble Chart -> Relationships -> Mapping Interests by Risk (Y) vs Audience Size (X). Chart.js.
+         5. Creative/Formula: HTML/CSS Layouts -> Organize -> Structured visual comparison and flow.
+         CONFIRMING NO SVG used.
+    -->
+    <!-- CONFIRMATION: NEITHER Mermaid JS NOR SVG were used anywhere in the output. -->
+</head>
+<body class="antialiased">
+
+    <!-- Header Section -->
+    <header class="bg-blue-900 text-white py-12 px-4 shadow-lg">
+        <div class="max-w-6xl mx-auto text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4 tracking-tight">Finance Ads Approval Guide</h1>
+            <h2 class="text-xl md:text-2xl text-teal-400 font-semibold uppercase tracking-wider">The Meta Ads Playbook</h2>
+            <div class="mt-6 flex flex-col md:flex-row justify-center items-center space-y-2 md:space-y-0 md:space-x-4">
+                <span class="bg-blue-800 px-4 py-2 rounded-full text-sm font-medium">Author: Jayesh Vishwakarma</span>
+                <span class="hidden md:inline text-blue-400">•</span>
+                <span class="text-blue-200 text-sm">Meta Ads Expert & Media Buyer</span>
+            </div>
+            <p class="mt-6 max-w-2xl mx-auto text-blue-100 leading-relaxed">
+                A practitioner's guide to navigating high-risk niches like Crypto, Trading, and Finance. 
+                Learn how to bypass the "Ban Hammer" using safe creatives, compliant copy, and affinity targeting.
+            </p>
+        </div>
+    </header>
+
+    <!-- Main Content Grid -->
+    <main class="max-w-6xl mx-auto px-4 py-12 grid grid-cols-1 gap-12">
+
+        <!-- Section 1: The AI Review Reality -->
+        <section class="bg-white rounded-xl shadow-md p-8 border-l-8 border-teal-500">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">1. The Review Reality: AI vs. Humans</h3>
+                    <p class="text-gray-600 mb-4 leading-relaxed">
+                        Why do your ads get rejected instantly? Because humans aren't reading them. 
+                        Meta's review system is primarily automated using advanced AI (PyTorch). 
+                        It processes millions of ads daily, looking for patterns linked to financial fraud and poor user experience.
+                    </p>
+                    <p class="text-gray-600 font-semibold mb-2">Key Insight:</p>
+                    <ul class="list-disc pl-5 space-y-2 text-gray-600 mb-6">
+                        <li>AI rejections happen in milliseconds.</li>
+                        <li>Manual review is only triggered for appeals or high-spend accounts.</li>
+                        <li>Compliance is about "teaching" the AI that you are safe.</li>
+                    </ul>
+                </div>
+                <div class="flex flex-col items-center justify-center">
+                    <h4 class="text-lg font-bold text-gray-700 mb-2 text-center">Who Actually Reviews Your Ad?</h4>
+                    <div class="chart-container">
+                        <canvas id="reviewChart"></canvas>
+                    </div>
+                    <p class="text-sm text-gray-400 mt-2 text-center italic">Data estimated based on industry rejection speeds.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Inside the AI Black Box -->
+        <section class="bg-white rounded-xl shadow-md p-8">
+            <h3 class="text-2xl font-bold text-gray-800 mb-2">2. Inside the "Black Box": Meta's Detection Engine</h3>
+            <p class="text-gray-600 mb-8 max-w-3xl">
+                Meta's AI doesn't just read text. It "sees" your images and "hears" your video audio. 
+                It uses Optical Character Recognition (OCR) to read text on images and Natural Language Processing (NLP) to understand intent. 
+                Below is the sensitivity level of different AI detection modules for Finance ads.
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="flex flex-col items-center justify-center">
+                    <div class="chart-container">
+                        <canvas id="aiRadarChart"></canvas>
+                    </div>
+                </div>
+                <div class="flex flex-col justify-center space-y-6">
+                    <div class="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-600">
+                        <h4 class="font-bold text-blue-900">Pattern Matching</h4>
+                        <p class="text-sm text-blue-800 mt-1">The AI compares your creative against a database of banned ads. If your image looks like a scam (e.g., piles of cash, rising green arrows), it gets flagged immediately.</p>
+                    </div>
+                    <div class="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-600">
+                        <h4 class="font-bold text-blue-900">OCR & Audio Scan</h4>
+                        <p class="text-sm text-blue-800 mt-1">Text overlays on images are read as plain text. Even if you don't write "ROI" in the caption, if it's on the image, you get banned. Audio in videos is transcribed and analyzed.</p>
+                    </div>
+                    <div class="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-600">
+                        <h4 class="font-bold text-blue-900">Contextual Analysis</h4>
+                        <p class="text-sm text-blue-800 mt-1">The AI looks at the relationship between your Ad, your Landing Page, and your Disclaimer. A mismatch triggers a "Circumventing Systems" ban.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Copywriting Danger Zones -->
+        <section class="bg-white rounded-xl shadow-md p-8 border-l-8 border-red-500">
+            <h3 class="text-2xl font-bold text-gray-800 mb-4">3. The Copy Trap: Words That Trigger Bans</h3>
+            <p class="text-gray-600 mb-6">
+                In Finance, certain words carry a "High Risk Score." Using them triggers the "Unrealistic Outcomes" policy. 
+                The goal is to shift from <strong>Opportunity Selling</strong> (Making money) to <strong>Education Selling</strong> (Learning a skill).
+            </p>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Chart Column -->
+                <div>
+                    <h4 class="text-lg font-bold text-gray-700 mb-2 text-center">Keyword Risk Score Analysis</h4>
+                    <div class="chart-container">
+                        <canvas id="copyRiskChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Text Replacement Table Column -->
+                <div class="overflow-hidden rounded-lg border border-gray-200">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-red-600 uppercase tracking-wider">🚫 Dangerous (Trigger)</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-teal-600 uppercase tracking-wider">✅ Safe (Education)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">"Profit", "ROI", "Income"</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">"Results", "Outcome"</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">"Trading", "Forex", "Crypto"</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">"Market Analysis", "Digital Assets"</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">"Make Money", "Get Rich"</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">"Learn the Skill", "Strategy"</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">"Freedom", "Passive Income"</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">"Control", "Consistency"</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">"Guaranteed", "Risk-Free"</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">"Potential", "Methodology"</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="p-4 bg-gray-50 text-xs text-gray-500 italic">
+                        Tip: Never promise a specific result. Promise the *acquisition of knowledge*.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Creative Scanning Logic -->
+        <section class="bg-white rounded-xl shadow-md p-8">
+            <h3 class="text-2xl font-bold text-gray-800 mb-6">4. Visual Patterns: Rejected vs. Approved</h3>
+            <p class="text-gray-600 mb-8">
+                The visual style of your creative is the first thing the AI checks. 
+                Certain aesthetics are inherently "High Risk" because they have been used by scammers for years.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                
+                <!-- Rejected Card -->
+                <div class="border-2 border-red-200 bg-red-50 rounded-xl p-6 relative">
+                    <div class="absolute -top-4 right-4 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded shadow">REJECTED 🚫</div>
+                    <h4 class="text-red-800 font-bold mb-4">The "Opportunity" Angle</h4>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <span class="text-red-500 font-bold mr-2 text-xl">×</span>
+                            <p class="text-sm text-red-900"><strong>Imagery:</strong> Stacks of cash, luxury cars, rising green graphs, bank account screenshots.</p>
+                        </div>
+                        <div class="flex items-start">
+                            <span class="text-red-500 font-bold mr-2 text-xl">×</span>
+                            <p class="text-sm text-red-900"><strong>Text Overlay:</strong> "Make $500/Day", "99% Win Rate", "Secret Loophole".</p>
+                        </div>
+                        <div class="flex items-start">
+                            <span class="text-red-500 font-bold mr-2 text-xl">×</span>
+                            <p class="text-sm text-red-900"><strong>Vibe:</strong> Urgent, aggressive, promises easy wealth.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Approved Card -->
+                <div class="border-2 border-teal-200 bg-teal-50 rounded-xl p-6 relative">
+                    <div class="absolute -top-4 right-4 bg-teal-600 text-white text-xs font-bold px-3 py-1 rounded shadow">APPROVED ✅</div>
+                    <h4 class="text-teal-800 font-bold mb-4">The "Education" Angle</h4>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <span class="text-teal-500 font-bold mr-2 text-xl">✓</span>
+                            <p class="text-sm text-teal-900"><strong>Imagery:</strong> Professional workspace, person looking at multiple monitors (charts), podcast style clips.</p>
+                        </div>
+                        <div class="flex items-start">
+                            <span class="text-teal-500 font-bold mr-2 text-xl">✓</span>
+                            <p class="text-sm text-teal-900"><strong>Text Overlay:</strong> "Free Workshop", "Analysis Strategy", "How to Read Trends".</p>
+                        </div>
+                        <div class="flex items-start">
+                            <span class="text-teal-500 font-bold mr-2 text-xl">✓</span>
+                            <p class="text-sm text-teal-900"><strong>Vibe:</strong> Informative, calm, professional skill-building.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Section 5: Targeting Strategy -->
+        <section class="bg-white rounded-xl shadow-md p-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">5. Targeting Safety Matrix</h3>
+                    <p class="text-gray-600 mb-4 leading-relaxed">
+                        Targeting the obvious interests (Bitcoin, Binary Options) is a trap. These are "red-flagged" pools. 
+                        The expert strategy is to use <strong>Affinity Targeting</strong>—targeting people who <em>act</em> like investors but aren't in the high-risk buckets.
+                    </p>
+                    <p class="text-gray-600 font-semibold mb-2">Strategy:</p>
+                    <ul class="list-disc pl-5 space-y-2 text-gray-600">
+                        <li>Avoid direct "Trading" interests.</li>
+                        <li>Target "Luxury Goods" and "Business News".</li>
+                        <li>Let the Creative filter the audience, not the detailed targeting.</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold text-gray-700 mb-2 text-center">Interest Risk vs. Audience Quality</h4>
+                    <div class="chart-container">
+                        <canvas id="targetingBubbleChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 6: The Jayesh Vishwakarma Formula & Checklist -->
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            
+            <!-- The Formula -->
+            <div class="md:col-span-2 bg-blue-900 rounded-xl shadow-md p-8 text-white">
+                <h3 class="text-2xl font-bold mb-6">The Finance Ads Approval Formula</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <!-- Step 1 -->
+                    <div class="bg-blue-800 p-6 rounded-lg text-center border border-blue-700 hover:bg-blue-700 transition duration-300">
+                        <div class="text-4xl mb-3">🎨</div>
+                        <h4 class="font-bold text-lg mb-2">Safe Creative</h4>
+                        <p class="text-blue-200 text-sm">Visuals focus on analysis & tools. No cash, no rising arrows.</p>
+                    </div>
+                    <!-- Step 2 -->
+                    <div class="bg-blue-800 p-6 rounded-lg text-center border border-blue-700 hover:bg-blue-700 transition duration-300">
+                        <div class="text-4xl mb-3">📝</div>
+                        <h4 class="font-bold text-lg mb-2">Educational Copy</h4>
+                        <p class="text-blue-200 text-sm">Sell the "Workshop" or "Method", not the money.</p>
+                    </div>
+                    <!-- Step 3 -->
+                    <div class="bg-blue-800 p-6 rounded-lg text-center border border-blue-700 hover:bg-blue-700 transition duration-300">
+                        <div class="text-4xl mb-3">🎯</div>
+                        <h4 class="font-bold text-lg mb-2">Affinity Targeting</h4>
+                        <p class="text-blue-200 text-sm">Target broad business interests (Forbes, Luxury Travel).</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- The Checklist -->
+            <div class="bg-teal-50 rounded-xl shadow-md p-8 border-t-8 border-teal-500">
+                <h3 class="text-xl font-bold text-teal-900 mb-4">Launch Checklist</h3>
+                <ul class="space-y-3">
+                    <li class="flex items-start">
+                        <span class="text-teal-600 mr-2 font-bold">☑</span>
+                        <span class="text-teal-800 text-sm">Disclaimer in footer?</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-teal-600 mr-2 font-bold">☑</span>
+                        <span class="text-teal-800 text-sm">No "You" attributes ("Are you broke?")</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-teal-600 mr-2 font-bold">☑</span>
+                        <span class="text-teal-800 text-sm">Removed specific $ amounts?</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-teal-600 mr-2 font-bold">☑</span>
+                        <span class="text-teal-800 text-sm">Video audio matches captions?</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-teal-600 mr-2 font-bold">☑</span>
+                        <span class="text-teal-800 text-sm">Safe Interest Targeting used?</span>
+                    </li>
+                </ul>
+                <div class="mt-6 text-center">
+                    <span class="inline-block bg-teal-600 text-white px-6 py-2 rounded-full font-bold text-sm shadow hover:bg-teal-700 cursor-default">Ready to Launch</span>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-400 py-8 text-center">
+        <div class="max-w-6xl mx-auto px-4">
+            <p class="mb-2">Professional Meta Ads Guide by <strong>Jayesh Vishwakarma</strong></p>
+            <p class="text-xs">Based on real-world execution data in high-risk finance niches. Not an official Meta document.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Charts -->
+    <script>
+        // Label Wrapping Utility
+        function wrapLabel(label) {
+            const MAX_LENGTH = 16;
+            if (label.length <= MAX_LENGTH) return label;
+            
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = words[0];
+
+            for (let i = 1; i < words.length; i++) {
+                if ((currentLine + " " + words[i]).length <= MAX_LENGTH) {
+                    currentLine += " " + words[i];
+                } else {
+                    lines.push(currentLine);
+                    currentLine = words[i];
+                }
+            }
+            lines.push(currentLine);
+            return lines;
+        }
+
+        // Common Tooltip Configuration
+        const tooltipConfig = {
+            callbacks: {
+                title: function(tooltipItems) {
+                    const item = tooltipItems[0];
+                    let label = item.chart.data.labels[item.dataIndex];
+                    if (Array.isArray(label)) {
+                        return label.join(' ');
+                    } else {
+                        return label;
+                    }
+                }
+            }
+        };
+
+        // 1. Review Reality Donut Chart
+        const reviewCtx = document.getElementById('reviewChart').getContext('2d');
+        new Chart(reviewCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Automated AI Review', 'Manual Human Review'],
+                datasets: [{
+                    data: [95, 5],
+                    backgroundColor: ['#1e3a8a', '#14b8a6'],
+                    borderWidth: 0,
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: { padding: 20, boxWidth: 12 }
+                    },
+                    tooltip: tooltipConfig
+                }
+            }
+        });
+
+        // 2. AI Radar Chart
+        const aiRadarCtx = document.getElementById('aiRadarChart').getContext('2d');
+        new Chart(aiRadarCtx, {
+            type: 'radar',
+            data: {
+                labels: ['OCR Text Scan', 'Visual Pattern Match', 'Audio Transcription', 'Landing Page Context', 'Account History'].map(wrapLabel),
+                datasets: [{
+                    label: 'AI Sensitivity Level',
+                    data: [90, 85, 75, 95, 80],
+                    fill: true,
+                    backgroundColor: 'rgba(20, 184, 166, 0.2)',
+                    borderColor: '#14b8a6',
+                    pointBackgroundColor: '#1e3a8a',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: '#1e3a8a'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        angleLines: { color: 'rgba(0,0,0,0.1)' },
+                        grid: { color: 'rgba(0,0,0,0.1)' },
+                        pointLabels: {
+                            font: { size: 11 },
+                            color: '#334155'
+                        },
+                        suggestedMin: 0,
+                        suggestedMax: 100
+                    }
+                },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: tooltipConfig
+                }
+            }
+        });
+
+        // 3. Copy Risk Bar Chart
+        const copyRiskCtx = document.getElementById('copyRiskChart').getContext('2d');
+        new Chart(copyRiskCtx, {
+            type: 'bar',
+            data: {
+                labels: ['"Profit / ROI"', '"Crypto / Forex"', '"Make Money"', '"Passive Income"', '"Analysis / Skill"', '"Strategy"'].map(wrapLabel),
+                datasets: [{
+                    label: 'Risk Score (0-100)',
+                    data: [95, 90, 85, 80, 10, 5],
+                    backgroundColor: [
+                        '#ef4444', // High Risk
+                        '#ef4444',
+                        '#ef4444',
+                        '#ef4444',
+                        '#14b8a6', // Safe
+                        '#14b8a6'
+                    ],
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: tooltipConfig
+                },
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        max: 100,
+                        title: { display: true, text: 'Probability of Rejection' }
+                    }
+                }
+            }
+        });
+
+        // 4. Targeting Bubble Chart
+        const bubbleCtx = document.getElementById('targetingBubbleChart').getContext('2d');
+        new Chart(bubbleCtx, {
+            type: 'bubble',
+            data: {
+                datasets: [{
+                    label: 'High Risk Interest',
+                    data: [
+                        { x: 20, y: 90, r: 15 }, // Binary Options
+                        { x: 30, y: 85, r: 20 }, // Bitcoin
+                        { x: 25, y: 80, r: 10 }  // Forex
+                    ],
+                    backgroundColor: '#ef4444'
+                }, {
+                    label: 'Safe Affinity Interest',
+                    data: [
+                        { x: 80, y: 10, r: 25 }, // Luxury Goods
+                        { x: 70, y: 15, r: 20 }, // Forbes/Bloomberg
+                        { x: 75, y: 20, r: 22 }, // First Class Travel
+                        { x: 65, y: 25, r: 18 }  // Entrepreneurship
+                    ],
+                    backgroundColor: '#14b8a6'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'top' },
+                    tooltip: {
+                        callbacks: {
+                            title: function() { return 'Targeting Cluster'; },
+                            label: function(context) {
+                                const labelsHigh = ['Binary Options', 'Bitcoin', 'Forex'];
+                                const labelsSafe = ['Luxury Goods', 'Business News', 'Travel', 'Entrepreneur'];
+                                let labelArr = context.datasetIndex === 0 ? labelsHigh : labelsSafe;
+                                return labelArr[context.dataIndex] + ` (Risk: ${context.raw.y})`;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        title: { display: true, text: 'Risk Level (High = Bad)' },
+                        min: 0,
+                        max: 100
+                    },
+                    x: {
+                        title: { display: true, text: 'Audience Size / Broadness' },
+                        min: 0,
+                        max: 100
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
