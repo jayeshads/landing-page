@@ -73,6 +73,9 @@
         .splide__pagination, .splide__arrows { display: none; }
         .splide__track { overflow: visible; } /* Allows cards to "bleed" out of view naturally */
     </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@splidejs/splide-extension-auto-scroll@0.5.3/dist/js/splide-extension-auto-scroll.min.js"></script>
 </head>
 <body class="antialiased">
 
@@ -194,74 +197,52 @@
         </div>
     </section>
 
-    <section class="py-24 px-6 bg-[#03081c] overflow-hidden">
-        <div class="max-w-7xl mx-auto mb-16 text-center" data-aos="fade-down">
-            <span class="text-fuchsia-400 font-bold tracking-widest uppercase text-xs">Community Feedback</span>
-            <h2 class="text-4xl lg:text-5xl font-black mt-2">Real User Results</h2>
-            <div class="w-24 h-1 bg-gradient-to-r from-purple-600 to-blue-600 mx-auto mt-6 rounded-full"></div>
+   <section class="py-24 px-6 bg-[#03081c] overflow-hidden">
+    <div class="max-w-7xl mx-auto mb-16 text-center" data-aos="fade-down">
+        <span class="text-fuchsia-400 font-bold tracking-widest uppercase text-xs">Community Feedback</span>
+        <h2 class="text-4xl lg:text-5xl font-black mt-2">Real User Results</h2>
+        <div class="w-24 h-1 bg-gradient-to-r from-purple-600 to-blue-600 mx-auto mt-6 rounded-full"></div>
+    </div>
+
+    <div id="testimonial-slider" class="splide testimonials-carousel" data-aos="fade-up">
+        <div class="splide__track">
+            <ul class="splide__list">
+                <li class="splide__slide px-4 pb-12">
+                    <div class="w-[280px] md:w-[300px] aspect-[9/16] glass rounded-3xl p-1 relative border border-white/10 shadow-[0_0_30px_rgba(124,58,237,0.1)] mx-auto overflow-hidden">
+                        <img src="https://via.placeholder.com/300x533/020617/7c3aed?text=Screenshot+1" class="w-full h-full object-cover rounded-[22px]">
+                        <div class="absolute bottom-4 left-4 right-4 p-4 glass rounded-xl border border-white/5">
+                            <p class="text-green-300 text-sm font-medium">"Bro, entries are fire! 🔥"</p>
+                        </div>
+                    </div>
+                </li>
+                <li class="splide__slide px-4 pb-12">
+                    <div class="w-[280px] md:w-[300px] aspect-[9/16] glass rounded-3xl p-1 relative border border-white/10 mx-auto overflow-hidden">
+                        <img src="https://via.placeholder.com/300x533/020617/3b82f6?text=Screenshot+2" class="w-full h-full object-cover rounded-[22px]">
+                        <div class="absolute bottom-4 left-4 right-4 p-4 glass rounded-xl border border-white/5">
+                            <p class="text-green-300 text-sm font-medium">"Win rate is insane now!"</p>
+                        </div>
+                    </div>
+                </li>
+                <li class="splide__slide px-4 pb-12">
+                    <div class="w-[280px] md:w-[300px] aspect-[9/16] glass rounded-3xl p-1 relative border border-white/10 mx-auto overflow-hidden">
+                        <img src="https://via.placeholder.com/300x533/020617/f59e0b?text=Screenshot+3" class="w-full h-full object-cover rounded-[22px]">
+                        <div class="absolute bottom-4 left-4 right-4 p-4 glass rounded-xl border border-white/5">
+                            <p class="text-green-300 text-sm font-medium">"Finally a real system!"</p>
+                        </div>
+                    </div>
+                </li>
+            </ul>
         </div>
-
-        <div class="splide testimonials-carousel" data-aos="fade-up">
-            <div class="splide__track">
-                <ul class="splide__list">
-                    
-                    <li class="splide__slide px-4">
-                        <div class="w-[300px] aspect-[9/16] glass rounded-3xl p-1 relative border border-white/10 shadow-[0_0_30px_rgba(124,58,237,0.1)] mx-auto overflow-hidden">
-                            <div class="absolute top-0 left-0 w-full h-8 flex justify-between items-center px-6 pt-2 z-10 text-white/60 text-xs">
-                                <span>9:41</span>
-                                <i data-lucide="signal" class="w-3 h-3"></i>
-                            </div>
-                            <img src="https://via.placeholder.com/300x533/020617/7c3aed?text=Chat+Screenshot+1" alt="Testimonial 1" class="w-full h-full object-cover rounded-[22px]">
-                            <div class="absolute bottom-4 left-4 right-4 p-4 glass rounded-xl border border-white/5">
-                                <p class="text-green-300 font-medium">"Bro, I finally understood entries 🔥 Strategy is pure gold!"</p>
-                            </div>
-                        </div>
-                    </li>
-
-                    <li class="splide__slide px-4">
-                        <div class="w-[300px] aspect-[9/16] glass rounded-3xl p-1 relative border border-white/10 mx-auto overflow-hidden">
-                            <div class="absolute top-0 left-0 w-full h-8 flex justify-between items-center px-6 pt-2 z-10 text-white/60 text-xs">
-                                <span>10:02</span>
-                                <i data-lucide="signal" class="w-3 h-3"></i>
-                            </div>
-                            <img src="https://via.placeholder.com/300x533/020617/3b82f6?text=Chat+Screenshot+2" alt="Testimonial 2" class="w-full h-full object-cover rounded-[22px]">
-                            <div class="absolute bottom-4 left-4 right-4 p-4 glass rounded-xl border border-white/5">
-                                <p class="text-green-300 font-medium">"Win rate improved after this guide. No more emotional trading."</p>
-                            </div>
-                        </div>
-                    </li>
-
-                    <li class="splide__slide px-4">
-                        <div class="w-[300px] aspect-[9/16] glass rounded-3xl p-1 relative border border-white/10 mx-auto overflow-hidden shadow-[0_0_30px_rgba(245,158,11,0.1)]">
-                            <div class="absolute top-0 left-0 w-full h-8 flex justify-between items-center px-6 pt-2 z-10 text-white/60 text-xs">
-                                <span>11:15</span>
-                                <i data-lucide="signal" class="w-3 h-3"></i>
-                            </div>
-                            <img src="https://via.placeholder.com/300x533/020617/f59e0b?text=Chat+Screenshot+3" alt="Testimonial 3" class="w-full h-full object-cover rounded-[22px]">
-                            <div class="absolute bottom-4 left-4 right-4 p-4 glass rounded-xl border border-white/5">
-                                <p class="text-green-300 font-medium">"This is way better than those trash paid signals."</p>
-                            </div>
-                        </div>
-                    </li>
-
-                    <li class="splide__slide px-4">
-                        <div class="w-[300px] aspect-[9/16] glass rounded-3xl p-1 relative border border-white/10 mx-auto overflow-hidden shadow-[0_0_30px_rgba(124,58,237,0.1)]">
-                            <div class="absolute top-0 left-0 w-full h-8 flex justify-between items-center px-6 pt-2 z-10 text-white/60 text-xs">
-                                <span>1:30</span>
-                                <i data-lucide="signal" class="w-3 h-3"></i>
-                            </div>
-                            <img src="https://via.placeholder.com/300x533/020617/f472b6?text=Chat+Screenshot+4" alt="Testimonial 4" class="w-full h-full object-cover rounded-[22px]">
-                            <div class="absolute bottom-4 left-4 right-4 p-4 glass rounded-xl border border-white/5">
-                                <p class="text-green-300 font-medium">"Just hit 5 wins in a row. Risk management works!"</p>
-                            </div>
-                        </div>
-                    </li>
-
-                </ul>
-            </div>
-        </div>
-      
-    </section>
+        
+        <style>
+            .splide__pagination { bottom: 0; }
+            .splide__pagination__page { background: rgba(124, 58, 237, 0.3); width: 10px; height: 10px; }
+            .splide__pagination__page.is-active { background: #7c3aed; transform: scale(1.4); }
+            .splide__arrow { background: rgba(124, 58, 237, 0.2); border: 1px solid rgba(124, 58, 237, 0.5); }
+            .splide__arrow svg { fill: #7c3aed; }
+        </style>
+    </div>
+</section>
 
     <section id="pricing" class="py-24 px-6 relative overflow-hidden">
         <div class="max-w-3xl mx-auto relative z-10" data-aos="zoom-in">
