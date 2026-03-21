@@ -1,6 +1,24 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
+    <!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];
+t=b.createElement(e);t.async=!0;
+t.src=v;
+s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}
+(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+
+fbq('init', '1413543176774133');
+fbq('track', 'PageView');
+</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meta Ad Policy Decoder – Finance Edition</title>
@@ -154,23 +172,37 @@
         AOS.init({ duration: 800, once: false });
         lucide.createIcons();
 
-        function payNow() {
-            var options = {
-                "key": "rzp_live_STpsPxw2w73L5f", // 🔥 Your Live Key
-                "amount": 48900, // ₹2,499.00
-                "currency": "INR",
-                "name": "Ads Pro",
-                "description": "Meta Ads Approval Guide",
-                "image": "https://img.icons8.com/color/96/000000/shield.png",
-                "handler": function (response){
-                    alert("Payment Successful! ID: " + response.razorpay_payment_id);
-                    window.location.href = "metabook.html";
-                },
-              
-            };
-            var rzp = new Razorpay(options);
-            rzp.open();
-        }
+   function payNow() {
+
+    // 🔥 Initiate Checkout Event
+    fbq('track', 'InitiateCheckout', {
+        value: 489,
+        currency: 'INR'
+    });
+
+    var options = {
+        "key": "rzp_live_STpsPxw2w73L5f",
+        "amount": 48900,
+        "currency": "INR",
+        "name": "Ads Pro",
+        "description": "Meta Ads Approval Guide",
+
+        "handler": function (response){
+
+            // 🔥 Purchase Event (Instant)
+            fbq('track', 'Purchase', {
+                value: 489,
+                currency: 'INR'
+            });
+
+            // Redirect to your thankyou page
+            window.location.href = "metayou.html";
+        },
+    };
+
+    var rzp = new Razorpay(options);
+    rzp.open();
+}
     </script>
 </body>
 </html>
