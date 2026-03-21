@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meta Ads Approval Guide | Ads Pro</title>
+    
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #04091e; color: #ffffff; overflow-x: hidden; min-height: 100vh; }
+        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.3s ease; }
+        .glass:hover { border-color: #3b82f6; box-shadow: 0 0 20px rgba(59, 130, 246, 0.2); }
+        .gradient-text { background: linear-gradient(90deg, #3b82f6, #60a5fa, #f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        @keyframes floating { 0%, 100% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-20px) rotate(2deg); } }
+        .float-anim { animation: floating 4s ease-in-out infinite; }
+        .glow-bg { position: absolute; filter: blur(100px); z-index: -1; opacity: 0.5; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #04091e; }
+        ::-webkit-scrollbar-thumb { background: #3b82f6; border-radius: 10px; }
+        .splide__pagination, .splide__arrows { display: none; }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div class="glow-bg w-[500px] h-[500px] bg-blue-900/30 top-[-10%] left-[-10%]"></div>
+
+    <nav class="flex justify-between items-center px-8 py-6 max-w-7xl mx-auto">
+        <div class="flex items-center gap-2">
+            <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center shadow-[0_0_15px_#3b82f6]">
+                <i data-lucide="check-circle" class="text-white w-5 h-5"></i>
+            </div>
+            <span class="font-extrabold text-xl tracking-tighter italic">ADS<span class="text-blue-500">PRO</span></span>
+        </div>
+        <button onclick="payNow()" class="px-6 py-2 border border-blue-500/50 rounded-full hover:bg-blue-500/10 transition-all text-sm font-medium">Get Guide</button>
+    </nav>
+
+    <section class="relative pt-16 pb-24 px-6">
+        <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
+            <div data-aos="fade-right">
+                <span class="px-4 py-1.5 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-400 text-xs font-bold uppercase tracking-widest mb-6 inline-block">The Ultimate Meta Ads Blueprint</span>
+                <h1 class="text-5xl lg:text-7xl font-extrabold mb-6 leading-tight">Master Meta Ads <br> <span class="gradient-text">Approval Every Time</span></h1>
+                <p class="text-gray-400 text-lg mb-8 max-w-lg">Minimize rejection risk with a professional-grade guide. No guesswork, just results.</p>
+                <div class="flex flex-col sm:flex-row gap-4 mb-10">
+                    <button onclick="payNow()" class="group relative px-8 py-4 bg-blue-600 rounded-xl font-bold text-lg hover:bg-blue-700 transition-all flex items-center justify-center gap-2 overflow-hidden">
+                        <span class="relative z-10">Get Instant Access – ₹1</span>
+                        <div class="absolute inset-0 bg-gradient-to-r from-blue-400/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-500"></div>
+                        <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="relative flex justify-center lg:justify-end" data-aos="zoom-in">
+                <div class="relative w-72 h-[420px] lg:w-96 lg:h-[540px] float-anim">
+                    <div class="absolute inset-0 bg-gradient-to-br from-blue-600 to-blue-800 rounded-2xl shadow-2xl flex flex-col justify-end p-8 border border-white/20">
+                        <i data-lucide="book-open" class="w-16 h-16 text-white/20 mb-auto"></i>
+                        <h3 class="text-3xl font-black mb-2">ADS<br>PRO MASTER</h3>
+                        <p class="text-white/60 text-sm italic">Professional approach to ad approval</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 px-6 bg-[#030617]">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="glass p-8 rounded-3xl group" data-aos="fade-up">
+                <div class="w-14 h-14 bg-blue-600/20 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-blue-600 transition-colors"><i data-lucide="shield-check" class="text-blue-400 group-hover:text-white"></i></div>
+                <h3 class="text-xl font-bold mb-3">Policy Framework</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">Essential policies to avoid pitfalls.</p>
+            </div>
+            <div class="glass p-8 rounded-3xl group" data-aos="fade-up" data-aos-delay="100">
+                <div class="w-14 h-14 bg-blue-600/20 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-blue-600 transition-colors"><i data-lucide="file-check" class="text-blue-400 group-hover:text-white"></i></div>
+                <h3 class="text-xl font-bold mb-3">Compliance Checklist</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">Step-by-step checklist for every ad.</p>
+            </div>
+            <div class="glass p-8 rounded-3xl group" data-aos="fade-up" data-aos-delay="200">
+                <div class="w-14 h-14 bg-orange-600/20 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-orange-600 transition-colors"><i data-lucide="maximize-2" class="text-orange-400 group-hover:text-white"></i></div>
+                <h3 class="text-xl font-bold mb-3">Creative Best Practices</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">Design engaging and compliant ads.</p>
+            </div>
+            <div class="glass p-8 rounded-3xl group" data-aos="fade-up" data-aos-delay="300">
+                <div class="w-14 h-14 bg-emerald-600/20 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-emerald-600 transition-colors"><i data-lucide="target" class="text-emerald-400 group-hover:text-white"></i></div>
+                <h3 class="text-xl font-bold mb-3">Targeting Optimization</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">Reach the right audience safely.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing" class="py-24 px-6 relative">
+        <div class="max-w-3xl mx-auto relative z-10" data-aos="zoom-in">
+            <div class="glass p-12 rounded-[40px] border-2 border-blue-500/50 text-center relative overflow-hidden">
+                <div class="absolute top-0 right-0 bg-blue-600 px-10 py-2 rotate-45 translate-x-8 translate-y-4 font-bold text-xs">OFFER</div>
+                <h2 class="text-4xl font-black mb-4">Start Getting Approved Now</h2>
+                <div class="flex justify-center items-center gap-4 mb-8">
+                    <span class="text-gray-500 line-through text-2xl">₹4,999</span>
+                    <span class="text-6xl font-black text-white">₹1</span>
+                </div>
+                <button onclick="payNow()" class="w-full py-6 bg-white text-black font-black text-2xl rounded-2xl hover:bg-blue-100 transition-all shadow-xl mb-6">UNLOCK GUIDE NOW</button>
+                <div class="flex flex-wrap justify-center gap-4 opacity-70">
+                    <img src="https://img.icons8.com/color/48/000000/visa.png" class="h-6" alt="Visa">
+                    <img src="https://img.icons8.com/color/48/000000/mastercard.png" class="h-6" alt="Mastercard">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 px-6 bg-[#030617]">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-12">Frequently Asked Questions</h2>
+            <div class="space-y-4">
+                <details class="glass p-6 rounded-2xl group cursor-pointer" open>
+                    <summary class="flex justify-between items-center font-bold text-lg list-none">Is this for beginners? <i data-lucide="chevron-down" class="group-open:rotate-180 transition-transform"></i></summary>
+                    <p class="mt-4 text-gray-400 text-sm">Yes! We cover essentials to get you started correctly.</p>
+                </details>
+                <details class="glass p-6 rounded-2xl group cursor-pointer">
+                    <summary class="flex justify-between items-center font-bold text-lg list-none">Do you guarantee approval? <i data-lucide="chevron-down" class="group-open:rotate-180 transition-transform"></i></summary>
+                    <p class="mt-4 text-gray-400 text-sm">No, approval depends on many factors. We provide the knowledge to minimize risk.</p>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-16 px-6 border-t border-white/5 bg-[#020512] text-center">
+        <div class="max-w-7xl mx-auto">
+            <div class="mb-10">
+                <p class="text-xs font-bold text-blue-500/60 tracking-widest uppercase mb-3">Developed by</p>
+                <p class="text-2xl font-black gradient-text">ADS PRO TEAM</p>
+            </div>
+            <div class="flex flex-wrap justify-center gap-4 mb-10">
+                <a href="#" class="px-5 py-2 glass rounded-full text-xs font-bold text-gray-300">Privacy Policy</a>
+                <a href="#" class="px-5 py-2 glass rounded-full text-xs font-bold text-gray-300">Terms & Conditions</a>
+            </div>
+            <div class="max-w-3xl mx-auto p-6 rounded-2xl border border-white/5 bg-white/[0.02]">
+                <p class="text-[10px] text-gray-500 uppercase tracking-tighter opacity-60">
+                    <span class="text-gray-400 font-bold block mb-2 underline decoration-blue-500/30 text-xs">Disclaimer</span>
+                    This is an educational guide. We are not affiliated with Meta. Results may vary. High-risk niches require extra caution.
+                </p>
+            </div>
+            <p class="mt-10 text-[10px] text-gray-700">© 2026 ADS PRO. ALL RIGHTS RESERVED.</p>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+
+    <script>
+        AOS.init({ duration: 800, once: false });
+        lucide.createIcons();
+
+        function payNow() {
+            var options = {
+                "key": "rzp_live_STpsPxw2w73L5f", // 🔥 Your Live Key
+                "amount": 100, // ₹2,499.00
+                "currency": "INR",
+                "name": "Ads Pro",
+                "description": "Meta Ads Approval Guide",
+                "image": "https://img.icons8.com/color/96/000000/shield.png",
+                "handler": function (response){
+                    alert("Payment Successful! ID: " + response.razorpay_payment_id);
+                    window.location.href = "thankyou.html";
+                },
+              
+            };
+            var rzp = new Razorpay(options);
+            rzp.open();
+        }
+    </script>
+</body>
+</html>
