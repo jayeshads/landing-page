@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Success! | Binary Expert Mastery</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #020617;
+            color: #ffffff;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(124, 58, 237, 0.2);
+        }
+
+        .glow {
+            box-shadow: 0 0 50px rgba(124, 58, 237, 0.3);
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, #7c3aed, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Success Checkmark Animation */
+        .checkmark {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: block;
+            stroke-width: 2;
+            stroke: #7c3aed;
+            stroke-miterlimit: 10;
+            box-shadow: inset 0px 0px 0px #7c3aed;
+            animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
+        }
+
+        @keyframes fill { 100% { box-shadow: inset 0px 0px 0px 40px #7c3aed; } }
+        @keyframes scale { 0%, 100% { transform: none; } 50% { transform: scale3d(1.1, 1.1, 1); } }
+    </style>
+</head>
+<body>
+
+    <div class="absolute top-[-10%] left-[-10%] w-[400px] h-[400px] bg-purple-600/20 blur-[120px]"></div>
+    <div class="absolute bottom-[-10%] right-[-10%] w-[400px] h-[400px] bg-blue-600/20 blur-[120px]"></div>
+
+    <div class="max-w-xl w-full px-6 text-center" data-aos="zoom-in">
+        <div class="glass glow p-10 md:p-16 rounded-[40px] relative overflow-hidden">
+            
+            <div class="flex justify-center mb-8">
+                <div class="w-20 h-20 bg-purple-600/20 rounded-full flex items-center justify-center border border-purple-500/50 shadow-[0_0_30px_rgba(124,58,237,0.4)]">
+                    <i data-lucide="check" class="text-white w-10 h-10"></i>
+                </div>
+            </div>
+
+            <h1 class="text-4xl md:text-5xl font-black mb-4">Payment <span class="gradient-text">Success!</span></h1>
+            <p class="text-gray-400 text-lg mb-8 leading-relaxed">
+                Thank you for choosing <span class="text-white font-bold">Binary Expert</span>. Your mastery guide has been sent to your email.
+            </p>
+
+            <div class="bg-blue-600/10 border border-blue-500/30 p-6 rounded-2xl mb-8">
+                <div class="flex items-center justify-center gap-3 mb-3">
+                    <i data-lucide="send" class="text-blue-400 w-6 h-6"></i>
+                    <h3 class="text-xl font-bold text-blue-400">Join Private Telegram</h3>
+                </div>
+                <p class="text-sm text-gray-400 mb-6">Redirecting you to our VIP channel in <span id="countdown" class="text-white font-bold text-lg">5</span> seconds...</p>
+                
+                <a href="https://t.me/YOUR_CHANNEL_LINK" id="tg-link" class="inline-flex items-center gap-2 px-8 py-4 bg-[#229ED9] hover:bg-[#1d8cc1] text-white font-bold rounded-xl transition-all hover:scale-105 active:scale-95 shadow-lg shadow-blue-500/20">
+                    JOIN TELEGRAM NOW
+                </a>
+            </div>
+
+            <p class="text-xs text-gray-500 uppercase tracking-widest font-bold">Marketing With Jayesh</p>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1000 });
+        lucide.createIcons();
+
+        // --- EDIT YOUR TELEGRAM LINK HERE ---
+        const TELEGRAM_URL = "https://t.me/YOUR_CHANNEL_LINK"; 
+
+        // Countdown Logic
+        let timeLeft = 59;
+        const countdownElement = document.getElementById('countdown');
+
+        const timer = setInterval(() => {
+            timeLeft--;
+            countdownElement.textContent = timeLeft;
+            if (timeLeft <= 0) {
+                clearInterval(timer);
+                window.location.href = TELEGRAM_URL; // Redirect to Telegram
+            }
+        }, 1000);
+
+        // Update Button Link too
+        document.getElementById('tg-link').href = TELEGRAM_URL;
+    </script>
+</body>
+</html>
