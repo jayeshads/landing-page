@@ -262,9 +262,9 @@
                 
                 <p class="text-gray-400 mb-10">Limited time offer. Get the full mastery guide, strategies, and templates instantly.</p>
                 
-                <button class="w-full py-6 bg-white text-black font-black text-2xl rounded-2xl hover:bg-purple-100 transition-all hover:scale-[1.02] active:scale-95 shadow-[0_20px_50px_rgba(255,255,255,0.1)] mb-6">
-                    UNLOCK ACCESS NOW
-                </button>
+                <button onclick="payNow()" class="w-full py-6 bg-white text-black font-black text-2xl rounded-2xl hover:bg-purple-100 transition-all hover:scale-[1.02] active:scale-95 shadow-[0_20px_50px_rgba(255,255,255,0.1)] mb-6">
+    UNLOCK ACCESS NOW
+</button> 
                 
                 <div class="flex flex-wrap justify-center gap-4 opacity-70">
                     <img src="https://img.icons8.com/color/48/000000/visa.png" class="h-6" alt="Visa">
@@ -345,5 +345,28 @@
             },
         }).mount();
     </script>
+    <script>
+function payNow() {
+  var options = {
+    "key": "rzp_live_STpsPxw2w73L5f", // 🔥 apni Razorpay key daal
+    "amount": "190000", // ₹19 = 1900 (agar $19 hai to approx ₹1600-1700 rakh)
+    "currency": "INR",
+    "name": "Binary Expert",
+    "description": "Binary Trading Ebook",
+
+    "handler": function (response){
+        alert("Payment Successful: " + response.razorpay_payment_id);
+        window.location.href = "thankyou.html"; // optional redirect
+    },
+
+    "theme": {
+        "color": "#7c3aed"
+    }
+  };
+
+  var rzp = new Razorpay(options);
+  rzp.open();
+}
+</script>
 </body>
 </html>
