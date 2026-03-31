@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Cricket Prediction | Mobile</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            background: #020617;
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            padding: 20px;
+        }
+
+        /* Animated Background Gradients */
+        .blob {
+            position: absolute;
+            width: 250px;
+            height: 250px;
+            background: #1e40af;
+            filter: blur(80px);
+            border-radius: 50%;
+            z-index: -1;
+            opacity: 0.4;
+            animation: move 8s infinite alternate ease-in-out;
+        }
+
+        @keyframes move {
+            from { transform: translate(-20%, -20%); }
+            to { transform: translate(20%, 20%); }
+        }
+
+        /* Circular PFP with Dual Glow */
+        .pfp-box {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .pfp-box::before {
+            content: '';
+            position: absolute;
+            inset: -5px;
+            background: linear-gradient(270deg, #3b82f6, #f59e0b, #3b82f6);
+            background-size: 200% 200%;
+            border-radius: 50%;
+            animation: borderRotate 3s linear infinite;
+        }
+
+        @keyframes borderRotate {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
+        }
+
+        .pfp-inner {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: #020617;
+            padding: 4px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pfp-inner img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        /* Premium Glass Card */
+        .mobile-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 3rem;
+            padding: 2.5rem 1.5rem;
+            width: 100%;
+            max-width: 360px;
+            text-align: center;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Pulsing Button */
+        .btn-telegram {
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn-telegram:active {
+            transform: scale(0.96);
+            filter: brightness(1.1);
+        }
+
+        /* Floating Icons */
+        .float-anim {
+            animation: floating 3s infinite ease-in-out;
+        }
+
+        @keyframes floating {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="blob"></div>
+
+    <div class="mobile-card" data-aos="fade-up">
+        <!-- Profile Image -->
+        <div class="pfp-box">
+        <!-- Yahan 'logo.png' ki jagah apni file ka asli naam likh dena -->
+<div class="pfp-inner">
+    <img src="logo.png" alt="Cricket King Logo">
+</div>
+        </div>
+
+        <!-- Headline -->
+        <h1 class="text-3xl font-black mb-1 tracking-tight uppercase">Cricket <span class="text-blue-500">Guru</span></h1>
+        
+        <!-- Live Status -->
+        <div class="flex items-center justify-center gap-2 mb-6">
+            <span class="relative flex h-2 w-2">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+            </span>
+            <span class="text-green-500 text-[10px] font-extrabold uppercase tracking-[0.2em]">Match Prediction Live</span>
+        </div>
+
+        <p class="text-gray-400 text-sm mb-8 leading-snug font-medium px-2">
+            Get 95% Fixed Toss & Match Reports. <br> 
+            <span class="text-white">Join the Family of 50K+ Winners!</span>
+        </p>
+
+        <!-- Stats -->
+        <div class="flex justify-around mb-10 bg-white/5 py-4 rounded-2xl border border-white/5">
+            <div>
+                <p class="text-xl font-black text-white">95%</p>
+                <p class="text-[8px] text-gray-500 font-bold uppercase tracking-widest">Accuracy</p>
+            </div>
+            <div class="w-[1px] h-8 bg-white/10"></div>
+            <div>
+                <p class="text-xl font-black text-blue-500">FREE</p>
+                <p class="text-[8px] text-gray-500 font-bold uppercase tracking-widest">Reports</p>
+            </div>
+            <div class="w-[1px] h-8 bg-white/10"></div>
+            <div>
+                <p class="text-xl font-black text-white">24/7</p>
+                <p class="text-[8px] text-gray-500 font-bold uppercase tracking-widest">Support</p>
+            </div>
+        </div>
+
+        <!-- Join Button -->
+        <a href="https://t.me/+cFEgq5Kw7xRjYmU1" class="btn-telegram flex items-center justify-center gap-3 w-full py-5 text-white font-black text-xl rounded-[20px]">
+            <i data-lucide="send" class="w-6 h-6"></i>
+            JOIN TELEGRAM
+        </a>
+
+        <div class="mt-6 flex items-center justify-center gap-2 text-gray-500">
+            <i data-lucide="shield-check" class="w-4 h-4 text-blue-500"></i>
+            <span class="text-[10px] font-bold uppercase tracking-widest">Ads Free & Secure</span>
+        </div>
+    </div>
+
+    <!-- Decorative Bottom Icon -->
+    <div class="absolute -bottom-10 left-1/2 -translate-x-1/2 opacity-10 float-anim">
+        <i data-lucide="trophy" class="w-40 h-40"></i>
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 800, once: true });
+        lucide.createIcons();
+    </script>
+</body>
+</html>
