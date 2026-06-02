@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IndianBook App</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#080808;
+color:white;
+overflow-x:hidden;
+}
+
+.hero{
+min-height:100vh;
+background:
+linear-gradient(rgba(0,0,0,.65),rgba(0,0,0,.75)),
+url("hero.jpeg");
+background-size:cover;
+background-position:center;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+padding:20px;
+}
+
+.content{
+max-width:900px;
+animation:fadeUp 1.2s ease;
+}
+
+.logo{
+width:120px;
+margin-bottom:20px;
+animation:float 4s ease-in-out infinite;
+}
+
+h1{
+font-size:60px;
+font-weight:700;
+margin-bottom:15px;
+}
+
+p{
+font-size:18px;
+opacity:.9;
+margin-bottom:30px;
+}
+
+.download-btn{
+display:inline-block;
+padding:18px 40px;
+background:#00d26a;
+color:white;
+font-size:20px;
+font-weight:600;
+border-radius:60px;
+text-decoration:none;
+transition:.4s;
+box-shadow:0 0 25px rgba(0,210,106,.5);
+}
+
+.download-btn:hover{
+transform:translateY(-5px) scale(1.05);
+box-shadow:0 0 40px rgba(0,210,106,.9);
+}
+
+.features{
+padding:80px 20px;
+max-width:1200px;
+margin:auto;
+}
+
+.section-title{
+text-align:center;
+font-size:40px;
+margin-bottom:50px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+}
+
+.card{
+background:rgba(255,255,255,.05);
+backdrop-filter:blur(10px);
+padding:30px;
+border-radius:20px;
+transition:.4s;
+}
+
+.card:hover{
+transform:translateY(-10px);
+background:rgba(255,255,255,.08);
+}
+
+.card h3{
+margin-bottom:10px;
+}
+
+.apk-box{
+padding:80px 20px;
+text-align:center;
+}
+
+.apk-card{
+max-width:600px;
+margin:auto;
+background:#111;
+padding:40px;
+border-radius:25px;
+border:1px solid rgba(255,255,255,.08);
+}
+
+footer{
+text-align:center;
+padding:30px;
+opacity:.6;
+}
+
+@keyframes float{
+0%,100%{
+transform:translateY(0px);
+}
+50%{
+transform:translateY(-15px);
+}
+}
+
+@keyframes fadeUp{
+from{
+opacity:0;
+transform:translateY(40px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+</style>
+</head>
+
+<body>
+
+<section class="hero">
+
+<div class="content">
+
+<img src="logo.jpeg" class="logo">
+
+<h1>IndianBook</h1>
+
+<p>
+Fast • Secure • Easy to Use
+</p>
+
+<a href="indianbook.apk" class="download-btn" download>
+⬇ Download APK
+</a>
+
+</div>
+
+</section>
+
+<section class="features">
+
+<h2 class="section-title">Why Choose IndianBook?</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3>⚡ Fast Performance</h3>
+<p>Lightning fast experience with optimized performance.</p>
+</div>
+
+<div class="card">
+<h3>🔒 Secure Platform</h3>
+<p>Your data remains protected and encrypted.</p>
+</div>
+
+<div class="card">
+<h3>📱 Mobile Friendly</h3>
+<p>Designed for Android users with smooth UI.</p>
+</div>
+
+<div class="card">
+<h3>🚀 Easy Access</h3>
+<p>One click install and start using instantly.</p>
+</div>
+
+</div>
+
+</section>
+
+<section class="apk-box">
+
+<div class="apk-card">
+
+<h2>Download Latest Version</h2>
+
+<br>
+
+<p>
+Get the newest version of IndianBook App.
+</p>
+
+<br>
+
+<a href="indianbook.apk" class="download-btn" download>
+Download Now
+</a>
+
+</div>
+
+</section>
+
+<footer>
+© 2026 IndianBook. All Rights Reserved.
+</footer>
+
+</body>
+</html>
