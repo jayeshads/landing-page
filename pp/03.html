@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Just For You</title>
+<link href="https://fonts.googleapis.com/css2?family=Parisienne&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+background:radial-gradient(circle at top,#220022,#000);
+display:flex;justify-content:center;align-items:center;
+min-height:100vh;padding:16px;color:white;
+font-family:Poppins,sans-serif;overflow:hidden;position:relative;
+}
+.aurora{
+position:absolute;width:700px;height:700px;
+background:radial-gradient(circle,rgba(255,0,128,.22),transparent 70%);
+filter:blur(90px);animation:aurora 8s infinite alternate;
+}
+@keyframes aurora{from{transform:translate(-80px,-50px)}to{transform:translate(80px,50px)}}
+
+.container{
+width:100%;max-width:340px;text-align:center;z-index:2;
+animation:floatCard 4s ease-in-out infinite;
+}
+@keyframes floatCard{50%{transform:translateY(-8px)}}
+
+.heart-circle{
+width:120px;height:120px;border-radius:50%;
+margin:0 auto 18px;
+display:flex;justify-content:center;align-items:center;
+background:radial-gradient(circle,#ff69b4,#b30059);
+box-shadow:0 0 30px #ff1a8c;
+animation:pulse 1.8s infinite;
+}
+.heart-circle span{font-size:48px}
+@keyframes pulse{
+50%{transform:scale(1.12)}
+}
+
+h1{
+font-family:Parisienne,cursive;
+font-size:52px;
+background:linear-gradient(45deg,#ff9ad2,#ff0080);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+.subtitle{
+font-size:14px;
+opacity:.85;
+margin:10px 0 22px;
+animation:blink 2s infinite;
+}
+@keyframes blink{50%{opacity:.45}}
+
+.box{
+width:100%;
+padding:16px;
+margin:12px 0;
+border-radius:18px;
+background:rgba(255,0,120,.12);
+backdrop-filter:blur(12px);
+cursor:pointer;
+position:relative;
+overflow:hidden;
+font-weight:600;
+transition:.4s;
+box-shadow:0 0 15px rgba(255,0,128,.15);
+}
+
+.box:hover,.box.opened{
+transform:scale(1.03);
+box-shadow:0 0 22px rgba(255,0,128,.45);
+}
+
+.box::before{
+content:'';
+position:absolute;
+top:0;left:-100%;
+width:100%;height:100%;
+background:linear-gradient(120deg,transparent,rgba(255,255,255,.25),transparent);
+animation:shine 3s infinite;
+}
+@keyframes shine{
+100%{left:120%}
+}
+
+.reveal{
+animation:popReveal .5s;
+}
+@keyframes popReveal{
+0%{transform:scale(.5);opacity:0}
+70%{transform:scale(1.1)}
+100%{transform:scale(1);opacity:1}
+}
+
+.btn{
+margin-top:20px;
+width:100%;
+padding:15px;
+border:none;
+border-radius:30px;
+font-size:16px;
+font-weight:700;
+color:#fff;
+background:linear-gradient(45deg,#ff007f,#ff4da6);
+box-shadow:0 0 20px rgba(255,0,128,.4);
+animation:floatBtn 2s infinite;
+}
+@keyframes floatBtn{
+50%{transform:translateY(-5px)}
+}
+
+.heart,.sparkle,.star{
+position:absolute;
+pointer-events:none;
+}
+.heart{color:#ff4da6;animation:up 6s linear forwards}
+.sparkle{
+width:4px;height:4px;background:#fff;border-radius:50%;
+animation:spark 4s linear forwards
+}
+.star{color:white;animation:twinkle 2s infinite}
+
+@keyframes up{to{transform:translateY(-100vh);opacity:0}}
+@keyframes spark{to{transform:translateY(-300px);opacity:0}}
+@keyframes twinkle{50%{opacity:.2;transform:scale(.5)}}
+</style>
+</head>
+<body>
+
+<div class="aurora"></div>
+
+<div class="container">
+
+<div class="heart-circle"><span>❤</span></div>
+
+<h1>Just For You</h1>
+<p class="subtitle">Tap each one to reveal ✨</p>
+
+<div class="box" onclick="reveal(this,'You look adorable 💖')"><span>❤</span></div>
+<div class="box" onclick="reveal(this,'Your smile is my favorite 😊')"><span>❤</span></div>
+<div class="box" onclick="reveal(this,'You make everything better ✨')"><span>❤</span></div>
+<div class="box" onclick="reveal(this,'You are truly special 🌹')"><span>❤</span></div>
+
+<button class="btn" onclick="window.location.href='04.html'">See More →</button>
+
+</div>
+
+<script>
+function reveal(box,message){
+if(box.classList.contains('opened')) return;
+box.classList.add('reveal');
+setTimeout(()=>{
+box.innerHTML='<span>'+message+'</span>';
+box.classList.add('opened');
+},250);
+}
+
+function heart(){
+let h=document.createElement('div');
+h.className='heart';
+h.innerHTML='❤';
+h.style.left=Math.random()*100+'vw';
+h.style.bottom='-20px';
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),6000);
+}
+setInterval(heart,500);
+
+function sparkle(){
+let s=document.createElement('div');
+s.className='sparkle';
+s.style.left=Math.random()*100+'vw';
+s.style.bottom='0';
+document.body.appendChild(s);
+setTimeout(()=>s.remove(),4000);
+}
+setInterval(sparkle,220);
+
+for(let i=0;i<25;i++){
+let st=document.createElement('div');
+st.className='star';
+st.innerHTML='✦';
+st.style.left=Math.random()*100+'vw';
+st.style.top=Math.random()*100+'vh';
+st.style.animationDelay=Math.random()*2+'s';
+document.body.appendChild(st);
+}
+</script>
+</body>
+</html>
