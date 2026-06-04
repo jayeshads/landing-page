@@ -1,0 +1,396 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hey Beautiful</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Parisienne&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  height:100vh;
+  background: radial-gradient(circle at top, #1a001f, #000);
+  font-family:'Poppins', sans-serif;
+  overflow:hidden;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:white;
+  position:relative;
+}
+
+/* Aurora Effect */
+.aurora{
+  position:absolute;
+  width:900px;
+  height:900px;
+  background:radial-gradient(circle,
+  rgba(255,0,128,.20),
+  transparent 70%);
+  filter:blur(100px);
+  animation:auroraMove 10s infinite alternate ease-in-out;
+  z-index:0;
+}
+
+@keyframes auroraMove{
+  from{
+    transform:translate(-150px,-80px);
+  }
+  to{
+    transform:translate(150px,80px);
+  }
+}
+
+/* Mouse Glow */
+.cursor-glow{
+  width:250px;
+  height:250px;
+  border-radius:50%;
+  position:fixed;
+  background:rgba(255,0,128,0.12);
+  filter:blur(70px);
+  pointer-events:none;
+  z-index:1;
+}
+
+/* Animated background dots */
+body::before{
+  content:"";
+  position:absolute;
+  width:200%;
+  height:200%;
+  background-image: radial-gradient(rgba(255,255,255,0.08) 1px, transparent 1px);
+  background-size:40px 40px;
+  animation:moveBg 40s linear infinite;
+}
+
+@keyframes moveBg{
+  from{transform:translate(0,0);}
+  to{transform:translate(-200px,-200px);}
+}
+
+.container{
+  text-align:center;
+  position:relative;
+  z-index:2;
+  animation:fadeIn 2s ease forwards;
+}
+
+@keyframes fadeIn{
+  from{
+    opacity:0;
+    transform:translateY(30px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+/* Avatar */
+.avatar{
+  width:150px;
+  height:150px;
+  border-radius:50%;
+  background:#fff;
+  margin:auto;
+  position:relative;
+  overflow:hidden;
+  box-shadow:0 0 40px rgba(255,0,150,0.6);
+  animation:pulse 2s infinite;
+}
+
+/* Rotating Ring */
+.avatar::before{
+  content:'';
+  position:absolute;
+  inset:-6px;
+  border-radius:50%;
+  border:3px solid transparent;
+  border-top:3px solid #ff4da6;
+  border-right:3px solid #ff4da6;
+  animation:rotate 3s linear infinite;
+}
+
+@keyframes rotate{
+  100%{
+    transform:rotate(360deg);
+  }
+}
+
+@keyframes pulse{
+  0%{
+    box-shadow:0 0 20px rgba(255,0,150,0.5);
+  }
+  50%{
+    box-shadow:0 0 60px rgba(255,0,150,1);
+  }
+  100%{
+    box-shadow:0 0 20px rgba(255,0,150,0.5);
+  }
+}
+
+.avatar img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+/* Title */
+h1{
+  font-family:'Parisienne', cursive;
+  font-size:80px;
+  letter-spacing:1px;
+  margin-top:30px;
+  background:linear-gradient(45deg,#ff4da6,#ff0080);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:floating 3s ease-in-out infinite;
+}
+
+@keyframes floating{
+  0%,100%{
+    transform:translateY(0);
+  }
+  50%{
+    transform:translateY(-10px);
+  }
+}
+
+/* Typing effect */
+.typing{
+  font-size:20px;
+  margin-top:10px;
+  border-right:2px solid white;
+  width:0;
+  overflow:hidden;
+  white-space:nowrap;
+  animation:typing 4s steps(40,end) forwards, blink .7s infinite;
+}
+
+@keyframes typing{
+  to{
+    width:100%;
+  }
+}
+
+@keyframes blink{
+  50%{
+    border-color:transparent;
+  }
+}
+
+/* Button */
+.btn{
+  margin-top:40px;
+  padding:15px 40px;
+  border:none;
+  border-radius:50px;
+  font-size:18px;
+  font-family:'Poppins', sans-serif;
+  font-weight:600;
+  cursor:pointer;
+  background:linear-gradient(45deg,#ff4da6,#ff0080);
+  color:white;
+  position:relative;
+  overflow:hidden;
+  transition:.3s;
+}
+
+.btn:hover{
+  transform:scale(1.1);
+  box-shadow:0 0 25px #ff0080;
+}
+
+.btn::before{
+  content:'';
+  position:absolute;
+  width:50px;
+  height:200%;
+  background:rgba(255,255,255,.3);
+  top:-50%;
+  left:-100px;
+  transform:rotate(25deg);
+}
+
+.btn:hover::before{
+  animation:shine .8s forwards;
+}
+
+@keyframes shine{
+  100%{
+    left:250px;
+  }
+}
+
+/* Floating Hearts */
+.heart{
+  position:absolute;
+  color:#ff4da6;
+  animation:float 6s linear infinite;
+  font-size:20px;
+  z-index:1;
+}
+
+@keyframes float{
+  0%{
+    transform:translateY(0);
+    opacity:1;
+  }
+  100%{
+    transform:translateY(-800px);
+    opacity:0;
+  }
+}
+
+/* Sparkles */
+.sparkle{
+  position:absolute;
+  width:4px;
+  height:4px;
+  background:white;
+  border-radius:50%;
+  animation:sparkle 4s linear infinite;
+  z-index:1;
+}
+
+@keyframes sparkle{
+  0%{
+    transform:translateY(0) scale(0);
+    opacity:0;
+  }
+  50%{
+    opacity:1;
+    transform:translateY(-200px) scale(1);
+  }
+  100%{
+    transform:translateY(-400px) scale(0);
+    opacity:0;
+  }
+}
+
+/* Falling Roses */
+.rose{
+  position:absolute;
+  z-index:1;
+  pointer-events:none;
+}
+
+@keyframes fall{
+  from{
+    transform:translateY(-50px) rotate(0deg);
+  }
+  to{
+    transform:translateY(110vh) rotate(360deg);
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="aurora"></div>
+<div class="cursor-glow"></div>
+
+<div class="container">
+
+  <div class="avatar">
+    <img src="gif/1st.gif.gif" alt="Avatar">
+  </div>
+
+  <h1>Hey Beautiful</h1>
+
+  <div class="typing">
+    Do you even know how cute you are?
+  </div>
+
+  <a href="22.html">
+    <button class="btn">LET'S CHECK 🤍</button>
+  </a>
+
+</div>
+
+<script>
+
+/* Mouse Glow */
+const glow=document.querySelector(".cursor-glow");
+
+document.addEventListener("mousemove",(e)=>{
+  glow.style.left=(e.clientX-125)+"px";
+  glow.style.top=(e.clientY-125)+"px";
+});
+
+/* Hearts */
+function createHeart(){
+  const heart=document.createElement("div");
+
+  heart.classList.add("heart");
+  heart.innerHTML="❤";
+
+  heart.style.left=Math.random()*100+"vw";
+  heart.style.bottom="-20px";
+  heart.style.fontSize=(Math.random()*20+15)+"px";
+
+  document.body.appendChild(heart);
+
+  setTimeout(()=>{
+    heart.remove();
+  },6000);
+}
+
+setInterval(createHeart,500);
+
+/* Sparkles */
+function createSparkle(){
+  const s=document.createElement("div");
+
+  s.classList.add("sparkle");
+
+  s.style.left=Math.random()*100+"vw";
+  s.style.bottom="0";
+
+  document.body.appendChild(s);
+
+  setTimeout(()=>{
+    s.remove();
+  },4000);
+}
+
+setInterval(createSparkle,200);
+
+/* Roses */
+function createRose(){
+
+  const rose=document.createElement("div");
+
+  rose.classList.add("rose");
+  rose.innerHTML="🌹";
+
+  rose.style.left=Math.random()*100+"vw";
+  rose.style.top="-50px";
+  rose.style.fontSize=(Math.random()*20+20)+"px";
+
+  rose.style.animation=
+  `fall ${Math.random()*5+5}s linear`;
+
+  document.body.appendChild(rose);
+
+  setTimeout(()=>{
+    rose.remove();
+  },10000);
+}
+
+setInterval(createRose,1200);
+
+</script>
+
+</body>
+</html>
+```
