@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LifeOS - Goals</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+<style>
+.container{
+  padding:20px;
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+
+.form{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:10px;
+}
+
+input, button{
+  padding:10px;
+  border-radius:10px;
+  border:none;
+}
+
+input{
+  background:rgba(255,255,255,0.05);
+  color:white;
+  outline:none;
+}
+
+.goal-list{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:15px;
+}
+
+.goal-card{
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.08);
+  padding:15px;
+  border-radius:15px;
+  backdrop-filter: blur(10px);
+  transition:0.3s;
+}
+
+.goal-card:hover{
+  transform:translateY(-5px);
+}
+
+.circle{
+  width:90px;
+  height:90px;
+  border-radius:50%;
+  margin:auto;
+  background:conic-gradient(#6c8cff 0deg, #222 0deg);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+}
+
+.circle::after{
+  content:"";
+  position:absolute;
+  width:70px;
+  height:70px;
+  background:#0b0f17;
+  border-radius:50%;
+}
+
+.circle span{
+  position:relative;
+  z-index:2;
+  font-size:14px;
+}
+
+.actions{
+  display:flex;
+  justify-content:space-between;
+  margin-top:10px;
+}
+
+.small-btn{
+  padding:6px 10px;
+  font-size:12px;
+}
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+<h2>🎯 Goals Tracker</h2>
+
+<!-- ADD GOAL FORM -->
+<div class="card form">
+  <input type="text" id="title" placeholder="Goal Title">
+  <input type="number" id="target" placeholder="Target % (0-100)">
+  <button onclick="addGoal()">Add Goal</button>
+</div>
+
+<!-- GOAL LIST -->
+<div class="goal-list" id="goalList"></div>
+
+</div>
+
+<script>
+
+let goals = JSON.parse(localStorage.getItem("goals")) || [];
+
+// SAVE
+function saveGoals(){
+  localStorage.setItem("goals", JSON.stringify(goals));
+}
+
+// ADD GOAL
+function addGoal(){
+  let title = document.getElementById("title").value;
+  let target = parseInt(document.getElementById("target").value);
+
+  if(!title || isNaN(target)) return;
+
+  goals.push({
+    id: Date.now(),
+    title,
+    progress: 0,
+    target
+  });
+
+  saveGoals();
+  renderGoals();
+}
+
+// UPDATE PROGRESS
+function increaseProgress(id){
+  let goal = goals.find(g => g.id === id);
+  if(!goal) return;
+
+  goal.progress += 10;
+  if(goal.progress > 100) goal.progress = 100;
+
+  saveGoals();
+  renderGoals();
+}
+
+// DELETE
+function deleteGoal(id){
+  goals = goals.filter(g => g.id !== id);
+  saveGoals();
+  renderGoals();
+}
+
+// RENDER
+function renderGoals(){
+  let list = document.getElementById("goalList");
+  list.innerHTML = "";
+
+  goals.forEach(goal => {
+
+    let angle = goal.progress * 3.6;
+
+    list.innerHTML += `
+      <div class="goal-card">
+
+        <h3>${goal.title}</h3>
+
+        <div class="circle" 
+          style="background:conic-gradient(#6c8cff ${angle}deg, #222 0deg)">
+          <span>${goal.progress}%</span>
+        </div>
+
+        <p>Target: ${goal.target}%</p>
+
+        <div class="actions">
+          <button class="small-btn" onclick="increaseProgress(${goal.id})">+ Progress</button>
+          <button class="small-btn" onclick="deleteGoal(${goal.id})">Delete</button>
+        </div>
+
+      </div>
+    `;
+  });
+}
+
+// INIT
+renderGoals();
+
+</script>
+
+</body>
+</html>
