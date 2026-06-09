@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>LifeOS Dashboard</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* Basic reset */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Inter', sans-serif;
+}
+
+body{
+  background:#0b0f17;
+  color:#fff;
+  display:flex;
+  min-height:100vh;
+}
+
+/* Sidebar */
+.sidebar{
+  width:260px;
+  background:#0f1624;
+  padding:20px;
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+
+.logo{
+  font-size:20px;
+  font-weight:700;
+  color:#6c8cff;
+}
+
+.nav a{
+  display:block;
+  padding:10px;
+  color:#aaa;
+  text-decoration:none;
+  border-radius:8px;
+  transition:0.3s;
+}
+
+.nav a:hover{
+  background:#1a2440;
+  color:#fff;
+}
+
+/* Main */
+.main{
+  flex:1;
+  padding:20px;
+}
+
+/* Top bar */
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:20px;
+}
+
+.card{
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:16px;
+  padding:20px;
+  backdrop-filter: blur(10px);
+}
+
+/* Grid */
+.grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap:20px;
+}
+
+/* Circular Progress */
+.circle-wrap{
+  width:120px;
+  height:120px;
+  border-radius:50%;
+  background: conic-gradient(#6c8cff 0deg, #1a2440 0deg);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin:auto;
+  position:relative;
+}
+
+.circle-inner{
+  width:90px;
+  height:90px;
+  background:#0b0f17;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:18px;
+  font-weight:700;
+}
+
+/* Missions */
+.mission{
+  display:flex;
+  justify-content:space-between;
+  padding:10px;
+  border-bottom:1px solid rgba(255,255,255,0.05);
+}
+
+button{
+  background:#6c8cff;
+  border:none;
+  padding:8px 12px;
+  border-radius:8px;
+  color:#fff;
+  cursor:pointer;
+}
+
+button:hover{
+  opacity:0.8;
+}
+
+/* Mobile */
+@media(max-width:768px){
+  .sidebar{
+    display:none;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Sidebar -->
+<div class="sidebar">
+  <div class="logo">⚡ LifeOS</div>
+
+  <div class="nav">
+    <a href="index.html">Dashboard</a>
+    <a href="goals.html">Goals</a>
+    <a href="habits.html">Habits</a>
+    <a href="tasks.html">Tasks</a>
+    <a href="journal.html">Journal</a>
+    <a href="finance.html">Finance</a>
+    <a href="vision.html">Vision</a>
+    <a href="analytics.html">Analytics</a>
+    <a href="warmode.html">War Mode</a>
+  </div>
+</div>
+
+<!-- Main -->
+<div class="main">
+
+  <div class="topbar">
+    <h2>🔥 Welcome Back</h2>
+    <button onclick="increaseXP()">+ Gain XP</button>
+  </div>
+
+  <!-- Stats -->
+  <div class="grid">
+
+    <!-- Circular Progress -->
+    <div class="card">
+      <h3>Overall Life Progress</h3>
+      <div class="circle-wrap" id="circle">
+        <div class="circle-inner" id="percent">0%</div>
+      </div>
+    </div>
+
+    <!-- XP -->
+    <div class="card">
+      <h3>XP Level</h3>
+      <h1 id="level">Level 1</h1>
+      <p>XP: <span id="xp">0</span>/100</p>
+    </div>
+
+    <!-- Streak -->
+    <div class="card">
+      <h3>🔥 Streak</h3>
+      <h1 id="streak">0 Days</h1>
+    </div>
+
+  </div>
+
+  <br/>
+
+  <!-- Missions -->
+  <div class="card">
+    <h3>🎯 Today's Missions</h3>
+
+    <div class="mission">
+      <span>Workout</span>
+      <button onclick="completeTask(this)">Done</button>
+    </div>
+
+    <div class="mission">
+      <span>Study 3 Hours</span>
+      <button onclick="completeTask(this)">Done</button>
+    </div>
+
+    <div class="mission">
+      <span>Business Outreach</span>
+      <button onclick="completeTask(this)">Done</button>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+let xp = 0;
+let level = 1;
+let streak = 0;
+let progress = 0;
+
+// Load
+function updateCircle(){
+  let circle = document.getElementById("circle");
+  let percent = document.getElementById("percent");
+
+  circle.style.background = `conic-gradient(#6c8cff ${progress*3.6}deg, #1a2440 0deg)`;
+  percent.innerText = progress + "%";
+}
+
+function increaseXP(){
+  xp += 20;
+
+  if(xp >= 100){
+    xp = 0;
+    level++;
+  }
+
+  document.getElementById("xp").innerText = xp;
+  document.getElementById("level").innerText = "Level " + level;
+
+  progress = Math.min(100, progress + 5);
+  updateCircle();
+}
+
+function completeTask(btn){
+  btn.innerText = "Done ✔";
+  btn.disabled = true;
+
+  streak++;
+  document.getElementById("streak").innerText = streak + " Days";
+
+  progress = Math.min(100, progress + 3);
+  updateCircle();
+
+  xp += 10;
+  if(xp >= 100){
+    xp = 0;
+    level++;
+  }
+
+  document.getElementById("xp").innerText = xp;
+  document.getElementById("level").innerText = "Level " + level;
+}
+
+// init
+updateCircle();
+</script>
+
+</body>
+      </html>
