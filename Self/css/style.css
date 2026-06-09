@@ -1,0 +1,254 @@
+/* =========================
+   LIFEOS GLOBAL STYLES
+   Premium SaaS + Glass UI
+========================= */
+
+:root{
+  --bg:#0b0f17;
+  --card:rgba(255,255,255,0.06);
+  --border:rgba(255,255,255,0.10);
+  --primary:#6c8cff;
+  --green:#2ee59d;
+  --red:#ff4d4d;
+  --text:#ffffff;
+  --muted:#aab2c0;
+}
+
+/* RESET */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Inter', sans-serif;
+}
+
+body{
+  background:var(--bg);
+  color:var(--text);
+  overflow-x:hidden;
+}
+
+/* =========================
+   GLASS CARD SYSTEM
+========================= */
+
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:20px;
+  backdrop-filter: blur(14px);
+  box-shadow:0 10px 40px rgba(0,0,0,0.3);
+  transition:0.3s ease;
+}
+
+.card:hover{
+  transform:translateY(-5px);
+  border-color:rgba(108,140,255,0.5);
+}
+
+/* =========================
+   BUTTONS
+========================= */
+
+button{
+  background:linear-gradient(135deg, #6c8cff, #8f6cff);
+  border:none;
+  padding:10px 14px;
+  border-radius:10px;
+  color:#fff;
+  cursor:pointer;
+  font-weight:600;
+  transition:0.3s;
+  box-shadow:0 8px 20px rgba(108,140,255,0.3);
+}
+
+button:hover{
+  transform:scale(1.05);
+  box-shadow:0 10px 25px rgba(108,140,255,0.5);
+}
+
+button:disabled{
+  background:#2a2f3a;
+  cursor:not-allowed;
+  transform:none;
+  box-shadow:none;
+}
+
+/* =========================
+   SIDEBAR
+========================= */
+
+.sidebar{
+  width:260px;
+  background:rgba(15,22,36,0.8);
+  border-right:1px solid var(--border);
+  backdrop-filter: blur(15px);
+  padding:20px;
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+
+.sidebar .logo{
+  font-size:22px;
+  font-weight:700;
+  color:var(--primary);
+  letter-spacing:1px;
+}
+
+.sidebar a{
+  display:block;
+  padding:12px;
+  color:var(--muted);
+  text-decoration:none;
+  border-radius:10px;
+  transition:0.3s;
+}
+
+.sidebar a:hover{
+  background:rgba(108,140,255,0.15);
+  color:#fff;
+  transform:translateX(5px);
+}
+
+/* =========================
+   TOPBAR
+========================= */
+
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:20px;
+}
+
+/* =========================
+   GRID SYSTEM
+========================= */
+
+.grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap:20px;
+}
+
+/* =========================
+   CIRCULAR PROGRESS (BASE)
+========================= */
+
+.circle-wrap{
+  width:140px;
+  height:140px;
+  border-radius:50%;
+  background:conic-gradient(var(--primary) 0deg, #1a2233 0deg);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin:auto;
+  position:relative;
+  transition:0.4s ease;
+  box-shadow:0 0 30px rgba(108,140,255,0.2);
+}
+
+.circle-wrap::after{
+  content:"";
+  position:absolute;
+  width:110px;
+  height:110px;
+  background:var(--bg);
+  border-radius:50%;
+}
+
+.circle-inner{
+  position:relative;
+  z-index:2;
+  font-size:20px;
+  font-weight:700;
+  color:#fff;
+}
+
+/* =========================
+   TEXT STYLES
+========================= */
+
+h1,h2,h3{
+  font-weight:700;
+}
+
+p{
+  color:var(--muted);
+}
+
+/* =========================
+   MISSIONS
+========================= */
+
+.mission{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:12px;
+  border-bottom:1px solid rgba(255,255,255,0.05);
+  transition:0.3s;
+}
+
+.mission:hover{
+  background:rgba(255,255,255,0.03);
+  border-radius:10px;
+}
+
+/* =========================
+   ANIMATIONS
+========================= */
+
+@keyframes fadeIn{
+  from{opacity:0; transform:translateY(20px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+.card{
+  animation:fadeIn 0.6s ease;
+}
+
+@keyframes pulse{
+  0%{box-shadow:0 0 10px rgba(108,140,255,0.3);}
+  50%{box-shadow:0 0 25px rgba(108,140,255,0.6);}
+  100%{box-shadow:0 0 10px rgba(108,140,255,0.3);}
+}
+
+.circle-wrap{
+  animation:pulse 3s infinite;
+}
+
+/* =========================
+   SCROLLBAR
+========================= */
+
+::-webkit-scrollbar{
+  width:8px;
+}
+
+::-webkit-scrollbar-thumb{
+  background:var(--primary);
+  border-radius:10px;
+}
+
+/* =========================
+   MOBILE RESPONSIVE
+========================= */
+
+@media(max-width:768px){
+  .sidebar{
+    display:none;
+  }
+
+  .grid{
+    grid-template-columns:1fr;
+  }
+
+  .circle-wrap{
+    width:120px;
+    height:120px;
+  }
+}
