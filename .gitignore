@@ -90,3 +90,4 @@ credentials.json
 *.key
 .credentials
 archive.zip
+frontend/node_modules/.cache/default-development/9.pack
