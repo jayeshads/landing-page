@@ -1,56 +1,50 @@
-import { useEffect } from "react";
 import "@/App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import axios from "axios";
-import { HOME } from "@/constants/testIds";
+import { Toaster } from "@/components/ui/sonner";
+import { AuthProvider } from "@/contexts/AuthContext";
+import ProtectedRoute from "@/components/ProtectedRoute";
+import Landing from "@/pages/Landing";
+import Login from "@/pages/Login";
+import Register from "@/pages/Register";
+import Dashboard from "@/pages/Dashboard";
+import Campaigns from "@/pages/Campaigns";
+import Logs from "@/pages/Logs";
+import Rules from "@/pages/Rules";
+import Integration from "@/pages/Integration";
+import Settings from "@/pages/Settings";
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-const API = `${BACKEND_URL}/api`;
-
-const Home = () => {
-  const helloWorldApi = async () => {
-    try {
-      const response = await axios.get(`${API}/`);
-      console.log(response.data.message);
-    } catch (e) {
-      console.error(e, `errored out requesting / api`);
-    }
-  };
-
-  useEffect(() => {
-    helloWorldApi();
-  }, []);
-
-  return (
-    <div>
-      <header className="App-header">
-        <a
-          data-testid={HOME.emergentLink}
-          className="App-link"
-          href="https://emergent.sh"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <img src="https://avatars.githubusercontent.com/in/1201222?s=120&u=2686cf91179bbafbc7a71bfbc43004cf9ae1acea&v=4" />
-        </a>
-        <p className="mt-5">Building something incredible ~!</p>
-      </header>
-    </div>
-  );
-};
-
-function App() {
-  return (
-    <div className="App">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />}>
-            <Route index element={<Home />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
-    </div>
-  );
+export default function App() {
+    return (
+        <div className="App">
+            <BrowserRouter>
+                <AuthProvider>
+                    <Routes>
+                        <Route path="/" element={<Landing />} />
+                        <Route path="/login" element={<Login />} />
+                        <Route path="/register" element={<Register />} />
+                        <Route path="/app" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+                        <Route path="/app/campaigns" element={<ProtectedRoute><Campaigns /></ProtectedRoute>} />
+                        <Route path="/app/logs" element={<ProtectedRoute><Logs /></ProtectedRoute>} />
+                        <Route path="/app/rules" element={<ProtectedRoute><Rules /></ProtectedRoute>} />
+                        <Route path="/app/integration" element={<ProtectedRoute><Integration /></ProtectedRoute>} />
+                        <Route path="/app/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
+                    </Routes>
+                    <Toaster
+                        theme="dark"
+                        position="bottom-right"
+                        toastOptions={{
+                            style: {
+                                background: "#0a0a0c",
+                                color: "#f9fafb",
+                                border: "1px solid #27272a",
+                                borderRadius: 0,
+                                fontFamily: "IBM Plex Mono, monospace",
+                                fontSize: "12px",
+                            },
+                        }}
+                    />
+                </AuthProvider>
+            </BrowserRouter>
+        </div>
+    );
 }
-
-export default App;
