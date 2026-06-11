@@ -1,10 +1,14 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import AppLayout from "@/components/AppLayout";
 import { Button } from "@/components/ui/button";
 import api from "@/lib/api";
 import { Activity, Bot, Globe2, Shield, Target, TrendingUp } from "lucide-react";
 import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+
+const AXIS_TICK = { fontSize: 10, fontFamily: "IBM Plex Mono" };
+const TOOLTIP_STYLE = { background: "#0a0a0c", border: "1px solid #27272a", borderRadius: 0, fontFamily: "IBM Plex Mono" };
+const TOOLTIP_LABEL_STYLE = { color: "#9ca3af" };
 
 function Stat({ label, value, icon: Icon, accent }) {
     return (
@@ -77,12 +81,9 @@ export default function Dashboard() {
                                     </linearGradient>
                                 </defs>
                                 <CartesianGrid stroke="#1f1f22" vertical={false} />
-                                <XAxis dataKey="hour" stroke="#52525b" tick={{ fontSize: 10, fontFamily: "IBM Plex Mono" }} />
-                                <YAxis stroke="#52525b" tick={{ fontSize: 10, fontFamily: "IBM Plex Mono" }} />
-                                <Tooltip
-                                    contentStyle={{ background: "#0a0a0c", border: "1px solid #27272a", borderRadius: 0, fontFamily: "IBM Plex Mono" }}
-                                    labelStyle={{ color: "#9ca3af" }}
-                                />
+                                <XAxis dataKey="hour" stroke="#52525b" tick={AXIS_TICK} />
+                                <YAxis stroke="#52525b" tick={AXIS_TICK} />
+                                <Tooltip contentStyle={TOOLTIP_STYLE} labelStyle={TOOLTIP_LABEL_STYLE} />
                                 <Area type="monotone" dataKey="money" stroke="#00ff66" strokeWidth={2} fill="url(#money-grad)" />
                                 <Area type="monotone" dataKey="safe" stroke="#ff3b30" strokeWidth={2} fill="url(#safe-grad)" />
                             </AreaChart>

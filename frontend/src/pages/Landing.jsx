@@ -126,7 +126,7 @@ export default function Landing() {
             <section className="border-y border-white/10 bg-black/60 overflow-hidden">
                 <div className="ticker-track flex gap-12 py-3 whitespace-nowrap font-mono text-xs text-gray-500">
                     {Array.from({ length: 2 }).map((_, i) => (
-                        <div key={i} className="flex gap-12">
+                        <div key={`ticker-${i}`} className="flex gap-12">
                             <span>GOOGLEBOT // BLOCKED</span>
                             <span>FACEBOOKEXTERNALHIT // BLOCKED</span>
                             <span>AHREFSBOT // BLOCKED</span>

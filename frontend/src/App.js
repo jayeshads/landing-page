@@ -13,6 +13,17 @@ import Rules from "@/pages/Rules";
 import Integration from "@/pages/Integration";
 import Settings from "@/pages/Settings";
 
+const TOAST_OPTIONS = {
+    style: {
+        background: "#0a0a0c",
+        color: "#f9fafb",
+        border: "1px solid #27272a",
+        borderRadius: 0,
+        fontFamily: "IBM Plex Mono, monospace",
+        fontSize: "12px",
+    },
+};
+
 export default function App() {
     return (
         <div className="App">
@@ -29,20 +40,7 @@ export default function App() {
                         <Route path="/app/integration" element={<ProtectedRoute><Integration /></ProtectedRoute>} />
                         <Route path="/app/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
                     </Routes>
-                    <Toaster
-                        theme="dark"
-                        position="bottom-right"
-                        toastOptions={{
-                            style: {
-                                background: "#0a0a0c",
-                                color: "#f9fafb",
-                                border: "1px solid #27272a",
-                                borderRadius: 0,
-                                fontFamily: "IBM Plex Mono, monospace",
-                                fontSize: "12px",
-                            },
-                        }}
-                    />
+                    <Toaster theme="dark" position="bottom-right" toastOptions={TOAST_OPTIONS} />
                 </AuthProvider>
             </BrowserRouter>
         </div>

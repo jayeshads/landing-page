@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import AppLayout from "@/components/AppLayout";
 import api from "@/lib/api";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -18,7 +18,15 @@ function StatBox({ icon: Icon, label, count, color }) {
 
 export default function Rules() {
     const [rules, setRules] = useState(null);
-    useEffect(() => { api.get("/rules").then((r) => setRules(r.data)); }, []);
+    const fetchRules = useCallback(async () => {
+        try {
+            const r = await api.get("/rules");
+            setRules(r.data);
+        } catch (e) {
+            console.warn("rules fetch failed", e?.message);
+        }
+    }, []);
+    useEffect(() => { fetchRules(); }, [fetchRules]);
 
     if (!rules) {
         return (

@@ -235,9 +235,12 @@ def country_from_ip(ip: str) -> str:
     For a production GeoIP we'd plug MaxMind here, but per user choice this is
     a built-in static heuristic based on a few well-known prefixes.
     """
+    addr = None
     try:
         addr = ipaddress.ip_address(ip)
     except ValueError:
+        return "XX"
+    if addr is None:
         return "XX"
     # Quick crude mapping (sample) — extend or replace with MMDB later.
     mapping = [
@@ -303,11 +306,43 @@ def get_client_ip(request: Request) -> str:
     return request.client.host if request.client else "0.0.0.0"
 
 
+def _check_filter_violation(ua: str, ua_l: str, ip: str, referrer: str, country: str,
+                            device: str, os_name: str, f: dict) -> Optional[str]:
+    """Return a violation reason string or None if the request passes all filters."""
+    if f.get("block_empty_ua", True) and not ua.strip():
+        return "empty_user_agent"
+    if f.get("block_known_bots", True) and any(p in ua_l for p in KNOWN_BOT_UA_PATTERNS):
+        return "known_bot_ua"
+    if f.get("block_headless", True) and any(h in ua_l for h in HEADLESS_HINTS):
+        return "headless_browser"
+    if f.get("block_datacenter", True) and ip_in_datacenter(ip):
+        return "datacenter_ip"
+    if f.get("require_referrer") and not referrer:
+        return "missing_referrer"
+    blocked_refs = [b.lower() for b in (f.get("blocked_referrers") or []) if b]
+    if any(b in referrer.lower() for b in blocked_refs):
+        return "blocked_referrer"
+    if any(r in referrer.lower() for r in INSPECTION_REFERRERS):
+        return "inspection_referrer"
+    allowed_countries = [c.upper() for c in (f.get("allowed_countries") or [])]
+    if allowed_countries and country not in allowed_countries:
+        return "country_not_allowed"
+    blocked_countries = [c.upper() for c in (f.get("blocked_countries") or [])]
+    if blocked_countries and country in blocked_countries:
+        return "country_blocked"
+    allowed_devices = f.get("allowed_devices") or []
+    if allowed_devices and device not in allowed_devices:
+        return "device_not_allowed"
+    allowed_os = [o.lower() for o in (f.get("allowed_os") or [])]
+    if allowed_os and os_name not in allowed_os:
+        return "os_not_allowed"
+    return None
+
+
 def evaluate_request(request: Request, filters: dict) -> dict:
     """Return decision dict: {decision, reason, ip, ua, country, device, os, is_bot}."""
     ip = get_client_ip(request)
     ua = request.headers.get("user-agent", "") or ""
-    ua_l = ua.lower()
     referrer = request.headers.get("referer", "") or ""
     lang = request.headers.get("accept-language", "")
 
@@ -315,39 +350,9 @@ def evaluate_request(request: Request, filters: dict) -> dict:
     device = detect_device(ua)
     os_name = detect_os(ua)
 
-    reason = "passed"
-    is_bot = False
-
-    f = filters or {}
-    if f.get("block_empty_ua", True) and not ua.strip():
-        is_bot, reason = True, "empty_user_agent"
-    elif f.get("block_known_bots", True) and any(p in ua_l for p in KNOWN_BOT_UA_PATTERNS):
-        is_bot, reason = True, "known_bot_ua"
-    elif f.get("block_headless", True) and any(h in ua_l for h in HEADLESS_HINTS):
-        is_bot, reason = True, "headless_browser"
-    elif f.get("block_datacenter", True) and ip_in_datacenter(ip):
-        is_bot, reason = True, "datacenter_ip"
-    elif f.get("require_referrer") and not referrer:
-        is_bot, reason = True, "missing_referrer"
-    elif any(b.lower() in referrer.lower() for b in (f.get("blocked_referrers") or []) if b):
-        is_bot, reason = True, "blocked_referrer"
-    elif any(r in referrer.lower() for r in INSPECTION_REFERRERS):
-        is_bot, reason = True, "inspection_referrer"
-    else:
-        allowed_countries = [c.upper() for c in (f.get("allowed_countries") or [])]
-        blocked_countries = [c.upper() for c in (f.get("blocked_countries") or [])]
-        if allowed_countries and country not in allowed_countries:
-            is_bot, reason = True, "country_not_allowed"
-        elif blocked_countries and country in blocked_countries:
-            is_bot, reason = True, "country_blocked"
-        else:
-            allowed_devices = f.get("allowed_devices") or []
-            if allowed_devices and device not in allowed_devices:
-                is_bot, reason = True, "device_not_allowed"
-            else:
-                allowed_os = [o.lower() for o in (f.get("allowed_os") or [])]
-                if allowed_os and os_name not in allowed_os:
-                    is_bot, reason = True, "os_not_allowed"
+    violation = _check_filter_violation(ua, ua.lower(), ip, referrer, country, device, os_name, filters or {})
+    is_bot = violation is not None
+    reason = violation or "passed"
 
     return {
         "ip": ip, "ua": ua, "country": country, "device": device, "os": os_name,

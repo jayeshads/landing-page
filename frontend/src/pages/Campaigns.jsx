@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import AppLayout from "@/components/AppLayout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -40,9 +40,16 @@ export default function Campaigns() {
     const [editingId, setEditingId] = useState(null);
     const [form, setForm] = useState(emptyForm);
 
-    const load = () => api.get("/campaigns").then((r) => setItems(r.data)).catch(() => {});
+    const load = useCallback(async () => {
+        try {
+            const r = await api.get("/campaigns");
+            setItems(r.data);
+        } catch (e) {
+            console.warn("campaigns list failed", e?.message);
+        }
+    }, []);
 
-    useEffect(() => { load(); }, []);
+    useEffect(() => { load(); }, [load]);
 
     const resetForm = () => { setForm(emptyForm); setEditingId(null); };
 

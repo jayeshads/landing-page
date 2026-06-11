@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import AppLayout from "@/components/AppLayout";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -14,7 +14,7 @@ export default function Logs() {
     const [country, setCountry] = useState("");
     const [loading, setLoading] = useState(false);
 
-    const load = async () => {
+    const load = useCallback(async () => {
         setLoading(true);
         try {
             let data = [];
@@ -37,11 +37,19 @@ export default function Logs() {
         } finally {
             setLoading(false);
         }
-    };
+    }, [campaignId, decision, country]);
 
-    useEffect(() => { api.get("/campaigns").then((r) => setCampaigns(r.data)); }, []);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    useEffect(() => { load(); }, [campaignId, decision, country]);
+    const loadCampaigns = useCallback(async () => {
+        try {
+            const r = await api.get("/campaigns");
+            setCampaigns(r.data);
+        } catch (e) {
+            console.warn("logs campaign list failed", e?.message);
+        }
+    }, []);
+
+    useEffect(() => { loadCampaigns(); }, [loadCampaigns]);
+    useEffect(() => { load(); }, [load]);
 
     return (
         <AppLayout
@@ -104,7 +112,7 @@ export default function Logs() {
                     </div>
                 )}
                 {logs.map((l, i) => (
-                    <div key={i} data-testid={`log-row-${i}`} className="grid grid-cols-12 gap-2 px-5 py-1.5 text-[11px] font-mono items-center min-w-[1000px] hover:bg-white/5 border-b border-white/5 last:border-0">
+                    <div key={`${l.ts}-${l.ip}-${i}`} data-testid={`log-row-${i}`} className="grid grid-cols-12 gap-2 px-5 py-1.5 text-[11px] font-mono items-center min-w-[1000px] hover:bg-white/5 border-b border-white/5 last:border-0">
                         <div className="col-span-2 text-gray-400">{new Date(l.ts).toLocaleString()}</div>
                         <div className="col-span-2 text-gray-200">{l.ip}</div>
                         <div className="col-span-1 text-gray-200">{l.country || "XX"}</div>

@@ -1,4 +1,4 @@
-import { createContext, useCallback, useContext, useEffect, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import api, { formatApiErrorDetail } from "@/lib/api";
 
 const AuthContext = createContext(null);
@@ -49,17 +49,18 @@ export function AuthProvider({ children }) {
     const logout = async () => {
         try {
             await api.post("/auth/logout");
-        } catch {
-            // ignore
+        } catch (e) {
+            console.warn("logout request failed; clearing client state anyway", e?.message);
         }
         setUser(false);
     };
 
-    return (
-        <AuthContext.Provider value={{ user, error, login, register, logout, refresh }}>
-            {children}
-        </AuthContext.Provider>
+    const value = useMemo(
+        () => ({ user, error, login, register, logout, refresh }),
+        [user, error, refresh],
     );
+
+    return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
 
 export const useAuth = () => useContext(AuthContext);

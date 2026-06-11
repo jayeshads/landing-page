@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import AppLayout from "@/components/AppLayout";
 import api, { API_BASE } from "@/lib/api";
 import { Button } from "@/components/ui/button";
@@ -10,12 +10,16 @@ export default function Integration() {
     const [items, setItems] = useState([]);
     const [selected, setSelected] = useState("");
 
-    useEffect(() => {
-        api.get("/campaigns").then((r) => {
+    const loadCampaigns = useCallback(async () => {
+        try {
+            const r = await api.get("/campaigns");
             setItems(r.data);
             if (r.data[0]) setSelected(r.data[0].id);
-        });
+        } catch (e) {
+            console.warn("integration list failed", e?.message);
+        }
     }, []);
+    useEffect(() => { loadCampaigns(); }, [loadCampaigns]);
 
     const cloakUrl = selected ? `${API_BASE}/cloak/${selected}` : `${API_BASE}/cloak/<CAMPAIGN_ID>`;
     const jsonUrl = `${cloakUrl}?mode=json`;
