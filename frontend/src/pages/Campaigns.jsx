@@ -313,11 +313,4 @@ function ToggleRow({ label, v, on, testid }) {
         </div>
     );
 }
-estid }) {
-    return (
-        <div className="flex items-center justify-between border border-white/10 px-3 py-2">
-            <span className="text-gray-300">{label}</span>
-            <Switch checked={v} onCheckedChange={on} data-testid={testid} />
-        </div>
-    );
-}
+

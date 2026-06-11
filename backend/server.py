@@ -310,17 +310,21 @@ def get_client_ip(request: Request) -> str:
     return request.client.host if request.client else "0.0.0.0"
 
 
-def _check_filter_violation(ua: str, ua_l: str, ip: str, referrer: str, country: str,
-                            device: str, os_name: str, f: dict) -> Optional[str]:
-    """Return a violation reason string or None if the request passes all filters."""
+def _check_ua_violations(ctx: dict, f: dict) -> Optional[str]:
+    ua, ua_l = ctx["ua"], ctx["ua_l"]
     if f.get("block_empty_ua", True) and not ua.strip():
         return "empty_user_agent"
     if f.get("block_known_bots", True) and any(p in ua_l for p in KNOWN_BOT_UA_PATTERNS):
         return "known_bot_ua"
     if f.get("block_headless", True) and any(h in ua_l for h in HEADLESS_HINTS):
         return "headless_browser"
-    if f.get("block_datacenter", True) and ip_in_datacenter(ip):
+    return None
+
+
+def _check_network_violations(ctx: dict, f: dict) -> Optional[str]:
+    if f.get("block_datacenter", True) and ip_in_datacenter(ctx["ip"]):
         return "datacenter_ip"
+    referrer = ctx["referrer"]
     if f.get("require_referrer") and not referrer:
         return "missing_referrer"
     blocked_refs = [b.lower() for b in (f.get("blocked_referrers") or []) if b]
@@ -328,18 +332,31 @@ def _check_filter_violation(ua: str, ua_l: str, ip: str, referrer: str, country:
         return "blocked_referrer"
     if any(r in referrer.lower() for r in INSPECTION_REFERRERS):
         return "inspection_referrer"
+    return None
+
+
+def _check_targeting_violations(ctx: dict, f: dict) -> Optional[str]:
     allowed_countries = [c.upper() for c in (f.get("allowed_countries") or [])]
-    if allowed_countries and country not in allowed_countries:
+    if allowed_countries and ctx["country"] not in allowed_countries:
         return "country_not_allowed"
     blocked_countries = [c.upper() for c in (f.get("blocked_countries") or [])]
-    if blocked_countries and country in blocked_countries:
+    if blocked_countries and ctx["country"] in blocked_countries:
         return "country_blocked"
     allowed_devices = f.get("allowed_devices") or []
-    if allowed_devices and device not in allowed_devices:
+    if allowed_devices and ctx["device"] not in allowed_devices:
         return "device_not_allowed"
     allowed_os = [o.lower() for o in (f.get("allowed_os") or [])]
-    if allowed_os and os_name not in allowed_os:
+    if allowed_os and ctx["os_name"] not in allowed_os:
         return "os_not_allowed"
+    return None
+
+
+def _check_filter_violation(ctx: dict, f: dict) -> Optional[str]:
+    """Run all filter checks and return the first violation reason, or None."""
+    for check in (_check_ua_violations, _check_network_violations, _check_targeting_violations):
+        reason = check(ctx, f)
+        if reason is not None:
+            return reason
     return None
 
 
@@ -349,20 +366,20 @@ def evaluate_request(request: Request, filters: dict) -> dict:
     ua = request.headers.get("user-agent", "") or ""
     referrer = request.headers.get("referer", "") or ""
     lang = request.headers.get("accept-language", "")
-
     country = country_from_ip(ip)
     device = detect_device(ua)
     os_name = detect_os(ua)
 
-    violation = _check_filter_violation(ua, ua.lower(), ip, referrer, country, device, os_name, filters or {})
+    ctx = {"ip": ip, "ua": ua, "ua_l": ua.lower(), "referrer": referrer,
+           "country": country, "device": device, "os_name": os_name}
+    violation = _check_filter_violation(ctx, filters or {})
     is_bot = violation is not None
-    reason = violation or "passed"
 
     return {
         "ip": ip, "ua": ua, "country": country, "device": device, "os": os_name,
         "referrer": referrer, "language": lang,
         "decision": "safe" if is_bot else "money",
-        "reason": reason,
+        "reason": violation or "passed",
         "is_bot": is_bot,
     }
 
