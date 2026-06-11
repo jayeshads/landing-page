@@ -104,7 +104,7 @@ export default function Logs() {
                     </div>
                 )}
                 {logs.map((l, i) => (
-                    <div key={i} className="grid grid-cols-12 gap-2 px-5 py-1.5 text-[11px] font-mono items-center min-w-[1000px] hover:bg-white/5 border-b border-white/5 last:border-0">
+                    <div key={i} data-testid={`log-row-${i}`} className="grid grid-cols-12 gap-2 px-5 py-1.5 text-[11px] font-mono items-center min-w-[1000px] hover:bg-white/5 border-b border-white/5 last:border-0">
                         <div className="col-span-2 text-gray-400">{new Date(l.ts).toLocaleString()}</div>
                         <div className="col-span-2 text-gray-200">{l.ip}</div>
                         <div className="col-span-1 text-gray-200">{l.country || "XX"}</div>

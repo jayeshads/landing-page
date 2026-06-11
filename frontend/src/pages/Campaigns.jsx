@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Plus, Trash2, Pencil, Copy } from "lucide-react";
 import api, { API_BASE, formatApiErrorDetail } from "@/lib/api";
@@ -105,6 +105,9 @@ export default function Campaigns() {
                             <SheetTitle className="font-display text-2xl font-black tracking-tighter">
                                 {editingId ? "Edit campaign" : "Create campaign"}
                             </SheetTitle>
+                            <SheetDescription className="font-mono text-xs text-gray-500">
+                                Configure money / safe URLs and the filter pipeline that decides which is served.
+                            </SheetDescription>
                         </SheetHeader>
 
                         <div className="mt-6 space-y-5">
