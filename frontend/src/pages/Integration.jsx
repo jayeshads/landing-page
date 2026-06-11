@@ -21,8 +21,20 @@ export default function Integration() {
     }, []);
     useEffect(() => { loadCampaigns(); }, [loadCampaigns]);
 
-    const cloakUrl = selected ? `${API_BASE}/cloak/${selected}` : `${API_BASE}/cloak/<CAMPAIGN_ID>`;
-    const jsonUrl = `${cloakUrl}?mode=json`;
+    const selectedCampaign = items.find((c) => c.id === selected);
+    const buildDisplayUrl = (c) => {
+        if (c && c.custom_domain) {
+            const dom = c.custom_domain.replace(/\/+$/, "");
+            const path = (c.custom_path || `/go/${c.id}`).replace(/^\/?/, "/");
+            return `${dom}${path}`;
+        }
+        return c ? `${API_BASE}/cloak/${c.id}` : `${API_BASE}/cloak/<CAMPAIGN_ID>`;
+    };
+
+    const cloakUrl = buildDisplayUrl(selectedCampaign);
+    const backendUrl = selected ? `${API_BASE}/cloak/${selected}` : `${API_BASE}/cloak/<CAMPAIGN_ID>`;
+    const jsonUrl = `${backendUrl}?mode=json`;
+    const isBranded = !!selectedCampaign?.custom_domain;
     const jsSnippet = `<!-- CloakForge embed -->
 <script>
   (function(){
@@ -62,11 +74,20 @@ export default function Integration() {
                         </div>
                     </div>
 
-                    <CodeCard title="Cloak link (302 redirect)"
-                              subtitle="Drop this URL into your ad tracking template. Best one-hop option."
+                    <CodeCard title={isBranded ? "Branded cloak link (via your domain)" : "Cloak link (302 redirect)"}
+                              subtitle={isBranded
+                                ? `Shareable link rendered with your custom domain. Point ${selectedCampaign?.custom_domain} via DNS / reverse-proxy to the CloakForge backend to make it resolve.`
+                                : "Drop this URL into your ad tracking template. Best one-hop option."}
                               code={cloakUrl}
                               testid="integration-cloak-url"
                               onCopy={() => copy(cloakUrl, "Cloak URL")} />
+
+                    {isBranded && (
+                        <CodeCard title="Underlying backend endpoint"
+                                  subtitle="The real backend URL your custom domain should proxy / redirect to."
+                                  code={backendUrl}
+                                  testid="integration-backend-url"
+                                  onCopy={() => copy(backendUrl, "Backend URL")} /> )}
 
                     <CodeCard title="JSON decision endpoint"
                               subtitle="Use server-side to fetch the decision and render conditionally."

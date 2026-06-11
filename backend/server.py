@@ -201,6 +201,8 @@ class CampaignIn(BaseModel):
     safe_url: str
     status: Literal["active", "paused"] = "active"
     notes: Optional[str] = None
+    custom_domain: Optional[str] = None
+    custom_path: Optional[str] = None
     filters: CampaignFilters = Field(default_factory=CampaignFilters)
 
 
@@ -220,6 +222,8 @@ def doc_to_campaign(doc: dict) -> dict:
         "safe_url": doc["safe_url"],
         "status": doc.get("status", "active"),
         "notes": doc.get("notes"),
+        "custom_domain": doc.get("custom_domain"),
+        "custom_path": doc.get("custom_path"),
         "filters": doc.get("filters", CampaignFilters().model_dump()),
         "created_at": doc.get("created_at", datetime.now(timezone.utc).isoformat()),
         "stats": doc.get("stats", {"total": 0, "money": 0, "safe": 0}),

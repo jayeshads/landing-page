@@ -17,6 +17,8 @@ const emptyForm = {
     safe_url: "",
     status: "active",
     notes: "",
+    custom_domain: "",
+    custom_path: "",
     filters: {
         allowed_countries: [],
         blocked_countries: [],
@@ -62,6 +64,8 @@ export default function Campaigns() {
             safe_url: c.safe_url,
             status: c.status,
             notes: c.notes || "",
+            custom_domain: c.custom_domain || "",
+            custom_path: c.custom_path || "",
             filters: { ...emptyForm.filters, ...(c.filters || {}) },
         });
         setEditingId(c.id);
@@ -154,6 +158,27 @@ export default function Campaigns() {
                                         </SelectContent>
                                     </Select>
                                 </div>
+                            </div>
+
+                            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                                <div className="space-y-2 sm:col-span-2">
+                                    <Label className="data-label">Custom domain (display only)</Label>
+                                    <Input data-testid="cmp-custom-domain-input" value={form.custom_domain}
+                                           placeholder="https://traffic.mybrand.com"
+                                           onChange={(e) => setForm({ ...form, custom_domain: e.target.value })}
+                                           className="bg-transparent border-white/20 rounded-none font-mono" />
+                                </div>
+                                <div className="space-y-2">
+                                    <Label className="data-label">Path</Label>
+                                    <Input data-testid="cmp-custom-path-input" value={form.custom_path}
+                                           placeholder="/go/abc123"
+                                           onChange={(e) => setForm({ ...form, custom_path: e.target.value })}
+                                           className="bg-transparent border-white/20 rounded-none font-mono" />
+                                </div>
+                                <p className="text-[10px] font-mono text-gray-500 sm:col-span-3 leading-relaxed">
+                                    Optional. Cosmetic — used only to render shareable links on the Integration page.
+                                    Point your DNS / reverse-proxy at our backend if you want the link to actually resolve.
+                                </p>
                             </div>
 
                             <div className="pt-2">
@@ -261,7 +286,7 @@ export default function Campaigns() {
                         <div className="col-span-1 text-xs">{c.stats?.total ?? 0}</div>
                         <div className="col-span-2 flex items-center justify-end gap-1">
                             <Button size="sm" variant="ghost" className="h-7 px-2 rounded-none text-gray-300 hover:bg-white/5"
-                                    data-testid={`cmp-copy-${c.id}`} onClick={() => copyLink(c.id)}>
+                                    data-testid={`cmp-copy-${c.id}`} onClick={() => copyLink(c)}>
                                 <Copy className="h-3.5 w-3.5" />
                             </Button>
                             <Button size="sm" variant="ghost" className="h-7 px-2 rounded-none text-gray-300 hover:bg-white/5"
@@ -281,6 +306,14 @@ export default function Campaigns() {
 }
 
 function ToggleRow({ label, v, on, testid }) {
+    return (
+        <div className="flex items-center justify-between border border-white/10 px-3 py-2">
+            <span className="text-gray-300">{label}</span>
+            <Switch checked={v} onCheckedChange={on} data-testid={testid} />
+        </div>
+    );
+}
+estid }) {
     return (
         <div className="flex items-center justify-between border border-white/10 px-3 py-2">
             <span className="text-gray-300">{label}</span>
