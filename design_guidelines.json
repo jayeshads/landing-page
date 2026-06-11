@@ -1,0 +1,106 @@
+{
+  "project_name": "Advance Cloaking Tool",
+  "theme_and_archetype": {
+    "theme": "dark",
+    "archetype": "Archetype 4 (Swiss & High-Contrast) / Terminal-Inspired",
+    "vibe": "Objective, rigid, functional, high-tech command center. Designed for security operators and affiliate marketers who value data density and raw performance over decorative fluff."
+  },
+  "colors": {
+    "background": {
+      "base": "#050505",
+      "surface": "#111113",
+      "surface_elevated": "#1A1A1D"
+    },
+    "text": {
+      "primary": "#F9FAFB",
+      "secondary": "#9CA3AF",
+      "muted": "#4B5563"
+    },
+    "primary": {
+      "DEFAULT": "#2563EB",
+      "hover": "#3B82F6",
+      "foreground": "#FFFFFF"
+    },
+    "data_states": {
+      "money_page": "#00FF66",
+      "safe_page": "#FBBF24",
+      "bot_blocked": "#FF3B30",
+      "real_user": "#00FF66",
+      "warning": "#F59E0B"
+    },
+    "borders": {
+      "default": "#27272A",
+      "focus": "#3B82F6"
+    }
+  },
+  "typography": {
+    "heading_font": "Chivo",
+    "body_font": "IBM Plex Mono",
+    "font_setup_instructions": "Import Chivo and IBM Plex Mono from Google Fonts. Apply Chivo to all h1-h6 tags. Apply IBM Plex Mono to body, tables, and data visualizations.",
+    "hierarchy": {
+      "h1": "text-5xl sm:text-6xl font-black tracking-tighter leading-none",
+      "h2": "text-3xl sm:text-4xl font-bold tracking-tight",
+      "h3": "text-xl sm:text-2xl font-semibold tracking-tight",
+      "h4": "text-lg sm:text-xl font-medium",
+      "body": "text-sm sm:text-base leading-relaxed tracking-normal",
+      "data_labels": "text-xs uppercase tracking-[0.2em] font-semibold text-gray-400"
+    }
+  },
+  "spacing_and_layout": {
+    "philosophy": "Strict grid hierarchy. High density for dashboard, generous for marketing.",
+    "marketing_layout": {
+      "grid": "grid-cols-1 md:grid-cols-12 gap-8 to gap-12",
+      "padding": "py-24 md:py-32",
+      "style": "Asymmetric, overlapping layers, bento-box features."
+    },
+    "dashboard_layout": {
+      "grid": "grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4",
+      "style": "Control Room style. Every pixel utilized. Stretch items to match neighbors."
+    },
+    "border_radius": "rounded-none or max rounded-sm (2px) to maintain the brutalist Swiss aesthetic."
+  },
+  "surfaces_and_micro_themes": {
+    "dashboard_cards": "Flat background (bg-[#111113]), 1px solid border (border-[#27272A]), NO shadow. On hover, border lightens to border-gray-600.",
+    "marketing_hero": "Dark overlay (bg-black/50) over hero image, ensuring high contrast for white text.",
+    "sticky_header": "Crystal Glassmorphism: bg-black/60 backdrop-blur-xl border-b border-white/10.",
+    "tables_and_logs": "Retro-Futurism touch: Use IBM Plex Mono for all table cells. Row hover effect should be a faint highlight (bg-white/5).",
+    "buttons": "Solid fill for primary (bg-blue-600 hover:bg-blue-500 text-white). Outline for secondary (border border-white/20 hover:bg-white/10). Sharp corners (rounded-none)."
+  },
+  "components": {
+    "forms": "Use Shadcn forms. Inputs should have bg-transparent, border-white/20, focus:border-blue-500 focus:ring-1 focus:ring-blue-500. No rounded corners.",
+    "campaign_drawer": "Use Shadcn Sheet (right side). Dark backdrop blur. Density high for form fields.",
+    "charts": "Recharts. Remove all axes lines, keep only horizontal grid lines (stroke: #27272A). Use neon green (#00FF66) for valid traffic line, neon red (#FF3B30) for blocked bots.",
+    "tables": "Shadcn Table. Dense padding (py-2). Use text-xs for log entries to simulate a terminal.",
+    "badges": "Square badges. Bot: bg-red-500/10 text-red-500 border border-red-500/20. Human: bg-green-500/10 text-green-500 border border-green-500/20."
+  },
+  "animations": {
+    "hover": "Fast transitions (150ms ease-in-out) for buttons and rows.",
+    "charts": "Draw-in animation for lines.",
+    "page_load": "Staggered fade-in (framer-motion) for dashboard widgets."
+  },
+  "media": {
+    "hero_background": {
+      "url": "https://images.pexels.com/photos/5380603/pexels-photo-5380603.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "description": "Dark room setup with code displayed on PC monitors. Use with a dark overlay for the marketing hero section."
+    },
+    "feature_server": {
+      "url": "https://images.pexels.com/photos/37730212/pexels-photo-37730212.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "description": "Server racks in a data center. Use for the infrastructure/reliability feature section."
+    },
+    "matrix_code": {
+      "url": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzNDR8MHwxfHNlYXJjaHwxfHxoYWNrZXIlMjB0ZXJtaW5hbCUyMGNvZGV8ZW58MHx8fHwxNzgxMTg1NTY1fDA&ixlib=rb-4.1.0&q=85",
+      "description": "Matrix code still. Use subtly behind the API/JS Snippet generation page."
+    }
+  },
+  "pages_instructions": {
+    "marketing_page": "Hero section with h1 and CTA. Trust grid showing 'Advanced Bot Detection', 'GeoIP Filtering', 'VPN/Proxy Blocking'. Use the 'feature_server' image in a bento box layout.",
+    "auth_pages": "Simple, centered card. Minimalist. JWT-based email/password login.",
+    "dashboard_overview": "Top row: 4 stat cards (Total Visitors, Bots Blocked, Real Users, Block Rate). Middle row: Main conversion/traffic chart (Recharts). Bottom: Recent campaigns list.",
+    "campaigns_list": "Table of campaigns. 'Create Campaign' button opens a Shadcn Sheet (Drawer) containing fields: name, money page URL, safe page URL, country/device/OS/language filters, and a toggle for VPN/proxy/datacenter blocking.",
+    "click_logs": "High-density table (Terminal look with IBM Plex Mono). Columns: Timestamp, IP, Country, UA, Device, ISP, Decision (Money/Safe badge), Reason.",
+    "bot_filter_rules": "List of active static rules and customizable block lists.",
+    "integration_snippet": "A page showing a code block (JS embed and cURL). Use a dark card with a copy-to-clipboard button.",
+    "settings": "Account settings, password reset, JWT token management."
+  },
+  "testing": "All interactive elements must include a data-testid attribute in kebab-case, role-based."
+}
