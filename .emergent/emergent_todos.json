@@ -1,0 +1,26 @@
+[
+  {
+    "content": "Create fallback implementation plan for frontend-only Meta Ads dashboard replica",
+    "status": "in_progress"
+  },
+  {
+    "content": "Inspect frontend project structure and existing dependencies",
+    "status": "pending"
+  },
+  {
+    "content": "Get design guidance focused on screenshot-faithful desktop recreation",
+    "status": "pending"
+  },
+  {
+    "content": "Implement single-page desktop UI with editable JSON-driven scrollable table",
+    "status": "pending"
+  },
+  {
+    "content": "Run lint/build sanity checks and fix issues",
+    "status": "pending"
+  },
+  {
+    "content": "Run testing agent for page load and table scroll verification",
+    "status": "pending"
+  }
+]
