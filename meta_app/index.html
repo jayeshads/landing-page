@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#191b22">
+<title>Campaign Manager</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #f4f5f7;
+    --card-bg: #ffffff;
+    --border: #ececef;
+    --statusbar: #191b22;
+    --text-main: #14161a;
+    --text-sub: #9297a0;
+    --green: #3fc655;
+    --pill-bg: #eceef1;
+    --red: #ff4d4f;
+    --blue: #2f6bff;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html,body{height:100%;}
+  body{
+    background:#d9dbe0;
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    padding:24px 0;
+    font-family:Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  .phone{
+    width:375px;
+    max-width:100vw;
+    height:812px;
+    max-height:100vh;
+    background:var(--bg);
+    border-radius:44px;
+    overflow:hidden;
+    box-shadow:0 30px 60px rgba(0,0,0,0.35);
+    display:flex;
+    flex-direction:column;
+    position:relative;
+    border:8px solid #111;
+  }
+  @media (max-width:400px){
+    body{padding:0;}
+    .phone{border-radius:0; border:none; height:100vh; width:100vw;}
+  }
+
+  .statusbar{
+    background:var(--statusbar);
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:10px 22px 8px;
+    font-size:15px;
+    font-weight:600;
+    flex-shrink:0;
+  }
+  .statusbar .left{display:flex; align-items:center; gap:8px;}
+  .call-pill{
+    background:var(--green);
+    color:#fff;
+    border-radius:20px;
+    padding:4px 14px 4px 10px;
+    font-size:13px;
+    display:flex;
+    align-items:center;
+    gap:6px;
+    font-weight:600;
+  }
+  .statusbar .right{display:flex; align-items:center; gap:6px; font-size:11px; font-weight:500;}
+  .battery{width:24px; height:12px; border:1px solid #fff; border-radius:3px; position:relative; display:inline-block;}
+  .battery::after{content:""; position:absolute; right:-4px; top:3px; width:3px; height:6px; background:#fff; border-radius:1px;}
+  .battery-fill{position:absolute; top:1px; left:1px; bottom:1px; width:30%; background:#fff; border-radius:1px;}
+
+  .header{
+    background:var(--card-bg);
+    padding:14px 18px 12px;
+    border-bottom:1px solid var(--border);
+    flex-shrink:0;
+  }
+  .header-top{display:flex; align-items:center; justify-content:space-between;}
+  .header-left{display:flex; align-items:center; gap:12px; min-width:0;}
+  .icon-circle{
+    width:38px; height:38px;
+    border-radius:50%;
+    background:#eef0f2;
+    display:flex; align-items:center; justify-content:center;
+    flex-shrink:0;
+    border:none;
+    cursor:pointer;
+  }
+  .title-block{display:flex; flex-direction:column; min-width:0;}
+  .title-row{display:flex; align-items:center; gap:6px;}
+  .title-row h1{
+    font-size:19px; font-weight:800; letter-spacing:0.3px; color:var(--text-main);
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:150px;
+  }
+  .badge{width:16px;height:16px; flex-shrink:0;}
+  .subtitle{display:flex; align-items:center; gap:5px; font-size:12.5px; color:var(--text-sub); margin-top:2px;}
+  .dot-gray{width:6px;height:6px; border-radius:50%; background:#c7cbd1; display:inline-block;}
+  .header-right{display:flex; align-items:center; gap:10px;}
+  .add-btn{
+    width:38px;height:38px; border-radius:50%; background:var(--green); color:#fff;
+    display:flex; align-items:center; justify-content:center; border:none; cursor:pointer;
+    box-shadow:0 2px 6px rgba(53,197,82,0.4);
+  }
+
+  .filters{display:flex; gap:10px; padding:14px 18px; background:var(--bg); flex-shrink:0;}
+  .filter-icon{width:44px;height:40px; background:var(--pill-bg); border-radius:12px; display:flex; align-items:center; justify-content:center; flex-shrink:0;}
+  .filter-pill{flex:1; background:var(--pill-bg); border-radius:12px; padding:0 14px; display:flex; align-items:center; justify-content:space-between; font-size:15px; font-weight:600; color:var(--text-main);}
+
+  .list{flex:1; overflow-y:auto; padding:2px 14px 20px; display:flex; flex-direction:column; gap:14px;}
+  .empty-state{ text-align:center; color:var(--text-sub); font-size:14px; padding:60px 20px; }
+  .card{background:var(--card-bg); border:1px solid var(--border); border-radius:16px; padding:16px; cursor:pointer;}
+  .card-top{display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;}
+  .card-id{display:flex; align-items:center; gap:12px; min-width:0;}
+  .thumb{width:44px;height:44px; border-radius:10px; background:#f0f1f3; display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; flex-shrink:0;}
+  .thumb img{width:100%;height:100%;object-fit:cover;}
+  .status-dot{position:absolute; bottom:-1px; right:-1px; width:12px;height:12px; border-radius:50%; border:2px solid #fff;}
+  .status-dot.on{background:var(--green);}
+  .status-dot.off{background:#d9dbe0;}
+  .camp-text{min-width:0;}
+  .camp-name{font-size:15.5px; font-weight:700; color:var(--text-main); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:180px;}
+  .camp-status{font-size:12.5px; color:var(--text-sub); margin-top:2px;}
+  .menu-dots{padding:4px; flex-shrink:0;}
+  .stats-row{display:flex; justify-content:space-between; gap:8px;}
+  .stat{display:flex; flex-direction:column; gap:3px;}
+  .stat-value{font-size:17px; font-weight:800; color:var(--text-main);}
+  .stat-label{font-size:12px; color:var(--text-sub); line-height:1.3;}
+
+  .bottom-nav{background:#fff; border-top:1px solid var(--border); display:flex; justify-content:space-around; align-items:center; padding:12px 0 22px; flex-shrink:0;}
+  .nav-item{width:38px;height:38px; display:flex; align-items:center; justify-content:center; border-radius:50%; border:none; background:none; cursor:pointer;}
+  .nav-item.active{background:#eaf2ff;}
+
+  /* Settings / Edit screens */
+  .screen{
+    position:absolute; inset:0; background:var(--bg);
+    display:flex; flex-direction:column;
+    transform:translateX(100%);
+    transition:transform .28s ease;
+    z-index:10;
+  }
+  .screen.open{ transform:translateX(0); }
+  .screen-header{
+    background:var(--card-bg); border-bottom:1px solid var(--border);
+    padding:14px 16px; display:flex; align-items:center; gap:14px; flex-shrink:0;
+  }
+  .back-btn{width:36px;height:36px; border-radius:50%; background:#eef0f2; border:none; display:flex; align-items:center; justify-content:center; cursor:pointer; flex-shrink:0;}
+  .screen-title{font-size:17px; font-weight:800; color:var(--text-main);}
+  .screen-body{flex:1; overflow-y:auto; padding:16px;}
+
+  .settings-section{margin-bottom:22px;}
+  .settings-label{font-size:12px; font-weight:700; color:var(--text-sub); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:8px; padding:0 4px;}
+  .settings-card{background:#fff; border:1px solid var(--border); border-radius:14px; padding:4px;}
+  .field-row{padding:12px 12px;}
+  .field-row + .field-row{border-top:1px solid var(--border);}
+  .field-row label{display:block; font-size:12px; color:var(--text-sub); margin-bottom:5px; font-weight:600;}
+  .field-row input, .field-row select{
+    width:100%; border:none; outline:none; font-size:15px; font-weight:600; color:var(--text-main); background:transparent; font-family:inherit;
+  }
+
+  .campaign-list-item{
+    display:flex; align-items:center; gap:12px; background:#fff; border:1px solid var(--border); border-radius:14px; padding:12px; margin-bottom:10px; cursor:pointer;
+  }
+  .campaign-list-item .thumb{width:40px;height:40px;}
+  .campaign-list-item .ci-text{flex:1; min-width:0;}
+  .campaign-list-item .ci-name{font-size:14.5px; font-weight:700; color:var(--text-main); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+  .campaign-list-item .ci-sub{font-size:12px; color:var(--text-sub); margin-top:2px;}
+  .delete-btn{width:32px;height:32px; border-radius:50%; background:#ffeded; border:none; display:flex; align-items:center; justify-content:center; flex-shrink:0; cursor:pointer;}
+
+  .add-campaign-btn{
+    width:100%; background:var(--green); color:#fff; border:none; border-radius:14px; padding:14px; font-size:15px; font-weight:700;
+    display:flex; align-items:center; justify-content:center; gap:8px; cursor:pointer; margin-top:6px;
+  }
+
+  .photo-upload{
+    display:flex; align-items:center; gap:14px; padding:14px 12px; border-bottom:1px solid var(--border);
+  }
+  .photo-preview{
+    width:64px;height:64px;border-radius:14px;background:#f0f1f3;display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;border:1px dashed #cfd2d7;
+  }
+  .photo-preview img{width:100%;height:100%;object-fit:cover;}
+  .upload-btn-label{
+    background:var(--pill-bg); color:var(--text-main); font-size:13px; font-weight:700; padding:9px 14px; border-radius:10px; cursor:pointer; display:inline-block;
+  }
+  .upload-btn-label input{display:none;}
+
+  .status-toggle{display:flex; gap:8px; margin-top:4px;}
+  .status-toggle button{
+    flex:1; padding:9px; border-radius:10px; border:1.5px solid var(--border); background:#fff; font-weight:700; font-size:13px; color:var(--text-sub); cursor:pointer;
+  }
+  .status-toggle button.selected.on{ background:#e8fbec; border-color:var(--green); color:#2a9c40; }
+  .status-toggle button.selected.off{ background:#f0f1f3; border-color:#c7cbd1; color:var(--text-main); }
+
+  .save-bar{padding:14px 16px 20px; background:var(--bg); flex-shrink:0;}
+  .save-btn{
+    width:100%; background:var(--blue); color:#fff; border:none; border-radius:14px; padding:15px; font-size:15px; font-weight:700; cursor:pointer;
+  }
+  .danger-btn{
+    width:100%; background:#fff; color:var(--red); border:1.5px solid #ffd4d4; border-radius:14px; padding:13px; font-size:14px; font-weight:700; cursor:pointer; margin-top:10px;
+  }
+</style>
+</head>
+<body>
+
+<div class="phone" id="phone">
+  <!-- Status Bar -->
+  <div class="statusbar">
+    <div class="left">
+      <span id="clock">10:33</span>
+      <span class="call-pill">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="#fff"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.4 21 3 13.6 3 4.6c0-.6.4-1 1-1h3.4c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.2 1L6.6 10.8z"/></svg>
+        04:12
+      </span>
+    </div>
+    <div class="right">
+      <span>7.00 KB/s</span><span>Vo LTE</span><span>5G</span>
+      <svg width="15" height="11" viewBox="0 0 16 12" fill="#fff"><rect x="0" y="8" width="2.5" height="4"/><rect x="4.5" y="5.5" width="2.5" height="6.5"/><rect x="9" y="3" width="2.5" height="9"/><rect x="13.5" y="0" width="2.5" height="12"/></svg>
+      <span class="battery"><span class="battery-fill"></span></span><span>30</span>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <div class="header">
+    <div class="header-top">
+      <div class="header-left">
+        <button class="icon-circle" id="openSettingsBtn" title="Settings">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3a3d44" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06A1.65 1.65 0 004.6 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06A1.65 1.65 0 009 4.6a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+        </button>
+        <div class="title-block">
+          <div class="title-row">
+            <h1 id="acctName">SHOPING</h1>
+            <span class="badge"><svg width="14" height="14" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="#dde0e4"/><text x="12" y="16" font-size="12" fill="#8b8f96" text-anchor="middle" font-weight="700">?</text></svg></span>
+          </div>
+          <div class="subtitle"><span class="dot-gray"></span> <span id="campCount">No active campaigns</span></div>
+        </div>
+      </div>
+      <div class="header-right">
+        <button class="icon-circle" title="Notifications">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#2b2d33"><path d="M12 22a2.4 2.4 0 002.4-2.4h-4.8A2.4 2.4 0 0012 22zm7.2-6.6V11c0-3.5-1.9-6.4-5.2-7.2V3a1.5 1.5 0 00-3 0v.8C7.7 4.6 5.8 7.5 5.8 11v4.4L4 17.2v.9h16.8v-.9l-1.6-1.8z"/></svg>
+        </button>
+        <button class="add-btn" id="addCampaignHeaderBtn" title="Add Campaign">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Filters -->
+  <div class="filters">
+    <div class="filter-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#5c6068" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M7 12h10M10 18h4"/></svg></div>
+    <div class="filter-pill">Date <svg width="11" height="7" viewBox="0 0 12 8" fill="none" stroke="#5c6068" stroke-width="1.8"><path d="M1 1l5 5 5-5"/></svg></div>
+    <div class="filter-pill">Status <svg width="11" height="7" viewBox="0 0 12 8" fill="none" stroke="#5c6068" stroke-width="1.8"><path d="M1 1l5 5 5-5"/></svg></div>
+  </div>
+
+  <!-- List -->
+  <div class="list" id="campaignList"></div>
+
+  <!-- Bottom Nav -->
+  <div class="bottom-nav">
+    <button class="nav-item active"><svg width="18" height="18" viewBox="0 0 24 24" fill="#2f6bff"><path d="M12 3l9 8h-3v9h-5v-6H11v6H6v-9H3l9-8z"/></svg></button>
+    <button class="nav-item"><svg width="16" height="18" viewBox="0 0 24 24" fill="none" stroke="#c3c6cc" stroke-width="1.8"><path d="M9 21h6M10 18h4M12 2a6 6 0 00-4 10.5c.6.6 1 1.4 1 2.5h6c0-1.1.4-1.9 1-2.5A6 6 0 0012 2z"/></svg></button>
+    <button class="nav-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c3c6cc" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 015 0c0 1.5-2 1.8-2 3.5" stroke-linecap="round"/><circle cx="12" cy="17" r="0.6" fill="#c3c6cc" stroke="none"/></svg></button>
+  </div>
+
+  <!-- SETTINGS SCREEN -->
+  <div class="screen" id="settingsScreen">
+    <div class="screen-header">
+      <button class="back-btn" data-close="settingsScreen"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+      <div class="screen-title">Settings</div>
+    </div>
+    <div class="screen-body">
+      <div class="settings-section">
+        <div class="settings-label">Ad Account</div>
+        <div class="settings-card">
+          <div class="field-row">
+            <label>Account Name</label>
+            <input type="text" id="acctNameInput" placeholder="e.g. SHOPING">
+          </div>
+        </div>
+      </div>
+
+      <div class="settings-section">
+        <div class="settings-label">Campaigns (<span id="settingsCampCount">0</span>)</div>
+        <div id="settingsCampaignList"></div>
+        <button class="add-campaign-btn" id="addCampaignBtn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+          Add New Campaign
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- EDIT CAMPAIGN SCREEN -->
+  <div class="screen" id="editScreen">
+    <div class="screen-header">
+      <button class="back-btn" data-close="editScreen"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+      <div class="screen-title" id="editScreenTitle">Edit Campaign</div>
+    </div>
+    <div class="screen-body">
+      <div class="settings-card">
+        <div class="photo-upload">
+          <div class="photo-preview" id="photoPreview">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#b7bac0" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="11" r="2"/><path d="M21 17l-5-4-4 3-3-2-5 4"/></svg>
+          </div>
+          <label class="upload-btn-label">
+            Upload Photo
+            <input type="file" id="photoInput" accept="image/*">
+          </label>
+        </div>
+        <div class="field-row">
+          <label>Campaign Name</label>
+          <input type="text" id="fName" placeholder="e.g. Trading Power">
+        </div>
+        <div class="field-row">
+          <label>Objective</label>
+          <input type="text" id="fObjective" placeholder="e.g. Engagement">
+        </div>
+        <div class="field-row">
+          <label>Status</label>
+          <div class="status-toggle">
+            <button type="button" id="statusOnBtn" data-status="on">On</button>
+            <button type="button" id="statusOffBtn" data-status="off">Off</button>
+          </div>
+        </div>
+        <div class="field-row">
+          <label>Website Subscribe (count)</label>
+          <input type="number" id="fSubs" placeholder="e.g. 13" inputmode="numeric">
+        </div>
+        <div class="field-row">
+          <label>Cost per Website Subscribe (₹)</label>
+          <input type="number" id="fCost" placeholder="e.g. 11.15" step="0.01" inputmode="decimal">
+        </div>
+        <div class="field-row">
+          <label>Amount Spent (₹)</label>
+          <input type="number" id="fSpent" placeholder="e.g. 144.97" step="0.01" inputmode="decimal">
+        </div>
+      </div>
+    </div>
+    <div class="save-bar">
+      <button class="save-btn" id="saveCampaignBtn">Save Campaign</button>
+      <button class="danger-btn" id="deleteCampaignBtn" style="display:none;">Delete Campaign</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ---------- Storage ---------- */
+const STORAGE_KEY = 'campaign_manager_data_v1';
+
+function uid(){ return 'c' + Date.now().toString(36) + Math.random().toString(36).slice(2,7); }
+
+const defaultData = {
+  acctName: 'SHOPING',
+  campaigns: [
+    { id: uid(), name:'Trading Power', objective:'Engagement', status:'off', photo:null, subs:13, cost:11.15, spent:144.97 },
+    { id: uid(), name:'SHIVAM {JS ADS}', objective:'Engagement', status:'off', photo:null, subs:120, cost:7.07, spent:848.77 },
+    { id: uid(), name:'JS ADS SHIVAM PANDEY', objective:'Engagement', status:'off', photo:null, subs:1263, cost:6.16, spent:7781.30 },
+    { id: uid(), name:'E68 P2', objective:'Engagement', status:'off', photo:null, subs:519, cost:5.41, spent:2808.97 }
+  ]
+};
+
+function loadData(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(raw){
+      const parsed = JSON.parse(raw);
+      if(parsed && Array.isArray(parsed.campaigns)) return parsed;
+    }
+  }catch(e){ console.error('load error', e); }
+  // first run: seed defaults and save
+  saveData(defaultData);
+  return JSON.parse(JSON.stringify(defaultData));
+}
+
+function saveData(data){
+  try{
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  }catch(e){ console.error('save error', e); }
+}
+
+let state = loadData();
+let editingId = null; // null = new campaign
+
+/* ---------- Rendering ---------- */
+function fmtMoney(n){
+  n = Number(n)||0;
+  return '₹' + n.toLocaleString('en-IN', {minimumFractionDigits:2, maximumFractionDigits:2});
+}
+function fmtCount(n){
+  n = Number(n)||0;
+  return n.toLocaleString('en-IN');
+}
+
+function thumbHTML(c){
+  if(c.photo){
+    return `<div class="thumb"><img src="${c.photo}" alt=""><span class="status-dot ${c.status}"></span></div>`;
+  }
+  return `<div class="thumb" style="background:linear-gradient(135deg,#0e2e22,#1b4a37);">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4ee08a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 3 8-9"/><path d="M14 6h6v6"/></svg>
+    <span class="status-dot ${c.status}"></span></div>`;
+}
+
+function renderDashboard(){
+  document.getElementById('acctName').textContent = state.acctName || 'SHOPING';
+  const list = document.getElementById('campaignList');
+  const active = state.campaigns.filter(c=>c.status==='on').length;
+  document.getElementById('campCount').textContent = active > 0 ? `${active} active campaign${active>1?'s':''}` : 'No active campaigns';
+
+  if(state.campaigns.length === 0){
+    list.innerHTML = `<div class="empty-state">No campaigns yet.<br>Tap Settings ⚙️ to add one.</div>`;
+    return;
+  }
+
+  list.innerHTML = state.campaigns.map(c => `
+    <div class="card" data-id="${c.id}">
+      <div class="card-top">
+        <div class="card-id">
+          ${thumbHTML(c)}
+          <div class="camp-text">
+            <div class="camp-name">${escapeHTML(c.name || 'Untitled')}</div>
+            <div class="camp-status">${c.status==='on'?'On':'Off'} · ${escapeHTML(c.objective||'Engagement')}</div>
+          </div>
+        </div>
+        <div class="menu-dots"><svg width="4" height="18" viewBox="0 0 4 18" fill="#b7bac0"><circle cx="2" cy="2" r="2"/><circle cx="2" cy="9" r="2"/><circle cx="2" cy="16" r="2"/></svg></div>
+      </div>
+      <div class="stats-row">
+        <div class="stat"><div class="stat-value">${fmtCount(c.subs)}</div><div class="stat-label">Website<br>subscribe</div></div>
+        <div class="stat"><div class="stat-value">${fmtMoney(c.cost)}</div><div class="stat-label">Cost per Website<br>subscribe</div></div>
+        <div class="stat"><div class="stat-value">${fmtMoney(c.spent)}</div><div class="stat-label">Spent</div></div>
+      </div>
+    </div>
+  `).join('');
+
+  list.querySelectorAll('.card').forEach(el=>{
+    el.addEventListener('click', ()=> openEditScreen(el.dataset.id));
+  });
+}
+
+function renderSettingsList(){
+  document.getElementById('acctNameInput').value = state.acctName || '';
+  document.getElementById('settingsCampCount').textContent = state.campaigns.length;
+  const wrap = document.getElementById('settingsCampaignList');
+  if(state.campaigns.length===0){
+    wrap.innerHTML = `<div class="empty-state" style="padding:24px 4px;">No campaigns yet.</div>`;
+    return;
+  }
+  wrap.innerHTML = state.campaigns.map(c=>`
+    <div class="campaign-list-item" data-id="${c.id}">
+      ${thumbHTML(c)}
+      <div class="ci-text">
+        <div class="ci-name">${escapeHTML(c.name||'Untitled')}</div>
+        <div class="ci-sub">${c.status==='on'?'On':'Off'} · ${fmtCount(c.subs)} subs · ${fmtMoney(c.spent)}</div>
+      </div>
+      <button class="delete-btn" data-del="${c.id}">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ff4d4f" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M8 6V4a1 1 0 011-1h6a1 1 0 011 1v2m2 0v14a1 1 0 01-1 1H7a1 1 0 01-1-1V6h12z"/></svg>
+      </button>
+    </div>
+  `).join('');
+
+  wrap.querySelectorAll('.campaign-list-item').forEach(el=>{
+    el.addEventListener('click', (e)=>{
+      if(e.target.closest('.delete-btn')) return;
+      openEditScreen(el.dataset.id);
+    });
+  });
+  wrap.querySelectorAll('.delete-btn').forEach(btn=>{
+    btn.addEventListener('click', (e)=>{
+      e.stopPropagation();
+      const id = btn.dataset.del;
+      if(confirm('Delete this campaign?')){
+        state.campaigns = state.campaigns.filter(c=>c.id!==id);
+        saveData(state);
+        renderSettingsList();
+        renderDashboard();
+      }
+    });
+  });
+}
+
+function escapeHTML(str){
+  const d = document.createElement('div');
+  d.textContent = str;
+  return d.innerHTML;
+}
+
+/* ---------- Screen navigation ---------- */
+function openScreen(id){ document.getElementById(id).classList.add('open'); }
+function closeScreen(id){ document.getElementById(id).classList.remove('open'); }
+
+document.getElementById('openSettingsBtn').addEventListener('click', ()=>{
+  renderSettingsList();
+  openScreen('settingsScreen');
+});
+document.querySelectorAll('[data-close]').forEach(btn=>{
+  btn.addEventListener('click', ()=> closeScreen(btn.dataset.close));
+});
+
+document.getElementById('acctNameInput').addEventListener('input', (e)=>{
+  state.acctName = e.target.value;
+  saveData(state);
+  document.getElementById('acctName').textContent = state.acctName || 'SHOPING';
+});
+
+/* ---------- Edit / Add campaign ---------- */
+let tempPhoto = null;
+let tempStatus = 'off';
+
+function openEditScreen(id){
+  editingId = id || null;
+  tempPhoto = null;
+  const c = id ? state.campaigns.find(x=>x.id===id) : null;
+  document.getElementById('editScreenTitle').textContent = c ? 'Edit Campaign' : 'New Campaign';
+  document.getElementById('fName').value = c ? c.name : '';
+  document.getElementById('fObjective').value = c ? c.objective : 'Engagement';
+  document.getElementById('fSubs').value = c ? c.subs : '';
+  document.getElementById('fCost').value = c ? c.cost : '';
+  document.getElementById('fSpent').value = c ? c.spent : '';
+  tempStatus = c ? c.status : 'off';
+  updateStatusButtons();
+  tempPhoto = c ? c.photo : null;
+  updatePhotoPreview();
+  document.getElementById('deleteCampaignBtn').style.display = c ? 'block' : 'none';
+  openScreen('editScreen');
+}
+
+function updateStatusButtons(){
+  document.getElementById('statusOnBtn').classList.toggle('selected', tempStatus==='on');
+  document.getElementById('statusOnBtn').classList.toggle('on', tempStatus==='on');
+  document.getElementById('statusOffBtn').classList.toggle('selected', tempStatus==='off');
+  document.getElementById('statusOffBtn').classList.toggle('off', tempStatus==='off');
+}
+document.getElementById('statusOnBtn').addEventListener('click', ()=>{ tempStatus='on'; updateStatusButtons(); });
+document.getElementById('statusOffBtn').addEventListener('click', ()=>{ tempStatus='off'; updateStatusButtons(); });
+
+function updatePhotoPreview(){
+  const el = document.getElementById('photoPreview');
+  if(tempPhoto){
+    el.innerHTML = `<img src="${tempPhoto}" alt="">`;
+  } else {
+    el.innerHTML = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#b7bac0" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="11" r="2"/><path d="M21 17l-5-4-4 3-3-2-5 4"/></svg>`;
+  }
+}
+
+document.getElementById('photoInput').addEventListener('change', (e)=>{
+  const file = e.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = (ev)=>{
+    tempPhoto = ev.target.result;
+    updatePhotoPreview();
+  };
+  reader.readAsDataURL(file);
+});
+
+document.getElementById('addCampaignBtn').addEventListener('click', ()=> openEditScreen(null));
+document.getElementById('addCampaignHeaderBtn').addEventListener('click', ()=> openEditScreen(null));
+
+document.getElementById('saveCampaignBtn').addEventListener('click', ()=>{
+  const name = document.getElementById('fName').value.trim();
+  if(!name){ alert('Please enter a campaign name'); return; }
+  const payload = {
+    name,
+    objective: document.getElementById('fObjective').value.trim() || 'Engagement',
+    status: tempStatus,
+    photo: tempPhoto,
+    subs: Number(document.getElementById('fSubs').value) || 0,
+    cost: Number(document.getElementById('fCost').value) || 0,
+    spent: Number(document.getElementById('fSpent').value) || 0
+  };
+  if(editingId){
+    const idx = state.campaigns.findIndex(c=>c.id===editingId);
+    if(idx>-1) state.campaigns[idx] = { ...state.campaigns[idx], ...payload };
+  } else {
+    state.campaigns.push({ id: uid(), ...payload });
+  }
+  saveData(state);
+  renderDashboard();
+  renderSettingsList();
+  closeScreen('editScreen');
+});
+
+document.getElementById('deleteCampaignBtn').addEventListener('click', ()=>{
+  if(!editingId) return;
+  if(confirm('Delete this campaign?')){
+    state.campaigns = state.campaigns.filter(c=>c.id!==editingId);
+    saveData(state);
+    renderDashboard();
+    renderSettingsList();
+    closeScreen('editScreen');
+  }
+});
+
+/* ---------- Init ---------- */
+renderDashboard();
+
+/* live clock */
+function updateClock(){
+  const d = new Date();
+  let h = d.getHours(); const m = d.getMinutes();
+  const ampm = h>=12?'pm':'am';
+  h = h%12; if(h===0) h=12;
+  document.getElementById('clock').textContent = `${h}:${m.toString().padStart(2,'0')}`;
+}
+updateClock();
+setInterval(updateClock, 30000);
+
+/* register service worker for offline/PWA support */
+if('serviceWorker' in navigator){
+  window.addEventListener('load', ()=>{
+    navigator.serviceWorker.register('service-worker.js').catch(()=>{});
+  });
+}
+</script>
+</body>
+</html>
