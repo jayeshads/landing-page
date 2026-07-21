@@ -1,0 +1,27 @@
+# Core
+fastapi==0.115.0
+uvicorn[standard]==0.30.6
+pydantic[email]==2.9.2
+pydantic-settings==2.5.2
+
+# Database
+motor==3.6.0                   # async MongoDB driver
+
+# Auth
+PyJWT==2.9.0                   # JWT tokens
+bcrypt==4.2.0                  # password hashing
+python-multipart==0.0.9        # form data (login forms)
+
+# HTTP
+httpx==0.27.2                  # async HTTP client (Meta API, LLM calls)
+
+# Security
+cryptography==43.0.1           # AES-256 encryption (Meta tokens at rest)
+
+# AI (will be used from Phase 3+)
+# openai
+# anthropic
+# google-generativeai
+
+# Utilities
+python-dotenv==1.0.1
