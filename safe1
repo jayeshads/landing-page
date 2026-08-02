@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Start Your LeadPilot Trial</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+body{
+    background:#0f172a;
+    color:#fff;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    padding:20px;
+}
+.card{
+    background:#1e293b;
+    max-width:500px;
+    width:100%;
+    border-radius:18px;
+    padding:35px;
+    text-align:center;
+    box-shadow:0 15px 40px rgba(0,0,0,.35);
+}
+h1{
+    font-size:32px;
+    margin-bottom:15px;
+}
+p{
+    color:#cbd5e1;
+    line-height:1.6;
+    margin-bottom:25px;
+}
+.features{
+    text-align:left;
+    margin-bottom:30px;
+}
+.features li{
+    margin:12px 0;
+    list-style:none;
+}
+button{
+    width:100%;
+    padding:16px;
+    border:none;
+    border-radius:12px;
+    background:#2563eb;
+    color:white;
+    font-size:18px;
+    cursor:pointer;
+    transition:.3s;
+}
+button:hover{
+    background:#1d4ed8;
+}
+.small{
+    margin-top:15px;
+    font-size:14px;
+    color:#94a3b8;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+<h1>🚀 Start Your Free Trial</h1>
+
+<p>
+Launch Meta Ads using AI in minutes.
+No complicated Ads Manager.
+Just tell LeadPilot your goal and let AI handle the rest.
+</p>
+
+<ul class="features">
+<li>✅ AI Campaign Creation</li>
+<li>✅ AI Ad Copy & Creatives</li>
+<li>✅ AI Audience Targeting</li>
+<li>✅ AI Budget Optimization</li>
+<li>✅ AI Performance Monitoring</li>
+</ul>
+
+<button onclick="startTrial()">
+Start Free Trial
+</button>
+
+<div class="small">
+No Credit Card Required
+</div>
+
+</div>
+
+<script>
+function startTrial(){
+    window.location.href="https://yourtriallink.com";
+}
+</script>
+
+</body>
+</html>
