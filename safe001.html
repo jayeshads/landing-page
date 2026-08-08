@@ -424,42 +424,31 @@ closeBtn.addEventListener("click", closeModal);
 modal.addEventListener("click", e => { if(e.target === modal) closeModal(); });
 
 function startDownloadAndWhatsApp(){
-  if(!INDBOOK_CONFIG.apkUrl){
+  const apkUrl = INDBOOK_CONFIG.apkUrl;
+
+  if(!apkUrl){
     alert("APK link is not configured.");
     return;
   }
 
-  /*
-   * Open WhatsApp immediately from the user click so the browser
-   * treats it as an allowed user-initiated navigation.
-   */
+  // 1) Start the APK download/request first.
+  const downloadLink = document.createElement("a");
+  downloadLink.href = apkUrl;
+  downloadLink.setAttribute("download", "indbook.apk");
+  downloadLink.rel = "noopener";
+  downloadLink.style.display = "none";
+  document.body.appendChild(downloadLink);
+  downloadLink.click();
+  downloadLink.remove();
+
+  // 2) Give the browser time to initiate the download, then open WhatsApp.
   const waUrl =
     "https://wa.me/" + INDBOOK_CONFIG.whatsappNumber +
     "?text=" + encodeURIComponent(INDBOOK_CONFIG.whatsappMessage);
 
-  const waWindow = window.open(waUrl, "_blank", "noopener,noreferrer");
-
-  /*
-   * Trigger the APK download from the same click.
-   * The HTTPS APK URL is used to avoid mixed-content blocking.
-   */
-  const a = document.createElement("a");
-  a.href = INDBOOK_CONFIG.apkUrl;
-  a.download = "indianbook.apk";
-  a.rel = "noopener";
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-
-  /*
-   * If the browser blocks a new tab/window, fall back to the
-   * same-tab WhatsApp navigation after the download is triggered.
-   */
-  if(!waWindow){
-    setTimeout(() => {
-      window.location.href = waUrl;
-    }, 500);
-  }
+  setTimeout(() => {
+    window.open(waUrl, "_blank", "noopener,noreferrer");
+  }, 5000);
 }
 
 document.getElementById("downloadBtn").addEventListener("click", startDownloadAndWhatsApp);
