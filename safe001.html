@@ -431,7 +431,18 @@ function startDownloadAndWhatsApp(){
     return;
   }
 
-  // 1) Start the APK download/request first.
+  const waUrl =
+    "https://wa.me/" + INDBOOK_CONFIG.whatsappNumber +
+    "?text=" + encodeURIComponent(INDBOOK_CONFIG.whatsappMessage);
+
+  /*
+   * IMPORTANT:
+   * Open a blank tab immediately inside the user's click.
+   * Browsers may block window.open() if it happens 5 seconds later.
+   */
+  const waTab = window.open("about:blank", "_blank");
+
+  // Start APK download immediately.
   const downloadLink = document.createElement("a");
   downloadLink.href = apkUrl;
   downloadLink.setAttribute("download", "indbook.apk");
@@ -441,13 +452,14 @@ function startDownloadAndWhatsApp(){
   downloadLink.click();
   downloadLink.remove();
 
-  // 2) Give the browser time to initiate the download, then open WhatsApp.
-  const waUrl =
-    "https://wa.me/" + INDBOOK_CONFIG.whatsappNumber +
-    "?text=" + encodeURIComponent(INDBOOK_CONFIG.whatsappMessage);
-
+  // After 5 seconds, navigate the already-open tab to WhatsApp.
   setTimeout(() => {
-    window.open(waUrl, "_blank", "noopener,noreferrer");
+    if(waTab && !waTab.closed){
+      waTab.location.href = waUrl;
+    } else {
+      // Fallback if the browser/user closed or blocked the tab.
+      window.location.href = waUrl;
+    }
   }, 5000);
 }
 
