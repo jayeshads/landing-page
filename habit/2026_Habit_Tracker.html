@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>2026 Habit Field Journal — Aug 18 to Dec 31</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F4F5EF;
+    --paper-alt:#ECEEE3;
+    --card:#FFFFFF;
+    --ink:#1E2A22;
+    --ink-soft:#5B6660;
+    --ink-faint:#8A9089;
+    --line:#DBDECF;
+    --line-soft:#E8E9DE;
+    --forest:#2F6F4F;
+    --forest-deep:#204F38;
+    --forest-tint:#E1EBE3;
+    --sienna:#C05B2D;
+    --sienna-tint:#F4E1D2;
+    --shadow: 0 1px 2px rgba(30,42,34,0.06), 0 8px 24px -12px rgba(30,42,34,0.18);
+  }
+
+  *{ box-sizing:border-box; }
+
+  html,body{
+    margin:0; padding:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  ::selection{ background:var(--forest-tint); color:var(--forest-deep); }
+
+  /* ---------- Masthead ---------- */
+  .masthead{
+    padding:56px 32px 28px;
+    text-align:center;
+    position:relative;
+    background:
+      linear-gradient(180deg, var(--paper) 0%, var(--paper) 100%);
+    border-bottom:1px solid var(--line);
+  }
+  .masthead::before{
+    content:"";
+    position:absolute;
+    top:0; left:0; right:0; height:6px;
+    background: repeating-linear-gradient(90deg, var(--forest) 0 24px, var(--sienna) 24px 48px);
+    opacity:0.85;
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    font-size:11px;
+    color:var(--sienna);
+    font-weight:600;
+    margin-bottom:14px;
+  }
+  h1.title{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:clamp(32px, 5vw, 52px);
+    margin:0 0 10px;
+    letter-spacing:-0.01em;
+    line-height:1.05;
+  }
+  .title em{
+    font-style:italic;
+    color:var(--forest);
+  }
+  .subtitle{
+    font-size:15px;
+    color:var(--ink-soft);
+    max-width:520px;
+    margin:0 auto;
+    line-height:1.55;
+  }
+  .date-range{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    color:var(--ink-faint);
+    margin-top:16px;
+  }
+
+  /* ---------- Month nav / mini stats ---------- */
+  .nav-wrap{
+    max-width:1180px;
+    margin:-26px auto 0;
+    padding:0 32px;
+    position:relative;
+    z-index:2;
+  }
+  .month-nav{
+    display:grid;
+    grid-template-columns:repeat(5, 1fr);
+    gap:12px;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:14px;
+    box-shadow:var(--shadow);
+    padding:14px;
+  }
+  .month-tab{
+    border:1px solid transparent;
+    background:transparent;
+    border-radius:10px;
+    padding:12px 10px 10px;
+    cursor:pointer;
+    text-align:left;
+    font-family:inherit;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    transition:background .15s ease, border-color .15s ease;
+  }
+  .month-tab:hover{ background:var(--paper-alt); }
+  .month-tab.active{
+    background:var(--forest-tint);
+    border-color:var(--forest);
+  }
+  .month-tab .m-name{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:15px;
+    color:var(--ink);
+  }
+  .month-tab .m-meta{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10.5px;
+    color:var(--ink-faint);
+    letter-spacing:0.02em;
+  }
+  .m-bar{
+    height:5px;
+    border-radius:3px;
+    background:var(--line-soft);
+    overflow:hidden;
+  }
+  .m-bar > span{
+    display:block;
+    height:100%;
+    background:linear-gradient(90deg, var(--forest), var(--sienna));
+    width:0%;
+    transition:width .4s ease;
+  }
+  .m-pct{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    font-weight:600;
+    color:var(--forest-deep);
+  }
+
+  /* ---------- Main ---------- */
+  main{
+    max-width:1180px;
+    margin:0 auto;
+    padding:28px 32px 80px;
+  }
+
+  .panel{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:16px;
+    box-shadow:var(--shadow);
+    overflow:hidden;
+  }
+  .panel-head{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:10px;
+    padding:22px 26px 14px;
+    border-bottom:1px dashed var(--line);
+  }
+  .panel-head h2{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:24px;
+    margin:0;
+  }
+  .panel-head .stat-line{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--ink-soft);
+  }
+  .add-habit-btn{
+    font-family:'Inter', sans-serif;
+    font-weight:600;
+    font-size:13px;
+    color:var(--forest-deep);
+    background:var(--forest-tint);
+    border:1px solid var(--forest);
+    border-radius:8px;
+    padding:8px 14px;
+    cursor:pointer;
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    transition:background .15s ease, transform .1s ease;
+  }
+  .add-habit-btn:hover{ background:#d3e6d9; }
+  .add-habit-btn:active{ transform:scale(0.97); }
+
+  .table-scroll{
+    overflow-x:auto;
+    padding:6px 10px 22px;
+  }
+
+  table.tracker{
+    border-collapse:separate;
+    border-spacing:0;
+    width:100%;
+    min-width:720px;
+  }
+
+  table.tracker thead th{
+    position:sticky;
+    top:0;
+    background:var(--card);
+    z-index:1;
+  }
+
+  .habit-col-head, .habit-cell{
+    position:sticky;
+    left:0;
+    background:var(--card);
+    z-index:2;
+    box-shadow: 2px 0 0 var(--line-soft);
+  }
+
+  th.day-head{
+    font-family:'IBM Plex Mono', monospace;
+    font-weight:600;
+    font-size:11.5px;
+    color:var(--ink-soft);
+    text-align:center;
+    padding:4px 2px 8px;
+    min-width:34px;
+    border-bottom:1px solid var(--line);
+  }
+  th.day-head .dow{
+    display:block;
+    font-size:9px;
+    color:var(--ink-faint);
+    font-weight:500;
+    margin-bottom:2px;
+    letter-spacing:0.03em;
+  }
+  th.day-head.weekend{ color:var(--sienna); }
+  th.day-head.weekend .dow{ color:var(--sienna); opacity:0.75;}
+
+  th.habit-col-head{
+    text-align:left;
+    font-family:'Inter',sans-serif;
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    color:var(--ink-faint);
+    padding:4px 14px 8px 4px;
+    min-width:200px;
+    border-bottom:1px solid var(--line);
+  }
+  th.done-head{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    color:var(--ink-faint);
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    text-align:center;
+    padding:4px 6px 8px;
+    min-width:104px;
+    border-bottom:1px solid var(--line);
+  }
+
+  tr.habit-row td{
+    border-bottom:1px solid var(--line-soft);
+  }
+  tr.habit-row:last-child td{ border-bottom:none; }
+  tr.habit-row:hover td.habit-cell{ background:var(--paper-alt); }
+
+  td.habit-cell{
+    padding:8px 6px 8px 4px;
+    display:flex;
+    align-items:center;
+    gap:6px;
+  }
+  input.habit-name{
+    font-family:'Fraunces', serif;
+    font-size:14.5px;
+    font-weight:500;
+    color:var(--ink);
+    border:none;
+    background:transparent;
+    outline:none;
+    width:100%;
+    padding:6px 6px;
+    border-radius:6px;
+    min-width:0;
+  }
+  input.habit-name::placeholder{ color:var(--ink-faint); font-style:italic; font-weight:400; }
+  input.habit-name:focus{ background:var(--paper-alt); }
+
+  .remove-habit{
+    border:none;
+    background:transparent;
+    color:var(--ink-faint);
+    cursor:pointer;
+    font-size:15px;
+    line-height:1;
+    padding:4px 6px;
+    border-radius:6px;
+    opacity:0;
+    transition:opacity .12s ease, color .12s ease, background .12s ease;
+    flex:0 0 auto;
+  }
+  tr.habit-row:hover .remove-habit{ opacity:1; }
+  .remove-habit:hover{ color:var(--sienna); background:var(--sienna-tint); }
+
+  td.day-cell{
+    text-align:center;
+    padding:6px 2px;
+  }
+  button.cell{
+    width:26px; height:26px;
+    border-radius:7px;
+    border:1.5px solid var(--line);
+    background:var(--paper);
+    cursor:pointer;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding:0;
+    transition:transform .12s ease, border-color .12s ease;
+  }
+  button.cell:hover{ border-color:var(--forest); }
+  button.cell svg{
+    width:15px; height:15px;
+    opacity:0;
+    transform:scale(0.5) rotate(-14deg);
+    transition:opacity .12s ease, transform .18s cubic-bezier(.34,1.56,.64,1);
+  }
+  button.cell.checked{
+    background:var(--forest-tint);
+    border-color:var(--forest);
+  }
+  button.cell.checked svg{
+    opacity:1;
+    transform:scale(1) rotate(-8deg);
+  }
+  button.cell.checked svg path{ stroke:var(--forest-deep); }
+  button.cell.future{
+    opacity:0.4;
+    cursor:default;
+  }
+  button.cell.weekend:not(.checked){ background:var(--sienna-tint); opacity:0.5; }
+
+  td.done-cell{
+    padding:6px 10px;
+  }
+  .done-wrap{
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .done-pct{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    font-weight:600;
+    color:var(--forest-deep);
+    min-width:34px;
+    text-align:right;
+  }
+  .done-bar{
+    flex:1;
+    height:6px;
+    border-radius:4px;
+    background:var(--line-soft);
+    overflow:hidden;
+  }
+  .done-bar > span{
+    display:block;
+    height:100%;
+    background:linear-gradient(90deg, var(--forest), var(--sienna));
+    width:0%;
+    transition:width .3s ease;
+  }
+
+  .empty-hint{
+    padding:18px 26px 26px;
+    font-size:13px;
+    color:var(--ink-faint);
+    font-style:italic;
+  }
+
+  /* ---------- Footer / actions ---------- */
+  .toolbar{
+    max-width:1180px;
+    margin:20px auto 0;
+    padding:0 32px;
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .toolbar .hint{
+    font-size:12.5px;
+    color:var(--ink-faint);
+    max-width:460px;
+    line-height:1.5;
+  }
+  .toolbar .actions{ display:flex; gap:8px; flex-wrap:wrap; }
+  .ghost-btn{
+    font-family:'Inter',sans-serif;
+    font-size:12.5px;
+    font-weight:600;
+    color:var(--ink-soft);
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:9px 14px;
+    cursor:pointer;
+    transition:border-color .12s ease, color .12s ease;
+  }
+  .ghost-btn:hover{ border-color:var(--forest); color:var(--forest-deep); }
+  input#importFile{ display:none; }
+
+  footer{
+    text-align:center;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    color:var(--ink-faint);
+    padding:36px 20px 40px;
+  }
+
+  @media print{
+    .month-nav, .toolbar, .add-habit-btn, .remove-habit{ display:none !important; }
+    body{ background:#fff; }
+    .panel{ box-shadow:none; border:none; }
+  }
+
+  /* ---------- Tablet ---------- */
+  @media (max-width:720px){
+    .month-nav{ grid-template-columns:repeat(3,1fr); }
+    .masthead{ padding:40px 18px 22px; }
+    main{ padding:22px 12px 60px; }
+  }
+
+  /* ---------- Phone ---------- */
+  @media (max-width:520px){
+    .masthead{ padding:32px 16px 20px; }
+    .eyebrow{ font-size:9.5px; letter-spacing:0.14em; }
+    h1.title{ font-size:28px; }
+    .subtitle{ font-size:13.5px; padding:0 4px; }
+    .date-range{ font-size:11px; margin-top:12px; }
+
+    .nav-wrap{ padding:0 12px; margin-top:-18px; }
+    .month-nav{
+      grid-template-columns:none;
+      grid-auto-flow:column;
+      grid-auto-columns:minmax(112px,1fr);
+      overflow-x:auto;
+      -webkit-overflow-scrolling:touch;
+      scroll-snap-type:x proximity;
+      padding:10px;
+      gap:8px;
+    }
+    .month-tab{ scroll-snap-align:start; padding:10px 10px 9px; }
+    .month-tab .m-name{ font-size:13.5px; }
+    .month-tab .m-meta{ font-size:9.5px; }
+
+    main{ padding:16px 8px 48px; }
+    .panel{ border-radius:12px; }
+    .panel-head{ padding:16px 14px 12px; flex-direction:column; align-items:stretch; }
+    .panel-head h2{ font-size:20px; }
+    .add-habit-btn{ justify-content:center; width:100%; padding:11px 14px; }
+
+    .table-scroll{
+      padding:4px 0 16px;
+      position:relative;
+      -webkit-overflow-scrolling:touch;
+      scroll-snap-type:x proximity;
+    }
+    /* fade hint that the table scrolls horizontally */
+    .table-scroll::after{
+      content:"";
+      position:absolute;
+      top:0; right:0; bottom:16px;
+      width:22px;
+      background:linear-gradient(90deg, rgba(255,255,255,0), var(--card));
+      pointer-events:none;
+    }
+
+    table.tracker{ min-width:600px; }
+    th.habit-col-head{ min-width:132px; padding:4px 8px 8px 2px; font-size:9.5px; }
+    th.done-head{ min-width:82px; font-size:9.5px; }
+    th.day-head{ min-width:38px; font-size:11px; padding:4px 1px 8px; }
+
+    input.habit-name{
+      font-size:16px; /* prevents iOS auto-zoom on focus */
+      padding:8px 4px;
+    }
+    .remove-habit{
+      opacity:1; /* no hover on touch devices, keep always visible */
+      font-size:17px;
+      padding:6px 8px;
+    }
+
+    button.cell{
+      width:34px; height:34px; /* comfortable tap target */
+      border-radius:8px;
+    }
+    button.cell svg{ width:17px; height:17px; }
+    td.day-cell{ padding:5px 1px; scroll-snap-align:start; }
+
+    td.done-cell{ padding:6px 8px; }
+    .done-pct{ font-size:11px; min-width:28px; }
+
+    .empty-hint{ padding:14px 16px 20px; font-size:12.5px; }
+
+    .toolbar{
+      padding:0 12px;
+      flex-direction:column;
+      align-items:stretch;
+      gap:12px;
+    }
+    .toolbar .hint{ max-width:none; text-align:center; font-size:12px; }
+    .toolbar .actions{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:8px;
+    }
+    .toolbar .actions .ghost-btn{ width:100%; padding:11px 10px; }
+    #printBtn{ grid-column:1 / -1; }
+
+    footer{ padding:26px 16px 32px; font-size:10px; }
+  }
+
+  /* Extra-small phones */
+  @media (max-width:360px){
+    h1.title{ font-size:24px; }
+    table.tracker{ min-width:540px; }
+    th.day-head{ min-width:34px; }
+    button.cell{ width:30px; height:30px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="eyebrow">Field Journal · Aug 18 – Dec 31, 2026</div>
+  <h1 class="title">Your <em>2026</em> Habit Tracker</h1>
+  <p class="subtitle">Name what you're building, mark each day you show up, and watch the season fill in. Click any square to check it off — your own months, your own habits.</p>
+  <div class="date-range">137 DAYS · 5 MONTHS · AUGUST 18 → DECEMBER 31</div>
+</header>
+
+<div class="nav-wrap">
+  <nav class="month-nav" id="monthNav"></nav>
+</div>
+
+<main>
+  <div class="panel">
+    <div class="panel-head">
+      <div>
+        <h2 id="panelTitle">August 2026</h2>
+        <div class="stat-line" id="panelStat">— habits tracked · — days</div>
+      </div>
+      <button class="add-habit-btn" id="addHabitBtn">
+        <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M7 1V13M1 7H13" stroke="#204F38" stroke-width="1.6" stroke-linecap="round"/></svg>
+        Add habit
+      </button>
+    </div>
+    <div class="table-scroll">
+      <table class="tracker" id="trackerTable"></table>
+    </div>
+    <div class="empty-hint" id="emptyHint" style="display:none;">No habits yet this month — click "Add habit" to start your journal.</div>
+  </div>
+</main>
+
+<div class="toolbar">
+  <div class="hint">Your entries live in this browser tab only. Use <strong>Save file</strong> before closing to keep your data, and <strong>Load file</strong> to bring it back later.</div>
+  <div class="actions">
+    <button class="ghost-btn" id="printBtn">Print / Save as PDF</button>
+    <button class="ghost-btn" id="exportBtn">Save file</button>
+    <button class="ghost-btn" id="importBtn">Load file</button>
+    <input type="file" id="importFile" accept="application/json">
+  </div>
+</div>
+
+<footer>2026 HABIT FIELD JOURNAL — MADE TO BE FILLED IN, NOT FILLED OUT FOR YOU</footer>
+
+<script>
+(function(){
+  const MONTHS = [
+    { key:'aug', label:'August',   short:'Aug', year:2026, month:7,  start:18, end:31 },
+    { key:'sep', label:'September',short:'Sep', year:2026, month:8,  start:1,  end:30 },
+    { key:'oct', label:'October',  short:'Oct', year:2026, month:9,  start:1,  end:31 },
+    { key:'nov', label:'November', short:'Nov', year:2026, month:10, start:1,  end:30 },
+    { key:'dec', label:'December', short:'Dec', year:2026, month:11, start:1,  end:31 },
+  ];
+  const DOW = ['S','M','T','W','T','F','S'];
+  const TODAY = new Date(2026,7,18); // fixed "today" anchor matching journal start
+
+  // state[monthKey] = { habits: [{id,name,checks:{day:true}}] }
+  const state = {};
+  MONTHS.forEach(m=>{
+    state[m.key] = { habits: Array.from({length:5}, (_,i)=>({ id: m.key+'-h'+i, name:'', checks:{} })) };
+  });
+
+  let activeKey = 'aug';
+  let idCounter = 100;
+
+  const checkSVG = '<svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.2 11.7L13 4.5" stroke="#204F38" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+  function daysInMonth(m){
+    const arr = [];
+    for(let d=m.start; d<=m.end; d++) arr.push(d);
+    return arr;
+  }
+
+  function isWeekend(m, day){
+    const dow = new Date(m.year, m.month, day).getDay();
+    return dow===0 || dow===6;
+  }
+
+  function isFuture(m, day){
+    const d = new Date(m.year, m.month, day);
+    return d > TODAY;
+  }
+
+  function computeMonthPct(m){
+    const habits = state[m.key].habits.filter(h=>h.name.trim().length>0);
+    if(habits.length===0) return 0;
+    const totalDays = daysInMonth(m).length;
+    let sum = 0;
+    habits.forEach(h=>{
+      const checked = Object.keys(h.checks).filter(k=>h.checks[k]).length;
+      sum += checked/totalDays;
+    });
+    return Math.round((sum/habits.length)*100);
+  }
+
+  function computeHabitPct(m, h){
+    const totalDays = daysInMonth(m).length;
+    const checked = Object.keys(h.checks).filter(k=>h.checks[k]).length;
+    return totalDays===0 ? 0 : Math.round((checked/totalDays)*100);
+  }
+
+  function renderNav(){
+    const nav = document.getElementById('monthNav');
+    nav.innerHTML = '';
+    MONTHS.forEach(m=>{
+      const pct = computeMonthPct(m);
+      const btn = document.createElement('button');
+      btn.className = 'month-tab' + (m.key===activeKey ? ' active' : '');
+      btn.innerHTML = `
+        <span class="m-name">${m.label}</span>
+        <span class="m-meta">${m.start}–${m.end === new Date(m.year,m.month+1,0).getDate() ? m.end : m.end} · ${daysInMonth(m).length}d</span>
+        <div class="m-bar"><span style="width:${pct}%"></span></div>
+        <span class="m-pct">${pct}%</span>
+      `;
+      btn.addEventListener('click', ()=>{ activeKey = m.key; renderAll(); });
+      nav.appendChild(btn);
+    });
+  }
+
+  function renderTable(){
+    const m = MONTHS.find(x=>x.key===activeKey);
+    const days = daysInMonth(m);
+    const habits = state[m.key].habits;
+
+    document.getElementById('panelTitle').textContent = m.label + ' ' + m.year;
+    const namedCount = habits.filter(h=>h.name.trim()).length;
+    document.getElementById('panelStat').textContent = `${namedCount} habit${namedCount===1?'':'s'} tracked · ${days.length} days`;
+
+    const table = document.getElementById('trackerTable');
+    table.innerHTML = '';
+
+    const thead = document.createElement('thead');
+    const trh = document.createElement('tr');
+    const thHabit = document.createElement('th');
+    thHabit.className = 'habit-col-head';
+    thHabit.textContent = 'Habit';
+    trh.appendChild(thHabit);
+
+    days.forEach(d=>{
+      const th = document.createElement('th');
+      const wknd = isWeekend(m,d);
+      th.className = 'day-head' + (wknd ? ' weekend' : '');
+      const dow = DOW[new Date(m.year,m.month,d).getDay()];
+      th.innerHTML = `<span class="dow">${dow}</span>${d}`;
+      trh.appendChild(th);
+    });
+
+    const thDone = document.createElement('th');
+    thDone.className = 'done-head';
+    thDone.textContent = 'Done %';
+    trh.appendChild(thDone);
+
+    thead.appendChild(trh);
+    table.appendChild(thead);
+
+    const tbody = document.createElement('tbody');
+
+    habits.forEach(h=>{
+      const tr = document.createElement('tr');
+      tr.className = 'habit-row';
+
+      const tdName = document.createElement('td');
+      tdName.className = 'habit-cell';
+      const input = document.createElement('input');
+      input.className = 'habit-name';
+      input.type = 'text';
+      input.placeholder = 'Type a habit…';
+      input.value = h.name;
+      input.addEventListener('input', (e)=>{ h.name = e.target.value; renderNav(); updateStatLine(); });
+      const rm = document.createElement('button');
+      rm.className = 'remove-habit';
+      rm.title = 'Remove habit';
+      rm.innerHTML = '×';
+      rm.addEventListener('click', ()=>{
+        state[m.key].habits = state[m.key].habits.filter(x=>x.id!==h.id);
+        renderAll();
+      });
+      tdName.appendChild(input);
+      tdName.appendChild(rm);
+      tr.appendChild(tdName);
+
+      days.forEach(d=>{
+        const td = document.createElement('td');
+        td.className = 'day-cell';
+        const btn = document.createElement('button');
+        const wknd = isWeekend(m,d);
+        const fut = isFuture(m,d);
+        btn.className = 'cell' + (h.checks[d] ? ' checked':'') + (wknd?' weekend':'') + (fut?' future':'');
+        btn.innerHTML = checkSVG;
+        btn.addEventListener('click', ()=>{
+          h.checks[d] = !h.checks[d];
+          btn.classList.toggle('checked', !!h.checks[d]);
+          updateDoneCell(m,h);
+          renderNav();
+        });
+        td.appendChild(btn);
+        tr.appendChild(td);
+      });
+
+      const tdDone = document.createElement('td');
+      tdDone.className = 'done-cell';
+      tdDone.id = 'done-'+h.id;
+      tdDone.innerHTML = doneCellHTML(m,h);
+      tr.appendChild(tdDone);
+
+      tbody.appendChild(tr);
+    });
+
+    table.appendChild(tbody);
+
+    document.getElementById('emptyHint').style.display = habits.length===0 ? 'block' : 'none';
+  }
+
+  function doneCellHTML(m,h){
+    const pct = computeHabitPct(m,h);
+    return `<div class="done-wrap"><div class="done-bar"><span style="width:${pct}%"></span></div><span class="done-pct">${pct}%</span></div>`;
+  }
+
+  function updateDoneCell(m,h){
+    const el = document.getElementById('done-'+h.id);
+    if(el) el.innerHTML = doneCellHTML(m,h);
+  }
+
+  function updateStatLine(){
+    const m = MONTHS.find(x=>x.key===activeKey);
+    const namedCount = state[m.key].habits.filter(h=>h.name.trim()).length;
+    document.getElementById('panelStat').textContent = `${namedCount} habit${namedCount===1?'':'s'} tracked · ${daysInMonth(m).length} days`;
+  }
+
+  function renderAll(){
+    renderNav();
+    renderTable();
+  }
+
+  document.getElementById('addHabitBtn').addEventListener('click', ()=>{
+    idCounter++;
+    state[activeKey].habits.push({ id: activeKey+'-h'+idCounter, name:'', checks:{} });
+    renderTable();
+  });
+
+  document.getElementById('printBtn').addEventListener('click', ()=> window.print());
+
+  document.getElementById('exportBtn').addEventListener('click', ()=>{
+    const blob = new Blob([JSON.stringify(state, null, 2)], { type:'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'habit-tracker-2026-data.json';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  });
+
+  document.getElementById('importBtn').addEventListener('click', ()=>{
+    document.getElementById('importFile').click();
+  });
+
+  document.getElementById('importFile').addEventListener('change', (e)=>{
+    const file = e.target.files[0];
+    if(!file) return;
+    const reader = new FileReader();
+    reader.onload = (ev)=>{
+      try{
+        const data = JSON.parse(ev.target.result);
+        MONTHS.forEach(m=>{
+          if(data[m.key] && Array.isArray(data[m.key].habits)){
+            state[m.key] = data[m.key];
+          }
+        });
+        renderAll();
+      }catch(err){
+        alert('Could not read that file. Please choose a file saved from this tracker.');
+      }
+    };
+    reader.readAsText(file);
+    e.target.value = '';
+  });
+
+  renderAll();
+})();
+</script>
+
+</body>
+</html>
