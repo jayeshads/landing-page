@@ -211,6 +211,8 @@
   .table-scroll{
     overflow-x:auto;
     padding:6px 10px 22px;
+    -webkit-overflow-scrolling:touch;
+    scroll-behavior:smooth;
   }
 
   table.tracker{
@@ -486,7 +488,6 @@
       padding:4px 0 16px;
       position:relative;
       -webkit-overflow-scrolling:touch;
-      scroll-snap-type:x proximity;
     }
     /* fade hint that the table scrolls horizontally */
     .table-scroll::after{
@@ -518,7 +519,7 @@
       border-radius:8px;
     }
     button.cell svg{ width:17px; height:17px; }
-    td.day-cell{ padding:5px 1px; scroll-snap-align:start; }
+    td.day-cell{ padding:5px 1px; }
 
     td.done-cell{ padding:6px 8px; }
     .done-pct{ font-size:11px; min-width:28px; }
@@ -606,7 +607,8 @@
     { key:'dec', label:'December', short:'Dec', year:2026, month:11, start:1,  end:31 },
   ];
   const DOW = ['S','M','T','W','T','F','S'];
-  const TODAY = new Date(2026,7,18); // fixed "today" anchor matching journal start
+  const TODAY = new Date();
+  TODAY.setHours(0,0,0,0);
 
   const STORAGE_KEY = 'habitTracker2026';
 
