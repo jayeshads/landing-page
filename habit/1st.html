@@ -211,6 +211,8 @@
   .table-scroll{
     overflow-x:auto;
     padding:6px 10px 22px;
+    -webkit-overflow-scrolling:touch;
+    scroll-behavior:smooth;
   }
 
   table.tracker{
@@ -399,6 +401,21 @@
     font-style:italic;
   }
 
+  .rotate-hint{
+    display:none;
+    align-items:center;
+    gap:8px;
+    margin:2px 16px 12px;
+    padding:9px 12px;
+    background:var(--sienna-tint);
+    border:1px solid var(--sienna);
+    border-radius:9px;
+    color:#8a3f1c;
+    font-size:12px;
+    font-weight:500;
+  }
+  .rotate-hint svg{ flex:0 0 auto; color:var(--sienna); }
+
   /* ---------- Footer / actions ---------- */
   .toolbar{
     max-width:1180px;
@@ -486,7 +503,6 @@
       padding:4px 0 16px;
       position:relative;
       -webkit-overflow-scrolling:touch;
-      scroll-snap-type:x proximity;
     }
     /* fade hint that the table scrolls horizontally */
     .table-scroll::after{
@@ -498,10 +514,10 @@
       pointer-events:none;
     }
 
-    table.tracker{ min-width:600px; }
+    table.tracker{ min-width:680px; }
     th.habit-col-head{ min-width:132px; padding:4px 8px 8px 2px; font-size:9.5px; }
     th.done-head{ min-width:82px; font-size:9.5px; }
-    th.day-head{ min-width:38px; font-size:11px; padding:4px 1px 8px; }
+    th.day-head{ min-width:42px; font-size:12px; padding:5px 2px 9px; }
 
     input.habit-name{
       font-size:16px; /* prevents iOS auto-zoom on focus */
@@ -514,11 +530,11 @@
     }
 
     button.cell{
-      width:34px; height:34px; /* comfortable tap target */
+      width:36px; height:36px; /* comfortable tap target */
       border-radius:8px;
     }
-    button.cell svg{ width:17px; height:17px; }
-    td.day-cell{ padding:5px 1px; scroll-snap-align:start; }
+    button.cell svg{ width:18px; height:18px; }
+    td.day-cell{ padding:5px 2px; }
 
     td.done-cell{ padding:6px 8px; }
     .done-pct{ font-size:11px; min-width:28px; }
@@ -546,9 +562,13 @@
   /* Extra-small phones */
   @media (max-width:360px){
     h1.title{ font-size:24px; }
-    table.tracker{ min-width:540px; }
-    th.day-head{ min-width:34px; }
-    button.cell{ width:30px; height:30px; }
+    table.tracker{ min-width:600px; }
+    th.day-head{ min-width:38px; }
+    button.cell{ width:32px; height:32px; }
+  }
+
+  @media (max-width:600px) and (orientation:portrait){
+    .rotate-hint{ display:flex; }
   }
 </style>
 </head>
@@ -578,6 +598,10 @@
       </button>
     </div>
     <div class="table-scroll">
+      <div class="rotate-hint" id="rotateHint">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M16.48 2.52c3.27 1.55 5.61 4.72 5.99 8.48h1.5L20 15.5 16 11h1.94A8.5 8.5 0 0 0 15.11 5c-.36-.24-.4-.75-.15-1.1.25-.33.65-.5 1.02-.38zM7.52 21.48A9.99 9.99 0 0 1 1.53 13H.03L4 8.5 8 13H6.06A8.5 8.5 0 0 0 8.89 19c.36.24.4.75.15 1.1-.25.33-.65.5-1.02.38z" fill="currentColor"/></svg>
+        Rotate your phone sideways for the full week, all at once.
+      </div>
       <table class="tracker" id="trackerTable"></table>
     </div>
     <div class="empty-hint" id="emptyHint" style="display:none;">No habits yet this month — click "Add habit" to start your journal.</div>
@@ -585,7 +609,7 @@
 </main>
 
 <div class="toolbar">
-  <div class="hint">Your entries live in this browser tab only. Use <strong>Save file</strong> before closing to keep your data, and <strong>Load file</strong> to bring it back later.</div>
+  <div class="hint">Your entries auto-save in this browser. Use <strong>Save file</strong> for a backup or to move your data to another device, and <strong>Load file</strong> to bring it back.</div>
   <div class="actions">
     <button class="ghost-btn" id="printBtn">Print / Save as PDF</button>
     <button class="ghost-btn" id="exportBtn">Save file</button>
@@ -606,7 +630,10 @@
     { key:'dec', label:'December', short:'Dec', year:2026, month:11, start:1,  end:31 },
   ];
   const DOW = ['S','M','T','W','T','F','S'];
-  const TODAY = new Date(2026,7,18); // fixed "today" anchor matching journal start
+  const TODAY = new Date();
+  TODAY.setHours(0,0,0,0);
+
+  const STORAGE_KEY = 'habitTracker2026';
 
   // state[monthKey] = { habits: [{id,name,checks:{day:true}}] }
   const state = {};
@@ -616,6 +643,30 @@
 
   let activeKey = 'aug';
   let idCounter = 100;
+
+  function saveToStorage(){
+    try{
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    }catch(err){
+      // storage unavailable (private browsing, quota, etc.) — export/import still works
+      console.warn('Could not auto-save:', err);
+    }
+  }
+
+  function loadFromStorage(){
+    try{
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if(!raw) return;
+      const data = JSON.parse(raw);
+      MONTHS.forEach(m=>{
+        if(data[m.key] && Array.isArray(data[m.key].habits)){
+          state[m.key] = data[m.key];
+        }
+      });
+    }catch(err){
+      console.warn('Could not load saved data:', err);
+    }
+  }
 
   const checkSVG = '<svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.2 11.7L13 4.5" stroke="#204F38" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 
@@ -720,7 +771,7 @@
       input.type = 'text';
       input.placeholder = 'Type a habit…';
       input.value = h.name;
-      input.addEventListener('input', (e)=>{ h.name = e.target.value; renderNav(); updateStatLine(); });
+      input.addEventListener('input', (e)=>{ h.name = e.target.value; renderNav(); updateStatLine(); saveToStorage(); });
       const rm = document.createElement('button');
       rm.className = 'remove-habit';
       rm.title = 'Remove habit';
@@ -728,6 +779,7 @@
       rm.addEventListener('click', ()=>{
         state[m.key].habits = state[m.key].habits.filter(x=>x.id!==h.id);
         renderAll();
+        saveToStorage();
       });
       tdName.appendChild(input);
       tdName.appendChild(rm);
@@ -746,6 +798,7 @@
           btn.classList.toggle('checked', !!h.checks[d]);
           updateDoneCell(m,h);
           renderNav();
+          saveToStorage();
         });
         td.appendChild(btn);
         tr.appendChild(td);
@@ -790,6 +843,7 @@
     idCounter++;
     state[activeKey].habits.push({ id: activeKey+'-h'+idCounter, name:'', checks:{} });
     renderTable();
+    saveToStorage();
   });
 
   document.getElementById('printBtn').addEventListener('click', ()=> window.print());
@@ -823,6 +877,7 @@
           }
         });
         renderAll();
+        saveToStorage();
       }catch(err){
         alert('Could not read that file. Please choose a file saved from this tracker.');
       }
@@ -831,6 +886,7 @@
     e.target.value = '';
   });
 
+  loadFromStorage();
   renderAll();
 })();
 </script>
