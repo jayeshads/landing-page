@@ -357,7 +357,7 @@
     </div>
 
     <div class="perm-note" id="permNote">
-      🔔 Real browser/OS notification ke liye permission allow karo. Bina permission ke sirf yeh page ke andar preview dikhega.
+      🔔 Real phone/OS notification (system tray) ke liye 2 cheezein chahiye: (1) permission allow karo, aur (2) yeh page HTTPS pe host ho (GitHub Pages jaisa) — file khud khol ke (file://) se real notification kaam nahi karega, sirf in-page preview dikhega.
     </div>
 
     <button class="primary" id="permBtn">Notification permission allow karo</button>
@@ -393,6 +393,15 @@ let mode = 'fixed';
 let timerId = null;
 let nextFireAt = null;
 let msgIndex = 0;
+let swRegistration = null;
+
+// Register service worker so real phone notifications work (Android/Chrome
+// requires this — plain new Notification() alone often silently fails there).
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.register('sw.js')
+    .then(reg => { swRegistration = reg; })
+    .catch(err => { console.warn('Service worker registration failed:', err); });
+}
 
 document.querySelectorAll('.toggle-btn').forEach(btn=>{
   btn.addEventListener('click', ()=>{
@@ -434,23 +443,60 @@ function getMessages(){
 function fireNotification(){
   const sender = senderEl.value.trim() || 'Unknown';
   const msgs = getMessages();
-  const text = msgs[msgIndex % msgs.length];
+  const rawText = msgs[msgIndex % msgs.length];
   msgIndex++;
 
-  // real OS/browser notification
+  // real OS/phone notification (system tray)
   if('Notification' in window && Notification.permission === 'granted'){
+    const plainBody = toPlainNotificationText(rawText);
     try{
-      new Notification(sender, { body: text, tag: 'sms-notifier' });
+      if(swRegistration){
+        // Preferred path — works on Android Chrome and shows in the
+        // actual phone notification tray/system UI.
+        swRegistration.showNotification(sender, {
+          body: plainBody,
+          tag: 'sms-notifier',
+          icon: 'https://cdn-icons-png.flaticon.com/512/724/724664.png',
+          badge: 'https://cdn-icons-png.flaticon.com/512/724/724664.png',
+          vibrate: [120, 60, 120]
+        }).catch(()=>{
+          try{ new Notification(sender, { body: plainBody, tag: 'sms-notifier' }); }catch(e){}
+        });
+      } else {
+        new Notification(sender, { body: plainBody, tag: 'sms-notifier' });
+      }
     }catch(e){}
   }
 
   // in-page Android style preview
-  showAndroidBanner(sender, text);
+  showAndroidBanner(sender, rawText);
 
   // persist last fire (best-effort)
   try{
     window.storage && window.storage.set('sms_notifier_last_fire', String(Date.now()));
   }catch(e){}
+}
+
+// Strips our card-only formatting syntax (Tag::, AMT:, |Subtext) down to
+// plain readable text for the real system notification body.
+function toPlainNotificationText(rawText){
+  if(rawText.startsWith('AMT:')){
+    const parts = rawText.slice(4).split(':');
+    const amount = (parts.shift() || '').trim();
+    const desc = parts.join(':').trim();
+    return desc ? `${amount} — ${desc}` : amount;
+  }
+  let headline = rawText, sub = '';
+  if(rawText.includes('::')){
+    const [, rest] = rawText.split('::');
+    headline = rest;
+  }
+  if(headline.includes('|')){
+    const [h, s] = headline.split('|');
+    headline = h.trim();
+    sub = s.trim();
+  }
+  return sub ? `${headline} — ${sub}` : headline;
 }
 
 function showAndroidBanner(sender, rawText){
