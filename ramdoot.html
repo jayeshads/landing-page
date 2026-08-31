@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Swarajya Foundation — Nepal Flood Emergency Donation</title>
+<meta name="description" content="Donate to Swarajya Foundation's Nepal flood relief effort. 92% of funds go directly to shelter, clean water, medical aid, and rebuilding for flood-affected families.">
+<meta name="keywords" content="Nepal flood relief, donate Nepal, NGO donation, flood emergency, Swarajya Foundation">
+<meta property="og:title" content="Swarajya Foundation — Nepal Flood Emergency Appeal">
+<meta property="og:description" content="1.2M+ people affected across 14 districts. Your donation reaches families within 48 hours.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://swarajyafoundation.org/donate">
+<meta property="og:image" content="https://swarajyafoundation.org/assets/og-cover.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Swarajya Foundation — Nepal Flood Emergency Appeal">
+<meta name="twitter:description" content="Support flood-affected families in Nepal. Every rupee is put to direct use.">
+<link rel="canonical" href="https://swarajyafoundation.org/donate">
+<!-- NOTE FOR DEVELOPER: replace swarajyafoundation.org URLs above with the real live domain, and og:image with an actual 1200x630 cover image. -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --indigo:#122A4C;
+    --indigo-soft:#1F3E68;
+    --crimson:#A6192E;
+    --crimson-dark:#7E1223;
+    --slate:#5C7A94;
+    --cream:#FAF7F1;
+    --cream-dim:#F1ECE2;
+    --gold:#C9A227;
+    --ink:#1C2530;
+    --line:rgba(18,42,76,0.12);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  #donate{scroll-margin-top:130px;}
+  @media (max-width:600px){ #donate{scroll-margin-top:150px;} }
+  body{
+    font-family:'Inter', sans-serif;
+    color:var(--ink);
+    background:var(--cream);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{font-family:'Fraunces', serif; font-weight:600; letter-spacing:-0.01em; color:var(--indigo);}
+  a{color:inherit;}
+  img{max-width:100%; display:block;}
+  .wrap{max-width:1120px; margin:0 auto; padding:0 24px;}
+  .eyebrow{
+    text-transform:uppercase; letter-spacing:0.14em; font-size:12.5px; font-weight:600;
+    color:var(--crimson);
+  }
+
+  /* Skip link / focus */
+  a:focus-visible, button:focus-visible, input:focus-visible{
+    outline:3px solid var(--gold); outline-offset:2px;
+  }
+
+  /* Urgency banner */
+  .urgency-bar{
+    background:var(--indigo); color:#fff; text-align:center;
+    padding:9px 16px; font-size:13px; font-weight:500;
+    display:flex; align-items:center; justify-content:center; gap:8px; flex-wrap:wrap;
+  }
+  .urgency-bar strong{color:var(--gold); font-weight:700;}
+  .urgency-bar #countdownTimer{font-variant-numeric:tabular-nums; font-weight:700; color:#fff; background:rgba(255,255,255,0.14); padding:2px 8px; border-radius:4px;}
+
+  /* Header */
+  header{
+    position:sticky; top:0; z-index:40;
+    background:rgba(250,247,241,0.92); backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{display:flex; align-items:center; justify-content:space-between; padding:16px 24px;}
+  .brand{display:flex; align-items:center; gap:10px; font-family:'Fraunces', serif; font-weight:600; font-size:19px; color:var(--indigo);}
+  .brand-mark{width:30px; height:30px; flex-shrink:0;}
+  .nav-links{display:flex; gap:28px; font-size:14.5px; font-weight:500; color:var(--indigo-soft);}
+  .nav-links a{text-decoration:none; transition:color .2s;}
+  .nav-links a:hover{color:var(--crimson);}
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center; gap:8px;
+    padding:12px 24px; border-radius:4px; font-weight:600; font-size:14.5px;
+    text-decoration:none; border:none; cursor:pointer; transition:transform .15s ease, background .2s;
+  }
+  .btn-primary{background:var(--crimson); color:#fff;}
+  .btn-primary:hover{background:var(--crimson-dark); transform:translateY(-1px);}
+  .btn-ghost{background:transparent; color:var(--indigo); border:1.5px solid var(--line);}
+  .btn-ghost:hover{border-color:var(--indigo);}
+  @media (max-width:760px){ .nav-links{display:none;} }
+
+  .lang-switch{display:flex; background:var(--cream-dim); border-radius:6px; padding:3px; gap:2px;}
+  .lang-btn{
+    border:none; background:transparent; padding:6px 10px; border-radius:4px;
+    font-size:12.5px; font-weight:600; color:var(--slate); cursor:pointer; transition:all .15s;
+  }
+  .lang-btn.active{background:var(--indigo); color:#fff;}
+  @media (max-width:420px){ .lang-switch{display:none;} }
+
+  /* Hero */
+  .hero{
+    position:relative; overflow:hidden;
+    background:linear-gradient(180deg, var(--indigo) 0%, var(--indigo-soft) 100%);
+    color:#fff; padding:76px 0 0;
+  }
+  .hero-grid{display:grid; grid-template-columns:1.15fr 0.85fr; gap:48px; align-items:center; padding-bottom:64px;}
+  @media (max-width:860px){ .hero-grid{grid-template-columns:1fr; padding-bottom:40px;} }
+  .hero h1{color:#fff; font-size:clamp(32px,5vw,52px); line-height:1.08; max-width:620px;}
+  .hero p.lede{color:rgba(255,255,255,0.82); font-size:17px; max-width:520px; margin-top:18px;}
+  .hero-cta{display:flex; gap:14px; margin-top:32px; flex-wrap:wrap;}
+  .hero-stats{display:flex; gap:32px; margin-top:44px; flex-wrap:wrap;}
+  .hero-stat b{display:block; font-family:'Fraunces',serif; font-size:26px; color:var(--gold);}
+  .hero-stat span{font-size:13px; color:rgba(255,255,255,0.7);}
+
+  .waterline{width:100%; display:block; margin-top:8px;}
+
+  /* Donate card in hero */
+  .donate-card{
+    background:#fff; color:var(--ink); border-radius:10px; padding:28px;
+    box-shadow:0 20px 50px rgba(0,0,0,0.28);
+  }
+  .donate-card h3{font-size:19px; margin-bottom:4px;}
+  .donate-card .sub{font-size:13.5px; color:var(--slate); margin-bottom:18px;}
+  .amounts{display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-bottom:12px;}
+  .amounts button{
+    padding:12px 6px; border-radius:6px; border:1.5px solid var(--line); background:#fff;
+    font-weight:600; font-size:14.5px; color:var(--indigo); cursor:pointer; transition:all .15s;
+  }
+  .amounts button.active{border-color:var(--crimson); background:rgba(166,25,46,0.06); color:var(--crimson);}
+  .custom-amount{
+    display:flex; align-items:center; border:1.5px solid var(--line); border-radius:6px; margin-bottom:18px; overflow:hidden;
+  }
+  .custom-amount span{padding:12px 10px; background:var(--cream-dim); font-weight:600; font-size:14px; color:var(--slate);}
+  .custom-amount input{
+    border:none; padding:12px 10px; font-size:14.5px; width:100%; font-family:'Inter',sans-serif; color:var(--ink);
+  }
+  .custom-amount input:focus{outline:none;}
+  .donate-card .btn-primary{width:100%; padding:14px; font-size:15px;}
+  .fine-print{font-size:12px; color:var(--slate); margin-top:12px; text-align:center;}
+
+  /* Progress bar */
+  .progress-wrap{margin-bottom:20px;}
+  .progress-stats{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:8px;}
+  .progress-stats .raised{font-family:'Fraunces',serif; font-size:20px; color:var(--indigo); font-weight:600;}
+  .progress-stats .raised span{font-size:12.5px; color:var(--slate); font-family:'Inter',sans-serif; font-weight:500; margin-left:4px;}
+  .progress-stats .goal{font-size:12.5px; color:var(--slate);}
+  .progress-track{width:100%; height:8px; border-radius:99px; background:var(--cream-dim); overflow:hidden;}
+  .progress-fill{height:100%; border-radius:99px; background:linear-gradient(90deg, var(--crimson) 0%, var(--gold) 100%); width:0%; transition:width 1.2s ease;}
+  .progress-meta{display:flex; justify-content:space-between; margin-top:8px; font-size:12px; color:var(--slate);}
+
+  /* Payment method badges */
+  .pay-methods{display:flex; align-items:center; justify-content:center; gap:8px; flex-wrap:wrap; margin-top:14px;}
+  .pay-badge{
+    display:flex; align-items:center; justify-content:center;
+    height:26px; padding:0 10px; border-radius:4px; border:1px solid var(--line);
+    background:#fff; font-size:11px; font-weight:700; color:var(--slate); letter-spacing:0.02em;
+  }
+
+  /* Sections */
+  section{padding:76px 0;}
+  .section-head{max-width:640px; margin-bottom:44px;}
+  .section-head h2{font-size:clamp(26px,3.4vw,36px); margin-top:10px;}
+  .section-head p{color:var(--slate); font-size:16px; margin-top:12px;}
+
+  /* Impact grid */
+  .impact-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:10px; overflow:hidden;}
+  .impact-cell{background:#fff; padding:30px 24px;}
+  .impact-cell b{display:block; font-family:'Fraunces',serif; font-size:32px; color:var(--indigo);}
+  .impact-cell span{font-size:13.5px; color:var(--slate);}
+  @media (max-width:760px){ .impact-grid{grid-template-columns:1fr 1fr;} }
+
+  /* How help works */
+  .help-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:28px;}
+  @media (max-width:900px){ .help-grid{grid-template-columns:1fr 1fr;} }
+  @media (max-width:520px){ .help-grid{grid-template-columns:1fr;} }
+  .help-item .icon{
+    width:46px; height:46px; border-radius:50%; background:var(--cream-dim);
+    display:flex; align-items:center; justify-content:center; margin-bottom:16px;
+  }
+  .help-item h3{font-size:17px; margin-bottom:8px;}
+  .help-item p{font-size:14.5px; color:var(--slate);}
+
+  /* Trust band */
+  .trust{background:var(--cream-dim);}
+  .trust-grid{display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:start;}
+  @media (max-width:800px){ .trust-grid{grid-template-columns:1fr;} }
+  .trust-list{margin-top:18px; display:flex; flex-direction:column; gap:14px;}
+  .trust-list li{list-style:none; display:flex; gap:12px; font-size:14.5px; color:var(--ink);}
+  .trust-list li .dot{width:6px; height:6px; border-radius:50%; background:var(--crimson); margin-top:8px; flex-shrink:0;}
+  .quote-card{background:#fff; border-radius:10px; padding:28px; border:1px solid var(--line);}
+  .quote-card p{font-family:'Fraunces',serif; font-size:19px; color:var(--indigo); line-height:1.5;}
+  .quote-card .attrib{margin-top:16px; font-size:13.5px; color:var(--slate); font-weight:600; font-family:'Inter',sans-serif;}
+  .carousel-slide{display:none;}
+  .carousel-slide.active{display:block; animation:fadeIn .4s ease;}
+  @keyframes fadeIn{ from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);} }
+  .carousel-dots{display:flex; gap:8px; margin-top:22px;}
+  .dot-btn{width:8px; height:8px; border-radius:50%; border:none; background:var(--line); cursor:pointer; padding:0; transition:all .2s;}
+  .dot-btn.active{background:var(--crimson); width:22px; border-radius:99px;}
+
+  /* Final CTA */
+  .final-cta{
+    background:linear-gradient(135deg, var(--crimson) 0%, var(--crimson-dark) 100%);
+    color:#fff; text-align:center; border-radius:14px; padding:56px 32px; margin:0 24px;
+  }
+  .final-cta h2{color:#fff;}
+  .final-cta p{color:rgba(255,255,255,0.85); max-width:520px; margin:14px auto 28px;}
+  .final-cta .btn-primary{background:#fff; color:var(--crimson-dark);}
+  .final-cta .btn-primary:hover{background:var(--cream);}
+
+  /* Photo gallery */
+  .gallery-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:16px;}
+  @media (max-width:900px){ .gallery-grid{grid-template-columns:1fr 1fr;} }
+  @media (max-width:520px){ .gallery-grid{grid-template-columns:1fr 1fr; gap:10px;} }
+  .gallery-tile{
+    position:relative; aspect-ratio:4/5; border-radius:10px; overflow:hidden;
+    display:flex; align-items:flex-end; padding:14px;
+    background:linear-gradient(160deg, var(--indigo) 0%, var(--indigo-soft) 55%, var(--slate) 100%);
+  }
+  .gallery-tile:nth-child(2){background:linear-gradient(160deg, var(--crimson-dark) 0%, var(--crimson) 60%, #B85A3E 100%);}
+  .gallery-tile:nth-child(3){background:linear-gradient(160deg, #2B4A63 0%, var(--slate) 60%, #8AA6B8 100%);}
+  .gallery-tile:nth-child(4){background:linear-gradient(160deg, var(--indigo-soft) 0%, #3A5B85 55%, var(--gold) 130%);}
+  .gallery-tile .g-pattern{position:absolute; inset:0; opacity:0.18;}
+  .gallery-tile .g-caption{position:relative; color:#fff; font-size:13px; font-weight:600; line-height:1.3;}
+  .gallery-tile .g-caption small{display:block; font-weight:500; font-size:11px; opacity:0.75; margin-top:2px;}
+  .gallery-note{
+    margin-top:20px; font-size:13px; color:var(--slate); background:var(--cream-dim);
+    border-radius:8px; padding:12px 16px; border:1px dashed var(--line);
+  }
+
+  /* WhatsApp float button */
+  .whatsapp-float{
+    position:fixed; right:20px; bottom:20px; z-index:100;
+    width:54px; height:54px; border-radius:50%; background:#25D366;
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 10px 24px rgba(37,211,102,0.4); text-decoration:none;
+    transition:transform .2s ease;
+  }
+  .whatsapp-float:hover{transform:scale(1.08);}
+  @media (max-width:520px){
+    .whatsapp-float{right:14px; bottom:14px; width:48px; height:48px;}
+  }
+
+  /* FAQ */
+  .faq-list{display:flex; flex-direction:column; gap:10px; max-width:760px;}
+  .faq-item{border:1px solid var(--line); border-radius:8px; background:#fff; overflow:hidden;}
+  .faq-q{
+    width:100%; text-align:left; background:none; border:none; padding:18px 20px;
+    display:flex; justify-content:space-between; align-items:center; gap:12px;
+    font-family:'Inter',sans-serif; font-weight:600; font-size:15px; color:var(--indigo); cursor:pointer;
+  }
+  .faq-icon{font-size:20px; color:var(--crimson); flex-shrink:0; transition:transform .25s;}
+  .faq-item.open .faq-icon{transform:rotate(45deg);}
+  .faq-a{max-height:0; overflow:hidden; transition:max-height .3s ease;}
+  .faq-a p{padding:0 20px 18px; font-size:14.5px; color:var(--slate);}
+  .faq-item.open .faq-a{max-height:200px;}
+
+  /* Volunteer form */
+  .volunteer-form{max-width:640px; display:flex; flex-direction:column; gap:12px;}
+  .vf-row{display:grid; grid-template-columns:1fr 1fr; gap:12px;}
+  @media (max-width:560px){ .vf-row{grid-template-columns:1fr;} }
+  .volunteer-form input, .volunteer-form select{
+    padding:13px 14px; border:1.5px solid var(--line); border-radius:6px;
+    font-family:'Inter',sans-serif; font-size:14.5px; color:var(--ink); background:#fff;
+  }
+  .volunteer-form input:focus, .volunteer-form select:focus{outline:none; border-color:var(--indigo);}
+
+  /* Corporate band */
+  .corporate-band{
+    background:var(--indigo); color:#fff; border-radius:14px; padding:40px 36px;
+    display:flex; align-items:center; justify-content:space-between; gap:28px; flex-wrap:wrap;
+  }
+  .corporate-band h3{color:#fff; font-size:24px; margin:6px 0 8px;}
+  .corporate-band p{color:rgba(255,255,255,0.8); max-width:480px; font-size:14.5px;}
+  @media (max-width:700px){ .corporate-band{padding:30px 24px; text-align:left;} }
+
+  /* Policy modal */
+  .modal-overlay{
+    position:fixed; inset:0; background:rgba(18,42,76,0.55); z-index:200;
+    display:none; align-items:center; justify-content:center; padding:20px;
+  }
+  .modal-overlay.open{display:flex;}
+  .modal-box{
+    background:#fff; border-radius:12px; max-width:560px; width:100%; max-height:80vh; overflow-y:auto;
+    padding:32px; position:relative;
+  }
+  .modal-box h3{margin-bottom:14px;}
+  .modal-box p{font-size:14.5px; color:var(--slate); margin-bottom:12px;}
+  .modal-close{
+    position:absolute; top:16px; right:16px; width:30px; height:30px; border-radius:50%;
+    border:none; background:var(--cream-dim); color:var(--indigo); font-size:16px; cursor:pointer;
+  }
+
+  .donation-toast{
+    position:fixed; right:20px; left:auto; top:104px; bottom:auto; z-index:100;
+    display:flex; align-items:flex-start; gap:12px;
+    background:#fff; border-radius:10px; padding:14px 16px;
+    box-shadow:0 12px 32px rgba(18,42,76,0.18); border:1px solid var(--line);
+    max-width:320px;
+    opacity:0; transform:translateY(-16px) scale(0.98);
+    transition:opacity .35s ease, transform .35s ease;
+    pointer-events:none;
+  }
+  .donation-toast.show{opacity:1; transform:translateY(0) scale(1);}
+  .dt-icon{
+    width:34px; height:34px; border-radius:50%; background:rgba(166,25,46,0.08);
+    color:var(--crimson); display:flex; align-items:center; justify-content:center;
+    font-size:16px; flex-shrink:0;
+  }
+  .dt-line1{font-size:13.5px; color:var(--ink); line-height:1.4;}
+  .dt-line1 strong{color:var(--indigo);}
+  .dt-line2{font-size:11.5px; color:var(--slate); margin-top:3px;}
+  @media (max-width:520px){
+    .donation-toast{
+      right:10px; left:10px; top:96px; max-width:none;
+      padding:10px 12px; gap:9px; border-radius:9px;
+    }
+    .dt-icon{width:26px; height:26px; font-size:12px;}
+    .dt-line1{font-size:12px;}
+    .dt-line2{font-size:10.5px;}
+  }
+
+  footer{padding:48px 0 32px; border-top:1px solid var(--line);}
+  .foot-grid{display:flex; justify-content:space-between; flex-wrap:wrap; gap:24px; font-size:13.5px; color:var(--slate);}
+  .foot-links{display:flex; gap:20px;}
+  .foot-links a{text-decoration:none;}
+  .foot-links a:hover{color:var(--crimson);}
+
+  /* Mobile refinements */
+  @media (max-width:600px){
+    .wrap{padding:0 18px;}
+    section{padding:52px 0;}
+    .hero{padding-top:64px;}
+    .hero-cta{gap:10px;}
+    .hero-cta .btn{flex:1; min-width:140px;}
+    .hero-stats{gap:22px;}
+    .hero-stat b{font-size:22px;}
+    .donate-card{padding:22px 20px;}
+    .amounts{gap:8px;}
+    .amounts button{padding:11px 4px; font-size:13.5px;}
+    .final-cta{margin:0 14px; padding:40px 22px;}
+    .foot-grid{flex-direction:column; align-items:flex-start; gap:14px;}
+    .brand{font-size:17px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="urgency-bar">
+  Emergency relief phase closes in <span id="countdownTimer">--d --h --m</span> — <strong>your donation today reaches families this week</strong>
+</div>
+
+<header>
+  <div class="nav wrap">
+    <div class="brand">
+      <svg class="brand-mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M4 26 L14 10 L20 20 L26 6 L36 26 Z" fill="#122A4C"/>
+        <path d="M4 30 Q10 26 16 30 T28 30 T40 30 V36 H4 Z" fill="#A6192E"/>
+      </svg>
+      Swarajya Foundation
+    </div>
+    <nav class="nav-links">
+      <a href="#impact">Impact</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#how-it-helps">Where it goes</a>
+      <a href="#trust">Transparency</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div style="display:flex; align-items:center; gap:12px;">
+      <div class="lang-switch" id="langSwitch">
+        <button type="button" class="lang-btn active" data-lang="en">EN</button>
+        <button type="button" class="lang-btn" data-lang="hi">हिं</button>
+        <button type="button" class="lang-btn" data-lang="ne">ने</button>
+      </div>
+      <a href="#donate" class="btn btn-primary">Donate Now</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow" style="color:var(--gold);">Emergency Appeal — Nepal Floods 2026</p>
+      <h1>Families across Nepal need shelter, clean water, and hope — right now.</h1>
+      <p class="lede">Monsoon floods and landslides have displaced thousands of families across Nepal's river valleys. Swarajya Foundation's relief teams are on the ground providing food, clean water, and emergency shelter. Your donation reaches families within 48 hours.</p>
+      <div class="hero-cta">
+        <a href="#donate" class="btn btn-primary">Donate Now</a>
+        <a href="#how-it-helps" class="btn btn-ghost" style="color:#fff; border-color:rgba(255,255,255,0.35);">See where funds go</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><b>18,400+</b><span>People reached so far</span></div>
+        <div class="hero-stat"><b>32</b><span>Relief camps active</span></div>
+        <div class="hero-stat"><b>92%</b><span>Of funds go directly to relief</span></div>
+      </div>
+    </div>
+
+    <div class="donate-card" id="donate">
+      <h3>Make a donation</h3>
+      <p class="sub">Every contribution is directed to active flood relief operations in Nepal.</p>
+
+      <div class="progress-wrap">
+        <div class="progress-stats">
+          <div class="raised">₹18,42,600 <span>raised</span></div>
+          <div class="goal">of ₹25,00,000 goal</div>
+        </div>
+        <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+        <div class="progress-meta"><span>2,340 donors</span><span>74% funded</span></div>
+      </div>
+
+      <div class="amounts" id="amountSection">
+        <button type="button" class="amt-btn" data-amt="500">₹500</button>
+        <button type="button" class="amt-btn active" data-amt="1500">₹1,500</button>
+        <button type="button" class="amt-btn" data-amt="3000">₹3,000</button>
+        <button type="button" class="amt-btn" data-amt="5000">₹5,000</button>
+        <button type="button" class="amt-btn" data-amt="10000">₹10,000</button>
+        <button type="button" class="amt-btn" data-amt="custom">Custom</button>
+      </div>
+      <div class="custom-amount" id="customWrap" style="display:none;">
+        <span>₹</span>
+        <input type="number" min="1" id="customInput" placeholder="Enter amount">
+      </div>
+      <button type="button" class="btn btn-primary" id="donateSubmit">Donate ₹1,500 Now</button>
+      <p class="fine-print">Secure payment · Tax-exemption receipt emailed instantly</p>
+      <div class="pay-methods">
+        <span class="pay-badge">UPI</span>
+        <span class="pay-badge">VISA</span>
+        <span class="pay-badge">Mastercard</span>
+        <span class="pay-badge">RuPay</span>
+        <span class="pay-badge">Net Banking</span>
+      </div>
+    </div>
+  </div>
+
+  <svg class="waterline" viewBox="0 0 1440 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,40 C240,80 480,0 720,35 C960,70 1200,10 1440,45 L1440,90 L0,90 Z" fill="#FAF7F1"/>
+  </svg>
+</section>
+
+<section id="impact">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">The situation</p>
+      <h2>The scale of the flooding</h2>
+      <p>Heavy monsoon rainfall has caused rivers across southern and central Nepal to overflow, sweeping away homes, roads, and farmland.</p>
+    </div>
+    <div class="impact-grid">
+      <div class="impact-cell"><b>1.2M+</b><span>People affected across 14 districts</span></div>
+      <div class="impact-cell"><b>64,000</b><span>Homes damaged or destroyed</span></div>
+      <div class="impact-cell"><b>210+</b><span>Villages currently cut off</span></div>
+      <div class="impact-cell"><b>6 weeks</b><span>Estimated relief operation window</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="gallery">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">From the field</p>
+      <h2>Relief work in progress</h2>
+      <p>Snapshots from ongoing distribution drives across the worst-affected districts.</p>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-tile">
+        <div class="g-caption">Relief camp setup<small>Sarlahi district</small></div>
+      </div>
+      <div class="gallery-tile">
+        <div class="g-caption">Food & water distribution<small>Rautahat district</small></div>
+      </div>
+      <div class="gallery-tile">
+        <div class="g-caption">Medical camp<small>Bardiya district</small></div>
+      </div>
+      <div class="gallery-tile">
+        <div class="g-caption">Volunteer team on ground<small>Kathmandu valley</small></div>
+      </div>
+    </div>
+    <p class="gallery-note">Placeholder tiles — replace with real photos from your relief camps for maximum donor trust. Recommended size: 800×1000px, JPG or WebP.</p>
+  </div>
+</section>
+
+<section id="how-it-helps" style="background:var(--cream-dim);">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Where your money goes</p>
+      <h2>Every rupee is put to direct use</h2>
+      <p>Swarajya Foundation's field teams work with local volunteers to move resources quickly and transparently.</p>
+    </div>
+    <div class="help-grid">
+      <div class="help-item">
+        <div class="icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 12 L12 4 L21 12" stroke="#A6192E" stroke-width="2" stroke-linecap="round"/><path d="M6 11 V20 H18 V11" stroke="#A6192E" stroke-width="2"/></svg>
+        </div>
+        <h3>Emergency shelter</h3>
+        <p>Tents and temporary housing materials for displaced families.</p>
+      </div>
+      <div class="help-item">
+        <div class="icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 3 C12 3 6 10 6 14 A6 6 0 0 0 18 14 C18 10 12 3 12 3 Z" stroke="#A6192E" stroke-width="2"/></svg>
+        </div>
+        <h3>Clean water</h3>
+        <p>Water purification and safe drinking supplies to prevent disease outbreaks.</p>
+      </div>
+      <div class="help-item">
+        <div class="icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="16" height="16" rx="2" stroke="#A6192E" stroke-width="2"/><path d="M8 12 H16 M12 8 V16" stroke="#A6192E" stroke-width="2"/></svg>
+        </div>
+        <h3>Medical aid</h3>
+        <p>Mobile health camps treating injuries and waterborne illness.</p>
+      </div>
+      <div class="help-item">
+        <div class="icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 20 V10 L12 4 L20 10 V20" stroke="#A6192E" stroke-width="2"/><path d="M9 20 V14 H15 V20" stroke="#A6192E" stroke-width="2"/></svg>
+        </div>
+        <h3>Rebuilding homes</h3>
+        <p>Long-term reconstruction support once immediate danger has passed.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="trust" class="trust">
+  <div class="wrap trust-grid">
+    <div>
+      <p class="eyebrow">Transparency</p>
+      <h2>Why donors trust Swarajya Foundation</h2>
+      <ul class="trust-list">
+        <li><span class="dot"></span> Registered NGO with public annual financial reports.</li>
+        <li><span class="dot"></span> 80G tax-exemption certificate provided with every receipt.</li>
+        <li><span class="dot"></span> Field updates and photo reports shared with donors monthly.</li>
+        <li><span class="dot"></span> Local Nepali volunteers lead on-ground distribution, ensuring aid reaches the right families.</li>
+      </ul>
+    </div>
+    <div class="quote-card">
+      <div class="carousel-track" id="testimonialTrack">
+        <div class="carousel-slide active">
+          <p>"Within two days of the water rising, the relief team reached our village with food and clean water. It gave us a way to start again."</p>
+          <p class="attrib">— Flood-affected resident, Sarlahi district</p>
+        </div>
+        <div class="carousel-slide">
+          <p>"We lost our home, but the medical camp treated my daughter's infection within hours. I don't know what we would have done otherwise."</p>
+          <p class="attrib">— Flood-affected parent, Rautahat district</p>
+        </div>
+        <div class="carousel-slide">
+          <p>"The volunteers didn't just drop off supplies — they stayed, listened, and helped us plan what comes next."</p>
+          <p class="attrib">— Village committee member, Bardiya district</p>
+        </div>
+      </div>
+      <div class="carousel-dots" id="testimonialDots">
+        <button class="dot-btn active" data-slide="0" aria-label="Testimonial 1"></button>
+        <button class="dot-btn" data-slide="1" aria-label="Testimonial 2"></button>
+        <button class="dot-btn" data-slide="2" aria-label="Testimonial 3"></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Common questions</p>
+      <h2>Frequently asked questions</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button type="button" class="faq-q">
+          Where exactly does my donation go?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p>100% of donations go into the relief fund. Roughly 92% is spent directly on shelter, food, water, and medical supplies; the remaining share covers logistics such as transport and storage needed to get aid to remote villages.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-q">
+          Will I get a tax exemption receipt?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p>Yes. Every donation above ₹500 receives an 80G tax-exemption receipt via email within minutes of successful payment.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-q">
+          Is my payment secure?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p>Yes. All payments are processed through encrypted, PCI-DSS compliant payment gateways. We never store your card details.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-q">
+          Can I get a refund if I donated by mistake?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p>Refund requests made within 24 hours of an accidental or duplicate donation are honoured. Write to us at the contact email in the footer with your transaction ID.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-q">
+          How can I track how funds are being used?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p>Donors receive monthly email updates with photos and spending summaries from the field. A public transparency report is also published quarterly.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="volunteer" style="background:var(--cream-dim);">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Get involved</p>
+      <h2>Can't donate right now? Volunteer your time instead.</h2>
+      <p>We need hands for packing relief kits, coordinating logistics, and on-ground distribution in Nepal and neighbouring Indian border districts.</p>
+    </div>
+    <form class="volunteer-form" id="volunteerForm">
+      <div class="vf-row">
+        <input type="text" placeholder="Full name" required>
+        <input type="tel" placeholder="Phone number" required>
+      </div>
+      <div class="vf-row">
+        <input type="email" placeholder="Email address" required>
+        <input type="text" placeholder="City" required>
+      </div>
+      <select required>
+        <option value="" disabled selected>How would you like to help?</option>
+        <option>On-ground distribution (Nepal / border districts)</option>
+        <option>Packing & logistics support</option>
+        <option>Remote / social media support</option>
+        <option>Skilled volunteering (medical, engineering, etc.)</option>
+      </select>
+      <button type="submit" class="btn btn-primary" style="margin-top:14px; width:100%;">Sign up to volunteer</button>
+      <p class="fine-print">We'll reach out within 3 working days. No payment required for this form.</p>
+    </form>
+  </div>
+</section>
+
+<section id="corporate">
+  <div class="wrap">
+    <div class="corporate-band">
+      <div>
+        <p class="eyebrow" style="color:var(--gold);">For organisations</p>
+        <h3>Corporate & CSR partnerships</h3>
+        <p>Match employee donations, sponsor a relief camp, or fulfil your CSR obligation under Section 135 through a transparent, audited partner.</p>
+      </div>
+      <a href="mailto:partnerships@swarajyafoundation.org" class="btn btn-ghost" style="color:#fff; border-color:rgba(255,255,255,0.4); white-space:nowrap;">Talk to our CSR team</a>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="final-cta">
+    <p class="eyebrow" style="color:rgba(255,255,255,0.85);">Act today</p>
+    <h2>Families are waiting on the next shipment of supplies</h2>
+    <p>A donation today moves directly into tomorrow's relief convoy.</p>
+    <a href="#donate" class="btn btn-primary">Donate Now</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-grid">
+    <div>© 2026 Swarajya Foundation. Registered Charitable Trust.</div>
+    <div class="foot-links">
+      <a href="#trust">Transparency Report</a>
+      <a href="mailto:contact@swarajyafoundation.org">Contact</a>
+      <a href="#" data-modal="privacyModal">Privacy Policy</a>
+      <a href="#" data-modal="refundModal">Refund Policy</a>
+    </div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="privacyModal">
+  <div class="modal-box">
+    <button class="modal-close" data-close-modal>&times;</button>
+    <h3>Privacy Policy</h3>
+    <p>Swarajya Foundation collects only the information needed to process your donation and issue a tax receipt — your name, email, phone number, and payment confirmation details. We never sell or share donor data with third parties for marketing purposes.</p>
+    <p>Payment information is handled entirely by our PCI-DSS compliant payment gateway partner; we do not store card or UPI credentials on our servers.</p>
+    <p>You may request access to, correction of, or deletion of your personal data at any time by writing to the contact email in our footer.</p>
+    <p style="font-size:12.5px; font-style:italic;">Placeholder policy — have this reviewed by your legal counsel before publishing, and update it to match your actual data practices and applicable law.</p>
+  </div>
+</div>
+
+<div class="modal-overlay" id="refundModal">
+  <div class="modal-box">
+    <button class="modal-close" data-close-modal>&times;</button>
+    <h3>Refund Policy</h3>
+    <p>Donations to Swarajya Foundation are generally non-refundable, as funds are often committed to relief operations quickly.</p>
+    <p>However, if you made a donation in error — such as a duplicate transaction or an incorrect amount — please contact us within 24 hours of the transaction with your transaction ID and registered email, and we will review the request.</p>
+    <p>Approved refunds are processed back to the original payment method within 7–10 working days.</p>
+    <p style="font-size:12.5px; font-style:italic;">Placeholder policy — have this reviewed by your legal counsel before publishing.</p>
+  </div>
+</div>
+
+
+<a class="whatsapp-float" href="https://wa.me/?text=Nepal%20floods%20have%20displaced%20lakhs%20of%20families.%20Support%20Swarajya%20Foundation%27s%20relief%20effort%20%E2%80%94%20every%20rupee%20helps%3A%20https%3A%2F%2Fswarajyafoundation.org%2Fdonate" target="_blank" rel="noopener" aria-label="Share on WhatsApp">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2zm0 18.14h-.01c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.37c0-4.54 3.7-8.24 8.26-8.24 2.2 0 4.27.86 5.83 2.42a8.18 8.18 0 0 1 2.42 5.83c0 4.55-3.7 8.24-8.25 8.24zm4.52-6.17c-.25-.12-1.47-.72-1.7-.81-.23-.08-.4-.12-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.04-.38-1.98-1.22-.73-.65-1.23-1.46-1.37-1.71-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.15.16-.25.25-.42.08-.17.04-.31-.02-.43-.06-.12-.56-1.36-.77-1.86-.2-.48-.41-.42-.56-.43-.14-.01-.31-.01-.48-.01a.93.93 0 0 0-.67.31c-.23.25-.87.85-.87 2.08s.9 2.41 1.02 2.58c.12.17 1.77 2.7 4.29 3.79.6.26 1.07.41 1.43.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.14-1.18-.06-.1-.23-.16-.48-.28z"/></svg>
+</a>
+
+<script>
+  const amtBtns = document.querySelectorAll('.amt-btn');
+  const customWrap = document.getElementById('customWrap');
+  const customInput = document.getElementById('customInput');
+  const donateSubmit = document.getElementById('donateSubmit');
+  let currentAmount = 1500;
+
+  amtBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      amtBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      if (btn.dataset.amt === 'custom') {
+        customWrap.style.display = 'flex';
+        customInput.focus();
+        currentAmount = parseInt(customInput.value) || 0;
+      } else {
+        customWrap.style.display = 'none';
+        currentAmount = parseInt(btn.dataset.amt);
+      }
+      updateButtonLabel();
+    });
+  });
+
+  customInput.addEventListener('input', () => {
+    currentAmount = parseInt(customInput.value) || 0;
+    updateButtonLabel();
+  });
+
+  function updateButtonLabel(){
+    const amtText = currentAmount > 0 ? '₹' + currentAmount.toLocaleString('en-IN') : '₹0';
+    donateSubmit.textContent = `Donate ${amtText} Now`;
+  }
+
+  donateSubmit.addEventListener('click', () => {
+    if (currentAmount <= 0){
+      customInput.focus();
+      return;
+    }
+    // NOTE FOR DEVELOPER: connect this to your payment gateway
+    // (Razorpay / Instamojo / Stripe etc.) using currentAmount.
+    alert(`Thank you! Proceeding to secure payment for ₹${currentAmount.toLocaleString('en-IN')}.\n\n(Connect this button to your payment gateway to go live.)`);
+  });
+
+  /* ---- Progress bar animation ---- */
+  window.addEventListener('DOMContentLoaded', () => {
+    const fill = document.getElementById('progressFill');
+    // NOTE FOR DEVELOPER: replace 74 with (raised / goal * 100) pulled from your backend/CRM.
+    setTimeout(() => { fill.style.width = '74%'; }, 300);
+  });
+
+  /* ---- Live donation notification popup ---- */
+  const donorFirstNames = ['Rahul','Priya','Amit','Sneha','Vikram','Anjali','Rohan','Neha','Karan','Divya','Suresh','Meera','Arjun','Pooja','Sanjay','Kavita','Ritu','Manish','Ananya','Deepak'];
+  const donorLastInitials = ['S.','K.','R.','M.','P.','T.','G.','V.','N.','D.'];
+  const cities = ['Delhi','Mumbai','Jaipur','Pune','Lucknow','Bengaluru','Ahmedabad','Chandigarh','Kathmandu','Kolkata'];
+  const sampleAmounts = [500, 1000, 1500, 2000, 3000, 5000, 250, 750];
+
+  function buildToast(){
+    const name = donorFirstNames[Math.floor(Math.random() * donorFirstNames.length)] + ' ' + donorLastInitials[Math.floor(Math.random() * donorLastInitials.length)];
+    const city = cities[Math.floor(Math.random() * cities.length)];
+    const amt = sampleAmounts[Math.floor(Math.random() * sampleAmounts.length)];
+    const minutesAgo = Math.floor(Math.random() * 8) + 1;
+
+    const toast = document.createElement('div');
+    toast.className = 'donation-toast';
+    toast.innerHTML = `
+      <div class="dt-icon">❤</div>
+      <div class="dt-body">
+        <div class="dt-line1"><strong>${name}</strong> from ${city} donated <strong>₹${amt.toLocaleString('en-IN')}</strong></div>
+        <div class="dt-line2">${minutesAgo} min ago · Verified donation</div>
+      </div>
+    `;
+    document.body.appendChild(toast);
+
+    requestAnimationFrame(() => toast.classList.add('show'));
+
+    setTimeout(() => {
+      toast.classList.remove('show');
+      setTimeout(() => toast.remove(), 400);
+    }, 4500);
+  }
+
+  // Show the first one shortly after load, then repeat at random intervals
+  setTimeout(buildToast, 2500);
+  setInterval(() => buildToast(), 7000 + Math.random() * 5000);
+
+  /* ---- Countdown timer ---- */
+  // NOTE FOR DEVELOPER: set this to the actual relief-phase end date.
+  const deadline = new Date();
+  deadline.setDate(deadline.getDate() + 18);
+  function updateCountdown(){
+    const now = new Date();
+    const diff = deadline - now;
+    const el = document.getElementById('countdownTimer');
+    if (diff <= 0){ el.textContent = 'ending soon'; return; }
+    const d = Math.floor(diff / (1000*60*60*24));
+    const h = Math.floor((diff / (1000*60*60)) % 24);
+    const m = Math.floor((diff / (1000*60)) % 60);
+    el.textContent = `${d}d ${h}h ${m}m`;
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 60000);
+
+  /* ---- Testimonial carousel ---- */
+  const slides = document.querySelectorAll('#testimonialTrack .carousel-slide');
+  const dots = document.querySelectorAll('#testimonialDots .dot-btn');
+  let activeSlide = 0;
+  function showSlide(i){
+    slides.forEach((s, idx) => s.classList.toggle('active', idx === i));
+    dots.forEach((d, idx) => d.classList.toggle('active', idx === i));
+    activeSlide = i;
+  }
+  dots.forEach(dot => {
+    dot.addEventListener('click', () => showSlide(parseInt(dot.dataset.slide)));
+  });
+  setInterval(() => showSlide((activeSlide + 1) % slides.length), 6000);
+
+  /* ---- FAQ accordion ---- */
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item');
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+      if (!wasOpen) item.classList.add('open');
+    });
+  });
+
+  /* ---- Volunteer form ---- */
+  const volunteerForm = document.getElementById('volunteerForm');
+  if (volunteerForm){
+    volunteerForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      // NOTE FOR DEVELOPER: wire this up to your backend / Google Sheet / CRM.
+      alert('Thank you for signing up! Our volunteer coordinator will reach out within 3 working days.');
+      volunteerForm.reset();
+    });
+  }
+
+  /* ---- Policy modals ---- */
+  document.querySelectorAll('[data-modal]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      document.getElementById(link.dataset.modal).classList.add('open');
+    });
+  });
+  document.querySelectorAll('[data-close-modal]').forEach(btn => {
+    btn.addEventListener('click', () => btn.closest('.modal-overlay').classList.remove('open'));
+  });
+  document.querySelectorAll('.modal-overlay').forEach(overlay => {
+    overlay.addEventListener('click', (e) => { if (e.target === overlay) overlay.classList.remove('open'); });
+  });
+
+  /* ---- Language toggle (EN / HI / NE) ---- */
+  const i18n = {
+    en: {
+      navImpact:'Impact', navGallery:'Gallery', navWhere:'Where it goes', navTrust:'Transparency', navFaq:'FAQ', navDonate:'Donate Now',
+      heroEyebrow:'Emergency Appeal — Nepal Floods 2026',
+      heroH1:'Families across Nepal need shelter, clean water, and hope — right now.',
+      heroLede:"Monsoon floods and landslides have displaced thousands of families across Nepal's river valleys. Swarajya Foundation's relief teams are on the ground providing food, clean water, and emergency shelter. Your donation reaches families within 48 hours.",
+      heroCta1:'Donate Now', heroCta2:'See where funds go',
+      stat1:'People reached so far', stat2:'Relief camps active', stat3:'Of funds go directly to relief',
+      donateH3:'Make a donation', donateSub:'Every contribution is directed to active flood relief operations in Nepal.',
+      finePrint:'Secure payment · Tax-exemption receipt emailed instantly'
+    },
+    hi: {
+      navImpact:'प्रभाव', navGallery:'गैलरी', navWhere:'पैसा कहाँ जाता है', navTrust:'पारदर्शिता', navFaq:'सवाल-जवाब', navDonate:'दान करें',
+      heroEyebrow:'आपातकालीन अपील — नेपाल बाढ़ 2026',
+      heroH1:'नेपाल भर के परिवारों को अभी आश्रय, स्वच्छ पानी और उम्मीद की ज़रूरत है।',
+      heroLede:'मानसून की बाढ़ और भूस्खलन ने नेपाल की नदी घाटियों में हज़ारों परिवारों को बेघर कर दिया है। स्वराज्य फाउंडेशन की राहत टीमें भोजन, स्वच्छ पानी और आपातकालीन आश्रय पहुँचा रही हैं। आपका दान 48 घंटों के भीतर परिवारों तक पहुँचता है।',
+      heroCta1:'दान करें', heroCta2:'देखें पैसा कहाँ जाता है',
+      stat1:'अब तक मदद पहुँचाए गए लोग', stat2:'सक्रिय राहत शिविर', stat3:'फंड सीधे राहत कार्य में जाता है',
+      donateH3:'दान करें', donateSub:'हर योगदान नेपाल में सक्रिय बाढ़ राहत कार्यों में लगाया जाता है।',
+      finePrint:'सुरक्षित भुगतान · कर-छूट रसीद तुरंत ईमेल की जाती है'
+    },
+    ne: {
+      navImpact:'प्रभाव', navGallery:'ग्यालरी', navWhere:'पैसा कहाँ जान्छ', navTrust:'पारदर्शिता', navFaq:'प्रश्नहरू', navDonate:'दान गर्नुहोस्',
+      heroEyebrow:'आपतकालीन अपिल — नेपाल बाढी २०२६',
+      heroH1:'नेपालभरका परिवारहरूलाई अहिले आश्रय, सफा पानी र आशा चाहिएको छ।',
+      heroLede:'मनसुनको बाढी र पहिरोले नेपालका नदी उपत्यकाहरूमा हजारौं परिवारलाई विस्थापित गरेको छ। स्वराज्य फाउन्डेसनका राहत टोलीहरूले खाना, सफा पानी र आपतकालीन आश्रय पुर्‍याइरहेका छन्। तपाईंको दान ४८ घण्टाभित्र परिवारहरूसम्म पुग्छ।',
+      heroCta1:'दान गर्नुहोस्', heroCta2:'पैसा कहाँ जान्छ हेर्नुहोस्',
+      stat1:'अहिलेसम्म पुगेका मानिसहरू', stat2:'सक्रिय राहत शिविरहरू', stat3:'रकम सिधै राहतमा जान्छ',
+      donateH3:'दान गर्नुहोस्', donateSub:'हरेक योगदान नेपालमा सक्रिय बाढी राहत कार्यमा प्रयोग हुन्छ।',
+      finePrint:'सुरक्षित भुक्तानी · कर-छुट रसिद तुरुन्तै इमेल गरिन्छ'
+    }
+  };
+
+  const i18nMap = {
+    '.nav-links a[href="#impact"]':'navImpact',
+    '.nav-links a[href="#gallery"]':'navGallery',
+    '.nav-links a[href="#how-it-helps"]':'navWhere',
+    '.nav-links a[href="#trust"]':'navTrust',
+    '.nav-links a[href="#faq"]':'navFaq',
+    '.hero .eyebrow':'heroEyebrow',
+    '.hero h1':'heroH1',
+    '.hero p.lede':'heroLede',
+    '.hero-cta .btn-primary':'heroCta1',
+    '.hero-cta .btn-ghost':'heroCta2',
+    '.hero-stat:nth-child(1) span':'stat1',
+    '.hero-stat:nth-child(2) span':'stat2',
+    '.hero-stat:nth-child(3) span':'stat3',
+    '.donate-card h3':'donateH3',
+    '.donate-card .sub':'donateSub',
+    '.donate-card .fine-print':'finePrint'
+  };
+
+  function applyLang(lang){
+    Object.keys(i18nMap).forEach(selector => {
+      const node = document.querySelector(selector);
+      if (node) node.textContent = i18n[lang][i18nMap[selector]];
+    });
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+    document.documentElement.lang = lang;
+  }
+
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.addEventListener('click', () => applyLang(btn.dataset.lang));
+  });
+  // NOTE FOR DEVELOPER: FAQ answers, testimonials, gallery captions, and the volunteer
+  // form are currently English-only. Extend the i18n dictionary above to translate them.
+</script>
+
+<!-- ============================================================
+  ANALYTICS PLACEHOLDER (Google Analytics + Meta Pixel)
+  Uncomment and insert your own IDs before going live.
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXX');
+  </script>
+
+  <script>
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+    document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', 'YOUR_PIXEL_ID');
+    fbq('track', 'PageView');
+  </script>
+============================================================= -->
+
+</body>
+</html>
