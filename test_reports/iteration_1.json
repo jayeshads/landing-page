@@ -1,0 +1,35 @@
+{
+  "summary": "Completed regression testing after overlay fix. All core functionality verified: dashboard loads without errors, campaigns table renders 11 rows with horizontal/vertical scroll, data editor drawer opens and closes correctly, JSON editing works, Apply button is clickable without force=True (overlay fix confirmed working), table updates visibly after data changes, and all interactive controls (checkboxes, toggles) function correctly.",
+  "backend_issues": {},
+  "frontend_issues": {},
+  "passed_tests": [
+    "Dashboard loads at root without red screen or console runtime errors",
+    "Campaigns table renders exactly 11 rows",
+    "Table supports horizontal scrolling",
+    "Table supports vertical scrolling",
+    "Edit table data button opens drawer successfully",
+    "JSON textarea is editable",
+    "Campaign name can be modified in JSON",
+    "Apply data button is clickable WITHOUT force=True (overlay fix verified)",
+    "Drawer closes after applying changes",
+    "Table updates visibly with changed campaign name",
+    "Row checkboxes toggle correctly",
+    "Row toggles switch correctly"
+  ],
+  "test_report_links": [
+    ".screenshots/01_dashboard_loaded.png",
+    ".screenshots/02_table_rendered.png",
+    ".screenshots/03_drawer_opened.png",
+    ".screenshots/04_json_edited.png",
+    ".screenshots/05_after_apply.png",
+    ".screenshots/05b_table_updated.png",
+    ".screenshots/06_checkboxes_toggles.png"
+  ],
+  "action_item_for_main_agent": "",
+  "updated_files": [],
+  "success_percentage": {
+    "frontend": "100%"
+  },
+  "should_call_test_agent_after_fix": false,
+  "should_main_agent_test_itself": false
+}
