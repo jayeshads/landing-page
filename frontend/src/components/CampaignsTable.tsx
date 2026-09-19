@@ -32,37 +32,13 @@ const statusClass = (tone: CampaignRow["deliveryTone"]) => {
   return "error";
 };
 
-const EditableInput = ({
-  value,
-  onChange,
-  className,
-  testId,
-  align,
-}: {
-  value: string;
-  onChange: (value: string) => void;
-  className?: string;
-  testId: string;
-  align?: "left" | "right" | "center";
-}) => (
-  <input
-    className={`inline-cell-input ${className || ""} ${align === "right" ? "right" : ""}`}
-    value={value || ""}
-    onChange={(event) => onChange(event.target.value)}
-    data-testid={testId}
-    aria-label={testId}
-  />
-);
-
 const CellContent = ({
   row,
   column,
-  onRowChange,
   onEditRow,
 }: {
   row: CampaignRow;
   column: CampaignColumn;
-  onRowChange: (id: string, patch: Partial<CampaignRow>) => void;
   onEditRow: (row: CampaignRow) => void;
 }) => {
   if (column.key === "select" || column.key === "toggle") return null;
@@ -70,12 +46,7 @@ const CellContent = ({
   if (column.key === "campaign") {
     return (
       <div className="campaign-name-cell">
-        <EditableInput
-          value={row.campaign}
-          onChange={(value) => onRowChange(row.id, { campaign: value })}
-          className="campaign-link-input"
-          testId={`inline-edit-${row.id}-campaign`}
-        />
+        <span className="campaign-link" data-testid={`campaign-name-${row.id}`}>{row.campaign}</span>
         <button className="campaign-inline-actions" onClick={() => onEditRow(row)} data-testid={`open-row-editor-${row.id}`}>
           <FileBarChart size={12} /> Edit / Duplicate
         </button>
@@ -85,19 +56,15 @@ const CellContent = ({
 
   if (column.key === "delivery") {
     return (
-      <button className="delivery-cell editable-delivery" onClick={() => onEditRow(row)} data-testid={`delivery-editor-${row.id}`}>
+      <div className="delivery-cell" data-testid={`delivery-display-${row.id}`}>
         <span className={`delivery-dot ${statusClass(row.deliveryTone)}`} />
         <span>{row.delivery}</span>
-      </button>
+      </div>
     );
   }
 
   if (column.key === "actions" && row.actions) {
-    return (
-      <button className="recommendation-pill" onClick={() => onEditRow(row)} data-testid={`recommendation-${row.id}`}>
-        ⓘ {row.actions}
-      </button>
-    );
+    return <span className="recommendation-pill" data-testid={`recommendation-${row.id}`}>ⓘ {row.actions}</span>;
   }
 
   const value = String(row[column.key as keyof CampaignRow] ?? "");
@@ -105,23 +72,9 @@ const CellContent = ({
   const subValue = subField ? String(row[subField] ?? "") : "";
 
   return (
-    <div className={`cell-stack ${column.align === "right" ? "right" : ""}`}>
-      <EditableInput
-        value={value}
-        onChange={(next) => onRowChange(row.id, { [column.key]: next } as Partial<CampaignRow>)}
-        className="primary-cell-text"
-        testId={`inline-edit-${row.id}-${String(column.key)}`}
-        align={column.align}
-      />
-      {subField && (
-        <EditableInput
-          value={subValue}
-          onChange={(next) => onRowChange(row.id, { [subField]: next } as Partial<CampaignRow>)}
-          className="secondary-cell-text"
-          testId={`inline-edit-${row.id}-${String(subField)}`}
-          align={column.align}
-        />
-      )}
+    <div className={`cell-stack ${column.align === "right" ? "right" : ""}`} data-testid={`readonly-cell-${row.id}-${String(column.key)}`}>
+      <span className="primary-cell-text">{value || "—"}</span>
+      {subField && subValue && <span className="secondary-cell-text">{subValue}</span>}
     </div>
   );
 };
@@ -192,7 +145,6 @@ export const CampaignsTable = ({ rows, onRowsChange, onRowChange, onEditRow }: C
                       className={`${column.sticky ? "sticky-col" : ""} ${column.align === "right" ? "align-right" : ""}`}
                       style={{ width: column.width, minWidth: column.width, ...stickyStyle }}
                       data-testid={`campaigns-table-cell-${row.id}-${String(column.key)}`}
-                      onDoubleClick={() => onEditRow(row)}
                     >
                       {column.key === "select" ? (
                         <Checkbox
@@ -211,7 +163,7 @@ export const CampaignsTable = ({ rows, onRowsChange, onRowChange, onEditRow }: C
                           aria-label={`Toggle ${row.campaign}`}
                         />
                       ) : (
-                        <CellContent row={row} column={column} onRowChange={onRowChange} onEditRow={onEditRow} />
+                        <CellContent row={row} column={column} onEditRow={onEditRow} />
                       )}
                     </td>
                   );

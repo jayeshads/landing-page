@@ -1,22 +1,14 @@
 [
   {
-    "content": "Analyze latest Meta Ads screenshot and update pixel-perfect target details",
+    "content": "Remove inline cell editing so data edits only happen through Edit controls",
     "status": "completed"
   },
   {
-    "content": "Add localStorage persistence for campaigns and editable date",
+    "content": "Polish table visual details for latest Meta Ads screenshot",
     "status": "completed"
   },
   {
-    "content": "Add full campaign create/edit drawer plus inline editable table cells",
-    "status": "completed"
-  },
-  {
-    "content": "Refine table layout, column order, right rail, and toolbar to match latest screenshot",
-    "status": "completed"
-  },
-  {
-    "content": "Build and run frontend testing agent for persistence/create/edit/toggles/scroll",
+    "content": "Build and run testing agent for edit-button-only flow",
     "status": "completed"
   }
 ]

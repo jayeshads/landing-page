@@ -739,6 +739,25 @@ textarea {
   gap: 3px;
 }
 
+.campaign-inline-actions {
+  border: 0;
+  background: transparent;
+  padding: 0;
+  width: fit-content;
+  cursor: pointer;
+}
+
+.campaign-inline-actions:hover {
+  color: #0a74b8;
+  text-decoration: underline;
+}
+
+.campaign-link {
+  display: block;
+}
+
+
+
 .delivery-cell {
   display: inline-flex;
   align-items: center;
