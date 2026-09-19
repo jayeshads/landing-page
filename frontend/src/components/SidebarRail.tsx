@@ -1,44 +1,35 @@
 import React from "react";
 import {
-  Activity,
-  BarChart3,
   Bell,
   BookOpen,
-  Building2,
-  CalendarDays,
   CircleHelp,
   CreditCard,
-  Database,
-  FileText,
   Gauge,
-  Grid3X3,
   Home,
   Menu,
-  MessageCircle,
   Search,
   Settings,
   Table2,
   Users,
+  Activity,
 } from "lucide-react";
 
 const navGroups = [
   [
     { key: "home", icon: Home, label: "Home" },
-    { key: "alerts", icon: Bell, label: "Notifications", badge: "11" },
+    { key: "alerts", icon: Bell, label: "Notifications", badge: "9" },
     { key: "gauge", icon: Gauge, label: "Overview" },
     { key: "campaigns", icon: Table2, label: "Campaigns", active: true },
-    { key: "docs", icon: FileText, label: "Docs" },
+    { key: "docs", icon: BookOpen, label: "Docs" },
     { key: "audiences", icon: Users, label: "Audiences" },
+    { key: "megaphone", icon: Activity, label: "Ads" },
     { key: "billing", icon: CreditCard, label: "Billing" },
-    { key: "automation", icon: Activity, label: "Automations" },
     { key: "more", icon: Menu, label: "More" },
   ],
   [
-    { key: "help", icon: CircleHelp, label: "Help", soft: true },
-    { key: "resources", icon: BookOpen, label: "Resources" },
+    { key: "help", icon: CircleHelp, label: "Help" },
     { key: "settings", icon: Settings, label: "Settings" },
     { key: "search", icon: Search, label: "Search" },
-    { key: "report", icon: BarChart3, label: "Reports" },
   ],
 ];
 
@@ -59,7 +50,7 @@ export const SidebarRail = () => {
               data-testid={`sidebar-nav-item-${item.key}`}
               aria-label={item.label}
             >
-              <Icon size={18} strokeWidth={1.7} />
+              <Icon size={20} strokeWidth={1.9} />
               {item.badge && <span className="sidebar-badge">{item.badge}</span>}
             </button>
           );
@@ -72,12 +63,12 @@ export const SidebarRail = () => {
           return (
             <button
               key={item.key}
-              className={`sidebar-item ${item.soft ? "soft" : ""}`}
+              className="sidebar-item"
               title={item.label}
               data-testid={`sidebar-nav-item-${item.key}`}
               aria-label={item.label}
             >
-              <Icon size={18} strokeWidth={1.7} />
+              <Icon size={20} strokeWidth={1.9} />
             </button>
           );
         })}

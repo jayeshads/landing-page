@@ -1,18 +1,22 @@
 [
   {
-    "content": "Update campaign data so every campaign is active and toggled on",
+    "content": "Analyze latest Meta Ads screenshot and update pixel-perfect target details",
     "status": "completed"
   },
   {
-    "content": "Tighten table typography, spacing, statuses, and active-state visuals to match screenshot closer",
+    "content": "Add localStorage persistence for campaigns and editable date",
     "status": "completed"
   },
   {
-    "content": "Add screenshot-reference option only for decorative top/side matching if useful without replacing editable table",
+    "content": "Add full campaign create/edit drawer plus inline editable table cells",
     "status": "completed"
   },
   {
-    "content": "Build and test updated active table interactions",
+    "content": "Refine table layout, column order, right rail, and toolbar to match latest screenshot",
+    "status": "completed"
+  },
+  {
+    "content": "Build and run frontend testing agent for persistence/create/edit/toggles/scroll",
     "status": "completed"
   }
 ]

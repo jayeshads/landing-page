@@ -19,6 +19,7 @@ export type CampaignRow = {
   reach: string;
   impressions: string;
   costPerResult: string;
+  costPerResultSub?: string;
   amountSpent: string;
   ends: string;
   schedule: string;

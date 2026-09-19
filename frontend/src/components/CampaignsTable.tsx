@@ -1,19 +1,28 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import { ChevronDown, FileBarChart } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Switch } from "@/components/ui/switch";
-import { campaignColumns, initialCampaignRows } from "@/data/campaignsData";
+import { campaignColumns } from "@/data/campaignsData";
 import { CampaignColumn, CampaignRow } from "@/types/campaign";
 
 type CampaignsTableProps = {
   rows: CampaignRow[];
   onRowsChange: (rows: CampaignRow[]) => void;
+  onRowChange: (id: string, patch: Partial<CampaignRow>) => void;
+  onEditRow: (row: CampaignRow) => void;
 };
 
 const leftOffsets: Record<string, number> = {
   select: 0,
-  toggle: 36,
-  campaign: 104,
+  toggle: 54,
+  campaign: 162,
+};
+
+const subFieldMap: Partial<Record<keyof CampaignRow, keyof CampaignRow>> = {
+  budget: "budgetSub",
+  attribution: "attributionSub",
+  results: "resultsSub",
+  costPerResult: "costPerResultSub",
 };
 
 const statusClass = (tone: CampaignRow["deliveryTone"]) => {
@@ -23,59 +32,114 @@ const statusClass = (tone: CampaignRow["deliveryTone"]) => {
   return "error";
 };
 
-const CellContent = ({ row, column }: { row: CampaignRow; column: CampaignColumn }) => {
-  if (column.key === "select") return null;
-  if (column.key === "toggle") return null;
+const EditableInput = ({
+  value,
+  onChange,
+  className,
+  testId,
+  align,
+}: {
+  value: string;
+  onChange: (value: string) => void;
+  className?: string;
+  testId: string;
+  align?: "left" | "right" | "center";
+}) => (
+  <input
+    className={`inline-cell-input ${className || ""} ${align === "right" ? "right" : ""}`}
+    value={value || ""}
+    onChange={(event) => onChange(event.target.value)}
+    data-testid={testId}
+    aria-label={testId}
+  />
+);
+
+const CellContent = ({
+  row,
+  column,
+  onRowChange,
+  onEditRow,
+}: {
+  row: CampaignRow;
+  column: CampaignColumn;
+  onRowChange: (id: string, patch: Partial<CampaignRow>) => void;
+  onEditRow: (row: CampaignRow) => void;
+}) => {
+  if (column.key === "select" || column.key === "toggle") return null;
 
   if (column.key === "campaign") {
     return (
       <div className="campaign-name-cell">
-        <a className="campaign-link" href="#" onClick={(event) => event.preventDefault()}>
-          {row.campaign}
-        </a>
-        {row.campaignMeta && (
-          <span className="campaign-inline-actions">
-            <FileBarChart size={12} /> Edit <span>/</span> Duplicate
-          </span>
-        )}
+        <EditableInput
+          value={row.campaign}
+          onChange={(value) => onRowChange(row.id, { campaign: value })}
+          className="campaign-link-input"
+          testId={`inline-edit-${row.id}-campaign`}
+        />
+        <button className="campaign-inline-actions" onClick={() => onEditRow(row)} data-testid={`open-row-editor-${row.id}`}>
+          <FileBarChart size={12} /> Edit / Duplicate
+        </button>
       </div>
     );
   }
 
   if (column.key === "delivery") {
     return (
-      <div className="delivery-cell">
+      <button className="delivery-cell editable-delivery" onClick={() => onEditRow(row)} data-testid={`delivery-editor-${row.id}`}>
         <span className={`delivery-dot ${statusClass(row.deliveryTone)}`} />
         <span>{row.delivery}</span>
-      </div>
+      </button>
     );
   }
 
-  const value = row[column.key as keyof CampaignRow] as string;
-  const subValue = column.key === "budget" ? row.budgetSub : column.key === "attribution" ? row.attributionSub : column.key === "results" ? row.resultsSub : undefined;
+  if (column.key === "actions" && row.actions) {
+    return (
+      <button className="recommendation-pill" onClick={() => onEditRow(row)} data-testid={`recommendation-${row.id}`}>
+        ⓘ {row.actions}
+      </button>
+    );
+  }
+
+  const value = String(row[column.key as keyof CampaignRow] ?? "");
+  const subField = subFieldMap[column.key as keyof CampaignRow];
+  const subValue = subField ? String(row[subField] ?? "") : "";
 
   return (
     <div className={`cell-stack ${column.align === "right" ? "right" : ""}`}>
-      <span className="primary-cell-text">{value}</span>
-      {subValue && <span className="secondary-cell-text">{subValue}</span>}
+      <EditableInput
+        value={value}
+        onChange={(next) => onRowChange(row.id, { [column.key]: next } as Partial<CampaignRow>)}
+        className="primary-cell-text"
+        testId={`inline-edit-${row.id}-${String(column.key)}`}
+        align={column.align}
+      />
+      {subField && (
+        <EditableInput
+          value={subValue}
+          onChange={(next) => onRowChange(row.id, { [subField]: next } as Partial<CampaignRow>)}
+          className="secondary-cell-text"
+          testId={`inline-edit-${row.id}-${String(subField)}`}
+          align={column.align}
+        />
+      )}
     </div>
   );
 };
 
-export const CampaignsTable = ({ rows, onRowsChange }: CampaignsTableProps) => {
-  const [allSelected, setAllSelected] = useState(true);
-
+export const CampaignsTable = ({ rows, onRowsChange, onRowChange, onEditRow }: CampaignsTableProps) => {
   const tableWidth = useMemo(() => campaignColumns.reduce((sum, col) => sum + col.width, 0), []);
+  const allSelected = rows.length > 0 && rows.every((row) => row.selected);
 
   const toggleAll = (checked: boolean) => {
-    setAllSelected(checked);
     onRowsChange(rows.map((row) => ({ ...row, selected: checked })));
   };
 
-  const updateRow = (id: string, patch: Partial<CampaignRow>) => {
-    const updated = rows.map((row) => (row.id === id ? { ...row, ...patch } : row));
-    onRowsChange(updated);
-    setAllSelected(updated.every((row) => row.selected));
+  const toggleRow = (row: CampaignRow, checked: boolean) => {
+    onRowChange(row.id, {
+      enabled: checked,
+      delivery: checked ? "Active" : "Off",
+      deliveryTone: checked ? "active" : "off",
+    });
   };
 
   return (
@@ -105,7 +169,7 @@ export const CampaignsTable = ({ rows, onRowsChange }: CampaignsTableProps) => {
                     ) : (
                       <div className="header-label">
                         <span>{column.label}</span>
-                        {column.sortable && <ChevronDown size={11} />}
+                        {column.sortable && <ChevronDown size={12} />}
                       </div>
                     )}
                   </th>
@@ -114,7 +178,7 @@ export const CampaignsTable = ({ rows, onRowsChange }: CampaignsTableProps) => {
             </tr>
           </thead>
           <tbody>
-            {rows.map((row, rowIndex) => (
+            {rows.map((row) => (
               <tr
                 key={row.id}
                 className={row.selected ? "selected-row" : ""}
@@ -128,11 +192,12 @@ export const CampaignsTable = ({ rows, onRowsChange }: CampaignsTableProps) => {
                       className={`${column.sticky ? "sticky-col" : ""} ${column.align === "right" ? "align-right" : ""}`}
                       style={{ width: column.width, minWidth: column.width, ...stickyStyle }}
                       data-testid={`campaigns-table-cell-${row.id}-${String(column.key)}`}
+                      onDoubleClick={() => onEditRow(row)}
                     >
                       {column.key === "select" ? (
                         <Checkbox
                           checked={row.selected}
-                          onCheckedChange={(checked) => updateRow(row.id, { selected: Boolean(checked) })}
+                          onCheckedChange={(checked) => onRowChange(row.id, { selected: Boolean(checked) })}
                           className="meta-checkbox"
                           data-testid={`table-row-checkbox-${row.id}`}
                           aria-label={`Select ${row.campaign}`}
@@ -140,13 +205,13 @@ export const CampaignsTable = ({ rows, onRowsChange }: CampaignsTableProps) => {
                       ) : column.key === "toggle" ? (
                         <Switch
                           checked={row.enabled}
-                          onCheckedChange={(checked) => updateRow(row.id, { enabled: checked, delivery: checked ? "Active" : "Off", deliveryTone: checked ? "active" : "off" })}
+                          onCheckedChange={(checked) => toggleRow(row, checked)}
                           className="meta-switch"
                           data-testid={`table-row-toggle-${row.id}`}
                           aria-label={`Toggle ${row.campaign}`}
                         />
                       ) : (
-                        <CellContent row={row} column={column} />
+                        <CellContent row={row} column={column} onRowChange={onRowChange} onEditRow={onEditRow} />
                       )}
                     </td>
                   );
@@ -157,14 +222,9 @@ export const CampaignsTable = ({ rows, onRowsChange }: CampaignsTableProps) => {
         </table>
       </div>
       <div className="table-summary" data-testid="campaigns-table-summary">
-        <span>Results from 11 campaigns</span>
+        <span>Results from {rows.length} campaigns</span>
         <span className="info-dot">i</span>
       </div>
     </div>
   );
-};
-
-export const useCampaignRows = () => {
-  const [rows, setRows] = useState<CampaignRow[]>(initialCampaignRows);
-  return { rows, setRows };
 };

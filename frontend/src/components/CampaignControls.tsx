@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import {
   BarChart3,
   CalendarDays,
@@ -9,10 +9,9 @@ import {
   FlaskConical,
   Grid3X3,
   ListFilter,
-  MoreHorizontal,
   Pencil,
   Plus,
-  RotateCcw,
+  RefreshCw,
   Search,
   Settings2,
   Tag,
@@ -26,13 +25,15 @@ type ToolButtonProps = {
   primary?: boolean;
   compact?: boolean;
   testId: string;
+  onClick?: () => void;
 };
 
-const ToolButton = ({ children, icon, primary, compact, testId }: ToolButtonProps) => (
+const ToolButton = ({ children, icon, primary, compact, testId, onClick }: ToolButtonProps) => (
   <Button
     className={`toolbar-button ${primary ? "primary" : ""} ${compact ? "compact" : ""}`}
     variant={primary ? "default" : "outline"}
     data-testid={testId}
+    onClick={onClick}
   >
     {icon}
     {children}
@@ -43,15 +44,15 @@ export const FilterBar = () => {
   return (
     <section className="controls-panel" data-testid="campaign-controls">
       <div className="quick-filter-row">
-        <Button className="search-square" variant="outline" size="icon" data-testid="quick-search-button" aria-label="Search filters">
-          <Search size={18} />
-        </Button>
         <button className="filter-chip active" data-testid="filter-chip-all-ads">
-          <span className="chip-left-line" />
+          <span className="folder-icon" />
           All ads
         </button>
         <button className="filter-chip" data-testid="filter-chip-had-delivery">
           Had delivery
+        </button>
+        <button className="filter-chip" data-testid="filter-chip-actions">
+          Actions
         </button>
         <button className="filter-chip" data-testid="filter-chip-active-ads">
           Active ads
@@ -70,19 +71,30 @@ export const FilterBar = () => {
         <input
           data-testid="campaigns-search-input"
           className="large-search"
-          placeholder="Search to filter by name, ID or metrics"
-          aria-label="Search to filter by name, ID or metrics"
+          placeholder="Describe what you're looking for"
+          aria-label="Describe what you're looking for"
         />
       </div>
     </section>
   );
 };
 
-export const CampaignTabs = () => {
+type CampaignTabsProps = {
+  selectedCount: number;
+  dateLabel: string;
+  dateValue: string;
+  onDateChange: (value: string) => void;
+  rowCount: number;
+};
+
+export const CampaignTabs = ({ selectedCount, dateLabel, dateValue, onDateChange, rowCount }: CampaignTabsProps) => {
+  const dateInputRef = useRef<HTMLInputElement>(null);
+  const selectedLabel = selectedCount === 1 ? "1 selected" : `${selectedCount} selected`;
+  const levelLabel = `${selectedCount || 1} Campaign`;
   const tabs = [
     { key: "campaigns", label: "Campaigns", active: true, icon: Tag },
-    { key: "adsets", label: "Ad Sets for 11 Campaigns", icon: Grid3X3 },
-    { key: "ads", label: "Ads for 11 Campaigns", icon: Grid3X3 },
+    { key: "adsets", label: `Ad sets for ${levelLabel}`, icon: Grid3X3 },
+    { key: "ads", label: `Ads for ${levelLabel}`, icon: Grid3X3 },
   ];
 
   return (
@@ -98,39 +110,57 @@ export const CampaignTabs = () => {
             >
               <Icon size={16} />
               <span>{tab.label}</span>
-              {tab.active && <span className="selected-count">11 selected</span>}
+              {tab.active && selectedCount > 0 && <span className="selected-count">{selectedLabel}<span className="selected-close">×</span></span>}
             </button>
           );
         })}
       </div>
-      <Button className="date-range" variant="outline" data-testid="date-range-trigger">
-        <CalendarDays size={16} />
-        Last 30 days: 29 Nov 2025 - 28 Dec 2025
-        <ChevronDown size={14} />
-      </Button>
+      <div className="date-picker-wrap">
+        <Button className="date-range" variant="outline" data-testid="date-range-trigger" onClick={() => (dateInputRef.current as any)?.showPicker?.()}>
+          <CalendarDays size={16} />
+          {dateLabel}
+          <ChevronDown size={14} />
+        </Button>
+        <input
+          ref={dateInputRef}
+          className="date-hidden-input"
+          type="date"
+          value={dateValue}
+          onChange={(event) => onDateChange(event.target.value)}
+          data-testid="editable-date-input"
+          aria-label="Edit date"
+        />
+      </div>
     </div>
   );
 };
 
-export const ActionToolbar = () => {
+type ActionToolbarProps = {
+  onCreate: () => void;
+  onEditSelected: () => void;
+};
+
+export const ActionToolbar = ({ onCreate, onEditSelected }: ActionToolbarProps) => {
+  const [menuOpen, setMenuOpen] = useState(false);
   return (
     <div className="action-toolbar" data-testid="campaigns-action-toolbar">
       <div className="action-left">
-        <ToolButton primary icon={<Plus size={16} />} testId="campaigns-create-button">Create</ToolButton>
+        <ToolButton primary icon={<Plus size={16} />} testId="campaigns-create-button" onClick={onCreate}>Create</ToolButton>
         <ToolButton icon={<Copy size={15} />} testId="campaigns-duplicate-button">Duplicate <ChevronDown size={13} /></ToolButton>
-        <ToolButton icon={<Pencil size={15} />} testId="campaigns-edit-button">Edit <ChevronDown size={13} /></ToolButton>
+        <ToolButton icon={<Pencil size={15} />} testId="campaigns-edit-button" onClick={onEditSelected}>Edit <ChevronDown size={13} /></ToolButton>
         <ToolButton compact icon={<Trash2 size={16} />} testId="campaigns-delete-button" />
-        <ToolButton compact icon={<RotateCcw size={16} />} testId="campaigns-undo-button" />
         <ToolButton icon={<FlaskConical size={15} />} testId="campaigns-ab-test-button">A/B test</ToolButton>
         <ToolButton compact icon={<Tag size={15} />} testId="campaigns-tag-button" />
-        <ToolButton testId="campaigns-more-button">More <ChevronDown size={13} /></ToolButton>
+        <ToolButton testId="campaigns-more-button" onClick={() => setMenuOpen(!menuOpen)}>More <ChevronDown size={13} /></ToolButton>
+        {menuOpen && <div className="mini-menu" data-testid="toolbar-more-menu">Rules<br />Export selected<br />Compare campaigns</div>}
       </div>
       <div className="action-right">
         <ToolButton icon={<Columns3 size={16} />} testId="campaigns-columns-button">Columns: Performance <ChevronDown size={13} /></ToolButton>
         <ToolButton icon={<ListFilter size={16} />} testId="campaigns-breakdown-button">Breakdown <ChevronDown size={13} /></ToolButton>
-        <ToolButton icon={<BarChart3 size={16} />} testId="campaigns-reports-button">Reports <ChevronDown size={13} /></ToolButton>
-        <ToolButton icon={<Download size={16} />} testId="campaigns-export-button">Export <ChevronDown size={13} /></ToolButton>
-        <ToolButton icon={<BarChart3 size={16} />} testId="campaigns-charts-button">Charts</ToolButton>
+        <ToolButton icon={<BarChart3 size={16} />} testId="campaigns-reports-button"><ChevronDown size={13} /></ToolButton>
+        <ToolButton compact icon={<Download size={16} />} testId="campaigns-export-button" />
+        <ToolButton compact testId="campaigns-export-menu-button"><ChevronDown size={13} /></ToolButton>
+        <ToolButton compact icon={<BarChart3 size={16} />} testId="campaigns-charts-button" />
       </div>
     </div>
   );
