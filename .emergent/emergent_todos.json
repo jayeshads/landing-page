@@ -1,14 +1,18 @@
 [
   {
-    "content": "Fix data editor apply button overlay issue",
+    "content": "Update campaign data so every campaign is active and toggled on",
     "status": "completed"
   },
   {
-    "content": "Rebuild frontend after overlay fix",
+    "content": "Tighten table typography, spacing, statuses, and active-state visuals to match screenshot closer",
     "status": "completed"
   },
   {
-    "content": "Re-run testing agent for editor apply verification",
+    "content": "Add screenshot-reference option only for decorative top/side matching if useful without replacing editable table",
+    "status": "completed"
+  },
+  {
+    "content": "Build and test updated active table interactions",
     "status": "completed"
   }
 ]

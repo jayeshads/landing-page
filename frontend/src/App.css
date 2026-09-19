@@ -14,9 +14,9 @@
   --meta-text: #1f2937;
   --meta-muted: #5f6f80;
   --meta-link: #1377c9;
-  --meta-green-row: #eaf5df;
+  --meta-green-row: #e9f7e8;
   --meta-blue-row: #d8e8ff;
-  --meta-row: #eef4ff;
+  --meta-row: #eaf2ff;
   --meta-error-dot: #d9dfe8;
   --meta-draft: #0c7a3c;
   --header-height: 56px;
@@ -579,8 +579,8 @@ textarea {
   border-collapse: separate;
   border-spacing: 0;
   table-layout: fixed;
-  font-size: 12px;
-  color: #25364b;
+  font-size: 13px;
+  color: #24364b;
   background: #ffffff;
 }
 
@@ -588,14 +588,14 @@ textarea {
   position: sticky;
   top: 0;
   z-index: 25;
-  height: 48px;
+  height: 56px;
   background: #ffffff;
   border-bottom: 1px solid #d5dee9;
   border-right: 1px solid #e1e7ee;
   text-align: left;
-  padding: 0 10px;
-  color: #26394f;
-  font-size: 12px;
+  padding: 0 12px;
+  color: #1f3349;
+  font-size: 13px;
   font-weight: 800;
   vertical-align: middle;
 }
@@ -605,22 +605,22 @@ textarea {
 }
 
 .campaigns-table tbody td {
-  height: 48px;
-  border-bottom: 1px solid #e0e7f0;
-  border-right: 1px solid #e6ebf2;
-  padding: 0 10px;
-  background: #edf4ff;
+  height: 56px;
+  border-bottom: 1px solid #dce5ef;
+  border-right: 1px solid #e4ebf3;
+  padding: 0 12px;
+  background: var(--meta-row);
   vertical-align: middle;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
 
-.campaigns-table tbody tr.draft-row td {
-  background: var(--meta-green-row);
+.campaigns-table tbody tr.selected-row td {
+  background: var(--meta-row);
 }
 
-.campaigns-table tbody tr.focused-row td {
+.campaigns-table tbody tr.selected-row:nth-child(2) td {
   background: var(--meta-blue-row);
 }
 
@@ -642,11 +642,11 @@ textarea {
   z-index: 18;
 }
 
-.campaigns-table tbody tr.draft-row td.sticky-col {
-  background: var(--meta-green-row);
+.campaigns-table tbody tr.selected-row td.sticky-col {
+  background: var(--meta-row);
 }
 
-.campaigns-table tbody tr.focused-row td.sticky-col {
+.campaigns-table tbody tr.selected-row:nth-child(2) td.sticky-col {
   background: var(--meta-blue-row);
 }
 
@@ -668,8 +668,8 @@ textarea {
 }
 
 .meta-checkbox {
-  width: 16px !important;
-  height: 16px !important;
+  width: 20px !important;
+  height: 20px !important;
   border-radius: 3px !important;
   border-color: #88bddf !important;
   background: #ffffff !important;
@@ -683,8 +683,8 @@ textarea {
 }
 
 .meta-switch {
-  height: 20px !important;
-  width: 34px !important;
+  height: 22px !important;
+  width: 40px !important;
   border: 0 !important;
   background: #d7e0eb !important;
   box-shadow: none !important;
@@ -695,14 +695,14 @@ textarea {
 }
 
 .meta-switch span {
-  width: 18px !important;
-  height: 18px !important;
+  width: 20px !important;
+  height: 20px !important;
   background: #ffffff !important;
   box-shadow: 0 1px 3px rgba(20, 45, 75, 0.25) !important;
 }
 
 .meta-switch span[data-state="checked"] {
-  transform: translateX(14px) !important;
+  transform: translateX(18px) !important;
 }
 
 .campaign-name-cell {
@@ -714,7 +714,7 @@ textarea {
 
 .campaign-link {
   color: var(--meta-link);
-  font-weight: 500;
+  font-weight: 600;
   text-decoration: none;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -726,8 +726,8 @@ textarea {
 }
 
 .campaign-inline-actions {
-  color: #506174;
-  font-size: 10px;
+  color: #445970;
+  font-size: 11px;
   display: flex;
   align-items: center;
   gap: 3px;
@@ -741,11 +741,11 @@ textarea {
 }
 
 .delivery-dot {
-  width: 9px;
-  height: 9px;
+  width: 10px;
+  height: 10px;
   border-radius: 999px;
   background: #d3d9e2;
-  flex: 0 0 9px;
+  flex: 0 0 10px;
 }
 
 .delivery-dot.draft {
@@ -779,7 +779,8 @@ textarea {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  color: #24374c;
+  color: #1f3349;
+  font-weight: 500;
   font-variant-numeric: tabular-nums;
 }
 
@@ -787,8 +788,8 @@ textarea {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  color: #6a7887;
-  font-size: 10px;
+  color: #65768a;
+  font-size: 11px;
 }
 
 .table-summary {

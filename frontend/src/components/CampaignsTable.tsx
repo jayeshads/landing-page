@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from "react";
-import { Check, ChevronDown, Edit2, FileBarChart, Pencil, X } from "lucide-react";
+import { ChevronDown, FileBarChart } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Switch } from "@/components/ui/switch";
 import { campaignColumns, initialCampaignRows } from "@/data/campaignsData";
@@ -117,7 +117,7 @@ export const CampaignsTable = ({ rows, onRowsChange }: CampaignsTableProps) => {
             {rows.map((row, rowIndex) => (
               <tr
                 key={row.id}
-                className={`${rowIndex === 0 ? "draft-row" : ""} ${rowIndex === 1 ? "focused-row" : ""}`}
+                className={row.selected ? "selected-row" : ""}
                 data-testid={`campaigns-table-row-${row.id}`}
               >
                 {campaignColumns.map((column) => {
@@ -140,7 +140,7 @@ export const CampaignsTable = ({ rows, onRowsChange }: CampaignsTableProps) => {
                       ) : column.key === "toggle" ? (
                         <Switch
                           checked={row.enabled}
-                          onCheckedChange={(checked) => updateRow(row.id, { enabled: checked })}
+                          onCheckedChange={(checked) => updateRow(row.id, { enabled: checked, delivery: checked ? "Active" : "Off", deliveryTone: checked ? "active" : "off" })}
                           className="meta-switch"
                           data-testid={`table-row-toggle-${row.id}`}
                           aria-label={`Toggle ${row.campaign}`}
