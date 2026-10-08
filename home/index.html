@@ -1,0 +1,2297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Big Billion Deals — Smart Deal Finder</title>
+
+<style>
+:root{
+  --bg:#07080c;
+  --card:#10131a;
+  --card2:#151923;
+  --text:#f8fafc;
+  --muted:#9ca3af;
+  --border:rgba(255,255,255,.09);
+  --primary:#7c3aed;
+  --primary2:#6366f1;
+  --green:#22c55e;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Inter,Arial,sans-serif;
+}
+
+html{scroll-behavior:smooth}
+
+body{
+  background:
+    radial-gradient(circle at 10% 0%,rgba(99,102,241,.14),transparent 30%),
+    radial-gradient(circle at 90% 10%,rgba(124,58,237,.12),transparent 25%),
+    var(--bg);
+  color:var(--text);
+  line-height:1.6;
+}
+
+button,input{font:inherit}
+button{cursor:pointer}
+a{text-decoration:none;color:inherit}
+
+/* HEADER */
+
+header{
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:rgba(7,8,12,.82);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border);
+}
+
+.header{
+  max-width:1180px;
+  height:72px;
+  margin:auto;
+  padding:0 20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:30px;
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight:800;
+  white-space:nowrap;
+}
+
+.logo-icon{
+  width:36px;
+  height:36px;
+  display:grid;
+  place-items:center;
+  border-radius:10px;
+  background:linear-gradient(135deg,var(--primary),var(--primary2));
+  font-weight:900;
+}
+
+.nav{
+  display:flex;
+  gap:28px;
+}
+
+.nav a{
+  color:var(--muted);
+  font-size:14px;
+}
+
+.nav a:hover{
+  color:#fff;
+}
+
+.header-btn{
+  border:1px solid var(--border);
+  background:#ffffff08;
+  color:white;
+  padding:10px 16px;
+  border-radius:9px;
+  font-weight:700;
+}
+
+/* HERO */
+
+.hero{
+  max-width:1180px;
+  margin:auto;
+  padding:100px 20px 80px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:70px;
+  align-items:center;
+}
+
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  border:1px solid #8b5cf633;
+  background:#8b5cf611;
+  color:#c4b5fd;
+  padding:7px 12px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:700;
+  margin-bottom:20px;
+}
+
+.badge-dot{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:var(--green);
+}
+
+.hero h1{
+  font-size:clamp(45px,6vw,72px);
+  line-height:1;
+  letter-spacing:-3px;
+  margin-bottom:22px;
+}
+
+.gradient{
+  background:linear-gradient(90deg,#a78bfa,#818cf8,#c084fc);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+
+.hero p{
+  color:var(--muted);
+  max-width:590px;
+  font-size:16px;
+  line-height:1.8;
+  margin-bottom:28px;
+}
+
+.actions{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+}
+
+.primary{
+  border:none;
+  color:#fff;
+  background:linear-gradient(135deg,var(--primary),var(--primary2));
+  padding:14px 22px;
+  border-radius:10px;
+  font-weight:800;
+}
+
+.secondary{
+  border:1px solid var(--border);
+  background:#ffffff07;
+  color:white;
+  padding:14px 22px;
+  border-radius:10px;
+  font-weight:700;
+}
+
+/* FINDER */
+
+.finder{
+  position:relative;
+}
+
+.finder-glow{
+  position:absolute;
+  inset:-40px;
+  background:#7c3aed20;
+  filter:blur(70px);
+  z-index:-1;
+}
+
+.finder-card{
+  background:linear-gradient(180deg,#ffffff0a,#ffffff03);
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:22px;
+  box-shadow:0 25px 80px #0008;
+}
+
+.window{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:20px;
+}
+
+.dots{
+  display:flex;
+  gap:6px;
+}
+
+.dots span{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:#4b5563;
+}
+
+.window-title{
+  font-size:11px;
+  color:#687080;
+}
+
+.finder-card h2{
+  margin-bottom:5px;
+}
+
+.finder-card>p{
+  font-size:12px;
+  color:var(--muted);
+  margin-bottom:18px;
+}
+
+.search{
+  display:flex;
+  background:#080a0f;
+  border:1px solid var(--border);
+  border-radius:10px;
+  overflow:hidden;
+}
+
+.search input{
+  flex:1;
+  min-width:0;
+  border:0;
+  outline:0;
+  background:transparent;
+  color:white;
+  padding:14px;
+}
+
+.search button{
+  border:0;
+  background:var(--primary);
+  color:#fff;
+  padding:0 18px;
+  font-weight:800;
+}
+
+.results{
+  display:none;
+  margin-top:18px;
+}
+
+.results.show{
+  display:block;
+}
+
+.result-top{
+  display:flex;
+  justify-content:space-between;
+  font-size:11px;
+  color:var(--muted);
+  margin-bottom:10px;
+}
+
+.result-top strong{
+  color:var(--green);
+}
+
+.result{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:10px;
+  padding:13px;
+  border:1px solid var(--border);
+  border-radius:9px;
+  background:#ffffff05;
+  margin-bottom:8px;
+}
+
+.store{
+  font-size:11px;
+  color:#8c94a2;
+}
+
+.product{
+  font-size:13px;
+  font-weight:700;
+}
+
+.price{
+  text-align:right;
+  font-weight:900;
+}
+
+.low{
+  display:block;
+  text-align:right;
+  font-size:9px;
+  color:var(--green);
+}
+
+/* TRUST */
+
+.trust{
+  max-width:1180px;
+  margin:auto;
+  padding:0 20px;
+}
+
+.trust-inner{
+  padding:22px 0;
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  display:flex;
+  justify-content:space-around;
+  gap:20px;
+  flex-wrap:wrap;
+}
+
+.trust-item{
+  text-align:center;
+  color:#7d8491;
+  font-size:12px;
+}
+
+.trust-item strong{
+  display:block;
+  color:#fff;
+  font-size:18px;
+}
+
+/* SECTIONS */
+
+.section{
+  max-width:1180px;
+  margin:auto;
+  padding:90px 20px;
+}
+
+.heading{
+  text-align:center;
+  max-width:680px;
+  margin:0 auto 45px;
+}
+
+.heading small{
+  color:#a78bfa;
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:2px;
+  font-weight:800;
+}
+
+.heading h2{
+  font-size:clamp(32px,4vw,48px);
+  line-height:1.1;
+  letter-spacing:-2px;
+  margin:12px 0;
+}
+
+.heading p{
+  color:var(--muted);
+  font-size:14px;
+}
+
+/* FEATURES */
+
+.features{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+
+.feature{
+  background:linear-gradient(180deg,#ffffff07,#ffffff02);
+  border:1px solid var(--border);
+  border-radius:15px;
+  padding:28px;
+}
+
+.icon{
+  width:44px;
+  height:44px;
+  display:grid;
+  place-items:center;
+  background:#8b5cf615;
+  border:1px solid #8b5cf625;
+  border-radius:11px;
+  margin-bottom:18px;
+  font-size:20px;
+}
+
+.feature h3{
+  font-size:17px;
+  margin-bottom:8px;
+}
+
+.feature p{
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.7;
+}
+
+/* STEPS */
+
+.steps{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+
+.step{
+  background:var(--card);
+  border:1px solid var(--border);
+  padding:28px;
+  border-radius:15px;
+}
+
+.step-number{
+  width:34px;
+  height:34px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  background:linear-gradient(135deg,var(--primary),var(--primary2));
+  font-weight:900;
+  margin-bottom:18px;
+}
+
+.step h3{
+  margin-bottom:8px;
+}
+
+.step p{
+  color:var(--muted);
+  font-size:13px;
+}
+
+/* PRICING */
+
+.pricing{
+  max-width:500px;
+  margin:auto;
+  padding:35px;
+  text-align:center;
+  border:1px solid #8b5cf655;
+  background:linear-gradient(180deg,#8b5cf614,#ffffff03);
+  border-radius:20px;
+}
+
+.pricing-badge{
+  display:inline-block;
+  background:#8b5cf61a;
+  color:#c4b5fd;
+  padding:6px 11px;
+  border-radius:999px;
+  font-size:10px;
+  font-weight:800;
+}
+
+.pricing h3{
+  margin-top:15px;
+}
+
+.big-price{
+  font-size:65px;
+  font-weight:900;
+  line-height:1;
+  margin:20px 0 5px;
+  letter-spacing:-4px;
+}
+
+.big-price small{
+  font-size:14px;
+  color:var(--muted);
+  letter-spacing:0;
+}
+
+.pricing>p{
+  color:var(--muted);
+  font-size:13px;
+}
+
+.list{
+  list-style:none;
+  text-align:left;
+  margin:25px 0;
+}
+
+.list li{
+  padding:8px 0;
+  font-size:13px;
+  color:#d2d6de;
+}
+
+.list li:before{
+  content:"✓";
+  color:var(--green);
+  font-weight:900;
+  margin-right:9px;
+}
+
+/* CTA */
+
+.cta{
+  max-width:1180px;
+  margin:0 auto 80px;
+  padding:0 20px;
+}
+
+.cta-box{
+  padding:65px 20px;
+  text-align:center;
+  border:1px solid var(--border);
+  border-radius:20px;
+  background:radial-gradient(circle,#8b5cf626,transparent 65%),#0d1017;
+}
+
+.cta-box h2{
+  font-size:clamp(30px,4vw,45px);
+  letter-spacing:-2px;
+  margin-bottom:10px;
+}
+
+.cta-box p{
+  color:var(--muted);
+  max-width:550px;
+  margin:0 auto 25px;
+  font-size:14px;
+}
+
+/* FOOTER */
+
+footer{
+  background:#05060a;
+  border-top:1px solid var(--border);
+}
+
+.footer{
+  max-width:1180px;
+  margin:auto;
+  padding:55px 20px 35px;
+  display:grid;
+  grid-template-columns:1.7fr 1fr 1fr 1fr;
+  gap:40px;
+}
+
+.footer p{
+  color:#707784;
+  font-size:12px;
+  max-width:300px;
+  margin-top:13px;
+}
+
+.footer h4{
+  font-size:13px;
+  margin-bottom:14px;
+}
+
+.footer button{
+  display:block;
+  border:0;
+  background:none;
+  color:#747b88;
+  font-size:12px;
+  padding:5px 0;
+}
+
+.footer button:hover{
+  color:white;
+}
+
+.bottom{
+  max-width:1180px;
+  margin:auto;
+  padding:18px 20px;
+  border-top:1px solid var(--border);
+  display:flex;
+  justify-content:space-between;
+  color:#555d69;
+  font-size:11px;
+}
+
+/* MODAL */
+
+.overlay{
+  position:fixed;
+  inset:0;
+  display:none;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+  background:#000b;
+  backdrop-filter:blur(8px);
+  z-index:1000;
+}
+
+.overlay.active{
+  display:flex;
+}
+
+.modal{
+  position:relative;
+  width:100%;
+  max-width:700px;
+  max-height:88vh;
+  overflow-y:auto;
+  background:#10131a;
+  border:1px solid var(--border);
+  border-radius:17px;
+  padding:35px;
+  box-shadow:0 30px 100px #000;
+  animation:popup .18s ease;
+}
+
+@keyframes popup{
+  from{
+    opacity:0;
+    transform:scale(.96) translateY(10px);
+  }
+  to{
+    opacity:1;
+    transform:scale(1) translateY(0);
+  }
+}
+
+.close{
+  position:absolute;
+  top:15px;
+  right:15px;
+  width:35px;
+  height:35px;
+  border-radius:50%;
+  border:1px solid var(--border);
+  background:#ffffff08;
+  color:white;
+  font-size:20px;
+}
+
+.modal h2{
+  font-size:28px;
+  margin-bottom:18px;
+  padding-right:40px;
+}
+
+.modal h3{
+  font-size:16px;
+  margin:24px 0 8px;
+}
+
+.modal p,
+.modal li{
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.8;
+}
+
+.modal ul{
+  padding-left:20px;
+}
+
+.info-box{
+  padding:16px;
+  margin-top:12px;
+  border:1px solid var(--border);
+  border-radius:10px;
+  background:#ffffff04;
+}
+
+/* DEMO MODAL */
+
+.demo-input{
+  display:flex;
+  gap:8px;
+  margin:20px 0;
+}
+
+.demo-input input{
+  flex:1;
+  min-width:0;
+  border:1px solid var(--border);
+  outline:none;
+  background:#080a0f;
+  color:white;
+  border-radius:9px;
+  padding:13px;
+}
+
+.demo-input button{
+  border:0;
+  background:var(--primary);
+  color:white;
+  padding:0 18px;
+  border-radius:9px;
+  font-weight:800;
+}
+
+.demo-result{
+  display:none;
+}
+
+.demo-result.show{
+  display:block;
+}
+
+.notice{
+  margin-top:15px;
+  padding:11px;
+  border-radius:8px;
+  background:#facc150b;
+  border:1px solid #facc1518;
+  color:#a99f62;
+  font-size:11px;
+}
+
+/* MOBILE */
+
+@media(max-width:850px){
+
+  .nav{
+    display:none;
+  }
+
+  .hero{
+    grid-template-columns:1fr;
+    padding-top:65px;
+  }
+
+  .features,
+  .steps{
+    grid-template-columns:1fr;
+  }
+
+  .footer{
+    grid-template-columns:1fr 1fr;
+  }
+}
+
+@media(max-width:600px){
+
+  .header{
+    height:65px;
+  }
+
+  .header-btn{
+    display:none;
+  }
+
+  .hero{
+    padding-top:50px;
+  }
+
+  .hero h1{
+    font-size:45px;
+  }
+
+  .footer{
+    grid-template-columns:1fr;
+  }
+
+  .bottom{
+    flex-direction:column;
+    gap:8px;
+  }
+
+  .modal{
+    padding:25px;
+  }
+
+  .demo-input{
+    flex-direction:column;
+  }
+
+  .demo-input button{
+    padding:12px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<header>
+  <div class="header">
+
+    <div class="logo">
+      <div class="logo-icon">B</div>
+      Big Billion Deals
+    </div>
+
+    <div class="nav">
+      <a href="#features">Features</a>
+      <a href="#how">How It Works</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+    </div>
+
+    <button class="header-btn" onclick="openDemo()">
+      Try Demo
+    </button>
+
+  </div>
+</header>
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+  <div>
+
+    <div class="badge">
+      <span class="badge-dot"></span>
+      Smart Deal Discovery
+    </div>
+
+    <h1>
+      Find better deals.
+      <span class="gradient">Pay less.</span>
+    </h1>
+
+    <p>
+      Big Billion Deals is a simple deal-finding software
+      designed to help you compare product prices and
+      discover potentially better offers before you buy.
+    </p>
+
+    <div class="actions">
+
+      <button class="primary" onclick="openDemo()">
+        Try Deal Finder →
+      </button>
+
+      <button
+        class="secondary"
+        onclick="scrollToId('how')"
+      >
+        How It Works
+      </button>
+
+    </div>
+
+    <p style="font-size:11px;margin-top:14px;color:#626977">
+      Software access starting at ₹99
+    </p>
+
+  </div>
+
+
+  <div class="finder">
+
+    <div class="finder-glow"></div>
+
+    <div class="finder-card">
+
+      <div class="window">
+
+        <div class="dots">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+
+        <div class="window-title">
+          bigbilliondeals / finder
+        </div>
+
+      </div>
+
+      <h2>Deal Finder</h2>
+
+      <p>
+        Enter a product to test the experience.
+      </p>
+
+      <div class="search">
+
+        <input
+          id="heroInput"
+          placeholder="e.g. wireless headphones"
+        >
+
+        <button onclick="heroSearch()">
+          Search
+        </button>
+
+      </div>
+
+      <div class="results" id="heroResults">
+
+        <div class="result-top">
+          <span>Sample comparison</span>
+          <strong>Lower price detected</strong>
+        </div>
+
+        <div class="result">
+
+          <div>
+            <div class="store">Store A</div>
+            <div class="product">Sample listing</div>
+          </div>
+
+          <div class="price">
+            ₹1,999
+          </div>
+
+        </div>
+
+        <div class="result">
+
+          <div>
+            <div class="store">Store B</div>
+            <div class="product">Sample listing</div>
+          </div>
+
+          <div>
+            <div class="price">₹1,799</div>
+            <span class="low">LOWER PRICE</span>
+          </div>
+
+        </div>
+
+        <div class="result">
+
+          <div>
+            <div class="store">Store C</div>
+            <div class="product">Sample listing</div>
+          </div>
+
+          <div class="price">
+            ₹2,099
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- TRUST -->
+
+<section class="trust">
+
+  <div class="trust-inner">
+
+    <div class="trust-item">
+      <strong>₹99</strong>
+      Simple pricing
+    </div>
+
+    <div class="trust-item">
+      <strong>Fast</strong>
+      Deal discovery
+    </div>
+
+    <div class="trust-item">
+      <strong>Simple</strong>
+      Easy interface
+    </div>
+
+    <div class="trust-item">
+      <strong>1 Tool</strong>
+      Price comparison
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- FEATURES -->
+
+<section class="section" id="features">
+
+  <div class="heading">
+
+    <small>Features</small>
+
+    <h2>
+      Everything you need to find better prices.
+    </h2>
+
+    <p>
+      A focused experience built around searching,
+      comparing and understanding product prices.
+    </p>
+
+  </div>
+
+
+  <div class="features">
+
+    <div class="feature">
+
+      <div class="icon">🔎</div>
+
+      <h3>
+        Smart Product Search
+      </h3>
+
+      <p>
+        Enter a product name and organize pricing
+        information into a simple comparison.
+      </p>
+
+    </div>
+
+
+    <div class="feature">
+
+      <div class="icon">⚡</div>
+
+      <h3>
+        Quick Comparison
+      </h3>
+
+      <p>
+        Quickly compare different offers and identify
+        potentially lower-priced options.
+      </p>
+
+    </div>
+
+
+    <div class="feature">
+
+      <div class="icon">📊</div>
+
+      <h3>
+        Price Insights
+      </h3>
+
+      <p>
+        See how different offers compare before making
+        your purchase decision.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- HOW IT WORKS -->
+
+<section class="section" id="how">
+
+  <div class="heading">
+
+    <small>How it works</small>
+
+    <h2>
+      Three simple steps.
+    </h2>
+
+    <p>
+      Search, compare and make a more informed decision.
+    </p>
+
+  </div>
+
+
+  <div class="steps">
+
+    <div class="step">
+
+      <div class="step-number">1</div>
+
+      <h3>
+        Search
+      </h3>
+
+      <p>
+        Enter the name of the product you're interested in.
+      </p>
+
+    </div>
+
+
+    <div class="step">
+
+      <div class="step-number">2</div>
+
+      <h3>
+        Compare
+      </h3>
+
+      <p>
+        Review available pricing information in one place.
+      </p>
+
+    </div>
+
+
+    <div class="step">
+
+      <div class="step-number">3</div>
+
+      <h3>
+        Decide
+      </h3>
+
+      <p>
+        Choose the offer that works best for your budget.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- PRICING -->
+
+<section class="section" id="pricing">
+
+  <div class="heading">
+
+    <small>Pricing</small>
+
+    <h2>
+      Simple. ₹99.
+    </h2>
+
+    <p>
+      No complicated pricing structure.
+    </p>
+
+  </div>
+
+
+  <div class="pricing">
+
+    <div class="pricing-badge">
+      DEAL FINDER ACCESS
+    </div>
+
+    <h3>
+      Big Billion Deals
+    </h3>
+
+    <div class="big-price">
+      ₹99
+      <small>/ access</small>
+    </div>
+
+    <p>
+      Get access to the deal discovery experience.
+    </p>
+
+
+    <ul class="list">
+
+      <li>
+        Product search
+      </li>
+
+      <li>
+        Price comparison
+      </li>
+
+      <li>
+        Deal discovery
+      </li>
+
+      <li>
+        Simple interface
+      </li>
+
+      <li>
+        Price insights
+      </li>
+
+    </ul>
+
+
+    <button
+      class="primary"
+      style="width:100%"
+      onclick="openDemo()"
+    >
+      Try Demo
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- FAQ -->
+
+<section class="section" id="faq">
+
+  <div class="heading">
+
+    <small>FAQ</small>
+
+    <h2>
+      Frequently asked questions.
+    </h2>
+
+  </div>
+
+
+  <div style="max-width:760px;margin:auto">
+
+    <details style="border-bottom:1px solid var(--border);padding:18px 0">
+
+      <summary style="cursor:pointer;font-weight:700">
+        What is Big Billion Deals?
+      </summary>
+
+      <p style="color:var(--muted);font-size:13px;margin-top:10px">
+        Big Billion Deals is a software concept designed
+        to help users search and compare product pricing.
+      </p>
+
+    </details>
+
+
+    <details style="border-bottom:1px solid var(--border);padding:18px 0">
+
+      <summary style="cursor:pointer;font-weight:700">
+        Is the demo using live prices?
+      </summary>
+
+      <p style="color:var(--muted);font-size:13px;margin-top:10px">
+        No. The prices shown in this static demo are
+        illustrative sample data. A live service would
+        require appropriate retailer or marketplace
+        integrations.
+      </p>
+
+    </details>
+
+
+    <details style="border-bottom:1px solid var(--border);padding:18px 0">
+
+      <summary style="cursor:pointer;font-weight:700">
+        How much does the software cost?
+      </summary>
+
+      <p style="color:var(--muted);font-size:13px;margin-top:10px">
+        The displayed software access price is ₹99.
+      </p>
+
+    </details>
+
+
+    <details style="border-bottom:1px solid var(--border);padding:18px 0">
+
+      <summary style="cursor:pointer;font-weight:700">
+        Does it guarantee the lowest price?
+      </summary>
+
+      <p style="color:var(--muted);font-size:13px;margin-top:10px">
+        No. Price, stock and promotions can change.
+        Users should verify the final price before buying.
+      </p>
+
+    </details>
+
+  </div>
+
+</section>
+
+
+<!-- CTA -->
+
+<section class="cta">
+
+  <div class="cta-box">
+
+    <h2>
+      Ready to find a better deal?
+    </h2>
+
+    <p>
+      Try the Big Billion Deals demo and explore the
+      simple deal-finding workflow.
+    </p>
+
+    <button class="primary" onclick="openDemo()">
+      Open Deal Finder →
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+  <div class="footer">
+
+    <div>
+
+      <div class="logo">
+        <div class="logo-icon">B</div>
+        Big Billion Deals
+      </div>
+
+      <p>
+        An independent software concept designed to make
+        deal discovery and price comparison easier.
+      </p>
+
+    </div>
+
+
+    <div>
+
+      <h4>Product</h4>
+
+      <button onclick="openDemo()">
+        Deal Finder
+      </button>
+
+      <button onclick="scrollToId('features')">
+        Features
+      </button>
+
+      <button onclick="scrollToId('pricing')">
+        Pricing
+      </button>
+
+    </div>
+
+
+    <div>
+
+      <h4>Company</h4>
+
+      <button onclick="openModal('aboutModal')">
+        About Us
+      </button>
+
+      <button onclick="openModal('contactModal')">
+        Contact Us
+      </button>
+
+      <button onclick="openModal('faqModal')">
+        FAQ
+      </button>
+
+    </div>
+
+
+    <div>
+
+      <h4>Legal</h4>
+
+      <button onclick="openModal('privacyModal')">
+        Privacy Policy
+      </button>
+
+      <button onclick="openModal('termsModal')">
+        Terms & Conditions
+      </button>
+
+      <button onclick="openModal('shippingModal')">
+        Shipping Policy
+      </button>
+
+      <button onclick="openModal('refundModal')">
+        Refund Policy
+      </button>
+
+      <button onclick="openModal('disclaimerModal')">
+        Disclaimer
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <div class="bottom">
+
+    <span>
+      © 2026 Big Billion Deals. All rights reserved.
+    </span>
+
+    <span>
+      Independent software service.
+    </span>
+
+  </div>
+
+</footer>
+
+
+<!-- ================================
+     DEMO MODAL
+================================ -->
+
+<div class="overlay" id="demoModal">
+
+  <div class="modal">
+
+    <button class="close" onclick="closeModal('demoModal')">
+      ×
+    </button>
+
+    <h2>
+      Deal Finder Demo
+    </h2>
+
+    <p>
+      Enter any product name below to test the
+      deal-finding interface.
+    </p>
+
+
+    <div class="demo-input">
+
+      <input
+        id="modalInput"
+        placeholder="e.g. smart watch"
+      >
+
+      <button onclick="modalSearch()">
+        Search
+      </button>
+
+    </div>
+
+
+    <div class="demo-result" id="modalResult">
+
+      <div class="result-top">
+        <span>Sample comparison</span>
+        <strong>Potential saving</strong>
+      </div>
+
+
+      <div class="result">
+
+        <div>
+          <div class="store">Store A</div>
+          <div class="product">Sample product listing</div>
+        </div>
+
+        <div class="price">
+          ₹2,499
+        </div>
+
+      </div>
+
+
+      <div class="result">
+
+        <div>
+          <div class="store">Store B</div>
+          <div class="product">Sample product listing</div>
+        </div>
+
+        <div>
+          <div class="price">₹2,099</div>
+          <span class="low">LOWER PRICE</span>
+        </div>
+
+      </div>
+
+
+      <div class="result">
+
+        <div>
+          <div class="store">Store C</div>
+          <div class="product">Sample product listing</div>
+        </div>
+
+        <div class="price">
+          ₹2,699
+        </div>
+
+      </div>
+
+
+      <div class="notice">
+        Demo only: these prices are illustrative sample
+        data and are not live retailer prices.
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- ================================
+     ABOUT US
+================================ -->
+
+<div class="overlay" id="aboutModal">
+
+  <div class="modal">
+
+    <button class="close" onclick="closeModal('aboutModal')">
+      ×
+    </button>
+
+    <h2>
+      About Us
+    </h2>
+
+    <p>
+      Welcome to Big Billion Deals.
+    </p>
+
+    <p style="margin-top:12px">
+      Big Billion Deals is an independent software
+      service concept focused on making online deal
+      discovery easier and more convenient.
+    </p>
+
+
+    <h3>
+      Our Mission
+    </h3>
+
+    <p>
+      Online shoppers often need to check multiple
+      listings before deciding where to buy a product.
+      Our goal is to simplify that process with a clean,
+      easy-to-use software experience.
+    </p>
+
+
+    <h3>
+      What We Do
+    </h3>
+
+    <p>
+      Our platform is designed around product search,
+      price comparison and deal discovery.
+    </p>
+
+
+    <h3>
+      Our Vision
+    </h3>
+
+    <p>
+      We want to build useful technology that helps
+      shoppers make better-informed purchasing decisions.
+    </p>
+
+
+    <div class="info-box">
+
+      <strong>
+        Independent Software Brand
+      </strong>
+
+      <p>
+        Big Billion Deals should not be represented as
+        an official website of any retailer or marketplace
+        unless an actual commercial relationship exists.
+      </p>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- ================================
+     CONTACT
+================================ -->
+
+<div class="overlay" id="contactModal">
+
+  <div class="modal">
+
+    <button class="close" onclick="closeModal('contactModal')">
+      ×
+    </button>
+
+    <h2>
+      Contact Us
+    </h2>
+
+    <p>
+      Have a question, suggestion or need assistance?
+      Get in touch with our support team.
+    </p>
+
+
+    <div class="info-box">
+
+      <strong>
+        Customer Support
+      </strong>
+
+      <p style="margin-top:5px">
+        support@bigbilliondeals.example
+      </p>
+
+    </div>
+
+
+    <div class="info-box">
+
+      <strong>
+        Support Hours
+      </strong>
+
+      <p style="margin-top:5px">
+        Monday – Saturday<br>
+        10:00 AM – 6:00 PM
+      </p>
+
+    </div>
+
+
+    <h3>
+      Before contacting us
+    </h3>
+
+    <p>
+      If you're contacting us about a payment or software
+      access issue, please keep your order or transaction
+      reference available.
+    </p>
+
+  </div>
+
+</div>
+
+
+<!-- ================================
+     PRIVACY POLICY
+================================ -->
+
+<div class="overlay" id="privacyModal">
+
+  <div class="modal">
+
+    <button class="close" onclick="closeModal('privacyModal')">
+      ×
+    </button>
+
+    <h2>
+      Privacy Policy
+    </h2>
+
+    <p>
+      This Privacy Policy explains how Big Billion Deals
+      may handle information when you use our website
+      or software service.
+    </p>
+
+
+    <h3>
+      Information We May Collect
+    </h3>
+
+    <ul>
+      <li>Name and contact information when voluntarily provided.</li>
+      <li>Product searches and service usage information.</li>
+      <li>Technical information such as browser and device details.</li>
+      <li>Information required to provide customer support.</li>
+    </ul>
+
+
+    <h3>
+      How Information May Be Used
+    </h3>
+
+    <ul>
+      <li>To provide and improve the service.</li>
+      <li>To respond to support requests.</li>
+      <li>To maintain website security.</li>
+      <li>To understand how users interact with the service.</li>
+    </ul>
+
+
+    <h3>
+      Cookies
+    </h3>
+
+    <p>
+      The website may use cookies or similar technologies
+      for functionality, analytics and improving the
+      user experience.
+    </p>
+
+
+    <h3>
+      Third-Party Services
+    </h3>
+
+    <p>
+      If third-party analytics, payment providers,
+      retailer APIs or other services are integrated,
+      their respective privacy policies may also apply.
+    </p>
+
+
+    <h3>
+      Data Security
+    </h3>
+
+    <p>
+      Reasonable technical and organizational measures
+      should be used to protect information against
+      unauthorized access or misuse.
+    </p>
+
+
+    <h3>
+      Contact
+    </h3>
+
+    <p>
+      Privacy-related questions can be directed to the
+      support contact provided on this website.
+    </p>
+
+  </div>
+
+</div>
+
+
+<!-- ================================
+     TERMS
+================================ -->
+
+<div class="overlay" id="termsModal">
+
+  <div class="modal">
+
+    <button class="close" onclick="closeModal('termsModal')">
+      ×
+    </button>
+
+    <h2>
+      Terms & Conditions
+    </h2>
+
+    <p>
+      By accessing or using Big Billion Deals, you agree
+      to use the service responsibly and for lawful purposes.
+    </p>
+
+
+    <h3>
+      Service Description
+    </h3>
+
+    <p>
+      Big Billion Deals is designed to assist users with
+      product discovery and price comparison.
+    </p>
+
+
+    <h3>
+      Price Information
+    </h3>
+
+    <p>
+      Prices, discounts, stock availability and promotions
+      may change at any time. Users should verify the final
+      price on the applicable seller or retailer website
+      before purchasing.
+    </p>
+
+
+    <h3>
+      No Guaranteed Lowest Price
+    </h3>
+
+    <p>
+      The service does not guarantee that a displayed offer
+      will always be the lowest available market price.
+    </p>
+
+
+    <h3>
+      User Responsibilities
+    </h3>
+
+    <ul>
+      <li>Do not misuse or disrupt the website.</li>
+      <li>Do not attempt unauthorized access.</li>
+      <li>Do not use the service for unlawful activities.</li>
+      <li>Provide accurate information when required.</li>
+    </ul>
+
+
+    <h3>
+      Changes to Service
+    </h3>
+
+    <p>
+      Features, pricing and functionality may be changed,
+      updated or discontinued from time to time.
+    </p>
+
+
+    <h3>
+      Acceptance
+    </h3>
+
+    <p>
+      Continued use of the service after changes to these
+      terms may constitute acceptance of the updated terms,
+      subject to applicable law.
+    </p>
+
+  </div>
+
+</div>
+
+
+<!-- ================================
+     SHIPPING
+================================ -->
+
+<div class="overlay" id="shippingModal">
+
+  <div class="modal">
+
+    <button class="close" onclick="closeModal('shippingModal')">
+      ×
+    </button>
+
+    <h2>
+      Shipping Policy
+    </h2>
+
+    <p>
+      Big Billion Deals is primarily a digital software
+      service. No physical product is shipped as part of
+      the software access itself.
+    </p>
+
+
+    <h3>
+      Digital Access
+    </h3>
+
+    <p>
+      Where applicable, software access or account
+      information may be provided electronically after
+      successful payment and verification.
+    </p>
+
+
+    <h3>
+      Delivery Time
+    </h3>
+
+    <p>
+      Digital access is generally intended to be delivered
+      electronically. Actual delivery time may depend on
+      payment confirmation and technical processing.
+    </p>
+
+
+    <h3>
+      Physical Products
+    </h3>
+
+    <p>
+      Big Billion Deals does not represent that it directly
+      sells or ships physical products through this
+      informational demo website.
+    </p>
+
+
+    <h3>
+      Delivery Problems
+    </h3>
+
+    <p>
+      If paid software access has not been received after
+      successful payment, contact customer support with
+      the relevant transaction information.
+    </p>
+
+  </div>
+
+</div>
+
+
+<!-- ================================
+     REFUND
+================================ -->
+
+<div class="overlay" id="refundModal">
+
+  <div class="modal">
+
+    <button class="close" onclick="closeModal('refundModal')">
+      ×
+    </button>
+
+    <h2>
+      Refund Policy
+    </h2>
+
+    <p>
+      This policy describes how refund requests for paid
+      software access may be handled.
+    </p>
+
+
+    <h3>
+      Refund Requests
+    </h3>
+
+    <p>
+      Customers who believe they qualify for a refund
+      should contact support and provide their purchase
+      information.
+    </p>
+
+
+    <h3>
+      Eligibility
+    </h3>
+
+    <p>
+      Refund eligibility may depend on the specific
+      product or software plan purchased and the terms
+      presented at the time of purchase.
+    </p>
+
+
+    <h3>
+      Processing
+    </h3>
+
+    <p>
+      Approved refunds may be processed through the
+      original payment method, subject to the payment
+      provider's processing timelines.
+    </p>
+
+
+    <h3>
+      Important
+    </h3>
+
+    <p>
+      The static demo version of this website does not
+      process real payments.
+    </p>
+
+  </div>
+
+</div>
+
+
+<!-- ================================
+     DISCLAIMER
+================================ -->
+
+<div class="overlay" id="disclaimerModal">
+
+  <div class="modal">
+
+    <button class="close" onclick="closeModal('disclaimerModal')">
+      ×
+    </button>
+
+    <h2>
+      Disclaimer
+    </h2>
+
+    <p>
+      The information displayed on this demo website is
+      provided for demonstration and informational purposes.
+    </p>
+
+
+    <h3>
+      Price Information
+    </h3>
+
+    <p>
+      Product prices, discounts and comparisons displayed
+      in demonstrations may be illustrative and should not
+      be treated as live market quotations.
+    </p>
+
+
+    <h3>
+      Retailer Information
+    </h3>
+
+    <p>
+      Any store names, prices or product information used
+      in demonstrations should be treated as sample data
+      unless connected to a verified live data source.
+    </p>
+
+
+    <h3>
+      No Purchase Guarantee
+    </h3>
+
+    <p>
+      Big Billion Deals does not guarantee availability,
+      price, discount, delivery or product quality of any
+      third-party listing.
+    </p>
+
+
+    <h3>
+      Independent Service
+    </h3>
+
+    <p>
+      Big Billion Deals is an independent software brand
+      and should not be presented as an official website
+      of another retailer or marketplace without an actual
+      authorization or partnership.
+    </p>
+
+  </div>
+
+</div>
+
+
+<!-- ================================
+     FAQ MODAL
+================================ -->
+
+<div class="overlay" id="faqModal">
+
+  <div class="modal">
+
+    <button class="close" onclick="closeModal('faqModal')">
+      ×
+    </button>
+
+    <h2>
+      Frequently Asked Questions
+    </h2>
+
+
+    <h3>
+      What is Big Billion Deals?
+    </h3>
+
+    <p>
+      It is a software concept that helps users search,
+      compare and discover potentially better product deals.
+    </p>
+
+
+    <h3>
+      Does it show live prices?
+    </h3>
+
+    <p>
+      The current static demo does not use live pricing.
+      The displayed results are sample data.
+    </p>
+
+
+    <h3>
+      How much does it cost?
+    </h3>
+
+    <p>
+      The displayed software access price is ₹99.
+    </p>
+
+
+    <h3>
+      Can I search any product?
+    </h3>
+
+    <p>
+      The demo accepts any product name, but its results
+      are illustrative until a real price-data integration
+      is connected.
+    </p>
+
+
+    <h3>
+      Does it guarantee the cheapest price?
+    </h3>
+
+    <p>
+      No. Market prices and availability can change, so
+      users should verify the final offer before purchasing.
+    </p>
+
+  </div>
+
+</div>
+
+
+<script>
+
+/* ==========================
+   MODAL FUNCTIONS
+========================== */
+
+function openModal(id){
+
+  const modal=document.getElementById(id);
+
+  if(!modal) return;
+
+  modal.classList.add("active");
+
+  document.body.style.overflow="hidden";
+}
+
+
+function closeModal(id){
+
+  const modal=document.getElementById(id);
+
+  if(!modal) return;
+
+  modal.classList.remove("active");
+
+  document.body.style.overflow="";
+}
+
+
+/* ==========================
+   DEMO
+========================== */
+
+function openDemo(){
+
+  openModal("demoModal");
+
+  setTimeout(()=>{
+
+    const input=document.getElementById("modalInput");
+
+    if(input) input.focus();
+
+  },150);
+}
+
+
+function heroSearch(){
+
+  const input=document.getElementById("heroInput");
+
+  if(!input.value.trim()){
+
+    input.focus();
+
+    return;
+  }
+
+  document
+    .getElementById("heroResults")
+    .classList.add("show");
+}
+
+
+function modalSearch(){
+
+  const input=document.getElementById("modalInput");
+
+  if(!input.value.trim()){
+
+    input.focus();
+
+    return;
+  }
+
+  document
+    .getElementById("modalResult")
+    .classList.add("show");
+}
+
+
+document
+  .getElementById("heroInput")
+  .addEventListener("keydown",function(e){
+
+    if(e.key==="Enter"){
+      heroSearch();
+    }
+
+  });
+
+
+document
+  .getElementById("modalInput")
+  .addEventListener("keydown",function(e){
+
+    if(e.key==="Enter"){
+      modalSearch();
+    }
+
+  });
+
+
+/* ==========================
+   OUTSIDE CLICK
+========================== */
+
+document
+  .querySelectorAll(".overlay")
+  .forEach(overlay=>{
+
+    overlay.addEventListener("click",function(e){
+
+      if(e.target===overlay){
+
+        overlay.classList.remove("active");
+
+        document.body.style.overflow="";
+
+      }
+
+    });
+
+  });
+
+
+/* ==========================
+   ESC
+========================== */
+
+document.addEventListener("keydown",function(e){
+
+  if(e.key==="Escape"){
+
+    document
+      .querySelectorAll(".overlay")
+      .forEach(modal=>{
+        modal.classList.remove("active");
+      });
+
+    document.body.style.overflow="";
+  }
+
+});
+
+
+/* ==========================
+   SCROLL
+========================== */
+
+function scrollToId(id){
+
+  const element=document.getElementById(id);
+
+  if(!element) return;
+
+  element.scrollIntoView({
+    behavior:"smooth"
+  });
+
+}
+
+</script>
+
+</body>
+</html>
