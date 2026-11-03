@@ -1,115 +1,580 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Grow Your Business</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- Meta Compliance -->
-  <meta name="description" content="Professional digital services to help your business grow.">
-  
+  <title>CricketPulse — Cricket Information</title>
+
   <style>
-    body {
+    * {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f5f7fa;
-      color: #333;
+      padding: 0;
+      box-sizing: border-box;
     }
 
-    header {
-      background: #1877f2;
-      color: white;
-      padding: 15px;
-      text-align: center;
+    html {
+      scroll-behavior: smooth;
     }
 
-    .container {
-      padding: 30px;
-      max-width: 1000px;
-      margin: auto;
-    }
-
-    .hero {
-      text-align: center;
-      padding: 50px 20px;
-    }
-
-    .hero h1 {
-      font-size: 32px;
-    }
-
-    .btn {
-      background: #1877f2;
-      color: white;
-      padding: 12px 25px;
-      border: none;
-      cursor: pointer;
-      margin-top: 15px;
-      display: inline-block;
-      text-decoration: none;
-    }
-
-    .section {
-      margin-top: 40px;
-    }
-
-    footer {
-      background: #222;
-      color: white;
-      padding: 20px;
-      text-align: center;
-      margin-top: 40px;
+    body {
+      font-family: Inter, Arial, sans-serif;
+      background: #07111f;
+      color: #ffffff;
+      line-height: 1.5;
     }
 
     a {
-      color: #1877f2;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      width: min(1120px, 92%);
+      margin: auto;
+    }
+
+    /* NAVBAR */
+
+    nav {
+      height: 72px;
+      border-bottom: 1px solid #18304a;
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-inner {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-size: 23px;
+      font-weight: 800;
+      letter-spacing: -0.7px;
+    }
+
+    .logo span {
+      color: #27e06f;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      color: #a9bbcf;
+      font-size: 14px;
+    }
+
+    .nav-links a:hover {
+      color: #27e06f;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 19px;
+      background: #27e06f;
+      color: #06120b;
+      border-radius: 9px;
+      font-weight: 700;
+      transition: 0.2s;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(39, 224, 111, 0.2);
+    }
+
+    /* HERO */
+
+    .hero {
+      padding: 82px 0 62px;
+      text-align: center;
+
+      background:
+        radial-gradient(
+          circle at 50% 5%,
+          #12335b 0,
+          #07111f 50%
+        );
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 7px 13px;
+      border: 1px solid #25496b;
+      border-radius: 50px;
+      color: #7fd8ff;
+      font-size: 12px;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-size: clamp(42px, 6vw, 72px);
+      line-height: 1.03;
+      letter-spacing: -2.5px;
+    }
+
+    .hero h1 span {
+      color: #27e06f;
+    }
+
+    .hero-description {
+      max-width: 650px;
+      margin: 21px auto 29px;
+      color: #a9bbcf;
+      font-size: 17px;
+    }
+
+    /* SCORE CARDS */
+
+    .score-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 40px;
+      text-align: left;
+    }
+
+    .score-card {
+      background: #0d1b2c;
+      border: 1px solid #1b334d;
+      border-radius: 16px;
+      padding: 22px;
+      transition: 0.2s;
+    }
+
+    .score-card:hover {
+      transform: translateY(-4px);
+      border-color: #2c587d;
+    }
+
+    .match-name {
+      color: #7f94a9;
+      font-size: 13px;
+    }
+
+    .score-card h3 {
+      margin: 8px 0;
+      font-size: 22px;
+    }
+
+    .status {
+      color: #27e06f;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    /* SECTIONS */
+
+    .section {
+      padding: 68px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 35px;
+      margin-bottom: 9px;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: #91a4b8;
+      margin-bottom: 32px;
+    }
+
+    /* STATS */
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+    }
+
+    .stat-card {
+      background: #0c1928;
+      padding: 23px;
+      border-radius: 14px;
+      border: 1px solid #193049;
+    }
+
+    .stat-card strong {
+      display: block;
+      font-size: 28px;
+      margin-bottom: 3px;
+    }
+
+    .stat-card span {
+      color: #8ea2b7;
+      font-size: 13px;
+    }
+
+    /* NEWS */
+
+    .news-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 18px;
+    }
+
+    .news-box {
+      background: #0d1b2c;
+      border: 1px solid #1b334d;
+      border-radius: 16px;
+      padding: 24px;
+    }
+
+    .news-box h3 {
+      margin-bottom: 12px;
+    }
+
+    .news-item {
+      padding: 15px 0;
+      border-bottom: 1px solid #1a3046;
+      color: #b5c4d3;
+      cursor: pointer;
+    }
+
+    .news-item:last-child {
+      border-bottom: none;
+    }
+
+    .news-item:hover {
+      color: #ffffff;
+    }
+
+    /* CTA */
+
+    .cta {
+      margin: 10px 0 65px;
+      padding: 50px 25px;
+      text-align: center;
+      border-radius: 20px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #10355a,
+          #0d251c
+        );
+
+      border: 1px solid #24506d;
+    }
+
+    .cta h2 {
+      font-size: 32px;
+    }
+
+    .cta p {
+      color: #a8bacb;
+      margin: 12px auto 23px;
+    }
+
+    /* FOOTER */
+
+    footer {
+      padding: 25px 0;
+      border-top: 1px solid #18304a;
+      color: #71879d;
+      font-size: 13px;
+      text-align: center;
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 760px) {
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 55px;
+      }
+
+      .score-grid,
+      .stats-grid,
+      .news-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h1 {
+        font-size: 45px;
+      }
+
+      .section-title {
+        font-size: 29px;
+      }
+
+      .cta {
+        padding: 35px 20px;
+      }
     }
   </style>
 </head>
 
 <body>
 
-<header>
-  <h2>Your Brand Name</h2>
-</header>
+  <!-- NAVBAR -->
 
-<div class="container">
+  <nav>
+    <div class="container nav-inner">
 
-  <div class="hero">
-    <h1>Grow Your Business With Professional Services</h1>
-    <p>We help businesses improve their online presence and generate quality leads.</p>
-    <a href="#" class="btn">Get Started</a>
-  </div>
+      <div class="logo">
+        Cricket<span>Pulse</span>
+      </div>
 
-  <div class="section">
-    <h2>Our Services</h2>
-    <p>✔ Social Media Marketing</p>
-    <p>✔ Facebook Ads Management</p>
-    <p>✔ Lead Generation</p>
-  </div>
+      <div class="nav-links">
+        <a href="#scores">Live Scores</a>
+        <a href="#news">News</a>
+        <a href="#stats">Stats</a>
+      </div>
 
-  <div class="section">
-    <h2>Why Choose Us</h2>
-    <p>✔ Transparent Work</p>
-    <p>✔ No False Promises</p>
-    <p>✔ Professional Support</p>
-  </div>
+      <a href="#scores" class="btn">
+        Explore Cricket
+      </a>
 
-  <div class="section">
-    <h2>Contact Us</h2>
-    <p>Email: support@yourdomain.com</p>
-    <p>Phone: +91 00000 00000</p>
-  </div>
+    </div>
+  </nav>
 
-</div>
 
-<footer>
-  <p>© 2026 Your Brand Name. All rights reserved.</p>
-  <p>
-    <a href="#">Privacy Policy</a> | 
-    <a href="#">Terms & Conditions</a>
-  </p>
-</footer>
+  <!-- HERO -->
+
+  <section class="hero">
+
+    <div class="container">
+
+      <div class="badge">
+        🏏 YOUR DAILY CRICKET HUB
+      </div>
+
+      <h1>
+        Everything Cricket.<br>
+        <span>One Place.</span>
+      </h1>
+
+      <p class="hero-description">
+        Get quick cricket information, match scores,
+        player statistics, tournament updates and the
+        latest stories — all in one simple place.
+      </p>
+
+      <a href="#scores" class="btn">
+        View Match Center →
+      </a>
+
+
+      <!-- SCORE CARDS -->
+
+      <div class="score-grid" id="scores">
+
+        <div class="score-card">
+
+          <div class="match-name">
+            IND vs AUS · 2nd ODI
+          </div>
+
+          <h3>
+            India 284/6
+          </h3>
+
+          <div class="status">
+            India lead by 18 runs
+          </div>
+
+        </div>
+
+
+        <div class="score-card">
+
+          <div class="match-name">
+            ENG vs SA · T20
+          </div>
+
+          <h3>
+            South Africa 168/7
+          </h3>
+
+          <div class="status">
+            England need 169
+          </div>
+
+        </div>
+
+
+        <div class="score-card">
+
+          <div class="match-name">
+            NZ vs PAK · Test
+          </div>
+
+          <h3>
+            New Zealand 312/4
+          </h3>
+
+          <div class="status">
+            Day 2 · Session 3
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- STATS -->
+
+  <section class="section" id="stats">
+
+    <div class="container">
+
+      <h2 class="section-title">
+        Cricket at a Glance
+      </h2>
+
+      <p class="section-subtitle">
+        Sample statistics for this demo landing page.
+      </p>
+
+
+      <div class="stats-grid">
+
+        <div class="stat-card">
+          <strong>1,248</strong>
+          <span>Matches covered</span>
+        </div>
+
+        <div class="stat-card">
+          <strong>326</strong>
+          <span>Players tracked</span>
+        </div>
+
+        <div class="stat-card">
+          <strong>48</strong>
+          <span>Tournaments</span>
+        </div>
+
+        <div class="stat-card">
+          <strong>24/7</strong>
+          <span>Cricket updates</span>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- NEWS -->
+
+  <section class="section" id="news">
+
+    <div class="container">
+
+      <h2 class="section-title">
+        Latest Cricket Updates
+      </h2>
+
+      <p class="section-subtitle">
+        Dummy content — replace with your real cricket feed later.
+      </p>
+
+
+      <div class="news-grid">
+
+        <div class="news-box">
+
+          <h3>
+            Top Stories
+          </h3>
+
+          <div class="news-item">
+            India announce squad for upcoming ODI series →
+          </div>
+
+          <div class="news-item">
+            Young opener scores a stunning maiden century →
+          </div>
+
+          <div class="news-item">
+            New tournament schedule released for the season →
+          </div>
+
+          <div class="news-item">
+            Captain discusses plans ahead of the big series →
+          </div>
+
+        </div>
+
+
+        <div class="news-box">
+
+          <h3>
+            Popular
+          </h3>
+
+          <div class="news-item">
+            🏆 Tournament Guide
+          </div>
+
+          <div class="news-item">
+            📊 Player Statistics
+          </div>
+
+          <div class="news-item">
+            📅 Match Schedule
+          </div>
+
+          <div class="news-item">
+            🔥 Trending Players
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- CTA -->
+
+  <section class="container">
+
+    <div class="cta">
+
+      <h2>
+        Stay Updated With Cricket
+      </h2>
+
+      <p>
+        Follow scores, schedules, stats and
+        cricket stories without the clutter.
+      </p>
+
+      <a href="#scores" class="btn">
+        Open Cricket Center
+      </a>
+
+    </div>
+
+  </section>
+
+
+  <!-- FOOTER -->
+
+  <footer>
+
+    © 2026 CricketPulse · Demo landing page ·
+    All scores and statistics shown above are fictional.
+
+  </footer>
 
 </body>
 </html>
