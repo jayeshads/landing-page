@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>document.documentElement.className="js"</script>
+<meta name="theme-color" content="#000000">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Leads Pilot | Performance Marketing for iGaming, Trading & High-Risk Verticals</title>
+<meta name="description" content="Leads Pilot runs paid media, push/native, SEO and tracking for iGaming, trading and restricted verticals in licensed markets.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#000;--bg2:#070707;--card:rgba(255,255,255,.045);--line:rgba(255,255,255,.14);--ink:#FFFFFF;--muted:#9B9B9B;--v:#FFFFFF;--c:#FFFFFF;--g:linear-gradient(120deg,#FFFFFF,#8A8A8A);--g2:linear-gradient(120deg,#FFFFFF,#6E6E6E);
+--d:"Sora",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;--b:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px);height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.6 var(--b);overflow-x:hidden}
+h1,h2,h3{font-family:var(--d);margin:0;line-height:1.15;letter-spacing:-.03em;overflow-wrap:break-word}
+p{margin:0}a{color:inherit}
+:focus-visible{outline:3px solid var(--c);outline-offset:3px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 22px;position:relative;z-index:2}
+.grad{background:linear-gradient(110deg,#fff 0%,#777 35%,#fff 70%,#777 100%);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:sh 5s linear infinite}
+@keyframes sh{to{background-position:-220% 0}}
+@keyframes up{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
+@keyframes pulse{0%,100%{box-shadow:0 0 30px rgba(255,255,255,.3)}50%{box-shadow:0 0 55px rgba(255,255,255,.65)}}
+@keyframes fl{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.hero h1{animation:up .9s .1s both}.hero .lead{animation:up .9s .3s both}.cta{animation:up .9s .5s both}.badges{animation:up .9s .7s both}
+.badges span{animation:fl 4s ease-in-out infinite}.badges span:nth-child(2){animation-delay:.5s}.badges span:nth-child(3){animation-delay:1s}.badges span:nth-child(4){animation-delay:1.5s}
+.hero .btn-p,.fab{animation:pulse 2.6s ease-in-out infinite}
+.btn{display:inline-block;font:600 16px var(--b);padding:15px 28px;border-radius:99px;text-decoration:none;border:0;cursor:pointer;transition:transform .2s,box-shadow .2s}
+.btn-p{background:#fff;color:#000;box-shadow:0 0 36px rgba(255,255,255,.35)}
+.btn-p:hover{transform:translateY(-3px);box-shadow:0 8px 50px rgba(255,255,255,.55)}
+.btn-o{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
+.btn-o:hover{border-color:var(--c)}
+/* hero */
+.hero{min-height:100vh;min-height:100svh;position:relative;display:flex;flex-direction:column;overflow:hidden;background:radial-gradient(700px 520px at 76% 28%,rgba(255,255,255,.22),transparent 65%),radial-gradient(600px 400px at 8% 100%,rgba(255,255,255,.08),transparent 60%),var(--bg)}
+.beam{position:absolute;top:-20%;right:8%;width:46%;height:140%;background:linear-gradient(180deg,rgba(255,255,255,.22),rgba(255,255,255,0) 70%);transform:rotate(18deg);filter:blur(46px);opacity:.55;pointer-events:none;animation:beam 9s ease-in-out infinite alternate}
+@keyframes beam{from{opacity:.3;transform:rotate(14deg)}to{opacity:.65;transform:rotate(22deg)}}
+#gl{position:absolute;inset:0;width:100%;height:100%}
+nav{display:flex;justify-content:space-between;align-items:center;padding:22px 0}
+.logo{font:800 20px var(--d);text-decoration:none}
+nav .btn{padding:10px 20px;font-size:15px}
+.hero-in{flex:1;display:flex;align-items:center;padding:30px 0 70px}
+.hero h1{font-size:clamp(36px,6.4vw,76px);font-weight:800;max-width:15ch}
+.hero p.lead{color:var(--muted);font-size:clamp(17px,2vw,20px);max-width:48ch;margin-top:22px}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:38px}
+.badges span{font-size:14px;padding:7px 14px;border:1px solid var(--line);border-radius:99px;background:var(--card);backdrop-filter:blur(8px);color:var(--muted)}
+/* marquee */
+.mq{border-block:1px solid var(--line);background:var(--bg2);overflow:hidden;padding:18px 0;white-space:nowrap}
+.mq div{display:inline-block;animation:mq 32s linear infinite}
+.mq span{font:700 20px var(--d);margin:0 26px;color:var(--muted)}
+.mq span:nth-child(even){color:#fff}
+@keyframes mq{to{transform:translateX(-50%)}}
+section{padding:96px 0;position:relative}
+h2.t{font-size:clamp(28px,4.4vw,48px);font-weight:700;max-width:18ch}
+.sub{color:var(--muted);max-width:56ch;margin-top:14px}
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px;margin-top:44px}
+.stat{padding:28px;border-radius:20px;background:var(--card);border:1px solid var(--line);backdrop-filter:blur(10px)}
+.stat b{display:block;font:800 clamp(34px,4.4vw,52px)/1 var(--d)}
+.stat span{color:var(--muted);font-size:15px;display:block;margin-top:10px}
+/* cases 3D tilt */
+.cases{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:22px;margin-top:44px;perspective:1100px}
+.case{position:relative;padding:30px;border-radius:22px;background:linear-gradient(160deg,rgba(255,255,255,.12),rgba(255,255,255,.02));border:1px solid var(--line);transform-style:preserve-3d;transition:transform .15s ease-out,box-shadow .3s;will-change:transform}
+.case:hover{box-shadow:0 30px 70px rgba(255,255,255,.14)}
+.case .k{font-size:14px;color:#cfcfcf;transform:translateZ(30px);display:block}
+.case h3{font-size:22px;margin:8px 0 18px;transform:translateZ(40px)}
+.case .row{display:flex;justify-content:space-between;padding:11px 0;border-top:1px solid var(--line);font-size:16px;transform:translateZ(20px)}
+.case .row b{font-family:var(--d);font-size:16px}
+.up{color:#fff}
+/* services */
+.svc{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px;margin-top:44px}
+.sv{padding:28px;border-radius:20px;background:var(--card);border:1px solid var(--line);transition:transform .25s,border-color .25s}
+.sv:hover{transform:translateY(-6px);border-color:var(--v)}
+.ic{width:48px;height:48px;border-radius:14px;background:rgba(255,255,255,.08);border:1px solid var(--line);display:grid;place-items:center;margin-bottom:18px;font-size:22px}
+.sv h3{font-size:19px;margin-bottom:8px}.sv p{color:var(--muted);font-size:16px}
+.note{margin-top:26px;padding:18px 22px;border-radius:14px;border:1px solid var(--line);background:var(--card);color:var(--muted);font-size:15.5px;max-width:78ch}
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:44px;counter-reset:s}
+.st{counter-increment:s;padding:26px;border-radius:20px;border:1px solid var(--line);background:var(--card)}
+.st::before{content:counter(s);display:block;font:800 40px var(--d);background:var(--g2);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:8px}
+.st h3{font-size:19px;margin-bottom:6px}.st p{color:var(--muted);font-size:16px}
+/* offers */
+.of{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;margin-top:44px}
+.pl{padding:32px;border-radius:22px;border:1px solid var(--line);background:var(--card)}
+.pl.hot{background:linear-gradient(160deg,rgba(255,255,255,.16),rgba(255,255,255,.03));border-color:#fff;box-shadow:0 0 60px rgba(255,255,255,.12)}
+.pl .tag{display:inline-block;font:600 13px var(--b);background:#fff;color:#000;border-radius:99px;padding:3px 12px;margin-bottom:12px}
+.pl h3{font-size:21px}.pr{font:800 34px var(--d);margin:12px 0}.pl p{color:var(--muted);font-size:16px}
+/* contact */
+.ct{display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:start}
+@media(max-width:820px){.ct{grid-template-columns:1fr}}
+.ch{display:grid;gap:12px;margin-top:28px}
+.ch a{padding:16px 20px;border-radius:16px;border:1px solid var(--line);background:var(--card);text-decoration:none;transition:border-color .2s}
+.ch a:hover{border-color:var(--c)}
+.ch b{display:block;font:700 17px var(--d)}.ch span{color:var(--muted);font-size:15px}
+form{padding:28px;border-radius:22px;border:1px solid var(--line);background:rgba(255,255,255,.06);backdrop-filter:blur(14px);display:grid;gap:15px}
+label{font-weight:500;font-size:15px;display:grid;gap:6px}
+input,select,textarea{font:400 16px var(--b);padding:13px 15px;border-radius:12px;border:1.5px solid var(--line);background:#0A0A0A;color:var(--ink);width:100%}
+textarea{min-height:90px;resize:vertical}
+.err{font-size:14px;color:#ff9a9a;min-height:20px}
+footer{border-top:1px solid var(--line);padding:34px 0 70px;color:var(--muted);font-size:14px}
+footer p+p{margin-top:8px;max-width:80ch}
+.fab{position:fixed;right:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:30;padding:14px 22px}
+.js .rv{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s ease}
+.js .rv.in{opacity:1;transform:none}
+.js .case.rv.in{transition:transform .15s ease-out,box-shadow .3s}
+@media(max-width:640px){
+body{font-size:16px}
+.wrap{padding:0 18px}
+nav{padding:16px 0}nav .btn{padding:9px 16px;font-size:14px}
+.hero-in{align-items:flex-end;padding:0 0 44px}
+.hero h1{font-size:clamp(32px,10vw,44px);max-width:12ch}
+.hero p.lead{font-size:16px;margin-top:16px}
+.cta{flex-direction:column;margin-top:24px}.cta .btn{text-align:center;width:100%}
+.badges{margin-top:24px;gap:8px}.badges span{font-size:13px;padding:6px 12px}
+.beam{width:90%;right:-10%}
+section{padding:60px 0}
+h2.t{font-size:clamp(26px,8vw,34px)}
+.stats{grid-template-columns:1fr 1fr;gap:12px;margin-top:30px}
+.stat{padding:18px 16px;border-radius:16px}.stat b{font-size:30px}.stat span{font-size:13px}
+.cases,.svc,.steps,.of{margin-top:30px;gap:14px}
+.case{padding:22px;border-radius:18px}.sv,.st,.pl{padding:22px;border-radius:18px}
+.mq span{font-size:15px;margin:0 16px}.mq{padding:13px 0}
+.ct{gap:26px}form{padding:20px;border-radius:18px}
+.fab{padding:12px 18px;font-size:14px}
+footer{padding-bottom:90px}
+}
+@media(hover:none){.case{transform:none!important}}
+@media(prefers-reduced-motion:reduce){.beam{animation:none}.mq div{animation:none}.js .rv{opacity:1;transform:none;transition:none}.hero h1,.hero .lead,.cta,.badges,.grad,.btn-p{animation:none!important}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="beam" aria-hidden="true"></div>
+  <canvas id="gl" aria-hidden="true"></canvas>
+  <div class="wrap" style="display:flex;flex-direction:column;flex:1">
+    <nav>
+      <a class="logo" href="#top">Leads<span class="grad">Pilot</span></a>
+      <a class="btn btn-o" href="#contact">Get a quote</a>
+    </nav>
+    <div class="hero-in">
+      <div>
+        <h1 id="top">We fly your traffic where <span class="grad">ads are hard to run.</span></h1>
+        <p class="lead">Performance marketing for iGaming, trading and other restricted verticals. Paid media, push/native, SEO and tracking, in licensed markets only.</p>
+        <div class="cta">
+          <a class="btn btn-p" href="https://wa.me/919131085961?text=Hi%20Leads%20Pilot%2C%20I%20want%20to%20discuss%20a%20campaign." target="_blank" rel="noopener">Chat on WhatsApp</a>
+          <a class="btn btn-o" href="#results">See results</a>
+        </div>
+        <div class="badges"><span>iGaming</span><span>Trading and forex</span><span>Crypto</span><span>White-label</span></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="mq" aria-hidden="true"><div id="mq"></div></div>
+
+<!-- NOTE: All numbers in STATS and CASES (script at the bottom) are SAMPLE figures. Replace them with your real campaign data before launch. -->
+<section id="results">
+  <div class="wrap">
+    <h2 class="t rv">Results that <span class="grad">speak</span></h2>
+    <p class="sub rv">Numbers from campaigns we have run across paid, push/native and organic channels.</p>
+    <div class="stats" id="stats"></div>
+    <div class="cases" id="cases"></div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="wrap">
+    <h2 class="t rv">Everything to scale a restricted vertical</h2>
+    <div class="svc">
+      <div class="sv rv"><div class="ic">🚀</div><h3>Paid media buying</h3><p>Search, programmatic, affiliate-network placements and social where policy allows. Budget grows in tested steps.</p></div>
+      <div class="sv rv"><div class="ic">🔔</div><h3>Push and native</h3><p>Creative testing, placement cleaning and bid control built around your CPA or ROAS target.</p></div>
+      <div class="sv rv"><div class="ic">🌐</div><h3>SEO and owned sites</h3><p>Review sites and content hubs that bring steady organic traffic. We run our own portfolio, so we know what ranks.</p></div>
+      <div class="sv rv"><div class="ic">📊</div><h3>Tracking and funnels</h3><p>Postbacks, server-side tracking and landing page tests, so every lead traces back to its source.</p></div>
+      <div class="sv rv"><div class="ic">🛡️</div><h3>Policy-safe scaling</h3><p>Account health, creative review readiness and backup sources, so one ban never stops a campaign.</p></div>
+      <div class="sv rv"><div class="ic">🤝</div><h3>White-label for agencies</h3><p>We act as your execution team under your brand. You keep the client.</p></div>
+    </div>
+    <p class="note rv">We run restricted verticals the clean way: licensed GEOs only, no cloaking, no fake reviews, no misleading claims, and no gambling promotion targeting India.</p>
+  </div>
+</section>
+
+<section id="process">
+  <div class="wrap">
+    <h2 class="t rv">From brief to scale in four steps</h2>
+    <div class="steps">
+      <div class="st rv"><h3>Brief</h3><p>Offer, GEO, payout and target CPA, agreed on a short call.</p></div>
+      <div class="st rv"><h3>30-day test</h3><p>One or two channels, fixed scope, full numbers.</p></div>
+      <div class="st rv"><h3>Scale</h3><p>Budget moves to the sources and creatives that hit target.</p></div>
+      <div class="st rv"><h3>Report</h3><p>Weekly plain-language reports with next steps.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="offers">
+  <div class="wrap">
+    <h2 class="t rv">Pick how you want to start</h2>
+    <div class="of">
+      <div class="pl rv hot"><span class="tag">Best way to start</span><h3>30-day test</h3><div class="pr">From $300</div><p>One channel, one GEO, one goal. Fixed fee on top of your ad budget.</p></div>
+      <div class="pl rv"><h3>Monthly retainer</h3><div class="pr">Custom</div><p>Ongoing media buying, SEO and reporting across channels, with a weekly call.</p></div>
+      <div class="pl rv"><h3>White-label</h3><div class="pr">Custom</div><p>Execution for agencies, under your brand and your client relationship.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap ct">
+    <div>
+      <h2 class="t rv">Ready to take off?</h2>
+      <p class="sub rv">Fill in the brief and it opens in WhatsApp with your details ready to send. Replies usually come within a few hours.</p>
+      <div class="ch">
+        <a href="https://wa.me/919131085961" target="_blank" rel="noopener"><b>WhatsApp</b><span>+91 91310 85961</span></a>
+        <a href="mailto:support.leadpilot@gmail.com"><b>Email</b><span>support.leadpilot@gmail.com</span></a>
+        <a href="https://instagram.com/leadspilotx" target="_blank" rel="noopener"><b>Instagram</b><span>@leadspilotx</span></a>
+        <a href="https://x.com/leadspilotx" target="_blank" rel="noopener"><b>X</b><span>@leadspilotx</span></a>
+      </div>
+    </div>
+    <form id="brief" novalidate>
+      <label>Your name<input id="f-name" type="text" autocomplete="name"></label>
+      <label>Email or WhatsApp number<input id="f-contact" type="text" autocomplete="email"></label>
+      <label>Vertical<select id="f-vert"><option>iGaming / casino</option><option>Trading / forex</option><option>Crypto</option><option>Other restricted vertical</option><option>Agency (white-label)</option></select></label>
+      <label>Monthly ad budget<select id="f-budget"><option>Under $1,000</option><option>$1,000 – $5,000</option><option>$5,000 – $20,000</option><option>$20,000+</option></select></label>
+      <label>Target GEO and goal<textarea id="f-msg" placeholder="Example: UK, casino, CPA target $80"></textarea></label>
+      <button class="btn btn-p" type="submit">Send brief on WhatsApp</button>
+      <button class="btn btn-o" type="button" id="mail-btn">Send by email instead</button>
+      <p class="err" id="err" role="alert"></p>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>© <span id="yr">2026</span> Leads Pilot. All rights reserved.</p>
+    <p>Gambling and trading carry financial risk and are for adults aged 18+ only. We promote only in jurisdictions where these products are licensed and legal, and we are not a financial adviser. Results depend on the offer, market and budget, and are not guaranteed.</p>
+  </div>
+</footer>
+
+<a class="btn btn-p fab" href="https://wa.me/919131085961?text=Hi%20Leads%20Pilot%2C%20I%20want%20to%20discuss%20a%20campaign." target="_blank" rel="noopener">WhatsApp us</a>
+
+<script>
+/* ===== EDIT THESE: sample figures, replace with your real data ===== */
+var STATS=[
+ {n:12,p:'M+',l:'Clicks driven'},
+ {n:350,p:'+',l:'Leads delivered monthly'},
+ {n:4.2,p:'x',l:'Average ROAS on scaled tests',d:1},
+ {n:15,p:'+',l:'GEOs tested'}
+];
+var CASES=[
+ {k:'iGaming · Tier-1 GEO',t:'Casino, push traffic',r:[['Spend','$8,400'],['Cost per FTD','$62'],['ROAS','3.8x']]},
+ {k:'Trading · Europe',t:'Forex leads, SEO and native',r:[['Leads / month','420'],['Cost per lead','$11'],['ROAS','4.6x']]},
+ {k:'Crypto · LATAM',t:'Paid media and funnels',r:[['Spend','$5,100'],['Cost per reg','$3.40'],['ROAS','2.9x']]}
+];
+var VERTS=['iGaming','Trading','Forex','Crypto','Push traffic','Native ads','SEO','Tracking','White-label','Media buying'];
+/* ================================================================== */
+var mq=document.getElementById('mq'),h='';
+for(var i=0;i<2;i++)VERTS.forEach(function(v){h+='<span>'+v+'</span>'});
+mq.innerHTML=h+h;
+document.getElementById('stats').innerHTML=STATS.map(function(s,i){return '<div class="stat rv"><b class="grad" data-n="'+s.n+'" data-d="'+(s.d||0)+'" data-p="'+s.p+'">0</b><span>'+s.l+'</span></div>'}).join('');
+document.getElementById('cases').innerHTML=CASES.map(function(c){return '<div class="case rv"><span class="k">'+c.k+'</span><h3>'+c.t+'</h3>'+c.r.map(function(r){return '<div class="row"><span>'+r[0]+'</span><b class="up">'+r[1]+'</b></div>'}).join('')+'</div>'}).join('');
+document.getElementById('yr').textContent=new Date().getFullYear();
+
+var still=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+/* reveal + counters */
+function count(el){var n=+el.dataset.n,d=+el.dataset.d,p=el.dataset.p,t0=null;
+ if(still){el.textContent=n.toFixed(d)+p;return}
+ (function f(t){if(!t0)t0=t;var k=Math.min((t-t0)/1600,1),e=1-Math.pow(1-k,3);el.textContent=(n*e).toFixed(d)+p;if(k<1)requestAnimationFrame(f)})(performance.now())}
+var io=window.IntersectionObserver?new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');var b=e.target.querySelector('[data-n]');if(b&&!b.done){b.done=1;count(b)}io.unobserve(e.target)}})},{threshold:.1}):{observe:function(e){e.classList.add('in')},unobserve:function(){}};
+document.querySelectorAll('.rv').forEach(function(el){io.observe(el)});
+setTimeout(function(){document.querySelectorAll('.rv').forEach(function(el){if(!el.classList.contains('in')){el.classList.add('in');var b=el.querySelector('[data-n]');if(b&&!b.done){b.done=1;count(b)}}})},4000);
+/* 3D tilt cards */
+document.querySelectorAll('.case').forEach(function(c){
+ c.addEventListener('mousemove',function(e){if(still)return;var r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.style.transform='rotateY('+(x*16)+'deg) rotateX('+(-y*16)+'deg) translateZ(10px)'});
+ c.addEventListener('mouseleave',function(){c.style.transform=''})});
+/* 3D globe (canvas, no external library) */
+(function(){
+ var cv=document.getElementById('gl'),x=cv.getContext('2d');if(!x)return;
+ var dpr=Math.min(window.devicePixelRatio||1,2),W,H,cx,cy,R,mx=0,my=0,vis=true,N=1100,P=[],i;
+ for(i=0;i<N;i++){var y=1-2*(i+.5)/N,rr=Math.sqrt(1-y*y),th=i*2.399963;P.push([rr*Math.cos(th),y,rr*Math.sin(th)])}
+ function size(){W=cv.clientWidth;H=cv.clientHeight;cv.width=W*dpr;cv.height=H*dpr;x.setTransform(dpr,0,0,dpr,0,0);
+  var wide=W>820;R=wide?Math.min(H*.34,W*.2):Math.min(W*.34,H*.19);cx=wide?W*.72:W/2;cy=wide?H*.48:H*.26}
+ size();addEventListener('resize',size);
+ addEventListener('pointermove',function(e){mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5});
+ if('IntersectionObserver' in window)new IntersectionObserver(function(e){vis=e[0].isIntersecting}).observe(cv);
+ var ang=0,ct,st,ca,sa;
+ function pr(px,py,pz){var x1=px*ca+pz*sa,z1=-px*sa+pz*ca,y2=py*ct-z1*st,z2=py*st+z1*ct,s=3.4/(3.4-z2);return[cx+x1*R*s,cy+y2*R*s,z2]}
+ function ring(k,rx,rz,col,t,dir){
+  var crx=Math.cos(rx),srx=Math.sin(rx),crz=Math.cos(rz),srz=Math.sin(rz),pts=[],a,q;
+  for(a=0;a<=64;a++){var u=a/64*Math.PI*2,px=k*Math.cos(u),py=0,pz=k*Math.sin(u),y1=py*crx-pz*srx,z1=py*srx+pz*crx;pts.push(pr(px*crz-y1*srz,px*srz+y1*crz,z1))}
+  x.beginPath();pts.forEach(function(q,j){j?x.lineTo(q[0],q[1]):x.moveTo(q[0],q[1])});x.strokeStyle=col;x.lineWidth=1.2;x.stroke();
+  var u2=t*.0009*dir,px2=k*Math.cos(u2),pz2=k*Math.sin(u2),y3=-pz2*srx,z3=pz2*crx;q=pr(px2*crz-y3*srz,px2*srz+y3*crz,z3);
+  x.beginPath();x.arc(q[0],q[1],4.5,0,7);x.fillStyle='#fff';x.shadowColor='#fff';x.shadowBlur=18;x.fill();x.shadowBlur=0}
+ function draw(t){
+  x.clearRect(0,0,W,H);
+  var g=x.createRadialGradient(cx,cy,R*.2,cx,cy,R*2);g.addColorStop(0,'rgba(255,255,255,.16)');g.addColorStop(1,'rgba(255,255,255,0)');x.fillStyle=g;x.fillRect(0,0,W,H);
+  ang=t*.00035+mx*.9;var tilt=.38+my*.35;ca=Math.cos(ang);sa=Math.sin(ang);ct=Math.cos(tilt);st=Math.sin(tilt);
+  for(var i=0;i<N;i++){var q=pr(P[i][0],P[i][1],P[i][2]),d=(q[2]+1)/2;x.fillStyle='rgba(255,255,255,'+(.12+.88*d*d).toFixed(2)+')';var z=.8+1.8*d;x.fillRect(q[0]-z/2,q[1]-z/2,z,z)}
+  ring(1.45,1.1,.3,'rgba(255,255,255,.55)',t,1);ring(1.75,.45,-.6,'rgba(255,255,255,.3)',t,-1)}
+ var still2=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+ if(still2){draw(0);addEventListener('resize',function(){draw(0)});return}
+ (function loop(t){requestAnimationFrame(loop);if(vis)draw(t)})(0)
+})();
+/* form */
+var err=document.getElementById('err');
+function build(){var n=document.getElementById('f-name').value.trim(),c=document.getElementById('f-contact').value.trim();
+ if(!n||!c){err.textContent='Add your name and an email or WhatsApp number so we can reply.';return null}err.textContent='';
+ return 'Hi Leads Pilot,\n\nName: '+n+'\nContact: '+c+'\nVertical: '+document.getElementById('f-vert').value+'\nBudget: '+document.getElementById('f-budget').value+'\nGEO and goal: '+(document.getElementById('f-msg').value.trim()||'Not specified')}
+document.getElementById('brief').addEventListener('submit',function(e){e.preventDefault();var t=build();if(t)window.open('https://wa.me/919131085961?text='+encodeURIComponent(t),'_blank')});
+document.getElementById('mail-btn').addEventListener('click',function(){var t=build();if(t)location.href='mailto:support.leadpilot@gmail.com?subject='+encodeURIComponent('Campaign brief from '+document.getElementById('f-name').value.trim())+'&body='+encodeURIComponent(t)});
+</script>
+</body>
+</html>
